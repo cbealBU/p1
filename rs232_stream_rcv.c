@@ -22,7 +22,7 @@
 #define NUM_OUTPUTS           2
 #define OUT_PORT_0_NAME       y0
 #define OUT_PORT_1_NAME       y1
-#define OUTPUT_0_WIDTH        100
+#define OUTPUT_0_WIDTH        128
 #define OUTPUT_1_WIDTH        1
 #define OUTPUT_0_DTYPE        SS_UINT8
 #define OUTPUT_1_DTYPE        SS_UINT8
@@ -52,6 +52,13 @@ static int  index;
 static int  starStatus;
 static double OutputLatch[NUM_OUTPUTS];
 
+// checksum function
+unsigned char checksum (unsigned char *ptr, size_t sz) {
+    unsigned char chk = 0;
+    while (sz-- != 0)
+        chk -= *ptr++;
+    return chk;
+}
 
 static void mdlInitializeSizes(SimStruct *S)
 {
@@ -160,6 +167,7 @@ static void mdlOutputs(SimStruct *S, int_T tid)
 //      static int  starStatus;
     
     int i,j,k,m;              //General purpose counters
+    unsigned char msgCharsRcvd;
     
     unsigned char *y0 = (unsigned char*) ssGetOutputPortSignal(S, 0);
     unsigned char *y1 = (unsigned char*) ssGetOutputPortSignal(S, 1);
@@ -175,17 +183,32 @@ static void mdlOutputs(SimStruct *S, int_T tid)
     
     k = rl32eReceiveBufferCount(PORT_ARG);  // Find out how many chars are in the buffer
     
-    if (k > OUTPUT_0_WIDTH) {
+    /*if (k > OUTPUT_0_WIDTH) {
         sprintf(msg,"COM Port buffer has more data than receive block buffer can handle\n");
         ssSetErrorStatus(S,msg);
         return;
-    }
-    y1[0] = (char)k; // set the second output port to the number of received characters
+    }*/ // CEB: This is no longer an issue since we'll read only one 128 byte message at a time
     
     // Craig's code
-    for(i=0; i<k; i++)
-        y0[i] = (unsigned char)rl32eReceiveChar(PORT_ARG); // Read all of the characters out of the buffer (and into the block output)
-    y0[k] = (char)0;
+    msgCharsRcvd = 0; // reset the counter on bytes in the output buffer
+    for(i=0; i<k; i++) // loop through all of the bytes available
+    {
+        if(0 == msgCharsRcvd) // if not already in the midst of pulling bytes in the middle of a message
+        {
+            y0[0] = (unsigned char)rl32eReceiveChar(PORT_ARG); // pull one character into the first output buffer byte (will be overwritten if not the start of a message)
+            if(y0[0] == '$') // check to see that the start of the output buffer is a $ character, signifying the start of a message
+                msgCharsRcvd++; // if a $ character is in place, note a successful first character received
+        }
+        else if(msgCharsRcvd < 128) // if not already at the end of the message
+        {
+            y0[msgCharsRcvd] = (unsigned char)rl32eReceiveChar(PORT_ARG); // read one byte out of the buffer (and into the block output)
+            msgCharsRcvd++; // increment the byte count for the output
+        }
+        else
+            break; // if 128 bytes have been received, we have the whole binary message, so leave the rest of the bytes in the buffer
+    }
+    
+    y1[0] = checksum(y0+8,118); // calculate and output the error in the checksum (should always be zero)
     
 #endif
 }
