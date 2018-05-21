@@ -1,0 +1,13 @@
+#define P 50
+#define M 1
+#define L 12
+#define maxbNum 342
+#define bcstrNum 278
+#define ctrlMode 2
+#define simCycNum 2
+#define Omega 26
+#define vecDim 612
+#define matDim 650
+#define termDim 78
+#define maxIterNum 100
+#define SAFEpoint 6

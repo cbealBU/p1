@@ -1,0 +1,1444 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Root>
+	<SubSystem>
+		<Name>Controllers and Output</Name>
+		<xPCName>p1_standalone/Controllers and Output</xPCName>
+		<SubSystem>
+			<Name>Steering Controller</Name>
+			<xPCName>p1_standalone/Controllers and Output/Steering Controller</xPCName>
+			<SubSystem>
+				<Name>LF steering controller</Name>
+				<xPCName>p1_standalone/Controllers and Output/Steering Controller/LF steering controller</xPCName>
+				<signal>
+					<sigName>Convert to
+output shaft
+angle</sigName>
+					<xpcsigName>Controllers and Output/Steering Controller/LF steering controller/Convert to output shaft angle</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>Convert to
+output shaft
+angle (too)</sigName>
+					<xpcsigName>Controllers and Output/Steering Controller/LF steering controller/Convert to output shaft angle (too)</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>Kd</sigName>
+					<xpcsigName>Controllers and Output/Steering Controller/LF steering controller/Kd</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>Ki</sigName>
+					<xpcsigName>Controllers and Output/Steering Controller/LF steering controller/Ki</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>Sum1</sigName>
+					<xpcsigName>Controllers and Output/Steering Controller/LF steering controller/Sum1</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>Sum2</sigName>
+					<xpcsigName>Controllers and Output/Steering Controller/LF steering controller/Sum2</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>Derivative &amp;
+Low-pass filter 2</sigName>
+					<xpcsigName>Controllers and Output/Steering Controller/LF steering controller/Derivative &amp; Low-pass filter 2</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+			</SubSystem>
+			<SubSystem>
+				<Name>RF steering controller</Name>
+				<xPCName>p1_standalone/Controllers and Output/Steering Controller/RF steering controller</xPCName>
+				<signal>
+					<sigName>Convert to
+output shaft
+angle</sigName>
+					<xpcsigName>Controllers and Output/Steering Controller/RF steering controller/Convert to output shaft angle</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>Convert to
+output shaft
+angle (too)</sigName>
+					<xpcsigName>Controllers and Output/Steering Controller/RF steering controller/Convert to output shaft angle (too)</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>Kd</sigName>
+					<xpcsigName>Controllers and Output/Steering Controller/RF steering controller/Kd</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>Ki</sigName>
+					<xpcsigName>Controllers and Output/Steering Controller/RF steering controller/Ki</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>Sum1</sigName>
+					<xpcsigName>Controllers and Output/Steering Controller/RF steering controller/Sum1</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>Sum2</sigName>
+					<xpcsigName>Controllers and Output/Steering Controller/RF steering controller/Sum2</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>Derivative &amp;
+Low-pass filter 2</sigName>
+					<xpcsigName>Controllers and Output/Steering Controller/RF steering controller/Derivative &amp; Low-pass filter 2</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+			</SubSystem>
+			<SubSystem>
+				<Name>Scope </Name>
+				<xPCName>p1_standalone/Controllers and Output/Steering Controller/Scope </xPCName>
+			</SubSystem>
+			<SubSystem>
+				<Name>Steering Geometry &amp;
+Gearbox Correction</Name>
+				<xPCName>p1_standalone/Controllers and Output/Steering Controller/Steering Geometry &amp; Gearbox Correction</xPCName>
+			</SubSystem>
+			<SubSystem>
+				<Name>standby</Name>
+				<xPCName>p1_standalone/Controllers and Output/Steering Controller/standby</xPCName>
+				<signal>
+					<sigName>Enable Controller</sigName>
+					<xpcsigName>Controllers and Output/Steering Controller/standby/Enable Controller</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>Derivative &amp;
+Low-pass filter</sigName>
+					<xpcsigName>Controllers and Output/Steering Controller/standby/Derivative &amp; Low-pass filter</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>filter</sigName>
+					<xpcsigName>Controllers and Output/Steering Controller/standby/filter</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>filter1</sigName>
+					<xpcsigName>Controllers and Output/Steering Controller/standby/filter1</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+			</SubSystem>
+			<signal>
+				<sigName>Product</sigName>
+				<xpcsigName>Controllers and Output/Steering Controller/Product</xpcsigName>
+				<sigWidth>2</sigWidth>
+				<sigDim>[2, 1]</sigDim>
+			</signal>
+		</SubSystem>
+		<SubSystem>
+			<Name>UI Controller</Name>
+			<xPCName>p1_standalone/Controllers and Output/UI Controller</xPCName>
+			<SubSystem>
+				<Name>Speedometer</Name>
+				<xPCName>p1_standalone/Controllers and Output/UI Controller/Speedometer</xPCName>
+			</SubSystem>
+			<signal>
+				<sigName>Heartbeat Signal</sigName>
+				<xpcsigName>Controllers and Output/UI Controller/Heartbeat Signal</xpcsigName>
+				<sigWidth>1</sigWidth>
+				<sigDim>[1, 1]</sigDim>
+			</signal>
+		</SubSystem>
+	</SubSystem>
+	<SubSystem>
+		<Name>Data Logging</Name>
+		<xPCName>p1_standalone/Data Logging</xPCName>
+		<signal>
+			<sigName>Named Mux</sigName>
+			<xpcsigName>Data Logging/Named Mux</xpcsigName>
+			<sigWidth>119</sigWidth>
+			<sigDim>[119, 1]</sigDim>
+		</signal>
+	</SubSystem>
+	<SubSystem>
+		<Name>Hardware I//O</Name>
+		<xPCName>p1_standalone/Hardware I//O</xPCName>
+		<SubSystem>
+			<Name>Input</Name>
+			<xPCName>p1_standalone/Hardware I//O/Input</xPCName>
+			<SubSystem>
+				<Name>Beeline</Name>
+				<xPCName>p1_standalone/Hardware I//O/Input/Beeline</xPCName>
+				<signal>
+					<sigName>Beeline</sigName>
+					<xpcsigName>Hardware I//O/Input/Beeline/Beeline</xpcsigName>
+					<sigWidth>10</sigWidth>
+					<sigDim>[10, 1]</sigDim>
+				</signal>
+			</SubSystem>
+			<SubSystem>
+				<Name>DAS Analog Demux</Name>
+				<xPCName>p1_standalone/Hardware I//O/Input/DAS Analog Demux</xPCName>
+			</SubSystem>
+			<SubSystem>
+				<Name>Encoder Board</Name>
+				<xPCName>p1_standalone/Hardware I//O/Input/Encoder Board</xPCName>
+				<signal>
+					<sigName>encoder board /p1</sigName>
+					<xpcsigName>Hardware I//O/Input/Encoder Board/encoder board /p1</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>encoder board /p2</sigName>
+					<xpcsigName>Hardware I//O/Input/Encoder Board/encoder board /p2</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>encoder board /p3</sigName>
+					<xpcsigName>Hardware I//O/Input/Encoder Board/encoder board /p3</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>encoder board /p4</sigName>
+					<xpcsigName>Hardware I//O/Input/Encoder Board/encoder board /p4</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>encoder board /p5</sigName>
+					<xpcsigName>Hardware I//O/Input/Encoder Board/encoder board /p5</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+			</SubSystem>
+			<SubSystem>
+				<Name>GPS Velocity and Position</Name>
+				<xPCName>p1_standalone/Hardware I//O/Input/GPS Velocity and Position</xPCName>
+				<signal>
+					<sigName>GPS Velocity</sigName>
+					<xpcsigName>Hardware I//O/Input/GPS Velocity and Position/GPS Velocity</xpcsigName>
+					<sigWidth>19</sigWidth>
+					<sigDim>[19, 1]</sigDim>
+				</signal>
+			</SubSystem>
+			<SubSystem>
+				<Name>Gearbox angle scaling</Name>
+				<xPCName>p1_standalone/Hardware I//O/Input/Gearbox angle scaling</xPCName>
+			</SubSystem>
+			<SubSystem>
+				<Name>Handwheel Scaling &amp; Initialization</Name>
+				<xPCName>p1_standalone/Hardware I//O/Input/Handwheel Scaling &amp; Initialization</xPCName>
+				<SubSystem>
+					<Name>Encoder Initialization</Name>
+					<xPCName>p1_standalone/Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Encoder Initialization</xPCName>
+					<signal>
+						<sigName>Encoder Initializer</sigName>
+						<xpcsigName>Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Encoder Initialization/Encoder Initializer</xpcsigName>
+						<sigWidth>1</sigWidth>
+						<sigDim>[1, 1]</sigDim>
+					</signal>
+					<signal>
+						<sigName>Unwrapper</sigName>
+						<xpcsigName>Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Encoder Initialization/Unwrapper</xpcsigName>
+						<sigWidth>1</sigWidth>
+						<sigDim>[1, 1]</sigDim>
+					</signal>
+				</SubSystem>
+				<SubSystem>
+					<Name>Handwheel Sensor
+Fault Detection</Name>
+					<xPCName>p1_standalone/Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection</xPCName>
+					<SubSystem>
+						<Name>Descision Logic</Name>
+						<xPCName>p1_standalone/Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Descision Logic</xPCName>
+						<SubSystem>
+							<Name>Change Detect</Name>
+							<xPCName>p1_standalone/Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Descision Logic/Change Detect</xPCName>
+						</SubSystem>
+						<SubSystem>
+							<Name>Latch</Name>
+							<xPCName>p1_standalone/Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Descision Logic/Latch</xPCName>
+							<SubSystem>
+								<Name>Enabled
+Subsystem</Name>
+								<xPCName>p1_standalone/Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Descision Logic/Latch/Enabled Subsystem</xPCName>
+								<signal>
+									<sigName>In1</sigName>
+									<xpcsigName>Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Descision Logic/Latch/Enabled Subsystem/In1</xpcsigName>
+									<sigWidth>1</sigWidth>
+									<sigDim>[1, 1]</sigDim>
+								</signal>
+							</SubSystem>
+						</SubSystem>
+						<SubSystem>
+							<Name>Latch1</Name>
+							<xPCName>p1_standalone/Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Descision Logic/Latch1</xPCName>
+							<SubSystem>
+								<Name>Enabled
+Subsystem</Name>
+								<xPCName>p1_standalone/Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Descision Logic/Latch1/Enabled Subsystem</xPCName>
+								<signal>
+									<sigName>In1</sigName>
+									<xpcsigName>Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Descision Logic/Latch1/Enabled Subsystem/In1</xpcsigName>
+									<sigWidth>1</sigWidth>
+									<sigDim>[1, 1]</sigDim>
+								</signal>
+							</SubSystem>
+						</SubSystem>
+						<signal>
+							<sigName>Logical
+Operator4</sigName>
+							<xpcsigName>Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Descision Logic/Logical Operator4</xpcsigName>
+							<sigWidth>1</sigWidth>
+							<sigDim>[1, 1]</sigDim>
+						</signal>
+						<signal>
+							<sigName>Memory3</sigName>
+							<xpcsigName>Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Descision Logic/Memory3</xpcsigName>
+							<sigWidth>1</sigWidth>
+							<sigDim>[1, 1]</sigDim>
+						</signal>
+					</SubSystem>
+					<SubSystem>
+						<Name>Enable Timer</Name>
+						<xPCName>p1_standalone/Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Enable Timer</xPCName>
+						<signal>
+							<sigName>Relational
+Operator</sigName>
+							<xpcsigName>Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Enable Timer/Relational Operator</xpcsigName>
+							<sigWidth>1</sigWidth>
+							<sigDim>[1, 1]</sigDim>
+						</signal>
+					</SubSystem>
+					<SubSystem>
+						<Name>Fault Detection1</Name>
+						<xPCName>p1_standalone/Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Fault Detection1</xPCName>
+						<SubSystem>
+							<Name>Counter</Name>
+							<xPCName>p1_standalone/Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Fault Detection1/Counter</xPCName>
+							<signal>
+								<sigName>Relational
+Operator2</sigName>
+								<xpcsigName>Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Fault Detection1/Counter/Relational Operator2</xpcsigName>
+								<sigWidth>1</sigWidth>
+								<sigDim>[1, 1]</sigDim>
+							</signal>
+						</SubSystem>
+						<SubSystem>
+							<Name>Counter1</Name>
+							<xPCName>p1_standalone/Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Fault Detection1/Counter1</xPCName>
+							<signal>
+								<sigName>Relational
+Operator2</sigName>
+								<xpcsigName>Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Fault Detection1/Counter1/Relational Operator2</xpcsigName>
+								<sigWidth>1</sigWidth>
+								<sigDim>[1, 1]</sigDim>
+							</signal>
+						</SubSystem>
+						<SubSystem>
+							<Name>Enabled
+Subsystem</Name>
+							<xPCName>p1_standalone/Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Fault Detection1/Enabled Subsystem</xPCName>
+							<signal>
+								<sigName>In1</sigName>
+								<xpcsigName>Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Fault Detection1/Enabled Subsystem/In1</xpcsigName>
+								<sigWidth>1</sigWidth>
+								<sigDim>[1, 1]</sigDim>
+							</signal>
+						</SubSystem>
+						<SubSystem>
+							<Name>Enabled
+Subsystem1</Name>
+							<xPCName>p1_standalone/Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Fault Detection1/Enabled Subsystem1</xPCName>
+							<signal>
+								<sigName>In1</sigName>
+								<xpcsigName>Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Fault Detection1/Enabled Subsystem1/In1</xpcsigName>
+								<sigWidth>1</sigWidth>
+								<sigDim>[1, 1]</sigDim>
+							</signal>
+						</SubSystem>
+						<SubSystem>
+							<Name>Nearly the Same</Name>
+							<xPCName>p1_standalone/Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Fault Detection1/Nearly the Same</xPCName>
+							<signal>
+								<sigName>Relational
+Operator</sigName>
+								<xpcsigName>Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Fault Detection1/Nearly the Same/Relational Operator</xpcsigName>
+								<sigWidth>1</sigWidth>
+								<sigDim>[1, 1]</sigDim>
+							</signal>
+						</SubSystem>
+						<SubSystem>
+							<Name>Nearly the Same1</Name>
+							<xPCName>p1_standalone/Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Fault Detection1/Nearly the Same1</xPCName>
+						</SubSystem>
+						<SubSystem>
+							<Name>Nearly the Same2</Name>
+							<xPCName>p1_standalone/Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Fault Detection1/Nearly the Same2</xPCName>
+							<signal>
+								<sigName>Relational
+Operator</sigName>
+								<xpcsigName>Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Fault Detection1/Nearly the Same2/Relational Operator</xpcsigName>
+								<sigWidth>1</sigWidth>
+								<sigDim>[1, 1]</sigDim>
+							</signal>
+						</SubSystem>
+						<SubSystem>
+							<Name>Nearly the Same3</Name>
+							<xPCName>p1_standalone/Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Fault Detection1/Nearly the Same3</xPCName>
+						</SubSystem>
+						<signal>
+							<sigName>Memory2</sigName>
+							<xpcsigName>Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Fault Detection1/Memory2</xpcsigName>
+							<sigWidth>1</sigWidth>
+							<sigDim>[1, 1]</sigDim>
+						</signal>
+					</SubSystem>
+					<SubSystem>
+						<Name>Switch Over</Name>
+						<xPCName>p1_standalone/Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Switch Over</xPCName>
+						<signal>
+							<sigName>Switch</sigName>
+							<xpcsigName>Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Switch Over/Switch</xpcsigName>
+							<sigWidth>1</sigWidth>
+							<sigDim>[1, 1]</sigDim>
+						</signal>
+					</SubSystem>
+				</SubSystem>
+				<signal>
+					<sigName>Handwheel Gear Ratio</sigName>
+					<xpcsigName>Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Gear Ratio</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>Harmonic Drive
+Gear Ratio</sigName>
+					<xpcsigName>Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Harmonic Drive Gear Ratio</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>Harmonic Drive
+Gear Ratio1</sigName>
+					<xpcsigName>Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Harmonic Drive Gear Ratio1</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>encoder scaling</sigName>
+					<xpcsigName>Hardware I//O/Input/Handwheel Scaling &amp; Initialization/encoder scaling</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+					<sigLabel>Primary</sigLabel>
+				</signal>
+				<signal>
+					<sigName>Sum</sigName>
+					<xpcsigName>Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Sum</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+			</SubSystem>
+			<SubSystem>
+				<Name>INS scaling</Name>
+				<xPCName>p1_standalone/Hardware I//O/Input/INS scaling</xPCName>
+				<signal>
+					<sigName>deg to rad</sigName>
+					<xpcsigName>Hardware I//O/Input/INS scaling/deg to rad</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+					<sigLabel>yaw</sigLabel>
+				</signal>
+			</SubSystem>
+			<SubSystem>
+				<Name>OEM4 wgsxyz2enu
+and status conversion</Name>
+				<xPCName>p1_standalone/Hardware I//O/Input/OEM4 wgsxyz2enu and status conversion</xPCName>
+				<SubSystem>
+					<Name>position preprocessing</Name>
+					<xPCName>p1_standalone/Hardware I//O/Input/OEM4 wgsxyz2enu and status conversion/position preprocessing</xPCName>
+					<SubSystem>
+						<Name>Position Converter</Name>
+						<xPCName>p1_standalone/Hardware I//O/Input/OEM4 wgsxyz2enu and status conversion/position preprocessing/Position Converter</xPCName>
+						<signal>
+							<sigName>S-Function2</sigName>
+							<xpcsigName>Hardware I//O/Input/OEM4 wgsxyz2enu and status conversion/position preprocessing/Position Converter/S-Function2</xpcsigName>
+							<sigWidth>3</sigWidth>
+							<sigDim>[3, 1]</sigDim>
+						</signal>
+					</SubSystem>
+					<signal>
+						<sigName>Sum</sigName>
+						<xpcsigName>Hardware I//O/Input/OEM4 wgsxyz2enu and status conversion/position preprocessing/Sum</xpcsigName>
+						<sigWidth>1</sigWidth>
+						<sigDim>[1, 1]</sigDim>
+					</signal>
+					<signal>
+						<sigName>Sum1</sigName>
+						<xpcsigName>Hardware I//O/Input/OEM4 wgsxyz2enu and status conversion/position preprocessing/Sum1</xpcsigName>
+						<sigWidth>1</sigWidth>
+						<sigDim>[1, 1]</sigDim>
+					</signal>
+					<signal>
+						<sigName>Sum2</sigName>
+						<xpcsigName>Hardware I//O/Input/OEM4 wgsxyz2enu and status conversion/position preprocessing/Sum2</xpcsigName>
+						<sigWidth>1</sigWidth>
+						<sigDim>[1, 1]</sigDim>
+					</signal>
+				</SubSystem>
+				<SubSystem>
+					<Name>velocity preprocessing</Name>
+					<xPCName>p1_standalone/Hardware I//O/Input/OEM4 wgsxyz2enu and status conversion/velocity preprocessing</xPCName>
+					<SubSystem>
+						<Name>Velocity Converter</Name>
+						<xPCName>p1_standalone/Hardware I//O/Input/OEM4 wgsxyz2enu and status conversion/velocity preprocessing/Velocity Converter</xPCName>
+						<signal>
+							<sigName>S-Function2</sigName>
+							<xpcsigName>Hardware I//O/Input/OEM4 wgsxyz2enu and status conversion/velocity preprocessing/Velocity Converter/S-Function2</xpcsigName>
+							<sigWidth>3</sigWidth>
+							<sigDim>[3, 1]</sigDim>
+						</signal>
+					</SubSystem>
+				</SubSystem>
+				<signal>
+					<sigName>Switch</sigName>
+					<xpcsigName>Hardware I//O/Input/OEM4 wgsxyz2enu and status conversion/Switch</xpcsigName>
+					<sigWidth>19</sigWidth>
+					<sigDim>[19, 1]</sigDim>
+				</signal>
+			</SubSystem>
+			<SubSystem>
+				<Name>Rear Wheel Speed Processing</Name>
+				<xPCName>p1_standalone/Hardware I//O/Input/Rear Wheel Speed Processing</xPCName>
+				<SubSystem>
+					<Name>Speed Calc</Name>
+					<xPCName>p1_standalone/Hardware I//O/Input/Rear Wheel Speed Processing/Speed Calc</xPCName>
+					<signal>
+						<sigName>Unwrapping</sigName>
+						<xpcsigName>Hardware I//O/Input/Rear Wheel Speed Processing/Speed Calc/Unwrapping</xpcsigName>
+						<sigWidth>1</sigWidth>
+						<sigDim>[1, 1]</sigDim>
+					</signal>
+				</SubSystem>
+				<SubSystem>
+					<Name>Speed Calc1</Name>
+					<xPCName>p1_standalone/Hardware I//O/Input/Rear Wheel Speed Processing/Speed Calc1</xPCName>
+					<signal>
+						<sigName>Unwrapping</sigName>
+						<xpcsigName>Hardware I//O/Input/Rear Wheel Speed Processing/Speed Calc1/Unwrapping</xpcsigName>
+						<sigWidth>1</sigWidth>
+						<sigDim>[1, 1]</sigDim>
+					</signal>
+				</SubSystem>
+				<signal>
+					<sigName>de-quadrature</sigName>
+					<xpcsigName>Hardware I//O/Input/Rear Wheel Speed Processing/de-quadrature</xpcsigName>
+					<sigWidth>2</sigWidth>
+					<sigDim>[2, 1]</sigDim>
+				</signal>
+			</SubSystem>
+			<SubSystem>
+				<Name>Steering Motor Encoder
+Initialization</Name>
+				<xPCName>p1_standalone/Hardware I//O/Input/Steering Motor Encoder Initialization</xPCName>
+				<SubSystem>
+					<Name>Left</Name>
+					<xPCName>p1_standalone/Hardware I//O/Input/Steering Motor Encoder Initialization/Left</xPCName>
+					<signal>
+						<sigName>Encoder Initializer</sigName>
+						<xpcsigName>Hardware I//O/Input/Steering Motor Encoder Initialization/Left/Encoder Initializer</xpcsigName>
+						<sigWidth>1</sigWidth>
+						<sigDim>[1, 1]</sigDim>
+					</signal>
+					<signal>
+						<sigName>Unwrapper</sigName>
+						<xpcsigName>Hardware I//O/Input/Steering Motor Encoder Initialization/Left/Unwrapper</xpcsigName>
+						<sigWidth>1</sigWidth>
+						<sigDim>[1, 1]</sigDim>
+					</signal>
+				</SubSystem>
+				<SubSystem>
+					<Name>Right</Name>
+					<xPCName>p1_standalone/Hardware I//O/Input/Steering Motor Encoder Initialization/Right</xPCName>
+					<signal>
+						<sigName>Encoder Initializer</sigName>
+						<xpcsigName>Hardware I//O/Input/Steering Motor Encoder Initialization/Right/Encoder Initializer</xpcsigName>
+						<sigWidth>1</sigWidth>
+						<sigDim>[1, 1]</sigDim>
+					</signal>
+					<signal>
+						<sigName>Unwrapper</sigName>
+						<xpcsigName>Hardware I//O/Input/Steering Motor Encoder Initialization/Right/Unwrapper</xpcsigName>
+						<sigWidth>1</sigWidth>
+						<sigDim>[1, 1]</sigDim>
+					</signal>
+				</SubSystem>
+				<signal>
+					<sigName>gearbox ratio</sigName>
+					<xpcsigName>Hardware I//O/Input/Steering Motor Encoder Initialization/gearbox ratio</xpcsigName>
+					<sigWidth>2</sigWidth>
+					<sigDim>[2, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>Sum1</sigName>
+					<xpcsigName>Hardware I//O/Input/Steering Motor Encoder Initialization/Sum1</xpcsigName>
+					<sigWidth>2</sigWidth>
+					<sigDim>[2, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>Sum2</sigName>
+					<xpcsigName>Hardware I//O/Input/Steering Motor Encoder Initialization/Sum2</xpcsigName>
+					<sigWidth>2</sigWidth>
+					<sigDim>[2, 1]</sigDim>
+				</signal>
+			</SubSystem>
+			<SubSystem>
+				<Name>Subsystem1</Name>
+				<xPCName>p1_standalone/Hardware I//O/Input/Subsystem1</xPCName>
+				<signal>
+					<sigName>Sum</sigName>
+					<xpcsigName>Hardware I//O/Input/Subsystem1/Sum</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+			</SubSystem>
+			<SubSystem>
+				<Name>Subsystem2</Name>
+				<xPCName>p1_standalone/Hardware I//O/Input/Subsystem2</xPCName>
+				<signal>
+					<sigName>Sum</sigName>
+					<xpcsigName>Hardware I//O/Input/Subsystem2/Sum</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+			</SubSystem>
+			<SubSystem>
+				<Name>VSBC Analog Demux</Name>
+				<xPCName>p1_standalone/Hardware I//O/Input/VSBC Analog Demux</xPCName>
+			</SubSystem>
+			<SubSystem>
+				<Name>current scaling</Name>
+				<xPCName>p1_standalone/Hardware I//O/Input/current scaling</xPCName>
+				<signal>
+					<sigName>Sum</sigName>
+					<xpcsigName>Hardware I//O/Input/current scaling/Sum</xpcsigName>
+					<sigWidth>2</sigWidth>
+					<sigDim>[2, 1]</sigDim>
+				</signal>
+			</SubSystem>
+			<signal>
+				<sigName>Load Cell Scaling</sigName>
+				<xpcsigName>Hardware I//O/Input/Load Cell Scaling</xpcsigName>
+				<sigWidth>2</sigWidth>
+				<sigDim>[2, 1]</sigDim>
+				<sigLabel>Front Load Cells</sigLabel>
+			</signal>
+			<signal>
+				<sigName>Load Cell Scaling Rear</sigName>
+				<xpcsigName>Hardware I//O/Input/Load Cell Scaling Rear</xpcsigName>
+				<sigWidth>2</sigWidth>
+				<sigDim>[2, 1]</sigDim>
+				<sigLabel>Rear Load Cells</sigLabel>
+			</signal>
+			<signal>
+				<sigName>encoder scaling</sigName>
+				<xpcsigName>Hardware I//O/Input/encoder scaling</xpcsigName>
+				<sigWidth>2</sigWidth>
+				<sigDim>[2, 1]</sigDim>
+				<sigLabel>Angles</sigLabel>
+			</signal>
+			<signal>
+				<sigName>voltage scaling</sigName>
+				<xpcsigName>Hardware I//O/Input/voltage scaling</xpcsigName>
+				<sigWidth>2</sigWidth>
+				<sigDim>[2, 1]</sigDim>
+				<sigLabel>Voltages</sigLabel>
+			</signal>
+			<signal>
+				<sigName>Absolute Encoder</sigName>
+				<xpcsigName>Hardware I//O/Input/Absolute Encoder</xpcsigName>
+				<sigWidth>1</sigWidth>
+				<sigDim>[1, 1]</sigDim>
+			</signal>
+			<signal>
+				<sigName>Analog Input
+(DAS)</sigName>
+				<xpcsigName>Hardware I//O/Input/Analog Input (DAS)</xpcsigName>
+				<sigWidth>16</sigWidth>
+				<sigDim>[16, 1]</sigDim>
+			</signal>
+			<signal>
+				<sigName>Analog Input
+(VSBC)</sigName>
+				<xpcsigName>Hardware I//O/Input/Analog Input (VSBC)</xpcsigName>
+				<sigWidth>8</sigWidth>
+				<sigDim>[8, 1]</sigDim>
+			</signal>
+			<signal>
+				<sigName>Ruby-MM/p1</sigName>
+				<xpcsigName>Hardware I//O/Input/Ruby-MM/p1</xpcsigName>
+				<sigWidth>1</sigWidth>
+				<sigDim>[1, 1]</sigDim>
+				<sigLabel>Fault Switch</sigLabel>
+			</signal>
+			<signal>
+				<sigName>Ruby-MM/p2</sigName>
+				<xpcsigName>Hardware I//O/Input/Ruby-MM/p2</xpcsigName>
+				<sigWidth>1</sigWidth>
+				<sigDim>[1, 1]</sigDim>
+				<sigLabel>Auto-Steer Switch</sigLabel>
+			</signal>
+			<signal>
+				<sigName>Ruby-MM/p3</sigName>
+				<xpcsigName>Hardware I//O/Input/Ruby-MM/p3</xpcsigName>
+				<sigWidth>1</sigWidth>
+				<sigDim>[1, 1]</sigDim>
+			</signal>
+			<signal>
+				<sigName>Ruby-MM/p4</sigName>
+				<xpcsigName>Hardware I//O/Input/Ruby-MM/p4</xpcsigName>
+				<sigWidth>1</sigWidth>
+				<sigDim>[1, 1]</sigDim>
+			</signal>
+			<signal>
+				<sigName>Wheelspeed Sensors</sigName>
+				<xpcsigName>Hardware I//O/Input/Wheelspeed Sensors</xpcsigName>
+				<sigWidth>2</sigWidth>
+				<sigDim>[2, 1]</sigDim>
+				<sigLabel>Front Wheel Speeds</sigLabel>
+			</signal>
+		</SubSystem>
+		<SubSystem>
+			<Name>Output</Name>
+			<xPCName>p1_standalone/Hardware I//O/Output</xPCName>
+			<SubSystem>
+				<Name>ConvertForce2Volt</Name>
+				<xPCName>p1_standalone/Hardware I//O/Output/ConvertForce2Volt</xPCName>
+			</SubSystem>
+			<signal>
+				<sigName>amps to
+volts</sigName>
+				<xpcsigName>Hardware I//O/Output/amps to volts</xpcsigName>
+				<sigWidth>1</sigWidth>
+				<sigDim>[1, 1]</sigDim>
+			</signal>
+			<signal>
+				<sigName>voltage gain</sigName>
+				<xpcsigName>Hardware I//O/Output/voltage gain</xpcsigName>
+				<sigWidth>2</sigWidth>
+				<sigDim>[2, 1]</sigDim>
+			</signal>
+			<signal>
+				<sigName>saturation</sigName>
+				<xpcsigName>Hardware I//O/Output/saturation</xpcsigName>
+				<sigWidth>1</sigWidth>
+				<sigDim>[1, 1]</sigDim>
+			</signal>
+			<signal>
+				<sigName>saturation 2</sigName>
+				<xpcsigName>Hardware I//O/Output/saturation 2</xpcsigName>
+				<sigWidth>2</sigWidth>
+				<sigDim>[2, 1]</sigDim>
+			</signal>
+		</SubSystem>
+	</SubSystem>
+	<SubSystem>
+		<Name>Model Info</Name>
+		<xPCName>p1_standalone/Model Info</xPCName>
+		<SubSystem>
+			<Name>EmptySubsystem</Name>
+			<xPCName>p1_standalone/Model Info/EmptySubsystem</xPCName>
+		</SubSystem>
+	</SubSystem>
+	<SubSystem>
+		<Name>Sensor Data and Estimation</Name>
+		<xPCName>p1_standalone/Sensor Data and Estimation</xPCName>
+		<SubSystem>
+			<Name>Nonlinear Observer</Name>
+			<xPCName>p1_standalone/Sensor Data and Estimation/Nonlinear Observer</xPCName>
+			<SubSystem>
+				<Name>Normal Loads</Name>
+				<xPCName>p1_standalone/Sensor Data and Estimation/Nonlinear Observer/Normal Loads</xPCName>
+				<signal>
+					<sigName>Left
+Normal Load</sigName>
+					<xpcsigName>Sensor Data and Estimation/Nonlinear Observer/Normal Loads/Left Normal Load</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>Right
+Normal Load</sigName>
+					<xpcsigName>Sensor Data and Estimation/Nonlinear Observer/Normal Loads/Right Normal Load</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+			</SubSystem>
+			<SubSystem>
+				<Name>Steering Torque Components</Name>
+				<xPCName>p1_standalone/Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components</xPCName>
+				<SubSystem>
+					<Name>Steering Geometry Calculation</Name>
+					<xPCName>p1_standalone/Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Steering Geometry Calculation</xPCName>
+					<signal>
+						<sigName>Left Steer Angle Look-up1</sigName>
+						<xpcsigName>Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Steering Geometry Calculation/Left Steer Angle Look-up1</xpcsigName>
+						<sigWidth>1</sigWidth>
+						<sigDim>[1, 1]</sigDim>
+					</signal>
+					<signal>
+						<sigName>Right Steer Angle Look-up1</sigName>
+						<xpcsigName>Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Steering Geometry Calculation/Right Steer Angle Look-up1</xpcsigName>
+						<sigWidth>1</sigWidth>
+						<sigDim>[1, 1]</sigDim>
+					</signal>
+				</SubSystem>
+				<SubSystem>
+					<Name>Wheel Accelerations</Name>
+					<xPCName>p1_standalone/Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Accelerations</xPCName>
+					<signal>
+						<sigName>Diff</sigName>
+						<xpcsigName>Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Accelerations/Diff</xpcsigName>
+						<sigWidth>1</sigWidth>
+						<sigDim>[1, 1]</sigDim>
+					</signal>
+					<signal>
+						<sigName>TSamp</sigName>
+						<xpcsigName>Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Accelerations/TSamp</xpcsigName>
+						<sigWidth>1</sigWidth>
+						<sigDim>[1, 1]</sigDim>
+					</signal>
+				</SubSystem>
+				<SubSystem>
+					<Name>Wheel Accelerations1</Name>
+					<xPCName>p1_standalone/Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Accelerations1</xPCName>
+					<signal>
+						<sigName>Diff</sigName>
+						<xpcsigName>Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Accelerations1/Diff</xpcsigName>
+						<sigWidth>1</sigWidth>
+						<sigDim>[1, 1]</sigDim>
+					</signal>
+					<signal>
+						<sigName>TSamp</sigName>
+						<xpcsigName>Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Accelerations1/TSamp</xpcsigName>
+						<sigWidth>1</sigWidth>
+						<sigDim>[1, 1]</sigDim>
+					</signal>
+				</SubSystem>
+				<SubSystem>
+					<Name>Wheel Velocities</Name>
+					<xPCName>p1_standalone/Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Velocities</xPCName>
+					<signal>
+						<sigName>Diff</sigName>
+						<xpcsigName>Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Velocities/Diff</xpcsigName>
+						<sigWidth>1</sigWidth>
+						<sigDim>[1, 1]</sigDim>
+					</signal>
+					<signal>
+						<sigName>TSamp</sigName>
+						<xpcsigName>Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Velocities/TSamp</xpcsigName>
+						<sigWidth>1</sigWidth>
+						<sigDim>[1, 1]</sigDim>
+					</signal>
+				</SubSystem>
+				<SubSystem>
+					<Name>Wheel Velocities1</Name>
+					<xPCName>p1_standalone/Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Velocities1</xPCName>
+					<signal>
+						<sigName>Diff</sigName>
+						<xpcsigName>Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Velocities1/Diff</xpcsigName>
+						<sigWidth>1</sigWidth>
+						<sigDim>[1, 1]</sigDim>
+					</signal>
+					<signal>
+						<sigName>TSamp</sigName>
+						<xpcsigName>Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Velocities1/TSamp</xpcsigName>
+						<sigWidth>1</sigWidth>
+						<sigDim>[1, 1]</sigDim>
+					</signal>
+				</SubSystem>
+				<signal>
+					<sigName>Disable</sigName>
+					<xpcsigName>Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Disable</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>Disable1</sigName>
+					<xpcsigName>Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Disable1</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>Disable3</sigName>
+					<xpcsigName>Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Disable3</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>Disable4</sigName>
+					<xpcsigName>Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Disable4</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>Disable6</sigName>
+					<xpcsigName>Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Disable6</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>Disable7</sigName>
+					<xpcsigName>Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Disable7</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>Wheel Damping</sigName>
+					<xpcsigName>Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Damping</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>Wheel Damping1</sigName>
+					<xpcsigName>Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Damping1</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>Wheel Friction</sigName>
+					<xpcsigName>Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Friction</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>Wheel Friction1</sigName>
+					<xpcsigName>Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Friction1</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>Wheel Inertia</sigName>
+					<xpcsigName>Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Inertia</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>Wheel Inertia1</sigName>
+					<xpcsigName>Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Inertia1</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>Product</sigName>
+					<xpcsigName>Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Product</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>Product1</sigName>
+					<xpcsigName>Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Product1</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+			</SubSystem>
+			<signal>
+				<sigName>1//Fnf</sigName>
+				<xpcsigName>Sensor Data and Estimation/Nonlinear Observer/1//Fnf</xpcsigName>
+				<sigWidth>1</sigWidth>
+				<sigDim>[1, 1]</sigDim>
+				<sigLabel>muhat</sigLabel>
+			</signal>
+			<signal>
+				<sigName>If_alpha_observer/p1</sigName>
+				<xpcsigName>Sensor Data and Estimation/Nonlinear Observer/If_alpha_observer/p1</xpcsigName>
+				<sigWidth>2</sigWidth>
+				<sigDim>[2, 1]</sigDim>
+				<sigLabel>ahats</sigLabel>
+			</signal>
+			<signal>
+				<sigName>If_alpha_observer/p2</sigName>
+				<xpcsigName>Sensor Data and Estimation/Nonlinear Observer/If_alpha_observer/p2</xpcsigName>
+				<sigWidth>1</sigWidth>
+				<sigDim>[1, 1]</sigDim>
+				<sigLabel>peakFyf</sigLabel>
+			</signal>
+			<signal>
+				<sigName>If_alpha_observer/p3</sigName>
+				<xpcsigName>Sensor Data and Estimation/Nonlinear Observer/If_alpha_observer/p3</xpcsigName>
+				<sigWidth>5</sigWidth>
+				<sigDim>[5, 1]</sigDim>
+				<sigLabel>estimation_flags</sigLabel>
+			</signal>
+			<signal>
+				<sigName>If_alpha_observer/p4</sigName>
+				<xpcsigName>Sensor Data and Estimation/Nonlinear Observer/If_alpha_observer/p4</xpcsigName>
+				<sigWidth>2</sigWidth>
+				<sigDim>[2, 1]</sigDim>
+				<sigLabel>pneumatic_trail</sigLabel>
+			</signal>
+			<signal>
+				<sigName>If_alpha_observer/p5</sigName>
+				<xpcsigName>Sensor Data and Estimation/Nonlinear Observer/If_alpha_observer/p5</xpcsigName>
+				<sigWidth>2</sigWidth>
+				<sigDim>[2, 1]</sigDim>
+				<sigLabel>peak_forces</sigLabel>
+			</signal>
+		</SubSystem>
+		<SubSystem>
+			<Name>Steering Kinematics</Name>
+			<xPCName>p1_standalone/Sensor Data and Estimation/Steering Kinematics</xPCName>
+			<SubSystem>
+				<Name>Steer Torque Calculation</Name>
+				<xPCName>p1_standalone/Sensor Data and Estimation/Steering Kinematics/Steer Torque Calculation</xPCName>
+				<signal>
+					<sigName>Left Arm Length Look-up</sigName>
+					<xpcsigName>Sensor Data and Estimation/Steering Kinematics/Steer Torque Calculation/Left Arm Length Look-up</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>Right Arm Length Look-up</sigName>
+					<xpcsigName>Sensor Data and Estimation/Steering Kinematics/Steer Torque Calculation/Right Arm Length Look-up</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>Product</sigName>
+					<xpcsigName>Sensor Data and Estimation/Steering Kinematics/Steer Torque Calculation/Product</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>Product1</sigName>
+					<xpcsigName>Sensor Data and Estimation/Steering Kinematics/Steer Torque Calculation/Product1</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+			</SubSystem>
+			<SubSystem>
+				<Name>Steering Angle Calculation</Name>
+				<xPCName>p1_standalone/Sensor Data and Estimation/Steering Kinematics/Steering Angle Calculation</xPCName>
+				<signal>
+					<sigName>Left Steer Angle Look-up</sigName>
+					<xpcsigName>Sensor Data and Estimation/Steering Kinematics/Steering Angle Calculation/Left Steer Angle Look-up</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>Right Steer Angle Look-up</sigName>
+					<xpcsigName>Sensor Data and Estimation/Steering Kinematics/Steering Angle Calculation/Right Steer Angle Look-up</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+			</SubSystem>
+			<signal>
+				<sigName>Composite Steer
+Angle Calculation</sigName>
+				<xpcsigName>Sensor Data and Estimation/Steering Kinematics/Composite Steer Angle Calculation</xpcsigName>
+				<sigWidth>1</sigWidth>
+				<sigDim>[1, 1]</sigDim>
+				<sigLabel>Composite Steer Angle</sigLabel>
+			</signal>
+		</SubSystem>
+		<SubSystem>
+			<Name>Vehicle State Estimator</Name>
+			<xPCName>p1_standalone/Sensor Data and Estimation/Vehicle State Estimator</xPCName>
+			<SubSystem>
+				<Name>GPS status</Name>
+				<xPCName>p1_standalone/Sensor Data and Estimation/Vehicle State Estimator/GPS status</xPCName>
+			</SubSystem>
+			<SubSystem>
+				<Name>Select: Yaw Rate</Name>
+				<xPCName>p1_standalone/Sensor Data and Estimation/Vehicle State Estimator/Select: Yaw Rate</xPCName>
+				<signal>
+					<sigName>Gain</sigName>
+					<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/Select: Yaw Rate/Gain</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+			</SubSystem>
+			<SubSystem>
+				<Name>state estimation</Name>
+				<xPCName>p1_standalone/Sensor Data and Estimation/Vehicle State Estimator/state estimation</xPCName>
+				<SubSystem>
+					<Name>Super Filter</Name>
+					<xPCName>p1_standalone/Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter</xPCName>
+					<SubSystem>
+						<Name>Accelerometer Pre-Processing</Name>
+						<xPCName>p1_standalone/Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Accelerometer Pre-Processing</xPCName>
+						<signal>
+							<sigName>cross coupling from ax</sigName>
+							<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Accelerometer Pre-Processing/cross coupling from ax</xpcsigName>
+							<sigWidth>1</sigWidth>
+							<sigDim>[1, 1]</sigDim>
+						</signal>
+						<signal>
+							<sigName>Sum4</sigName>
+							<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Accelerometer Pre-Processing/Sum4</xpcsigName>
+							<sigWidth>1</sigWidth>
+							<sigDim>[1, 1]</sigDim>
+						</signal>
+						<signal>
+							<sigName>Sum5</sigName>
+							<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Accelerometer Pre-Processing/Sum5</xpcsigName>
+							<sigWidth>1</sigWidth>
+							<sigDim>[1, 1]</sigDim>
+						</signal>
+					</SubSystem>
+					<SubSystem>
+						<Name>Beeline GPS Pre-Processing</Name>
+						<xPCName>p1_standalone/Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Beeline GPS Pre-Processing</xPCName>
+						<signal>
+							<sigName>Gain</sigName>
+							<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Beeline GPS Pre-Processing/Gain</xpcsigName>
+							<sigWidth>1</sigWidth>
+							<sigDim>[1, 1]</sigDim>
+						</signal>
+						<signal>
+							<sigName>Delay function</sigName>
+							<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Beeline GPS Pre-Processing/Delay function</xpcsigName>
+							<sigWidth>1</sigWidth>
+							<sigDim>[1, 1]</sigDim>
+						</signal>
+						<signal>
+							<sigName>S-Function4</sigName>
+							<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Beeline GPS Pre-Processing/S-Function4</xpcsigName>
+							<sigWidth>1</sigWidth>
+							<sigDim>[1, 1]</sigDim>
+						</signal>
+						<signal>
+							<sigName>Sum1</sigName>
+							<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Beeline GPS Pre-Processing/Sum1</xpcsigName>
+							<sigWidth>1</sigWidth>
+							<sigDim>[1, 1]</sigDim>
+						</signal>
+						<signal>
+							<sigName>Switch3.5</sigName>
+							<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Beeline GPS Pre-Processing/Switch3.5</xpcsigName>
+							<sigWidth>1</sigWidth>
+							<sigDim>[1, 1]</sigDim>
+						</signal>
+					</SubSystem>
+					<SubSystem>
+						<Name>OEM4 GPS Pre-Processing</Name>
+						<xPCName>p1_standalone/Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/OEM4 GPS Pre-Processing</xPCName>
+						<signal>
+							<sigName>Comparison to .1</sigName>
+							<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/OEM4 GPS Pre-Processing/Comparison to .1</xpcsigName>
+							<sigWidth>1</sigWidth>
+							<sigDim>[1, 1]</sigDim>
+						</signal>
+						<signal>
+							<sigName>Delay function</sigName>
+							<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/OEM4 GPS Pre-Processing/Delay function</xpcsigName>
+							<sigWidth>1</sigWidth>
+							<sigDim>[1, 1]</sigDim>
+						</signal>
+						<signal>
+							<sigName>S-Function4</sigName>
+							<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/OEM4 GPS Pre-Processing/S-Function4</xpcsigName>
+							<sigWidth>1</sigWidth>
+							<sigDim>[1, 1]</sigDim>
+						</signal>
+						<signal>
+							<sigName>Switch2</sigName>
+							<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/OEM4 GPS Pre-Processing/Switch2</xpcsigName>
+							<sigWidth>1</sigWidth>
+							<sigDim>[1, 1]</sigDim>
+						</signal>
+					</SubSystem>
+					<SubSystem>
+						<Name>Roll//Yaw Gyro Pre-processing</Name>
+						<xPCName>p1_standalone/Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Roll//Yaw Gyro Pre-processing</xPCName>
+						<signal>
+							<sigName>cross coupling from roll</sigName>
+							<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Roll//Yaw Gyro Pre-processing/cross coupling from roll</xpcsigName>
+							<sigWidth>1</sigWidth>
+							<sigDim>[1, 1]</sigDim>
+						</signal>
+						<signal>
+							<sigName>Sum3</sigName>
+							<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Roll//Yaw Gyro Pre-processing/Sum3</xpcsigName>
+							<sigWidth>1</sigWidth>
+							<sigDim>[1, 1]</sigDim>
+						</signal>
+						<signal>
+							<sigName>Sum5</sigName>
+							<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Roll//Yaw Gyro Pre-processing/Sum5</xpcsigName>
+							<sigWidth>1</sigWidth>
+							<sigDim>[1, 1]</sigDim>
+						</signal>
+					</SubSystem>
+					<signal>
+						<sigName>Gain to make CCW</sigName>
+						<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Gain to make CCW</xpcsigName>
+						<sigWidth>1</sigWidth>
+						<sigDim>[1, 1]</sigDim>
+					</signal>
+					<signal>
+						<sigName>Position Filter</sigName>
+						<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Position Filter</xpcsigName>
+						<sigWidth>42</sigWidth>
+						<sigDim>[42, 1]</sigDim>
+					</signal>
+					<signal>
+						<sigName>Super Filter!</sigName>
+						<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Super Filter!</xpcsigName>
+						<sigWidth>44</sigWidth>
+						<sigDim>[44, 1]</sigDim>
+					</signal>
+				</SubSystem>
+				<signal>
+					<sigName>DegtoRad1</sigName>
+					<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/DegtoRad1</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+					<sigLabel>Yaw Rate</sigLabel>
+				</signal>
+				<signal>
+					<sigName>DegtoRad2</sigName>
+					<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/DegtoRad2</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+					<sigLabel>Yaw Angle</sigLabel>
+				</signal>
+				<signal>
+					<sigName>DegtoRad3</sigName>
+					<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/DegtoRad3</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+					<sigLabel>Roll Angle</sigLabel>
+				</signal>
+				<signal>
+					<sigName>DegtoRad4</sigName>
+					<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/DegtoRad4</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+					<sigLabel>Roll Rate</sigLabel>
+				</signal>
+				<signal>
+					<sigName>DegtoRad5</sigName>
+					<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/DegtoRad5</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+					<sigLabel>Yaw Gyro Bias</sigLabel>
+				</signal>
+				<signal>
+					<sigName>DegtoRad6</sigName>
+					<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/DegtoRad6</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+					<sigLabel>Roll Gyro Bias</sigLabel>
+				</signal>
+				<signal>
+					<sigName>DegtoRad7</sigName>
+					<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/DegtoRad7</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+					<sigLabel>Sideslip</sigLabel>
+				</signal>
+			</SubSystem>
+			<signal>
+				<sigName>Gain1</sigName>
+				<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/Gain1</xpcsigName>
+				<sigWidth>1</sigWidth>
+				<sigDim>[1, 1]</sigDim>
+			</signal>
+			<signal>
+				<sigName>Gain2</sigName>
+				<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/Gain2</xpcsigName>
+				<sigWidth>1</sigWidth>
+				<sigDim>[1, 1]</sigDim>
+			</signal>
+			<signal>
+				<sigName>Gain3</sigName>
+				<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/Gain3</xpcsigName>
+				<sigWidth>1</sigWidth>
+				<sigDim>[1, 1]</sigDim>
+			</signal>
+			<signal>
+				<sigName>Gain4</sigName>
+				<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/Gain4</xpcsigName>
+				<sigWidth>1</sigWidth>
+				<sigDim>[1, 1]</sigDim>
+			</signal>
+			<signal>
+				<sigName>Gain5</sigName>
+				<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/Gain5</xpcsigName>
+				<sigWidth>1</sigWidth>
+				<sigDim>[1, 1]</sigDim>
+			</signal>
+			<signal>
+				<sigName>Low-pass filter</sigName>
+				<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/Low-pass filter</xpcsigName>
+				<sigWidth>1</sigWidth>
+				<sigDim>[1, 1]</sigDim>
+				<sigLabel>Front Left</sigLabel>
+			</signal>
+			<signal>
+				<sigName>Low-pass filter1</sigName>
+				<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/Low-pass filter1</xpcsigName>
+				<sigWidth>1</sigWidth>
+				<sigDim>[1, 1]</sigDim>
+				<sigLabel>Horiz Speed</sigLabel>
+			</signal>
+			<signal>
+				<sigName>Low-pass filter2</sigName>
+				<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/Low-pass filter2</xpcsigName>
+				<sigWidth>1</sigWidth>
+				<sigDim>[1, 1]</sigDim>
+				<sigLabel>Front Right</sigLabel>
+			</signal>
+			<signal>
+				<sigName>Low-pass filter3</sigName>
+				<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/Low-pass filter3</xpcsigName>
+				<sigWidth>1</sigWidth>
+				<sigDim>[1, 1]</sigDim>
+				<sigLabel>Rear Left</sigLabel>
+			</signal>
+			<signal>
+				<sigName>Low-pass filter4</sigName>
+				<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/Low-pass filter4</xpcsigName>
+				<sigWidth>1</sigWidth>
+				<sigDim>[1, 1]</sigDim>
+				<sigLabel>Rear Right</sigLabel>
+			</signal>
+		</SubSystem>
+	</SubSystem>
+	<SubSystem>
+		<Name>User Controllers</Name>
+		<xPCName>p1_standalone/User Controllers</xPCName>
+		<SubSystem>
+			<Name>Scope </Name>
+			<xPCName>p1_standalone/User Controllers/Scope </xPCName>
+		</SubSystem>
+		<SubSystem>
+			<Name>Steering Controller</Name>
+			<xPCName>p1_standalone/User Controllers/Steering Controller</xPCName>
+			<SubSystem>
+				<Name>Ackermann Correction</Name>
+				<xPCName>p1_standalone/User Controllers/Steering Controller/Ackermann Correction</xPCName>
+			</SubSystem>
+			<SubSystem>
+				<Name>HAL-9000</Name>
+				<xPCName>p1_standalone/User Controllers/Steering Controller/HAL-9000</xPCName>
+				<SubSystem>
+					<Name>Chirp Signal</Name>
+					<xPCName>p1_standalone/User Controllers/Steering Controller/HAL-9000/Chirp Signal</xPCName>
+				</SubSystem>
+				<SubSystem>
+					<Name>Double chirp</Name>
+					<xPCName>p1_standalone/User Controllers/Steering Controller/HAL-9000/Double chirp</xPCName>
+					<SubSystem>
+						<Name>Chirp One</Name>
+						<xPCName>p1_standalone/User Controllers/Steering Controller/HAL-9000/Double chirp/Chirp One</xPCName>
+					</SubSystem>
+					<SubSystem>
+						<Name>Chirp Two</Name>
+						<xPCName>p1_standalone/User Controllers/Steering Controller/HAL-9000/Double chirp/Chirp Two</xPCName>
+					</SubSystem>
+				</SubSystem>
+				<SubSystem>
+					<Name>Double-step</Name>
+					<xPCName>p1_standalone/User Controllers/Steering Controller/HAL-9000/Double-step</xPCName>
+					<SubSystem>
+						<Name>Left Pulse</Name>
+						<xPCName>p1_standalone/User Controllers/Steering Controller/HAL-9000/Double-step/Left Pulse</xPCName>
+					</SubSystem>
+					<SubSystem>
+						<Name>Right Pulse</Name>
+						<xPCName>p1_standalone/User Controllers/Steering Controller/HAL-9000/Double-step/Right Pulse</xPCName>
+					</SubSystem>
+				</SubSystem>
+				<SubSystem>
+					<Name>Latch</Name>
+					<xPCName>p1_standalone/User Controllers/Steering Controller/HAL-9000/Latch</xPCName>
+					<signal>
+						<sigName>In1</sigName>
+						<xpcsigName>User Controllers/Steering Controller/HAL-9000/Latch/In1</xpcsigName>
+						<sigWidth>1</sigWidth>
+						<sigDim>[1, 1]</sigDim>
+					</signal>
+				</SubSystem>
+				<SubSystem>
+					<Name>Ramp</Name>
+					<xPCName>p1_standalone/User Controllers/Steering Controller/HAL-9000/Ramp</xPCName>
+				</SubSystem>
+				<SubSystem>
+					<Name>Step</Name>
+					<xPCName>p1_standalone/User Controllers/Steering Controller/HAL-9000/Step</xPCName>
+				</SubSystem>
+				<signal>
+					<sigName>Clock</sigName>
+					<xpcsigName>User Controllers/Steering Controller/HAL-9000/Clock</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>Product</sigName>
+					<xpcsigName>User Controllers/Steering Controller/HAL-9000/Product</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>Product1</sigName>
+					<xpcsigName>User Controllers/Steering Controller/HAL-9000/Product1</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>Sum</sigName>
+					<xpcsigName>User Controllers/Steering Controller/HAL-9000/Sum</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+			</SubSystem>
+			<signal>
+				<sigName>Sum</sigName>
+				<xpcsigName>User Controllers/Steering Controller/Sum</xpcsigName>
+				<sigWidth>1</sigWidth>
+				<sigDim>[1, 1]</sigDim>
+			</signal>
+			<signal>
+				<sigName>Heavy Filter</sigName>
+				<xpcsigName>User Controllers/Steering Controller/Heavy Filter</xpcsigName>
+				<sigWidth>1</sigWidth>
+				<sigDim>[1, 1]</sigDim>
+			</signal>
+			<signal>
+				<sigName>Nominal Filter</sigName>
+				<xpcsigName>User Controllers/Steering Controller/Nominal Filter</xpcsigName>
+				<sigWidth>1</sigWidth>
+				<sigDim>[1, 1]</sigDim>
+			</signal>
+		</SubSystem>
+		<signal>
+			<sigName>Gain</sigName>
+			<xpcsigName>User Controllers/Gain</xpcsigName>
+			<sigWidth>2</sigWidth>
+			<sigDim>[2, 1]</sigDim>
+		</signal>
+	</SubSystem>
+</Root>
