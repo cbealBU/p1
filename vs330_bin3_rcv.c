@@ -1,4 +1,4 @@
-#define S_FUNCTION_NAME rs232_stream_rcv
+#define S_FUNCTION_NAME vs330_bin3_rcv
 #define S_FUNCTION_LEVEL 2
 
 #include <stddef.h>
@@ -20,36 +20,30 @@
 #define SAMPLE_TIME             ssGetSFcnParam(S,0)
 
 #define NUM_OUTPUTS           2
-//#define OUT_PORT_0_NAME       y0
-//#define OUT_PORT_1_NAME       y1
 #define OUTPUT_0_WIDTH        33
 #define OUTPUT_1_WIDTH        1
 #define OUTPUT_0_COMPLEX      COMPLEX_NO
 #define OUTPUT_1_COMPLEX      COMPLEX_NO
 
-#define PORT_ARG                 1          //Com port number minus one (zero indexed)
-#define BAUDRATE_ARG             115200     //Must reset GPS receiver each time you change this
-#define DATABIT_ARG              8          //# of data bits in a packet
+#define PORT_ARG                 1          // com port number minus one (zero indexed)
+#define BAUDRATE_ARG             115200     // must reset GPS receiver each time you change this
+#define DATABIT_ARG              8          // # of data bits in a packet
 #define STOPBIT_ARG              1
 #define PARITY_ARG               0x100
-#define PROTOCOL_ARG             0       //Protocol ?? I am guessing this is handshaking
+#define PROTOCOL_ARG             0       // protocol?? I am guessing this is handshaking
 #define SENDBUF_ARG              8192
 #define RECBUF_ARG               8192
 #define TX_SHIFT_EMPTY           0x40
 
-//#define NO_I_WORKS               (0)
-//#define NO_R_WORKS               (6)
-
-static char_T errMsg[SENDBUF_ARG];
+static char_T errMsg[SENDBUF_ARG];          // message string used for setup error messages
 
 extern int rs232ports[];
 extern int rs232recbufs[];
 
-static unsigned char msgBuff[SENDBUF_ARG];           //Global Variables to buffer serial port data
-static int  index;
-static double OutputLatch[NUM_OUTPUTS];
+static unsigned char msgBuff[SENDBUF_ARG];           // global Variables to buffer serial port data
+static int index;
 
-// checksum function
+// checksum function - UNTESTED
 unsigned char checksum (unsigned char *ptr, size_t sz) {
     unsigned char chk = 0;
     while (sz-- != 0)
@@ -60,8 +54,6 @@ unsigned char checksum (unsigned char *ptr, size_t sz) {
 // function for converting all of the data to doubles
 double parseCharToDouble(unsigned char *startByte)
 {
-    //unsigned char *tmp;
-    //tmp = *startByte;
     return (double)*startByte;
 }
 
@@ -143,15 +135,11 @@ static void mdlInitializeSizes(SimStruct *S)
     ssSetNumContStates(S, 0);
     ssSetNumDiscStates(S, 0);
     ssSetNumInputPorts(S, 0);
-    //ssSetNumInputs(S, 0);
     
     /* set the output port properties */
     ssSetNumOutputPorts(S, 2);
-    //ssSetNumOutputs(S, NUM_OUTPUTS); // this is the port width
     ssSetOutputPortWidth(S, 0, OUTPUT_0_WIDTH);
     ssSetOutputPortWidth(S, 1, OUTPUT_1_WIDTH);
-    //ssSetOutputPortDataType(S, 0, SS_UINT8);
-    //ssSetOutputPortDataType(S, 1, SS_UINT8);
     ssSetOutputPortComplexSignal(S, 0, OUTPUT_0_COMPLEX);
     ssSetOutputPortComplexSignal(S, 1, OUTPUT_1_COMPLEX);
     
@@ -185,31 +173,13 @@ static void mdlInitializeConditions(SimStruct *S)
             SENDBUF_ARG,
             PROTOCOL_ARG);
     
-//Reset the com port to the new desired speed.
-//     rl32eInitCOMPort(   PORT_ARG,
-//                 DefaultCOMIOBase[PORT_ARG],
-//                 DefaultCOMIRQ[PORT_ARG],
-//                 BAUDRATE_ARG,
-//                 PARITY_ARG,
-//                 STOPBIT_ARG,
-//                 DATABIT_ARG,
-//                 RECBUF_ARG,
-//                 SENDBUF_ARG,
-//                 PROTOCOL_ARG);
-    rs232ports[PORT_ARG]=1;
-    
-    /* Check to make sure the port is open */
-    if (!rs232ports[PORT_ARG]) {
-        printf("RS232 I/O-send Error: choosen COM-port not initialized\n");
-        return;
-    }
-    
+    rs232ports[PORT_ARG]=1; // set the port status flag to initialized
+        
     // Empty the buffer by reading and tossing each character available
     k = rl32eReceiveBufferCount(PORT_ARG);
-    for(i = 0; i<k; i++){
+    for(i = 0; i < k; i++)
         c=rl32eReceiveChar(PORT_ARG);
-        
-    }
+
     // set the message index value to zero
     index = 0;
     
@@ -224,14 +194,13 @@ static void mdlOutputs(SimStruct *S, int_T tid)
     // real_T *y, const real_T *x, const real_T *u,
 #ifndef MATLAB_MEX_FILE
     
-// !!!! NOTE !!! This function accesses global variables as they appear on line 55
+// !!!! NOTE !!! This function accesses global variables as they appear above
 // It needs to do this because the serial string spans multiple sample times
 //
-//      static char msgBuff[SENDBUF_ARG];           //Global Variables to buffer serial port data
-//      static int  index;
-//      static int  starStatus;
+//      static unsigned char msgBuff[SENDBUF_ARG];           //Global Variables to buffer serial port data
+//      static int index;
     
-    int i,j,k,m;              //General purpose counters
+    int i,k;              //General purpose counting variables
     
     double *y0 = (double*)ssGetOutputPortSignal(S, 0); // arrays corresponding to the output ports
     double *y1 = (double*)ssGetOutputPortSignal(S, 1);
@@ -243,35 +212,22 @@ static void mdlOutputs(SimStruct *S, int_T tid)
     }
     
     k = rl32eReceiveBufferCount(PORT_ARG);  // Find out how many chars are in the buffer
-    //if(k > 0)
-    //    printf("Debug point C: %d bytes available\r\n",k);
     
-    // TODO: move this to an appropriate point later on
     for(i=0; i<k; i++) // loop through all of the bytes available
     {
         if(0 == index) // if not already in the midst of pulling bytes in the middle of a message
         {
             msgBuff[0] = (unsigned char)rl32eReceiveChar(PORT_ARG); // pull one character into the first output buffer byte (will be overwritten if not the start of a message)
-            //printf("%x \r\n",msgBuff[0]);
             if(msgBuff[0] == '$') // check to see that the start of the output buffer is a $ character, signifying the start of a message
-            {
                 index++; // if a $ character is in place, note a successful first character received
-                //printf("Debug point A\r\n");
-            }
         }
         else if(index < 128) // if not already at the end of the message
         {
             msgBuff[index] = (unsigned char)rl32eReceiveChar(PORT_ARG); // read one byte out of the buffer (and into the block output)
             index++; // increment the byte count for the output
-            //printf("Debug point D: index is %d\r\n",index);
-            
         }
         else
-        {
-            // if 128 bytes have been received, we have the whole binary message, so leave the rest of the bytes in the buffer
-            //printf("Debug point B\r\n");
-            break;
-        }
+            break; // if 128 bytes have been received, we have the whole binary message, so leave the rest of the bytes in the buffer
     }
     
     // if a full message was received, process it
@@ -279,9 +235,6 @@ static void mdlOutputs(SimStruct *S, int_T tid)
     {
         index = 0; // reset the index flag back to zero so the next message can be read
         y1[0] = (double)checksum(msgBuff+8,118); // calculate and output the error in the checksum (should always be zero)
-        
-        // debug: print out the header information
-        printf("%x %x %x %x %x %x %x... %x %x\r\n",msgBuff[0],msgBuff[1],msgBuff[2],msgBuff[3],msgBuff[4],msgBuff[5],msgBuff[6],msgBuff[126],msgBuff[127]);
         
         // now parse the message
         y0[0] = parseLongToDouble(msgBuff+0); // skipping output of header information
@@ -316,18 +269,14 @@ static void mdlOutputs(SimStruct *S, int_T tid)
         y0[29] = parseFloatToDouble(msgBuff+116);
         y0[30] = parseFloatToDouble(msgBuff+120);
         y0[31] = parseShortToDouble(msgBuff+124);
-        y0[32] = parseShortToDouble(msgBuff+126);
-        
+        y0[32] = parseShortToDouble(msgBuff+126);  
     }
-    else
+    else // if index < 128 (a message is not being parsed this time step)
     {
         for(i = 0; i < OUTPUT_0_WIDTH; i++)
             y0[i] = 0.0; // zero the output since there is no new message
         y1[i] = -99; // flag for no data
-        //printf("Debug point E\r\n");
     }
-//        printf("Output 0: %02x %f\r\n",msgBuff[0],y0[0]);
-//        printf("Output 32: %02x%02x %f\r\n",msgBuff[126],msgBuff[127],y0[32]);
     
 #endif
 }
