@@ -22,10 +22,8 @@
 #define NUM_OUTPUTS           2
 #define OUT_PORT_0_NAME       y0
 #define OUT_PORT_1_NAME       y1
-#define OUTPUT_0_WIDTH        128
+#define OUTPUT_0_WIDTH        31
 #define OUTPUT_1_WIDTH        1
-#define OUTPUT_0_DTYPE        SS_UINT8
-#define OUTPUT_1_DTYPE        SS_UINT8
 #define OUTPUT_0_COMPLEX      COMPLEX_NO
 #define OUTPUT_1_COMPLEX      COMPLEX_NO
 
@@ -39,17 +37,16 @@
 #define RECBUF_ARG               8192
 #define TX_SHIFT_EMPTY           0x40
 
-#define NO_I_WORKS               (0)
-#define NO_R_WORKS               (6)
+//#define NO_I_WORKS               (0)
+//#define NO_R_WORKS               (6)
 
-static char_T msg[SENDBUF_ARG];
+static char_T errMsg[SENDBUF_ARG];
 
 extern int rs232ports[];
 extern int rs232recbufs[];
 
 static char msgBuff[SENDBUF_ARG];           //Global Variables to buffer serial port data
 static int  index;
-static int  starStatus;
 static double OutputLatch[NUM_OUTPUTS];
 
 // checksum function
@@ -58,6 +55,14 @@ unsigned char checksum (unsigned char *ptr, size_t sz) {
     while (sz-- != 0)
         chk -= *ptr++;
     return chk;
+}
+
+// function for converting all of the data to doubles
+double parseToDouble(unsigned char *startByte, size_t numBytes)
+{
+    double outputVal;
+    memcpy(&outputVal,startByte,numBytes);
+    return outputVal;
 }
 
 static void mdlInitializeSizes(SimStruct *S)
@@ -70,8 +75,8 @@ static void mdlInitializeSizes(SimStruct *S)
 #ifdef MATLAB_MEX_FILE
     ssSetNumSFcnParams(S, NUMBER_OF_ARGS);  /* Number of expected parameters */
     if (ssGetNumSFcnParams(S) != ssGetSFcnParamsCount(S)) {
-        sprintf(msg,"Wrong number of input arguments passed.\n1 argument is expected\n");
-        ssSetErrorStatus(S,msg);
+        sprintf(errMsg,"Wrong number of input arguments passed.\n1 argument is expected\n");
+        ssSetErrorStatus(S,errMsg);
         return;
     }
 #endif
@@ -87,8 +92,8 @@ static void mdlInitializeSizes(SimStruct *S)
     //ssSetNumOutputs(S, NUM_OUTPUTS); // this is the port width
     ssSetOutputPortWidth(S, 0, OUTPUT_0_WIDTH);
     ssSetOutputPortWidth(S, 1, OUTPUT_1_WIDTH);
-    ssSetOutputPortDataType(S, 0, SS_UINT8);
-    ssSetOutputPortDataType(S, 1, SS_UINT8);
+    //ssSetOutputPortDataType(S, 0, SS_UINT8);
+    //ssSetOutputPortDataType(S, 1, SS_UINT8);
     ssSetOutputPortComplexSignal(S, 0, OUTPUT_0_COMPLEX);
     ssSetOutputPortComplexSignal(S, 1, OUTPUT_1_COMPLEX);
     
@@ -167,13 +172,9 @@ static void mdlOutputs(SimStruct *S, int_T tid)
 //      static int  starStatus;
     
     int i,j,k,m;              //General purpose counters
-    unsigned char msgCharsRcvd;
-    
-    unsigned char *y0 = (unsigned char*) ssGetOutputPortSignal(S, 0);
-    unsigned char *y1 = (unsigned char*) ssGetOutputPortSignal(S, 1);
-    
-    //static double VelSolType;  //Storage of velocity solution type (used to default latency to 0.0
-    //if in Doppler Mode)
+   
+    double *y0 = (double*) ssGetOutputPortSignal(S, 0); // arrays corresponding to the output ports
+    double *y1 = (double*) ssGetOutputPortSignal(S, 1);
     
     /* Check to make sure the port is open */
     if (!rs232ports[PORT_ARG]) {
@@ -183,32 +184,62 @@ static void mdlOutputs(SimStruct *S, int_T tid)
     
     k = rl32eReceiveBufferCount(PORT_ARG);  // Find out how many chars are in the buffer
     
-    /*if (k > OUTPUT_0_WIDTH) {
-        sprintf(msg,"COM Port buffer has more data than receive block buffer can handle\n");
-        ssSetErrorStatus(S,msg);
-        return;
-    }*/ // CEB: This is no longer an issue since we'll read only one 128 byte message at a time
-    
-    // Craig's code
-    msgCharsRcvd = 0; // reset the counter on bytes in the output buffer
+    // TODO: move this to an appropriate point later on
+    // index = 0; // reset the counter on bytes in the output buffer
     for(i=0; i<k; i++) // loop through all of the bytes available
     {
-        if(0 == msgCharsRcvd) // if not already in the midst of pulling bytes in the middle of a message
+        if(0 == index) // if not already in the midst of pulling bytes in the middle of a message
         {
-            y0[0] = (unsigned char)rl32eReceiveChar(PORT_ARG); // pull one character into the first output buffer byte (will be overwritten if not the start of a message)
-            if(y0[0] == '$') // check to see that the start of the output buffer is a $ character, signifying the start of a message
-                msgCharsRcvd++; // if a $ character is in place, note a successful first character received
+            msgBuff[0] = (unsigned char)rl32eReceiveChar(PORT_ARG); // pull one character into the first output buffer byte (will be overwritten if not the start of a message)
+            if(msgBuff[0] == '$') // check to see that the start of the output buffer is a $ character, signifying the start of a message
+                index++; // if a $ character is in place, note a successful first character received
         }
-        else if(msgCharsRcvd < 128) // if not already at the end of the message
+        else if(index < 128) // if not already at the end of the message
         {
-            y0[msgCharsRcvd] = (unsigned char)rl32eReceiveChar(PORT_ARG); // read one byte out of the buffer (and into the block output)
-            msgCharsRcvd++; // increment the byte count for the output
+            msgBuff[index] = (unsigned char)rl32eReceiveChar(PORT_ARG); // read one byte out of the buffer (and into the block output)
+            index++; // increment the byte count for the output
         }
         else
             break; // if 128 bytes have been received, we have the whole binary message, so leave the rest of the bytes in the buffer
     }
     
-    y1[0] = checksum(y0+8,118); // calculate and output the error in the checksum (should always be zero)
+    y1[0] = (double)checksum(msgBuff+8,118); // calculate and output the error in the checksum (should always be zero)
+
+    // now parse the message
+    //y[0] = parseToDouble(msgBuff+0,sizeof(uint64_T));
+    y0[0] = parseToDouble(msgBuff+8,sizeof(double));
+    y0[1] = parseToDouble(msgBuff+16,sizeof(unsigned short));
+    y0[2] = parseToDouble(msgBuff+18,sizeof(unsigned short));
+    y0[3] = parseToDouble(msgBuff+20,sizeof(unsigned short));
+    y0[4] = parseToDouble(msgBuff+22,sizeof(unsigned char));
+    y0[5] = parseToDouble(msgBuff+23,sizeof(unsigned char));
+    y0[6] = parseToDouble(msgBuff+24,sizeof(double));
+    y0[7] = parseToDouble(msgBuff+32,sizeof(double));
+    y0[8] = parseToDouble(msgBuff+40,sizeof(float));
+    y0[9] = parseToDouble(msgBuff+44,sizeof(float));
+    y0[10] = parseToDouble(msgBuff+48,sizeof(float));
+    y0[11] = parseToDouble(msgBuff+52,sizeof(float));
+    y0[12] = parseToDouble(msgBuff+56,sizeof(float));
+    y0[13] = parseToDouble(msgBuff+60,sizeof(float));
+    y0[14] = parseToDouble(msgBuff+64,sizeof(float));
+    y0[15] = parseToDouble(msgBuff+68,sizeof(unsigned short));
+    y0[16] = parseToDouble(msgBuff+70,sizeof(unsigned short));
+    y0[17] = parseToDouble(msgBuff+72,sizeof(float));
+    y0[18] = parseToDouble(msgBuff+76,sizeof(float));
+    y0[19] = parseToDouble(msgBuff+80,sizeof(float));
+    y0[20] = parseToDouble(msgBuff+84,sizeof(float));
+    y0[21] = parseToDouble(msgBuff+88,sizeof(float));
+    y0[22] = parseToDouble(msgBuff+92,sizeof(float));
+    y0[23] = parseToDouble(msgBuff+96,sizeof(float));
+    y0[24] = parseToDouble(msgBuff+100,sizeof(float));
+    y0[25] = parseToDouble(msgBuff+104,sizeof(float));
+    y0[26] = parseToDouble(msgBuff+108,sizeof(float));
+    y0[27] = parseToDouble(msgBuff+112,sizeof(float));
+    y0[28] = parseToDouble(msgBuff+116,sizeof(float));
+    y0[29] = parseToDouble(msgBuff+120,sizeof(float));
+    y0[30] = parseToDouble(msgBuff+124,sizeof(unsigned short));
+    y0[31] = parseToDouble(msgBuff+126,sizeof(unsigned short));
+    
     
 #endif
 }
