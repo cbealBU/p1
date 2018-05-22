@@ -20,15 +20,15 @@
 #define SAMPLE_TIME             ssGetSFcnParam(S,0)
 
 #define NUM_OUTPUTS           2
-#define OUT_PORT_0_NAME       y0
-#define OUT_PORT_1_NAME       y1
-#define OUTPUT_0_WIDTH        31
+//#define OUT_PORT_0_NAME       y0
+//#define OUT_PORT_1_NAME       y1
+#define OUTPUT_0_WIDTH        33
 #define OUTPUT_1_WIDTH        1
 #define OUTPUT_0_COMPLEX      COMPLEX_NO
 #define OUTPUT_1_COMPLEX      COMPLEX_NO
 
-#define PORT_ARG                 1          //Com port number -1
-#define BAUDRATE_ARG             9600     //Must reset GPS receiver each time you change this
+#define PORT_ARG                 1          //Com port number minus one (zero indexed)
+#define BAUDRATE_ARG             115200     //Must reset GPS receiver each time you change this
 #define DATABIT_ARG              8          //# of data bits in a packet
 #define STOPBIT_ARG              1
 #define PARITY_ARG               0x100
@@ -45,7 +45,7 @@ static char_T errMsg[SENDBUF_ARG];
 extern int rs232ports[];
 extern int rs232recbufs[];
 
-static char msgBuff[SENDBUF_ARG];           //Global Variables to buffer serial port data
+static unsigned char msgBuff[SENDBUF_ARG];           //Global Variables to buffer serial port data
 static int  index;
 static double OutputLatch[NUM_OUTPUTS];
 
@@ -60,33 +60,67 @@ unsigned char checksum (unsigned char *ptr, size_t sz) {
 // function for converting all of the data to doubles
 double parseCharToDouble(unsigned char *startByte)
 {
-    unsigned char tmp;
-    memcpy(&tmp,startByte,sizeof(unsigned char));
-    return (double)tmp;
+    //unsigned char *tmp;
+    //tmp = *startByte;
+    return (double)*startByte;
 }
 
 // function for converting all of the data to doubles
 double parseShortToDouble(unsigned char *startByte)
 {
-    unsigned short tmp;
-    memcpy(&tmp,startByte,sizeof(unsigned short));
-    return (double)tmp;
+    unsigned char tmp[2];
+    unsigned short *output;
+    tmp[1] = startByte[0];
+    tmp[0] = startByte[1];
+    output = &tmp[0];
+    return (double)*output;
+}
+
+// function for converting all of the data to doubles
+double parseLongToDouble(unsigned char *startByte)
+{
+    unsigned char tmp[8];
+    unsigned long long *output;
+    tmp[7] = startByte[0];
+    tmp[6] = startByte[1];
+    tmp[5] = startByte[2];
+    tmp[4] = startByte[3];
+    tmp[3] = startByte[4];
+    tmp[2] = startByte[5];
+    tmp[1] = startByte[6];
+    tmp[0] = startByte[7];
+    output = &tmp[0];
+    return (double)*output;
 }
 
 // function for converting all of the data to doubles
 double parseFloatToDouble(unsigned char *startByte)
 {
-    float tmp;
-    memcpy(&tmp,startByte,sizeof(float));
-    return (double)tmp;
+    unsigned char tmp[4];
+    float *output;
+    tmp[3] = startByte[0];
+    tmp[2] = startByte[1];
+    tmp[1] = startByte[2];
+    tmp[0] = startByte[3];
+    output = &tmp[0];
+    return (double)*output;
 }
 
 // function for converting all of the data to doubles
 double parseDoubleToDouble(unsigned char *startByte)
 {
-    double tmp;
-    memcpy(&tmp,startByte,sizeof(double));
-    return (double)tmp;
+    unsigned char tmp[8];
+    double *output;
+    tmp[7] = startByte[0];
+    tmp[6] = startByte[1];
+    tmp[5] = startByte[2];
+    tmp[4] = startByte[3];
+    tmp[3] = startByte[4];
+    tmp[2] = startByte[5];
+    tmp[1] = startByte[6];
+    tmp[0] = startByte[7];
+    output = &tmp[0];
+    return *output;
 }
 
 static void mdlInitializeSizes(SimStruct *S)
@@ -143,7 +177,7 @@ static void mdlInitializeConditions(SimStruct *S)
     rl32eInitCOMPort(  PORT_ARG,
             DefaultCOMIOBase[PORT_ARG],
             DefaultCOMIRQ[PORT_ARG],
-            9600,   //This is the default baud rate on reset
+            BAUDRATE_ARG,   //This is the default baud rate on reset
             PARITY_ARG,
             STOPBIT_ARG,
             DATABIT_ARG,
@@ -176,6 +210,8 @@ static void mdlInitializeConditions(SimStruct *S)
         c=rl32eReceiveChar(PORT_ARG);
         
     }
+    // set the message index value to zero
+    index = 0;
     
 #endif
     
@@ -197,8 +233,8 @@ static void mdlOutputs(SimStruct *S, int_T tid)
     
     int i,j,k,m;              //General purpose counters
     
-    double *y0 = (double*) ssGetOutputPortSignal(S, 0); // arrays corresponding to the output ports
-    double *y1 = (double*) ssGetOutputPortSignal(S, 1);
+    double *y0 = (double*)ssGetOutputPortSignal(S, 0); // arrays corresponding to the output ports
+    double *y1 = (double*)ssGetOutputPortSignal(S, 1);
     
     /* Check to make sure the port is open */
     if (!rs232ports[PORT_ARG]) {
@@ -207,63 +243,91 @@ static void mdlOutputs(SimStruct *S, int_T tid)
     }
     
     k = rl32eReceiveBufferCount(PORT_ARG);  // Find out how many chars are in the buffer
+    //if(k > 0)
+    //    printf("Debug point C: %d bytes available\r\n",k);
     
     // TODO: move this to an appropriate point later on
-    // index = 0; // reset the counter on bytes in the output buffer
     for(i=0; i<k; i++) // loop through all of the bytes available
     {
         if(0 == index) // if not already in the midst of pulling bytes in the middle of a message
         {
             msgBuff[0] = (unsigned char)rl32eReceiveChar(PORT_ARG); // pull one character into the first output buffer byte (will be overwritten if not the start of a message)
+            //printf("%x \r\n",msgBuff[0]);
             if(msgBuff[0] == '$') // check to see that the start of the output buffer is a $ character, signifying the start of a message
+            {
                 index++; // if a $ character is in place, note a successful first character received
+                //printf("Debug point A\r\n");
+            }
         }
         else if(index < 128) // if not already at the end of the message
         {
             msgBuff[index] = (unsigned char)rl32eReceiveChar(PORT_ARG); // read one byte out of the buffer (and into the block output)
             index++; // increment the byte count for the output
+            //printf("Debug point D: index is %d\r\n",index);
+            
         }
         else
-            break; // if 128 bytes have been received, we have the whole binary message, so leave the rest of the bytes in the buffer
+        {
+            // if 128 bytes have been received, we have the whole binary message, so leave the rest of the bytes in the buffer
+            //printf("Debug point B\r\n");
+            break;
+        }
     }
     
-    y1[0] = (double)checksum(msgBuff+8,118); // calculate and output the error in the checksum (should always be zero)
-
-    // now parse the message
-    //y[0] = parseToDouble(msgBuff+0,sizeof(uint64_T)); // skipping output of header information
-    y0[0] = parseDoubleToDouble(msgBuff+8);
-    y0[1] = parseShortToDouble(msgBuff+16);
-    y0[2] = parseShortToDouble(msgBuff+18);
-    y0[3] = parseShortToDouble(msgBuff+20);
-    y0[4] = parseCharToDouble(msgBuff+22);
-    y0[5] = parseCharToDouble(msgBuff+23);
-    y0[6] = parseDoubleToDouble(msgBuff+24);
-    y0[7] = parseDoubleToDouble(msgBuff+32);
-    y0[8] = parseFloatToDouble(msgBuff+40);
-    y0[9] = parseFloatToDouble(msgBuff+44);
-    y0[10] = parseFloatToDouble(msgBuff+48);
-    y0[11] = parseFloatToDouble(msgBuff+52);
-    y0[12] = parseFloatToDouble(msgBuff+56);
-    y0[13] = parseFloatToDouble(msgBuff+60);
-    y0[14] = parseFloatToDouble(msgBuff+64);
-    y0[15] = parseShortToDouble(msgBuff+68);
-    y0[16] = parseShortToDouble(msgBuff+70);
-    y0[17] = parseFloatToDouble(msgBuff+72);
-    y0[18] = parseFloatToDouble(msgBuff+76);
-    y0[19] = parseFloatToDouble(msgBuff+80);
-    y0[20] = parseFloatToDouble(msgBuff+84);
-    y0[21] = parseFloatToDouble(msgBuff+88);
-    y0[22] = parseFloatToDouble(msgBuff+92);
-    y0[23] = parseFloatToDouble(msgBuff+96);
-    y0[24] = parseFloatToDouble(msgBuff+100);
-    y0[25] = parseFloatToDouble(msgBuff+104);
-    y0[26] = parseFloatToDouble(msgBuff+108);
-    y0[27] = parseFloatToDouble(msgBuff+112);
-    y0[28] = parseFloatToDouble(msgBuff+116);
-    y0[29] = parseFloatToDouble(msgBuff+120);
-    y0[30] = parseShortToDouble(msgBuff+124);
-    y0[31] = parseShortToDouble(msgBuff+126);
-    
+    // if a full message was received, process it
+    if(128 <= index)
+    {
+        index = 0; // reset the index flag back to zero so the next message can be read
+        y1[0] = (double)checksum(msgBuff+8,118); // calculate and output the error in the checksum (should always be zero)
+        
+        // debug: print out the header information
+        printf("%x %x %x %x %x %x %x... %x %x\r\n",msgBuff[0],msgBuff[1],msgBuff[2],msgBuff[3],msgBuff[4],msgBuff[5],msgBuff[6],msgBuff[126],msgBuff[127]);
+        
+        // now parse the message
+        y0[0] = parseLongToDouble(msgBuff+0); // skipping output of header information
+        y0[1] = parseDoubleToDouble(msgBuff+8);
+        y0[2] = parseShortToDouble(msgBuff+16);
+        y0[3] = parseShortToDouble(msgBuff+18);
+        y0[4] = parseShortToDouble(msgBuff+20);
+        y0[5] = parseCharToDouble(msgBuff+22);
+        y0[6] = parseCharToDouble(msgBuff+23);
+        y0[7] = parseDoubleToDouble(msgBuff+24);
+        y0[8] = parseDoubleToDouble(msgBuff+32);
+        y0[9] = parseFloatToDouble(msgBuff+40);
+        y0[10] = parseFloatToDouble(msgBuff+44);
+        y0[11] = parseFloatToDouble(msgBuff+48);
+        y0[12] = parseFloatToDouble(msgBuff+52);
+        y0[13] = parseFloatToDouble(msgBuff+56);
+        y0[14] = parseFloatToDouble(msgBuff+60);
+        y0[15] = parseFloatToDouble(msgBuff+64);
+        y0[16] = parseShortToDouble(msgBuff+68);
+        y0[17] = parseShortToDouble(msgBuff+70);
+        y0[18] = parseFloatToDouble(msgBuff+72);
+        y0[19] = parseFloatToDouble(msgBuff+76);
+        y0[20] = parseFloatToDouble(msgBuff+80);
+        y0[21] = parseFloatToDouble(msgBuff+84);
+        y0[22] = parseFloatToDouble(msgBuff+88);
+        y0[23] = parseFloatToDouble(msgBuff+92);
+        y0[24] = parseFloatToDouble(msgBuff+96);
+        y0[25] = parseFloatToDouble(msgBuff+100);
+        y0[26] = parseFloatToDouble(msgBuff+104);
+        y0[27] = parseFloatToDouble(msgBuff+108);
+        y0[28] = parseFloatToDouble(msgBuff+112);
+        y0[29] = parseFloatToDouble(msgBuff+116);
+        y0[30] = parseFloatToDouble(msgBuff+120);
+        y0[31] = parseShortToDouble(msgBuff+124);
+        y0[32] = parseShortToDouble(msgBuff+126);
+        
+    }
+    else
+    {
+        for(i = 0; i < OUTPUT_0_WIDTH; i++)
+            y0[i] = 0.0; // zero the output since there is no new message
+        y1[i] = -99; // flag for no data
+        //printf("Debug point E\r\n");
+    }
+//        printf("Output 0: %02x %f\r\n",msgBuff[0],y0[0]);
+//        printf("Output 32: %02x%02x %f\r\n",msgBuff[126],msgBuff[127],y0[32]);
     
 #endif
 }
