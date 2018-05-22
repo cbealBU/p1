@@ -58,11 +58,35 @@ unsigned char checksum (unsigned char *ptr, size_t sz) {
 }
 
 // function for converting all of the data to doubles
-double parseToDouble(unsigned char *startByte, size_t numBytes)
+double parseCharToDouble(unsigned char *startByte)
 {
-    double outputVal;
-    memcpy(&outputVal,startByte,numBytes);
-    return outputVal;
+    unsigned char tmp;
+    memcpy(&tmp,startByte,sizeof(unsigned char));
+    return (double)tmp;
+}
+
+// function for converting all of the data to doubles
+double parseShortToDouble(unsigned char *startByte)
+{
+    unsigned short tmp;
+    memcpy(&tmp,startByte,sizeof(unsigned short));
+    return (double)tmp;
+}
+
+// function for converting all of the data to doubles
+double parseFloatToDouble(unsigned char *startByte)
+{
+    float tmp;
+    memcpy(&tmp,startByte,sizeof(float));
+    return (double)tmp;
+}
+
+// function for converting all of the data to doubles
+double parseDoubleToDouble(unsigned char *startByte)
+{
+    double tmp;
+    memcpy(&tmp,startByte,sizeof(double));
+    return (double)tmp;
 }
 
 static void mdlInitializeSizes(SimStruct *S)
@@ -172,7 +196,7 @@ static void mdlOutputs(SimStruct *S, int_T tid)
 //      static int  starStatus;
     
     int i,j,k,m;              //General purpose counters
-   
+    
     double *y0 = (double*) ssGetOutputPortSignal(S, 0); // arrays corresponding to the output ports
     double *y1 = (double*) ssGetOutputPortSignal(S, 1);
     
@@ -206,39 +230,39 @@ static void mdlOutputs(SimStruct *S, int_T tid)
     y1[0] = (double)checksum(msgBuff+8,118); // calculate and output the error in the checksum (should always be zero)
 
     // now parse the message
-    //y[0] = parseToDouble(msgBuff+0,sizeof(uint64_T));
-    y0[0] = parseToDouble(msgBuff+8,sizeof(double));
-    y0[1] = parseToDouble(msgBuff+16,sizeof(unsigned short));
-    y0[2] = parseToDouble(msgBuff+18,sizeof(unsigned short));
-    y0[3] = parseToDouble(msgBuff+20,sizeof(unsigned short));
-    y0[4] = parseToDouble(msgBuff+22,sizeof(unsigned char));
-    y0[5] = parseToDouble(msgBuff+23,sizeof(unsigned char));
-    y0[6] = parseToDouble(msgBuff+24,sizeof(double));
-    y0[7] = parseToDouble(msgBuff+32,sizeof(double));
-    y0[8] = parseToDouble(msgBuff+40,sizeof(float));
-    y0[9] = parseToDouble(msgBuff+44,sizeof(float));
-    y0[10] = parseToDouble(msgBuff+48,sizeof(float));
-    y0[11] = parseToDouble(msgBuff+52,sizeof(float));
-    y0[12] = parseToDouble(msgBuff+56,sizeof(float));
-    y0[13] = parseToDouble(msgBuff+60,sizeof(float));
-    y0[14] = parseToDouble(msgBuff+64,sizeof(float));
-    y0[15] = parseToDouble(msgBuff+68,sizeof(unsigned short));
-    y0[16] = parseToDouble(msgBuff+70,sizeof(unsigned short));
-    y0[17] = parseToDouble(msgBuff+72,sizeof(float));
-    y0[18] = parseToDouble(msgBuff+76,sizeof(float));
-    y0[19] = parseToDouble(msgBuff+80,sizeof(float));
-    y0[20] = parseToDouble(msgBuff+84,sizeof(float));
-    y0[21] = parseToDouble(msgBuff+88,sizeof(float));
-    y0[22] = parseToDouble(msgBuff+92,sizeof(float));
-    y0[23] = parseToDouble(msgBuff+96,sizeof(float));
-    y0[24] = parseToDouble(msgBuff+100,sizeof(float));
-    y0[25] = parseToDouble(msgBuff+104,sizeof(float));
-    y0[26] = parseToDouble(msgBuff+108,sizeof(float));
-    y0[27] = parseToDouble(msgBuff+112,sizeof(float));
-    y0[28] = parseToDouble(msgBuff+116,sizeof(float));
-    y0[29] = parseToDouble(msgBuff+120,sizeof(float));
-    y0[30] = parseToDouble(msgBuff+124,sizeof(unsigned short));
-    y0[31] = parseToDouble(msgBuff+126,sizeof(unsigned short));
+    //y[0] = parseToDouble(msgBuff+0,sizeof(uint64_T)); // skipping output of header information
+    y0[0] = parseDoubleToDouble(msgBuff+8);
+    y0[1] = parseShortToDouble(msgBuff+16);
+    y0[2] = parseShortToDouble(msgBuff+18);
+    y0[3] = parseShortToDouble(msgBuff+20);
+    y0[4] = parseCharToDouble(msgBuff+22);
+    y0[5] = parseCharToDouble(msgBuff+23);
+    y0[6] = parseDoubleToDouble(msgBuff+24);
+    y0[7] = parseDoubleToDouble(msgBuff+32);
+    y0[8] = parseFloatToDouble(msgBuff+40);
+    y0[9] = parseFloatToDouble(msgBuff+44);
+    y0[10] = parseFloatToDouble(msgBuff+48);
+    y0[11] = parseFloatToDouble(msgBuff+52);
+    y0[12] = parseFloatToDouble(msgBuff+56);
+    y0[13] = parseFloatToDouble(msgBuff+60);
+    y0[14] = parseFloatToDouble(msgBuff+64);
+    y0[15] = parseShortToDouble(msgBuff+68);
+    y0[16] = parseShortToDouble(msgBuff+70);
+    y0[17] = parseFloatToDouble(msgBuff+72);
+    y0[18] = parseFloatToDouble(msgBuff+76);
+    y0[19] = parseFloatToDouble(msgBuff+80);
+    y0[20] = parseFloatToDouble(msgBuff+84);
+    y0[21] = parseFloatToDouble(msgBuff+88);
+    y0[22] = parseFloatToDouble(msgBuff+92);
+    y0[23] = parseFloatToDouble(msgBuff+96);
+    y0[24] = parseFloatToDouble(msgBuff+100);
+    y0[25] = parseFloatToDouble(msgBuff+104);
+    y0[26] = parseFloatToDouble(msgBuff+108);
+    y0[27] = parseFloatToDouble(msgBuff+112);
+    y0[28] = parseFloatToDouble(msgBuff+116);
+    y0[29] = parseFloatToDouble(msgBuff+120);
+    y0[30] = parseShortToDouble(msgBuff+124);
+    y0[31] = parseShortToDouble(msgBuff+126);
     
     
 #endif
