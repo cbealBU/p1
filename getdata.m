@@ -8,7 +8,7 @@ t=tg.TimeLog;y=tg.OutputLog;
 TET=tg.tetlog;
 
 % Retrieve the current data description.
-DataDescription=datadesc;
+%DataDescription=datadesc;
 
 % Now define DataDescriptionUser
 % if sum(strcmp(find_system(bdroot),'p1/User Controllers/ControllerP1Racing'))+sum(strcmp(find_system(bdroot),'p1/User Controllers/ControllerP1RacingSlipCircle'))
@@ -54,8 +54,8 @@ DataDescription=datadesc;
 %     DataDescriptionUser=datadescPSU;
 %     UserBlockName='PSU Sim';
 % else
-    UserBlockName='none';
+%    UserBlockName='none';
 % end
 
-sanity;
+%sanity;
 

@@ -43,11 +43,13 @@ extern int rs232recbufs[];
 static unsigned char msgBuff[SENDBUF_ARG];           // global Variables to buffer serial port data
 static int index;
 
-// checksum function - UNTESTED
-unsigned char checksum (unsigned char *ptr, size_t sz) {
-    unsigned char chk = 0;
-    while (sz-- != 0)
-        chk -= *ptr++;
+// checksum function - modified from found code:
+// the algorithm is clever and subtracts the bytes from the checksum 
+// provided at the end of the array so that the final value is zero
+unsigned short checksum (unsigned char *ptr, size_t sz) {
+    unsigned short chk = *(unsigned short*)(ptr+sz); // initialize the sum with the reference checksum
+    while (sz-- != 0) // keep decreasing the value of sz, the offset to the end of the array
+        chk -= (unsigned short)*(ptr+sz); // subtract the value of each byte (promoting to ushort since the checksum is 2 bytes)
     return chk;
 }
 
@@ -60,59 +62,29 @@ double parseCharToDouble(unsigned char *startByte)
 // function for converting all of the data to doubles
 double parseShortToDouble(unsigned char *startByte)
 {
-    unsigned char tmp[2];
-    unsigned short *output;
-    tmp[1] = startByte[0];
-    tmp[0] = startByte[1];
-    output = &tmp[0];
+    unsigned short *output = (unsigned short *)startByte;
     return (double)*output;
 }
 
 // function for converting all of the data to doubles
 double parseLongToDouble(unsigned char *startByte)
 {
-    unsigned char tmp[8];
-    unsigned long long *output;
-    tmp[7] = startByte[0];
-    tmp[6] = startByte[1];
-    tmp[5] = startByte[2];
-    tmp[4] = startByte[3];
-    tmp[3] = startByte[4];
-    tmp[2] = startByte[5];
-    tmp[1] = startByte[6];
-    tmp[0] = startByte[7];
-    output = &tmp[0];
+    unsigned long long *output = (unsigned long long*)startByte;
     return (double)*output;
 }
 
 // function for converting all of the data to doubles
 double parseFloatToDouble(unsigned char *startByte)
 {
-    unsigned char tmp[4];
-    float *output;
-    tmp[3] = startByte[0];
-    tmp[2] = startByte[1];
-    tmp[1] = startByte[2];
-    tmp[0] = startByte[3];
-    output = &tmp[0];
+    float *output = (float*)startByte;
     return (double)*output;
 }
 
 // function for converting all of the data to doubles
 double parseDoubleToDouble(unsigned char *startByte)
 {
-    unsigned char tmp[8];
-    double *output;
-    tmp[7] = startByte[0];
-    tmp[6] = startByte[1];
-    tmp[5] = startByte[2];
-    tmp[4] = startByte[3];
-    tmp[3] = startByte[4];
-    tmp[2] = startByte[5];
-    tmp[1] = startByte[6];
-    tmp[0] = startByte[7];
-    output = &tmp[0];
-    return *output;
+    double *output = (double*)startByte;
+    return (double)*output;
 }
 
 static void mdlInitializeSizes(SimStruct *S)
@@ -234,7 +206,7 @@ static void mdlOutputs(SimStruct *S, int_T tid)
     if(128 <= index)
     {
         index = 0; // reset the index flag back to zero so the next message can be read
-        y1[0] = (double)checksum(msgBuff+8,118); // calculate and output the error in the checksum (should always be zero)
+        y1[0] = (double)checksum(msgBuff+8,116); // calculate and output the error in the checksum (should always be zero)
         
         // now parse the message
         y0[0] = parseLongToDouble(msgBuff+0); // skipping output of header information
@@ -275,7 +247,7 @@ static void mdlOutputs(SimStruct *S, int_T tid)
     {
         for(i = 0; i < OUTPUT_0_WIDTH; i++)
             y0[i] = 0.0; // zero the output since there is no new message
-        y1[i] = -99; // flag for no data
+        y1[0] = -99; // flag for no data
     }
     
 #endif
