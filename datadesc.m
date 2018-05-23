@@ -28,9 +28,9 @@ DataDescription(ii).desc='Contains in order: Yaw rate, ax, roll rate, ay, pitch 
 
 ii=3;
 DataDescription(ii).name='GPS';
-DataDescription(ii).size=28;
-DataDescription(ii).units=cell(1,28);
-DataDescription(ii).desc='Contains 10 beeline signals, 6 GPS velocity signals, 1 PPS signal, 6 GPS position signals, 2 GPS other signals, 3 Raw XYZ';
+DataDescription(ii).size=25;
+DataDescription(ii).units={'na','s','na','deg','deg','m','m/s','m/s','deg','deg','deg','na','na','na','s','deg','deg','m','m','m^2','m^2','m^2','m^2','m^2','m^2'};
+DataDescription(ii).desc='PPS, time of week, week num, latitude, longitude, altitude, horizontal speed, vert velocity, course over ground, heading, roll angle, nav mode, attitude status, sats used, differential age, yaw stddev, roll stddev, horizontal rms, vertical rms, covariance N-N, covariance N-E, covariance N-U, covariance E-E, covariance E-U, covariance U-U';
 
 ii=4;
 DataDescription(ii).name='Handwheel';
@@ -65,7 +65,7 @@ DataDescription(ii).desc= 'Contains in order: 1) YAW angle, gyro sf, gyro bias, 
 ii=9;
 DataDescription(ii).name='Switches';
 DataDescription(ii).size=4;
-DataDescription(ii).units={ 'bool' 'bool' 'bool' 'bool' };
+DataDescription(ii).units={'bool' 'bool' 'bool' 'bool'};
 DataDescription(ii).desc='Contains status of fault switch, HAL switch, cruise control switch, and brake pedal switch.';
 
 ii=10;

@@ -1,0 +1,44 @@
+//-****************************************************
+//-*  SBinaryMsg3
+//-*  Lat/Lon/Hgt, Covariances, RMS, DOPs and COG, Speed, Heading
+//-****************************************************
+typedef struct
+{					   //                                      Size         Offset
+    SUnionMsgHeader  m_sHead;              //                                      [8]		[0]
+    double           m_dGPSTimeOfWeek;     // GPS tow                              [8 bytes]	[8]
+    unsigned short   m_wGPSWeek;           // GPS week                             [2 bytes]	[16]
+    unsigned short   m_wNumSatsTracked;    // SATS Tracked                         [2 bytes]	[18]
+    unsigned short   m_wNumSatsUsed;       // SATS Used                            [2 bytes]	[20]
+    unsigned char    m_byNavMode;          // Nav Mode (same as message 1)         [1 byte ]	[22]
+    unsigned char    m_bySpare00;          // Spare                                [1 byte ]	[23]
+    double           m_dLatitude;          // Latitude degrees, -90..90            [8 bytes]	[24]
+    double           m_dLongitude;         // Longitude degrees, -180..180         [8 bytes]	[32]
+    float            m_fHeight;            // (m), Altitude ellipsoid              [4 bytes]	[40]
+    float            m_fSpeed;             // Horizontal Speed   m/s               [4 bytes]	[44]
+    float            m_fVUp;               // Vertical Velocity +up  m/s           [4 bytes]	[48]
+    float            m_fCOG;               // Course over Ground, degrees          [4 bytes]	[52]
+    float            m_fHeading;           // Heading (degrees), Zero unless vector[4 bytes]    [56]
+    float            m_fPitch;             // Pitch (degrees), Zero unless vector  [4 bytes]	[60]
+    float            m_fSpare01;           // Spare                                [4 bytes]	[64]
+    unsigned short   m_wAgeOfDiff;         // age of differential, seconds         [2 bytes]	[68]
+    // m_wAttitudeStatus: bit {0-3}  = sStatus.eYaw
+    //                    bit {4-7}  = sStatus.ePitch
+    //                    bit {8-11} = sStatus.eRoll
+    // where sStatus can be 0 = INVALID, 1 = GNSS, 2 = Inertial, 3= Magnetic
+    unsigned short   m_wAttitudeStatus;    // Attitude Status, Zero unless vector  [2 bytes]	[70]
+    float            m_fStdevHeading;      // Yaw stdev, degrees, 0 unless vector  [4 bytes]	[72]
+    float            m_fStdevPitch;        // Pitch stdev, degrees, 0 unless vector[4 bytes]	[76]
+    float            m_fHRMS;              // Horizontal RMS                       [4 bytes]	[80]
+    float            m_fVRMS;              // Vertical   RMS                       [4 bytes]	[84]
+    float            m_fHDOP;              // Horizontal DOP                       [4 bytes]	[88]
+    float            m_fVDOP;              // Vertical DOP                         [4 bytes]	[92]
+    float            m_fTDOP;              // Time DOP                             [4 bytes]	[96]
+    float            m_fCovNN;             // Covariance North-North               [4 bytes]	[100]
+    float            m_fCovNE;             // Covariance North-East                [4 bytes]	[104]
+    float            m_fCovNU;             // Covariance North-Up                  [4 bytes]	[108]
+    float            m_fCovEE;             // Covariance East-East                 [4 bytes]	[112]
+    float            m_fCovEU;             // Covariance East-Up                   [4 bytes]	[116]
+    float            m_fCovUU;             // Covariance Up-Up                     [4 bytes]	[120]
+    unsigned short   m_wCheckSum;          // sum of bytes of the data fields	   [2 bytes]	[124]
+    unsigned short   m_wCRLF;              // Carriage Return Line Feed		   [2 bytes]	[126]
+} SBinaryMsg3;                             // length = 8 + 116 + 2 + 2 = 128  (108 = 74 hex)

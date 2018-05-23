@@ -20,7 +20,7 @@
 #define SAMPLE_TIME             ssGetSFcnParam(S,0)
 
 #define NUM_OUTPUTS           2
-#define OUTPUT_0_WIDTH        33
+#define OUTPUT_0_WIDTH        24
 #define OUTPUT_1_WIDTH        1
 #define OUTPUT_0_COMPLEX      COMPLEX_NO
 #define OUTPUT_1_COMPLEX      COMPLEX_NO
@@ -208,40 +208,41 @@ static void mdlOutputs(SimStruct *S, int_T tid)
         index = 0; // reset the index flag back to zero so the next message can be read
         y1[0] = (double)checksum(msgBuff+8,116); // calculate and output the error in the checksum (should always be zero)
         
-        // now parse the message
-        y0[0] = parseLongToDouble(msgBuff+0); // skipping output of header information
-        y0[1] = parseDoubleToDouble(msgBuff+8);
-        y0[2] = parseShortToDouble(msgBuff+16);
-        y0[3] = parseShortToDouble(msgBuff+18);
-        y0[4] = parseShortToDouble(msgBuff+20);
-        y0[5] = parseCharToDouble(msgBuff+22);
-        y0[6] = parseCharToDouble(msgBuff+23);
-        y0[7] = parseDoubleToDouble(msgBuff+24);
-        y0[8] = parseDoubleToDouble(msgBuff+32);
-        y0[9] = parseFloatToDouble(msgBuff+40);
-        y0[10] = parseFloatToDouble(msgBuff+44);
-        y0[11] = parseFloatToDouble(msgBuff+48);
-        y0[12] = parseFloatToDouble(msgBuff+52);
-        y0[13] = parseFloatToDouble(msgBuff+56);
-        y0[14] = parseFloatToDouble(msgBuff+60);
-        y0[15] = parseFloatToDouble(msgBuff+64);
-        y0[16] = parseShortToDouble(msgBuff+68);
-        y0[17] = parseShortToDouble(msgBuff+70);
-        y0[18] = parseFloatToDouble(msgBuff+72);
-        y0[19] = parseFloatToDouble(msgBuff+76);
-        y0[20] = parseFloatToDouble(msgBuff+80);
-        y0[21] = parseFloatToDouble(msgBuff+84);
-        y0[22] = parseFloatToDouble(msgBuff+88);
-        y0[23] = parseFloatToDouble(msgBuff+92);
-        y0[24] = parseFloatToDouble(msgBuff+96);
-        y0[25] = parseFloatToDouble(msgBuff+100);
-        y0[26] = parseFloatToDouble(msgBuff+104);
-        y0[27] = parseFloatToDouble(msgBuff+108);
-        y0[28] = parseFloatToDouble(msgBuff+112);
-        y0[29] = parseFloatToDouble(msgBuff+116);
-        y0[30] = parseFloatToDouble(msgBuff+120);
-        y0[31] = parseShortToDouble(msgBuff+124);
-        y0[32] = parseShortToDouble(msgBuff+126);  
+        // now parse the message: commented outputs are not needed for
+        // usage on P1 and are removed for clarity in the block diagram
+        //y0[0] = parseLongToDouble(msgBuff+0);     // header information
+        y0[0] = parseDoubleToDouble(msgBuff+8);     // GPS time of week
+        y0[1] = parseShortToDouble(msgBuff+16);     // GPS week number
+        //y0[3] = parseShortToDouble(msgBuff+18);   // SATS tracked
+        y0[2] = parseShortToDouble(msgBuff+20);     // SATS used
+        y0[3] = parseCharToDouble(msgBuff+22);      // NAV mode
+        //y0[6] = parseCharToDouble(msgBuff+23);    // Spare
+        y0[4] = parseDoubleToDouble(msgBuff+24);    // Latitude
+        y0[5] = parseDoubleToDouble(msgBuff+32);    // Longitude
+        y0[6] = parseFloatToDouble(msgBuff+40);     // Altitude
+        y0[7] = parseFloatToDouble(msgBuff+44);    // Horizontal speed
+        y0[8] = parseFloatToDouble(msgBuff+48);    // Vertical velocity
+        y0[9] = parseFloatToDouble(msgBuff+52);    // Course over ground
+        y0[10] = parseFloatToDouble(msgBuff+56);    // Heading
+        y0[11] = parseFloatToDouble(msgBuff+60);    // Pitch (roll for P1)
+        //y0[15] = parseFloatToDouble(msgBuff+64);    // Spare
+        y0[12] = parseShortToDouble(msgBuff+68);    // Age of differential
+        y0[13] = parseShortToDouble(msgBuff+70);    // Attitude status
+        y0[14] = parseFloatToDouble(msgBuff+72);    // Yaw stddev
+        y0[15] = parseFloatToDouble(msgBuff+76);    // Pitch (roll) stddev
+        y0[16] = parseFloatToDouble(msgBuff+80);    // Horizontal RMS
+        y0[17] = parseFloatToDouble(msgBuff+84);    // Vertical RMS
+        //y0[22] = parseFloatToDouble(msgBuff+88);    // Horizontal DOP
+        //y0[23] = parseFloatToDouble(msgBuff+92);    // Vertical DOP
+        //y0[24] = parseFloatToDouble(msgBuff+96);    // Time DOP
+        y0[18] = parseFloatToDouble(msgBuff+100);   // Covariance North-North
+        y0[19] = parseFloatToDouble(msgBuff+104);   // Covariance North-East
+        y0[20] = parseFloatToDouble(msgBuff+108);   // Covariance North-Up
+        y0[21] = parseFloatToDouble(msgBuff+112);   // Covariance East-East
+        y0[22] = parseFloatToDouble(msgBuff+116);   // Covariance East-Up
+        y0[23] = parseFloatToDouble(msgBuff+120);   // Covariance Up-Up
+        //y0[31] = parseShortToDouble(msgBuff+124);   // 16-bit bytewise checksum 
+        //y0[32] = parseShortToDouble(msgBuff+126);   // Carriage return, line feed 
     }
     else // if index < 128 (a message is not being parsed this time step)
     {
