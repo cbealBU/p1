@@ -170,8 +170,8 @@ Low-pass filter</sigName>
 		<signal>
 			<sigName>Named Mux</sigName>
 			<xpcsigName>Data Logging/Named Mux</xpcsigName>
-			<sigWidth>123</sigWidth>
-			<sigDim>[123, 1]</sigDim>
+			<sigWidth>120</sigWidth>
+			<sigDim>[120, 1]</sigDim>
 		</signal>
 	</SubSystem>
 	<SubSystem>
@@ -180,16 +180,6 @@ Low-pass filter</sigName>
 		<SubSystem>
 			<Name>Input</Name>
 			<xPCName>p1/Hardware I//O/Input</xPCName>
-			<SubSystem>
-				<Name>Beeline</Name>
-				<xPCName>p1/Hardware I//O/Input/Beeline</xPCName>
-				<signal>
-					<sigName>Beeline</sigName>
-					<xpcsigName>Hardware I//O/Input/Beeline/Beeline</xpcsigName>
-					<sigWidth>10</sigWidth>
-					<sigDim>[10, 1]</sigDim>
-				</signal>
-			</SubSystem>
 			<SubSystem>
 				<Name>DAS Analog Demux</Name>
 				<xPCName>p1/Hardware I//O/Input/DAS Analog Demux</xPCName>
@@ -226,16 +216,6 @@ Low-pass filter</sigName>
 					<xpcsigName>Hardware I//O/Input/Encoder Board/encoder board /p5</xpcsigName>
 					<sigWidth>1</sigWidth>
 					<sigDim>[1, 1]</sigDim>
-				</signal>
-			</SubSystem>
-			<SubSystem>
-				<Name>GPS Velocity and Position</Name>
-				<xPCName>p1/Hardware I//O/Input/GPS Velocity and Position</xPCName>
-				<signal>
-					<sigName>GPS Velocity</sigName>
-					<xpcsigName>Hardware I//O/Input/GPS Velocity and Position/GPS Velocity</xpcsigName>
-					<sigWidth>19</sigWidth>
-					<sigDim>[19, 1]</sigDim>
 				</signal>
 			</SubSystem>
 			<SubSystem>
@@ -468,63 +448,6 @@ Gear Ratio1</sigName>
 				</signal>
 			</SubSystem>
 			<SubSystem>
-				<Name>OEM4 wgsxyz2enu
-and status conversion</Name>
-				<xPCName>p1/Hardware I//O/Input/OEM4 wgsxyz2enu and status conversion</xPCName>
-				<SubSystem>
-					<Name>position preprocessing</Name>
-					<xPCName>p1/Hardware I//O/Input/OEM4 wgsxyz2enu and status conversion/position preprocessing</xPCName>
-					<SubSystem>
-						<Name>Position Converter</Name>
-						<xPCName>p1/Hardware I//O/Input/OEM4 wgsxyz2enu and status conversion/position preprocessing/Position Converter</xPCName>
-						<signal>
-							<sigName>S-Function2</sigName>
-							<xpcsigName>Hardware I//O/Input/OEM4 wgsxyz2enu and status conversion/position preprocessing/Position Converter/S-Function2</xpcsigName>
-							<sigWidth>3</sigWidth>
-							<sigDim>[3, 1]</sigDim>
-						</signal>
-					</SubSystem>
-					<signal>
-						<sigName>Sum</sigName>
-						<xpcsigName>Hardware I//O/Input/OEM4 wgsxyz2enu and status conversion/position preprocessing/Sum</xpcsigName>
-						<sigWidth>1</sigWidth>
-						<sigDim>[1, 1]</sigDim>
-					</signal>
-					<signal>
-						<sigName>Sum1</sigName>
-						<xpcsigName>Hardware I//O/Input/OEM4 wgsxyz2enu and status conversion/position preprocessing/Sum1</xpcsigName>
-						<sigWidth>1</sigWidth>
-						<sigDim>[1, 1]</sigDim>
-					</signal>
-					<signal>
-						<sigName>Sum2</sigName>
-						<xpcsigName>Hardware I//O/Input/OEM4 wgsxyz2enu and status conversion/position preprocessing/Sum2</xpcsigName>
-						<sigWidth>1</sigWidth>
-						<sigDim>[1, 1]</sigDim>
-					</signal>
-				</SubSystem>
-				<SubSystem>
-					<Name>velocity preprocessing</Name>
-					<xPCName>p1/Hardware I//O/Input/OEM4 wgsxyz2enu and status conversion/velocity preprocessing</xPCName>
-					<SubSystem>
-						<Name>Velocity Converter</Name>
-						<xPCName>p1/Hardware I//O/Input/OEM4 wgsxyz2enu and status conversion/velocity preprocessing/Velocity Converter</xPCName>
-						<signal>
-							<sigName>S-Function2</sigName>
-							<xpcsigName>Hardware I//O/Input/OEM4 wgsxyz2enu and status conversion/velocity preprocessing/Velocity Converter/S-Function2</xpcsigName>
-							<sigWidth>3</sigWidth>
-							<sigDim>[3, 1]</sigDim>
-						</signal>
-					</SubSystem>
-				</SubSystem>
-				<signal>
-					<sigName>Switch</sigName>
-					<xpcsigName>Hardware I//O/Input/OEM4 wgsxyz2enu and status conversion/Switch</xpcsigName>
-					<sigWidth>19</sigWidth>
-					<sigDim>[19, 1]</sigDim>
-				</signal>
-			</SubSystem>
-			<SubSystem>
 				<Name>Rear Wheel Speed Processing</Name>
 				<xPCName>p1/Hardware I//O/Input/Rear Wheel Speed Processing</xPCName>
 				<SubSystem>
@@ -690,6 +613,18 @@ Initialization</Name>
 				<xpcsigName>Hardware I//O/Input/Analog Input (VSBC)</xpcsigName>
 				<sigWidth>8</sigWidth>
 				<sigDim>[8, 1]</sigDim>
+			</signal>
+			<signal>
+				<sigName>Hemisphere VS330/p1</sigName>
+				<xpcsigName>Hardware I//O/Input/Hemisphere VS330/p1</xpcsigName>
+				<sigWidth>24</sigWidth>
+				<sigDim>[24, 1]</sigDim>
+			</signal>
+			<signal>
+				<sigName>Hemisphere VS330/p2</sigName>
+				<xpcsigName>Hardware I//O/Input/Hemisphere VS330/p2</xpcsigName>
+				<sigWidth>1</sigWidth>
+				<sigDim>[1, 1]</sigDim>
 			</signal>
 			<signal>
 				<sigName>Ruby-MM/p1</sigName>
@@ -1106,6 +1041,11 @@ Angle Calculation</sigName>
 					<SubSystem>
 						<Name>Beeline GPS Pre-Processing</Name>
 						<xPCName>p1/Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Beeline GPS Pre-Processing</xPCName>
+						<SubSystem>
+							<Name>Compare
+To Constant</Name>
+							<xPCName>p1/Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Beeline GPS Pre-Processing/Compare To Constant</xPCName>
+						</SubSystem>
 						<signal>
 							<sigName>Gain</sigName>
 							<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Beeline GPS Pre-Processing/Gain</xpcsigName>
@@ -1130,40 +1070,10 @@ Angle Calculation</sigName>
 							<sigWidth>1</sigWidth>
 							<sigDim>[1, 1]</sigDim>
 						</signal>
-						<signal>
-							<sigName>Switch3.5</sigName>
-							<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Beeline GPS Pre-Processing/Switch3.5</xpcsigName>
-							<sigWidth>1</sigWidth>
-							<sigDim>[1, 1]</sigDim>
-						</signal>
 					</SubSystem>
 					<SubSystem>
 						<Name>OEM4 GPS Pre-Processing</Name>
 						<xPCName>p1/Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/OEM4 GPS Pre-Processing</xPCName>
-						<signal>
-							<sigName>Comparison to .1</sigName>
-							<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/OEM4 GPS Pre-Processing/Comparison to .1</xpcsigName>
-							<sigWidth>1</sigWidth>
-							<sigDim>[1, 1]</sigDim>
-						</signal>
-						<signal>
-							<sigName>Delay function</sigName>
-							<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/OEM4 GPS Pre-Processing/Delay function</xpcsigName>
-							<sigWidth>1</sigWidth>
-							<sigDim>[1, 1]</sigDim>
-						</signal>
-						<signal>
-							<sigName>S-Function4</sigName>
-							<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/OEM4 GPS Pre-Processing/S-Function4</xpcsigName>
-							<sigWidth>1</sigWidth>
-							<sigDim>[1, 1]</sigDim>
-						</signal>
-						<signal>
-							<sigName>Switch2</sigName>
-							<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/OEM4 GPS Pre-Processing/Switch2</xpcsigName>
-							<sigWidth>1</sigWidth>
-							<sigDim>[1, 1]</sigDim>
-						</signal>
 					</SubSystem>
 					<SubSystem>
 						<Name>Roll//Yaw Gyro Pre-processing</Name>

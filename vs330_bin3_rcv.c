@@ -207,6 +207,13 @@ static void mdlOutputs(SimStruct *S, int_T tid)
     {
         index = 0; // reset the index flag back to zero so the next message can be read
         y1[0] = (double)checksum(msgBuff+8,116); // calculate and output the error in the checksum (should always be zero)
+        if(0 != y1[0])
+        {
+            for(i = 0; i < OUTPUT_0_WIDTH; i++)
+                y0[i] = 0.0; // zero the output since there is no new message
+            y1[0] = -99; // flag for no data
+            return;
+        }
         
         // now parse the message: commented outputs are not needed for
         // usage on P1 and are removed for clarity in the block diagram
@@ -246,9 +253,6 @@ static void mdlOutputs(SimStruct *S, int_T tid)
     }
     else // if index < 128 (a message is not being parsed this time step)
     {
-        for(i = 0; i < OUTPUT_0_WIDTH; i++)
-            y0[i] = 0.0; // zero the output since there is no new message
-        y1[0] = -99; // flag for no data
     }
     
 #endif
