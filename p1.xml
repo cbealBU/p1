@@ -557,6 +557,62 @@ Initialization</Name>
 				<xPCName>p1/Hardware I//O/Input/VSBC Analog Demux</xPCName>
 			</SubSystem>
 			<SubSystem>
+				<Name>Wheel Force Transducers</Name>
+				<xPCName>p1/Hardware I//O/Input/Wheel Force Transducers</xPCName>
+				<SubSystem>
+					<Name>Scope </Name>
+					<xPCName>p1/Hardware I//O/Input/Wheel Force Transducers/Scope </xPCName>
+				</SubSystem>
+				<signal>
+					<sigName>CAN Unpack/p1</sigName>
+					<xpcsigName>Hardware I//O/Input/Wheel Force Transducers/CAN Unpack/p1</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>CAN Unpack/p2</sigName>
+					<xpcsigName>Hardware I//O/Input/Wheel Force Transducers/CAN Unpack/p2</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>CAN Unpack/p3</sigName>
+					<xpcsigName>Hardware I//O/Input/Wheel Force Transducers/CAN Unpack/p3</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>CAN Unpack/p4</sigName>
+					<xpcsigName>Hardware I//O/Input/Wheel Force Transducers/CAN Unpack/p4</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>CAN Unpack/p5</sigName>
+					<xpcsigName>Hardware I//O/Input/Wheel Force Transducers/CAN Unpack/p5</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>Receive /p1</sigName>
+					<xpcsigName>Hardware I//O/Input/Wheel Force Transducers/Receive /p1</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>Receive /p2</sigName>
+					<xpcsigName>Hardware I//O/Input/Wheel Force Transducers/Receive /p2</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>Receive /p3</sigName>
+					<xpcsigName>Hardware I//O/Input/Wheel Force Transducers/Receive /p3</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+			</SubSystem>
+			<SubSystem>
 				<Name>current scaling</Name>
 				<xPCName>p1/Hardware I//O/Input/current scaling</xPCName>
 				<signal>
@@ -1047,6 +1103,12 @@ To Constant</Name>
 							<xPCName>p1/Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Beeline GPS Pre-Processing/Compare To Constant</xPCName>
 						</SubSystem>
 						<signal>
+							<sigName>Data Type Conversion</sigName>
+							<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Beeline GPS Pre-Processing/Data Type Conversion</xpcsigName>
+							<sigWidth>1</sigWidth>
+							<sigDim>[1, 1]</sigDim>
+						</signal>
+						<signal>
 							<sigName>Gain</sigName>
 							<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Beeline GPS Pre-Processing/Gain</xpcsigName>
 							<sigWidth>1</sigWidth>
@@ -1070,10 +1132,18 @@ To Constant</Name>
 							<sigWidth>1</sigWidth>
 							<sigDim>[1, 1]</sigDim>
 						</signal>
-					</SubSystem>
-					<SubSystem>
-						<Name>OEM4 GPS Pre-Processing</Name>
-						<xPCName>p1/Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/OEM4 GPS Pre-Processing</xPCName>
+						<signal>
+							<sigName>Switch2</sigName>
+							<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Beeline GPS Pre-Processing/Switch2</xpcsigName>
+							<sigWidth>1</sigWidth>
+							<sigDim>[1, 1]</sigDim>
+						</signal>
+						<signal>
+							<sigName>Switch3.5</sigName>
+							<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Beeline GPS Pre-Processing/Switch3.5</xpcsigName>
+							<sigWidth>1</sigWidth>
+							<sigDim>[1, 1]</sigDim>
+						</signal>
 					</SubSystem>
 					<SubSystem>
 						<Name>Roll//Yaw Gyro Pre-processing</Name>
@@ -1317,10 +1387,6 @@ To Constant</Name>
 				<sigWidth>1</sigWidth>
 				<sigDim>[1, 1]</sigDim>
 			</signal>
-		</SubSystem>
-		<SubSystem>
-			<Name>Scope </Name>
-			<xPCName>p1/User Controllers/Scope </xPCName>
 		</SubSystem>
 		<SubSystem>
 			<Name>Steering Controller</Name>
