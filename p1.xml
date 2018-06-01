@@ -170,8 +170,8 @@ Low-pass filter</sigName>
 		<signal>
 			<sigName>Named Mux</sigName>
 			<xpcsigName>Data Logging/Named Mux</xpcsigName>
-			<sigWidth>120</sigWidth>
-			<sigDim>[120, 1]</sigDim>
+			<sigWidth>140</sigWidth>
+			<sigDim>[140, 1]</sigDim>
 		</signal>
 	</SubSystem>
 	<SubSystem>
@@ -478,6 +478,10 @@ Gear Ratio1</sigName>
 				</signal>
 			</SubSystem>
 			<SubSystem>
+				<Name>Scope 1</Name>
+				<xPCName>p1/Hardware I//O/Input/Scope 1</xPCName>
+			</SubSystem>
+			<SubSystem>
 				<Name>Steering Motor Encoder
 Initialization</Name>
 				<xPCName>p1/Hardware I//O/Input/Steering Motor Encoder Initialization</xPCName>
@@ -553,43 +557,201 @@ Initialization</Name>
 				</signal>
 			</SubSystem>
 			<SubSystem>
+				<Name>VS330 GPS Data</Name>
+				<xPCName>p1/Hardware I//O/Input/VS330 GPS Data</xPCName>
+				<signal>
+					<sigName>Hemisphere VS330/p1</sigName>
+					<xpcsigName>Hardware I//O/Input/VS330 GPS Data/Hemisphere VS330/p1</xpcsigName>
+					<sigWidth>24</sigWidth>
+					<sigDim>[24, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>Hemisphere VS330/p2</sigName>
+					<xpcsigName>Hardware I//O/Input/VS330 GPS Data/Hemisphere VS330/p2</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+			</SubSystem>
+			<SubSystem>
 				<Name>VSBC Analog Demux</Name>
 				<xPCName>p1/Hardware I//O/Input/VSBC Analog Demux</xPCName>
 			</SubSystem>
 			<SubSystem>
 				<Name>Wheel Force Transducers</Name>
 				<xPCName>p1/Hardware I//O/Input/Wheel Force Transducers</xPCName>
-				<SubSystem>
-					<Name>Scope </Name>
-					<xPCName>p1/Hardware I//O/Input/Wheel Force Transducers/Scope </xPCName>
-				</SubSystem>
 				<signal>
 					<sigName>CAN Unpack/p1</sigName>
 					<xpcsigName>Hardware I//O/Input/Wheel Force Transducers/CAN Unpack/p1</xpcsigName>
 					<sigWidth>1</sigWidth>
 					<sigDim>[1, 1]</sigDim>
+					<sigLabel>LF_Fx</sigLabel>
 				</signal>
 				<signal>
 					<sigName>CAN Unpack/p2</sigName>
 					<xpcsigName>Hardware I//O/Input/Wheel Force Transducers/CAN Unpack/p2</xpcsigName>
 					<sigWidth>1</sigWidth>
 					<sigDim>[1, 1]</sigDim>
+					<sigLabel>LF_Fy</sigLabel>
 				</signal>
 				<signal>
 					<sigName>CAN Unpack/p3</sigName>
 					<xpcsigName>Hardware I//O/Input/Wheel Force Transducers/CAN Unpack/p3</xpcsigName>
 					<sigWidth>1</sigWidth>
 					<sigDim>[1, 1]</sigDim>
+					<sigLabel>LF_Fz</sigLabel>
 				</signal>
 				<signal>
 					<sigName>CAN Unpack/p4</sigName>
 					<xpcsigName>Hardware I//O/Input/Wheel Force Transducers/CAN Unpack/p4</xpcsigName>
 					<sigWidth>1</sigWidth>
 					<sigDim>[1, 1]</sigDim>
+					<sigLabel>LF_Mx</sigLabel>
 				</signal>
 				<signal>
 					<sigName>CAN Unpack/p5</sigName>
 					<xpcsigName>Hardware I//O/Input/Wheel Force Transducers/CAN Unpack/p5</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>CAN Unpack1/p1</sigName>
+					<xpcsigName>Hardware I//O/Input/Wheel Force Transducers/CAN Unpack1/p1</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+					<sigLabel>LF_My</sigLabel>
+				</signal>
+				<signal>
+					<sigName>CAN Unpack1/p2</sigName>
+					<xpcsigName>Hardware I//O/Input/Wheel Force Transducers/CAN Unpack1/p2</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+					<sigLabel>LF_Mz</sigLabel>
+				</signal>
+				<signal>
+					<sigName>CAN Unpack1/p3</sigName>
+					<xpcsigName>Hardware I//O/Input/Wheel Force Transducers/CAN Unpack1/p3</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+					<sigLabel>LF_omega</sigLabel>
+				</signal>
+				<signal>
+					<sigName>CAN Unpack1/p4</sigName>
+					<xpcsigName>Hardware I//O/Input/Wheel Force Transducers/CAN Unpack1/p4</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+					<sigLabel>LF_theta</sigLabel>
+				</signal>
+				<signal>
+					<sigName>CAN Unpack1/p5</sigName>
+					<xpcsigName>Hardware I//O/Input/Wheel Force Transducers/CAN Unpack1/p5</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>CAN Unpack2/p1</sigName>
+					<xpcsigName>Hardware I//O/Input/Wheel Force Transducers/CAN Unpack2/p1</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+					<sigLabel>LF_ax</sigLabel>
+				</signal>
+				<signal>
+					<sigName>CAN Unpack2/p2</sigName>
+					<xpcsigName>Hardware I//O/Input/Wheel Force Transducers/CAN Unpack2/p2</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+					<sigLabel>LF_ay</sigLabel>
+				</signal>
+				<signal>
+					<sigName>CAN Unpack2/p3</sigName>
+					<xpcsigName>Hardware I//O/Input/Wheel Force Transducers/CAN Unpack2/p3</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>CAN Unpack3/p1</sigName>
+					<xpcsigName>Hardware I//O/Input/Wheel Force Transducers/CAN Unpack3/p1</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+					<sigLabel>RF_Fx</sigLabel>
+				</signal>
+				<signal>
+					<sigName>CAN Unpack3/p2</sigName>
+					<xpcsigName>Hardware I//O/Input/Wheel Force Transducers/CAN Unpack3/p2</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+					<sigLabel>RF_Fy</sigLabel>
+				</signal>
+				<signal>
+					<sigName>CAN Unpack3/p3</sigName>
+					<xpcsigName>Hardware I//O/Input/Wheel Force Transducers/CAN Unpack3/p3</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+					<sigLabel>RF_Fz</sigLabel>
+				</signal>
+				<signal>
+					<sigName>CAN Unpack3/p4</sigName>
+					<xpcsigName>Hardware I//O/Input/Wheel Force Transducers/CAN Unpack3/p4</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+					<sigLabel>RF_Mx</sigLabel>
+				</signal>
+				<signal>
+					<sigName>CAN Unpack3/p5</sigName>
+					<xpcsigName>Hardware I//O/Input/Wheel Force Transducers/CAN Unpack3/p5</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>CAN Unpack4/p1</sigName>
+					<xpcsigName>Hardware I//O/Input/Wheel Force Transducers/CAN Unpack4/p1</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+					<sigLabel>RF_My</sigLabel>
+				</signal>
+				<signal>
+					<sigName>CAN Unpack4/p2</sigName>
+					<xpcsigName>Hardware I//O/Input/Wheel Force Transducers/CAN Unpack4/p2</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+					<sigLabel>RF_Mz</sigLabel>
+				</signal>
+				<signal>
+					<sigName>CAN Unpack4/p3</sigName>
+					<xpcsigName>Hardware I//O/Input/Wheel Force Transducers/CAN Unpack4/p3</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+					<sigLabel>RF_omega</sigLabel>
+				</signal>
+				<signal>
+					<sigName>CAN Unpack4/p4</sigName>
+					<xpcsigName>Hardware I//O/Input/Wheel Force Transducers/CAN Unpack4/p4</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+					<sigLabel>RF_theta</sigLabel>
+				</signal>
+				<signal>
+					<sigName>CAN Unpack4/p5</sigName>
+					<xpcsigName>Hardware I//O/Input/Wheel Force Transducers/CAN Unpack4/p5</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>CAN Unpack5/p1</sigName>
+					<xpcsigName>Hardware I//O/Input/Wheel Force Transducers/CAN Unpack5/p1</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+					<sigLabel>RF_ax</sigLabel>
+				</signal>
+				<signal>
+					<sigName>CAN Unpack5/p2</sigName>
+					<xpcsigName>Hardware I//O/Input/Wheel Force Transducers/CAN Unpack5/p2</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+					<sigLabel>RF_ay</sigLabel>
+				</signal>
+				<signal>
+					<sigName>CAN Unpack5/p3</sigName>
+					<xpcsigName>Hardware I//O/Input/Wheel Force Transducers/CAN Unpack5/p3</xpcsigName>
 					<sigWidth>1</sigWidth>
 					<sigDim>[1, 1]</sigDim>
 				</signal>
@@ -669,18 +831,6 @@ Initialization</Name>
 				<xpcsigName>Hardware I//O/Input/Analog Input (VSBC)</xpcsigName>
 				<sigWidth>8</sigWidth>
 				<sigDim>[8, 1]</sigDim>
-			</signal>
-			<signal>
-				<sigName>Hemisphere VS330/p1</sigName>
-				<xpcsigName>Hardware I//O/Input/Hemisphere VS330/p1</xpcsigName>
-				<sigWidth>24</sigWidth>
-				<sigDim>[24, 1]</sigDim>
-			</signal>
-			<signal>
-				<sigName>Hemisphere VS330/p2</sigName>
-				<xpcsigName>Hardware I//O/Input/Hemisphere VS330/p2</xpcsigName>
-				<sigWidth>1</sigWidth>
-				<sigDim>[1, 1]</sigDim>
 			</signal>
 			<signal>
 				<sigName>Ruby-MM/p1</sigName>

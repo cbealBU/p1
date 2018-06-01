@@ -101,5 +101,5 @@ DataDescription(ii).desc='Contains in order: left & right aligning, Dalembert, C
 ii=15;
 DataDescription(ii).name='Wheel Forces';
 DataDescription(ii).size=20;
-DataDescription(ii).units={'N' 'N' 'N' 'Nm' 'Nm' 'Nm' 'rpm' 'deg' 'N' 'N' 'N' 'Nm' 'Nm' 'Nm' 'rpm' 'deg'};
-DataDescription(ii).desc='Contains in order: left & right Fx, Fy, Fz, Mx, My, Mz, wheel rotation rate, wheel rotation angle';
+DataDescription(ii).units={'N' 'N' 'N' 'Nm' 'Nm' 'Nm' 'rpm' 'deg' 'N' 'N' 'N' 'Nm' 'Nm' 'Nm' 'rpm' 'deg' 'm/s' 'm/s'};
+DataDescription(ii).desc='Contains in order: left & right Fx, Fy, Fz, Mx, My, Mz, wheel rotation rate, wheel rotation angle, wheel hub ax, wheel hub ay';
