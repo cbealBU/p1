@@ -98,14 +98,8 @@ DataDescription(ii).size=10;
 DataDescription(ii).units={'Nm' 'Nm' 'Nm' 'Nm' 'Nm' 'Nm' 'Nm' 'Nm' 'Nm' 'Nm'};
 DataDescription(ii).desc='Contains in order: left & right aligning, Dalembert, Coulomb friction, damping, and jacking torques';
 
-% % uncomment for SSC controller (hack -- fix this soon) CGB
-% ii = 14;
-% DataDescription(ii).name='Controller Debug';
-% DataDescription(ii).size=1;
-% DataDescription(ii).units={'unitless'};
-% DataDescription(ii).desc='Contains in order: empty';
-% % DataDescription(ii).name='Controller Debug';
-% % DataDescription(ii).size=9;
-% % DataDescription(ii).units={'rad' 'rad/s' 'rad/s' 'rad' 'rad/s/s' 'rad/s' 'N' 'N' 'unitless'};
-% % DataDescription(ii).desc='Contains in order: desired steer angle, S, nominal yaw rate, nominal sideslip, rnom_dot, Bnom_dot, Fyf desired, Fyr, Enable Switch';
-% 
+ii=15;
+DataDescription(ii).name='Wheel Forces';
+DataDescription(ii).size=20;
+DataDescription(ii).units={'N' 'N' 'N' 'Nm' 'Nm' 'Nm' 'rpm' 'deg' 'N' 'N' 'N' 'Nm' 'Nm' 'Nm' 'rpm' 'deg'};
+DataDescription(ii).desc='Contains in order: left & right Fx, Fy, Fz, Mx, My, Mz, wheel rotation rate, wheel rotation angle';
