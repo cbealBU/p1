@@ -170,8 +170,8 @@ Low-pass filter</sigName>
 		<signal>
 			<sigName>Named Mux</sigName>
 			<xpcsigName>Data Logging/Named Mux</xpcsigName>
-			<sigWidth>123</sigWidth>
-			<sigDim>[123, 1]</sigDim>
+			<sigWidth>140</sigWidth>
+			<sigDim>[140, 1]</sigDim>
 		</signal>
 	</SubSystem>
 	<SubSystem>
@@ -180,16 +180,6 @@ Low-pass filter</sigName>
 		<SubSystem>
 			<Name>Input</Name>
 			<xPCName>p1/Hardware I//O/Input</xPCName>
-			<SubSystem>
-				<Name>Beeline</Name>
-				<xPCName>p1/Hardware I//O/Input/Beeline</xPCName>
-				<signal>
-					<sigName>Beeline</sigName>
-					<xpcsigName>Hardware I//O/Input/Beeline/Beeline</xpcsigName>
-					<sigWidth>10</sigWidth>
-					<sigDim>[10, 1]</sigDim>
-				</signal>
-			</SubSystem>
 			<SubSystem>
 				<Name>DAS Analog Demux</Name>
 				<xPCName>p1/Hardware I//O/Input/DAS Analog Demux</xPCName>
@@ -226,16 +216,6 @@ Low-pass filter</sigName>
 					<xpcsigName>Hardware I//O/Input/Encoder Board/encoder board /p5</xpcsigName>
 					<sigWidth>1</sigWidth>
 					<sigDim>[1, 1]</sigDim>
-				</signal>
-			</SubSystem>
-			<SubSystem>
-				<Name>GPS Velocity and Position</Name>
-				<xPCName>p1/Hardware I//O/Input/GPS Velocity and Position</xPCName>
-				<signal>
-					<sigName>GPS Velocity</sigName>
-					<xpcsigName>Hardware I//O/Input/GPS Velocity and Position/GPS Velocity</xpcsigName>
-					<sigWidth>19</sigWidth>
-					<sigDim>[19, 1]</sigDim>
 				</signal>
 			</SubSystem>
 			<SubSystem>
@@ -468,63 +448,6 @@ Gear Ratio1</sigName>
 				</signal>
 			</SubSystem>
 			<SubSystem>
-				<Name>OEM4 wgsxyz2enu
-and status conversion</Name>
-				<xPCName>p1/Hardware I//O/Input/OEM4 wgsxyz2enu and status conversion</xPCName>
-				<SubSystem>
-					<Name>position preprocessing</Name>
-					<xPCName>p1/Hardware I//O/Input/OEM4 wgsxyz2enu and status conversion/position preprocessing</xPCName>
-					<SubSystem>
-						<Name>Position Converter</Name>
-						<xPCName>p1/Hardware I//O/Input/OEM4 wgsxyz2enu and status conversion/position preprocessing/Position Converter</xPCName>
-						<signal>
-							<sigName>S-Function2</sigName>
-							<xpcsigName>Hardware I//O/Input/OEM4 wgsxyz2enu and status conversion/position preprocessing/Position Converter/S-Function2</xpcsigName>
-							<sigWidth>3</sigWidth>
-							<sigDim>[3, 1]</sigDim>
-						</signal>
-					</SubSystem>
-					<signal>
-						<sigName>Sum</sigName>
-						<xpcsigName>Hardware I//O/Input/OEM4 wgsxyz2enu and status conversion/position preprocessing/Sum</xpcsigName>
-						<sigWidth>1</sigWidth>
-						<sigDim>[1, 1]</sigDim>
-					</signal>
-					<signal>
-						<sigName>Sum1</sigName>
-						<xpcsigName>Hardware I//O/Input/OEM4 wgsxyz2enu and status conversion/position preprocessing/Sum1</xpcsigName>
-						<sigWidth>1</sigWidth>
-						<sigDim>[1, 1]</sigDim>
-					</signal>
-					<signal>
-						<sigName>Sum2</sigName>
-						<xpcsigName>Hardware I//O/Input/OEM4 wgsxyz2enu and status conversion/position preprocessing/Sum2</xpcsigName>
-						<sigWidth>1</sigWidth>
-						<sigDim>[1, 1]</sigDim>
-					</signal>
-				</SubSystem>
-				<SubSystem>
-					<Name>velocity preprocessing</Name>
-					<xPCName>p1/Hardware I//O/Input/OEM4 wgsxyz2enu and status conversion/velocity preprocessing</xPCName>
-					<SubSystem>
-						<Name>Velocity Converter</Name>
-						<xPCName>p1/Hardware I//O/Input/OEM4 wgsxyz2enu and status conversion/velocity preprocessing/Velocity Converter</xPCName>
-						<signal>
-							<sigName>S-Function2</sigName>
-							<xpcsigName>Hardware I//O/Input/OEM4 wgsxyz2enu and status conversion/velocity preprocessing/Velocity Converter/S-Function2</xpcsigName>
-							<sigWidth>3</sigWidth>
-							<sigDim>[3, 1]</sigDim>
-						</signal>
-					</SubSystem>
-				</SubSystem>
-				<signal>
-					<sigName>Switch</sigName>
-					<xpcsigName>Hardware I//O/Input/OEM4 wgsxyz2enu and status conversion/Switch</xpcsigName>
-					<sigWidth>19</sigWidth>
-					<sigDim>[19, 1]</sigDim>
-				</signal>
-			</SubSystem>
-			<SubSystem>
 				<Name>Rear Wheel Speed Processing</Name>
 				<xPCName>p1/Hardware I//O/Input/Rear Wheel Speed Processing</xPCName>
 				<SubSystem>
@@ -553,6 +476,10 @@ and status conversion</Name>
 					<sigWidth>2</sigWidth>
 					<sigDim>[2, 1]</sigDim>
 				</signal>
+			</SubSystem>
+			<SubSystem>
+				<Name>Scope 1</Name>
+				<xPCName>p1/Hardware I//O/Input/Scope 1</xPCName>
 			</SubSystem>
 			<SubSystem>
 				<Name>Steering Motor Encoder
@@ -630,8 +557,222 @@ Initialization</Name>
 				</signal>
 			</SubSystem>
 			<SubSystem>
+				<Name>VS330 GPS Data</Name>
+				<xPCName>p1/Hardware I//O/Input/VS330 GPS Data</xPCName>
+				<signal>
+					<sigName>Hemisphere VS330/p1</sigName>
+					<xpcsigName>Hardware I//O/Input/VS330 GPS Data/Hemisphere VS330/p1</xpcsigName>
+					<sigWidth>24</sigWidth>
+					<sigDim>[24, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>Hemisphere VS330/p2</sigName>
+					<xpcsigName>Hardware I//O/Input/VS330 GPS Data/Hemisphere VS330/p2</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+			</SubSystem>
+			<SubSystem>
 				<Name>VSBC Analog Demux</Name>
 				<xPCName>p1/Hardware I//O/Input/VSBC Analog Demux</xPCName>
+			</SubSystem>
+			<SubSystem>
+				<Name>Wheel Force Transducers</Name>
+				<xPCName>p1/Hardware I//O/Input/Wheel Force Transducers</xPCName>
+				<signal>
+					<sigName>CAN Unpack/p1</sigName>
+					<xpcsigName>Hardware I//O/Input/Wheel Force Transducers/CAN Unpack/p1</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+					<sigLabel>LF_Fx</sigLabel>
+				</signal>
+				<signal>
+					<sigName>CAN Unpack/p2</sigName>
+					<xpcsigName>Hardware I//O/Input/Wheel Force Transducers/CAN Unpack/p2</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+					<sigLabel>LF_Fy</sigLabel>
+				</signal>
+				<signal>
+					<sigName>CAN Unpack/p3</sigName>
+					<xpcsigName>Hardware I//O/Input/Wheel Force Transducers/CAN Unpack/p3</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+					<sigLabel>LF_Fz</sigLabel>
+				</signal>
+				<signal>
+					<sigName>CAN Unpack/p4</sigName>
+					<xpcsigName>Hardware I//O/Input/Wheel Force Transducers/CAN Unpack/p4</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+					<sigLabel>LF_Mx</sigLabel>
+				</signal>
+				<signal>
+					<sigName>CAN Unpack/p5</sigName>
+					<xpcsigName>Hardware I//O/Input/Wheel Force Transducers/CAN Unpack/p5</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>CAN Unpack1/p1</sigName>
+					<xpcsigName>Hardware I//O/Input/Wheel Force Transducers/CAN Unpack1/p1</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+					<sigLabel>LF_My</sigLabel>
+				</signal>
+				<signal>
+					<sigName>CAN Unpack1/p2</sigName>
+					<xpcsigName>Hardware I//O/Input/Wheel Force Transducers/CAN Unpack1/p2</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+					<sigLabel>LF_Mz</sigLabel>
+				</signal>
+				<signal>
+					<sigName>CAN Unpack1/p3</sigName>
+					<xpcsigName>Hardware I//O/Input/Wheel Force Transducers/CAN Unpack1/p3</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+					<sigLabel>LF_omega</sigLabel>
+				</signal>
+				<signal>
+					<sigName>CAN Unpack1/p4</sigName>
+					<xpcsigName>Hardware I//O/Input/Wheel Force Transducers/CAN Unpack1/p4</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+					<sigLabel>LF_theta</sigLabel>
+				</signal>
+				<signal>
+					<sigName>CAN Unpack1/p5</sigName>
+					<xpcsigName>Hardware I//O/Input/Wheel Force Transducers/CAN Unpack1/p5</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>CAN Unpack2/p1</sigName>
+					<xpcsigName>Hardware I//O/Input/Wheel Force Transducers/CAN Unpack2/p1</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+					<sigLabel>LF_ax</sigLabel>
+				</signal>
+				<signal>
+					<sigName>CAN Unpack2/p2</sigName>
+					<xpcsigName>Hardware I//O/Input/Wheel Force Transducers/CAN Unpack2/p2</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+					<sigLabel>LF_ay</sigLabel>
+				</signal>
+				<signal>
+					<sigName>CAN Unpack2/p3</sigName>
+					<xpcsigName>Hardware I//O/Input/Wheel Force Transducers/CAN Unpack2/p3</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>CAN Unpack3/p1</sigName>
+					<xpcsigName>Hardware I//O/Input/Wheel Force Transducers/CAN Unpack3/p1</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+					<sigLabel>RF_Fx</sigLabel>
+				</signal>
+				<signal>
+					<sigName>CAN Unpack3/p2</sigName>
+					<xpcsigName>Hardware I//O/Input/Wheel Force Transducers/CAN Unpack3/p2</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+					<sigLabel>RF_Fy</sigLabel>
+				</signal>
+				<signal>
+					<sigName>CAN Unpack3/p3</sigName>
+					<xpcsigName>Hardware I//O/Input/Wheel Force Transducers/CAN Unpack3/p3</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+					<sigLabel>RF_Fz</sigLabel>
+				</signal>
+				<signal>
+					<sigName>CAN Unpack3/p4</sigName>
+					<xpcsigName>Hardware I//O/Input/Wheel Force Transducers/CAN Unpack3/p4</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+					<sigLabel>RF_Mx</sigLabel>
+				</signal>
+				<signal>
+					<sigName>CAN Unpack3/p5</sigName>
+					<xpcsigName>Hardware I//O/Input/Wheel Force Transducers/CAN Unpack3/p5</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>CAN Unpack4/p1</sigName>
+					<xpcsigName>Hardware I//O/Input/Wheel Force Transducers/CAN Unpack4/p1</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+					<sigLabel>RF_My</sigLabel>
+				</signal>
+				<signal>
+					<sigName>CAN Unpack4/p2</sigName>
+					<xpcsigName>Hardware I//O/Input/Wheel Force Transducers/CAN Unpack4/p2</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+					<sigLabel>RF_Mz</sigLabel>
+				</signal>
+				<signal>
+					<sigName>CAN Unpack4/p3</sigName>
+					<xpcsigName>Hardware I//O/Input/Wheel Force Transducers/CAN Unpack4/p3</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+					<sigLabel>RF_omega</sigLabel>
+				</signal>
+				<signal>
+					<sigName>CAN Unpack4/p4</sigName>
+					<xpcsigName>Hardware I//O/Input/Wheel Force Transducers/CAN Unpack4/p4</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+					<sigLabel>RF_theta</sigLabel>
+				</signal>
+				<signal>
+					<sigName>CAN Unpack4/p5</sigName>
+					<xpcsigName>Hardware I//O/Input/Wheel Force Transducers/CAN Unpack4/p5</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>CAN Unpack5/p1</sigName>
+					<xpcsigName>Hardware I//O/Input/Wheel Force Transducers/CAN Unpack5/p1</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+					<sigLabel>RF_ax</sigLabel>
+				</signal>
+				<signal>
+					<sigName>CAN Unpack5/p2</sigName>
+					<xpcsigName>Hardware I//O/Input/Wheel Force Transducers/CAN Unpack5/p2</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+					<sigLabel>RF_ay</sigLabel>
+				</signal>
+				<signal>
+					<sigName>CAN Unpack5/p3</sigName>
+					<xpcsigName>Hardware I//O/Input/Wheel Force Transducers/CAN Unpack5/p3</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>Receive /p1</sigName>
+					<xpcsigName>Hardware I//O/Input/Wheel Force Transducers/Receive /p1</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>Receive /p2</sigName>
+					<xpcsigName>Hardware I//O/Input/Wheel Force Transducers/Receive /p2</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>Receive /p3</sigName>
+					<xpcsigName>Hardware I//O/Input/Wheel Force Transducers/Receive /p3</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
 			</SubSystem>
 			<SubSystem>
 				<Name>current scaling</Name>
@@ -1106,6 +1247,17 @@ Angle Calculation</sigName>
 					<SubSystem>
 						<Name>Beeline GPS Pre-Processing</Name>
 						<xPCName>p1/Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Beeline GPS Pre-Processing</xPCName>
+						<SubSystem>
+							<Name>Compare
+To Constant</Name>
+							<xPCName>p1/Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Beeline GPS Pre-Processing/Compare To Constant</xPCName>
+						</SubSystem>
+						<signal>
+							<sigName>Data Type Conversion</sigName>
+							<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Beeline GPS Pre-Processing/Data Type Conversion</xpcsigName>
+							<sigWidth>1</sigWidth>
+							<sigDim>[1, 1]</sigDim>
+						</signal>
 						<signal>
 							<sigName>Gain</sigName>
 							<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Beeline GPS Pre-Processing/Gain</xpcsigName>
@@ -1131,36 +1283,14 @@ Angle Calculation</sigName>
 							<sigDim>[1, 1]</sigDim>
 						</signal>
 						<signal>
+							<sigName>Switch2</sigName>
+							<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Beeline GPS Pre-Processing/Switch2</xpcsigName>
+							<sigWidth>1</sigWidth>
+							<sigDim>[1, 1]</sigDim>
+						</signal>
+						<signal>
 							<sigName>Switch3.5</sigName>
 							<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Beeline GPS Pre-Processing/Switch3.5</xpcsigName>
-							<sigWidth>1</sigWidth>
-							<sigDim>[1, 1]</sigDim>
-						</signal>
-					</SubSystem>
-					<SubSystem>
-						<Name>OEM4 GPS Pre-Processing</Name>
-						<xPCName>p1/Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/OEM4 GPS Pre-Processing</xPCName>
-						<signal>
-							<sigName>Comparison to .1</sigName>
-							<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/OEM4 GPS Pre-Processing/Comparison to .1</xpcsigName>
-							<sigWidth>1</sigWidth>
-							<sigDim>[1, 1]</sigDim>
-						</signal>
-						<signal>
-							<sigName>Delay function</sigName>
-							<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/OEM4 GPS Pre-Processing/Delay function</xpcsigName>
-							<sigWidth>1</sigWidth>
-							<sigDim>[1, 1]</sigDim>
-						</signal>
-						<signal>
-							<sigName>S-Function4</sigName>
-							<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/OEM4 GPS Pre-Processing/S-Function4</xpcsigName>
-							<sigWidth>1</sigWidth>
-							<sigDim>[1, 1]</sigDim>
-						</signal>
-						<signal>
-							<sigName>Switch2</sigName>
-							<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/OEM4 GPS Pre-Processing/Switch2</xpcsigName>
 							<sigWidth>1</sigWidth>
 							<sigDim>[1, 1]</sigDim>
 						</signal>
@@ -1407,10 +1537,6 @@ Angle Calculation</sigName>
 				<sigWidth>1</sigWidth>
 				<sigDim>[1, 1]</sigDim>
 			</signal>
-		</SubSystem>
-		<SubSystem>
-			<Name>Scope </Name>
-			<xPCName>p1/User Controllers/Scope </xPCName>
 		</SubSystem>
 		<SubSystem>
 			<Name>Steering Controller</Name>

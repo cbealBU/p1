@@ -97,8 +97,8 @@ end
 
 info.run=letters;
 
-% Create a unique filename.
-fname=[info.driver '_' datestr(now,29) '_' info.run ];
+% Create a unique filename, putting the data in a "data" subdirectory.
+fname=['data/' info.driver '_' datestr(now,29) '_' info.run ];
 
 % This part shouldn't be necessary.  But just to be safe...
 dirlist=dir([fname '.mat']);
