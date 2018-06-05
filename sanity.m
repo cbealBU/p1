@@ -16,21 +16,21 @@ if(~exist('DataDescription'))
     error('Variable DataDescription does not exist.');
 end
 
-% % A quick check to catch an obvious inconsistency...
-% if (exist('DataDescriptionUser'))
-%     if ( sum([DataDescription.size])+sum([DataDescriptionUser.size]) )~=size(y,2)
-%         error('Data dimensions are not consistent with data description.');
-%     end
-% else
-%     if sum([DataDescription.size]) ~= size(y,2)
-%         error('Data dimensions are not consistent with data description.');
-%     end
-% end
+% A quick check to catch an obvious inconsistency...
+if (exist('DataDescriptionUser'))
+    if ( sum([DataDescription.size])+sum([DataDescriptionUser.size]) )~=size(y,2)
+        error('Data dimensions are not consistent with data description.');
+    end
+else
+    if sum([DataDescription.size]) ~= size(y,2)
+        error('Data dimensions are not consistent with data description.');
+    end
+end
 
 
 % Ok, now use extractdata to convert y into something more useful.
-GPS=extractdata(y,DataDescription,'GPS',0);
-INS=extractdata(y,DataDescription,'INS',0);
+GPS=extractdata(y,DataDescription,'03 GPS',0);
+INS=extractdata(y,DataDescription,'02 INS',0);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Basic data checks.
@@ -47,24 +47,23 @@ end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Check the GPS data.
-BeelineHeadingInvalid=round(100*size(find(GPS(:,4)~=4))/size(t));
-BeelineVelocityInvalid=round(100*size(find(GPS(:,10)~=0))/size(t));
-GPSVelocityInvalid=round(100*size(find(GPS(:,16)~=3))/size(t));
-RollAyCov=cov(GPS(:,3),INS(:,4));
-SlipAngle=(mod(GPS(:,2)-GPS(:,8),360)-270).*(GPS(:,7)>2);
-ReverseSlipAngle=(mod(GPS(:,2)-GPS(:,8),360)-90).*(GPS(:,7)>2);
-PPSSignal=100*size(find(GPS(:,17)>2))/size(t);
+AttitudeInvalid=round(100*size(find(GPS(:,15)~=4))/size(t));
+PosVelocityInvalid=round(100*size(find(GPS(:,16)~=529))/size(t)); % Signal 16 is attitude status (expected value)
+% bitshift(bitand(GPS(:,16),512),-8) 
+% bitshift(bitand(GPS(:,16),16),-4)
+% bitand(GPS(:,16),1)
+RollAyCov=cov(GPS(:,14),INS(:,4));
+SlipAngle=(mod(GPS(:,13)-GPS(:,12)+180,360)-180).*(GPS(:,10)>3);  % Heading - course over ground, multiplied by boolean of speed above threshold
+ReverseSlipAngle=(mod(GPS(:,12)-GPS(:,13)+180,360)-180).*(GPS(:,10)>3);  % Course over ground - heading, multiplied by boolean of speed above threshold
+PPSSignal=100*size(find(GPS(:,1)>2))/size(t);
 
 
 % If more than 10% of the data has an invalid GPS status, issue a warning.
-if(BeelineHeadingInvalid>10)
-	disp(sprintf('WARNING: Beeline heading status invalid for %d%% of data.',BeelineHeadingInvalid));
+if(AttitudeInvalid>10)
+	disp(sprintf('WARNING: Attitude status invalid for %d%% of data.',AttitudeInvalid));
 end
-if(BeelineVelocityInvalid>10)
-	disp(sprintf('WARNING: Beeline velocity status invalid for %d%% of data.',BeelineVelocityInvalid));
-end
-if(GPSVelocityInvalid>10)
-	disp(sprintf('WARNING: GPS velocity status invalid for %d%% of data.',GPSVelocityInvalid));
+if(PosVelocityInvalid>10)
+	disp(sprintf('WARNING: Position/velocity status invalid for %d%% of data.',PosVelocityInvalid));
 end
 
 % Check to see if the beeline antennas are hooked up backwards.
@@ -94,7 +93,7 @@ disp('Sanity check complete')
 % Clean up after ourselves...
 clear GPS INS
 clear BeelineHeadingInvalid BeelineVelocityInvalid GPSVelocityInvalid ... 
-	  RollAyCov PPSSignal DirectionHeading SlipAngle ReverseSlipAngle
+	 % RollAyCov PPSSignal DirectionHeading SlipAngle ReverseSlipAngle
 	  
 
 

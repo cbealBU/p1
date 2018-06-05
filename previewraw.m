@@ -155,8 +155,8 @@ ylabel('\delta (deg)');
 legend('Command','Actual');
 subplot(n,1,4:5);
 % Calculate sideslip angle
-betaflag = abs(GPS(T,7)) >= 1;
-beta = GPS(T,9) - GPS(T,10);
+betaflag = abs(GPS(T,10)) >= 1;
+beta = GPS(T,13) - GPS(T,12);
 plot(t(T),[INS(T,2)*180/pi betaflag.*beta GPS(T,11)]);
 h(3) = gca;
 grid;

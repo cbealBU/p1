@@ -19,6 +19,7 @@ end
 
 for signo=1:length(DataDescription),
 	signame=DataDescription(signo).name;  % Lookup the name of this signal.
+    signame = signame(4:end); % this is to strip the leading numbers inserted to help identify the various signals
 	signame(findstr(signame,' '))='_'; % Replace spaces with underscores.
 	eval(sprintf('%s=extractdata(y,DataDescription,%d,%d);',signame,signo,0));
 end
