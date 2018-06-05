@@ -592,6 +592,12 @@ Radians1</Name>
 					</signal>
 				</SubSystem>
 				<signal>
+					<sigName>Roll Axis Reversed</sigName>
+					<xpcsigName>Hardware I//O/Input/VS330 GPS Data/Roll Axis Reversed</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+				<signal>
 					<sigName>Hemisphere VS330/p1</sigName>
 					<xpcsigName>Hardware I//O/Input/VS330 GPS Data/Hemisphere VS330/p1</xpcsigName>
 					<sigWidth>24</sigWidth>
@@ -967,20 +973,6 @@ volts</sigName>
 			<SubSystem>
 				<Name>Normal Loads</Name>
 				<xPCName>p1/Sensor Data and Estimation/Nonlinear Observer/Normal Loads</xPCName>
-				<signal>
-					<sigName>Left
-Normal Load</sigName>
-					<xpcsigName>Sensor Data and Estimation/Nonlinear Observer/Normal Loads/Left Normal Load</xpcsigName>
-					<sigWidth>1</sigWidth>
-					<sigDim>[1, 1]</sigDim>
-				</signal>
-				<signal>
-					<sigName>Right
-Normal Load</sigName>
-					<xpcsigName>Sensor Data and Estimation/Nonlinear Observer/Normal Loads/Right Normal Load</xpcsigName>
-					<sigWidth>1</sigWidth>
-					<sigDim>[1, 1]</sigDim>
-				</signal>
 			</SubSystem>
 			<SubSystem>
 				<Name>Steering Torque Components</Name>
@@ -1275,24 +1267,6 @@ Angle Calculation</sigName>
 					<SubSystem>
 						<Name>Accelerometer Pre-Processing</Name>
 						<xPCName>p1/Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Accelerometer Pre-Processing</xPCName>
-						<signal>
-							<sigName>cross coupling from ax</sigName>
-							<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Accelerometer Pre-Processing/cross coupling from ax</xpcsigName>
-							<sigWidth>1</sigWidth>
-							<sigDim>[1, 1]</sigDim>
-						</signal>
-						<signal>
-							<sigName>Sum4</sigName>
-							<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Accelerometer Pre-Processing/Sum4</xpcsigName>
-							<sigWidth>1</sigWidth>
-							<sigDim>[1, 1]</sigDim>
-						</signal>
-						<signal>
-							<sigName>Sum5</sigName>
-							<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Accelerometer Pre-Processing/Sum5</xpcsigName>
-							<sigWidth>1</sigWidth>
-							<sigDim>[1, 1]</sigDim>
-						</signal>
 					</SubSystem>
 					<SubSystem>
 						<Name>Beeline GPS Pre-Processing</Name>
@@ -1309,12 +1283,6 @@ To Constant</Name>
 							<sigDim>[1, 1]</sigDim>
 						</signal>
 						<signal>
-							<sigName>Gain</sigName>
-							<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Beeline GPS Pre-Processing/Gain</xpcsigName>
-							<sigWidth>1</sigWidth>
-							<sigDim>[1, 1]</sigDim>
-						</signal>
-						<signal>
 							<sigName>Delay function</sigName>
 							<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Beeline GPS Pre-Processing/Delay function</xpcsigName>
 							<sigWidth>1</sigWidth>
@@ -1323,12 +1291,6 @@ To Constant</Name>
 						<signal>
 							<sigName>S-Function4</sigName>
 							<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Beeline GPS Pre-Processing/S-Function4</xpcsigName>
-							<sigWidth>1</sigWidth>
-							<sigDim>[1, 1]</sigDim>
-						</signal>
-						<signal>
-							<sigName>Sum1</sigName>
-							<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Beeline GPS Pre-Processing/Sum1</xpcsigName>
 							<sigWidth>1</sigWidth>
 							<sigDim>[1, 1]</sigDim>
 						</signal>
@@ -1348,43 +1310,7 @@ To Constant</Name>
 					<SubSystem>
 						<Name>Roll//Yaw Gyro Pre-processing</Name>
 						<xPCName>p1/Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Roll//Yaw Gyro Pre-processing</xPCName>
-						<signal>
-							<sigName>cross coupling from roll</sigName>
-							<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Roll//Yaw Gyro Pre-processing/cross coupling from roll</xpcsigName>
-							<sigWidth>1</sigWidth>
-							<sigDim>[1, 1]</sigDim>
-						</signal>
-						<signal>
-							<sigName>Sum3</sigName>
-							<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Roll//Yaw Gyro Pre-processing/Sum3</xpcsigName>
-							<sigWidth>1</sigWidth>
-							<sigDim>[1, 1]</sigDim>
-						</signal>
-						<signal>
-							<sigName>Sum5</sigName>
-							<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Roll//Yaw Gyro Pre-processing/Sum5</xpcsigName>
-							<sigWidth>1</sigWidth>
-							<sigDim>[1, 1]</sigDim>
-						</signal>
 					</SubSystem>
-					<signal>
-						<sigName>Gain to make CCW</sigName>
-						<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Gain to make CCW</xpcsigName>
-						<sigWidth>1</sigWidth>
-						<sigDim>[1, 1]</sigDim>
-					</signal>
-					<signal>
-						<sigName>Position Filter</sigName>
-						<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Position Filter</xpcsigName>
-						<sigWidth>42</sigWidth>
-						<sigDim>[42, 1]</sigDim>
-					</signal>
-					<signal>
-						<sigName>Super Filter!</sigName>
-						<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Super Filter!</xpcsigName>
-						<sigWidth>44</sigWidth>
-						<sigDim>[44, 1]</sigDim>
-					</signal>
 				</SubSystem>
 				<signal>
 					<sigName>DegtoRad1</sigName>
@@ -1405,7 +1331,6 @@ To Constant</Name>
 					<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/DegtoRad3</xpcsigName>
 					<sigWidth>1</sigWidth>
 					<sigDim>[1, 1]</sigDim>
-					<sigLabel>Roll Angle</sigLabel>
 				</signal>
 				<signal>
 					<sigName>DegtoRad4</sigName>

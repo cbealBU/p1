@@ -80,7 +80,7 @@ end
 info.description=description;
 
 
-dirlist=dir([info.driver '_' datestr(now,29) '_*.mat']);
+dirlist=dir(['data/' info.driver '_' datestr(now,29) '_*.mat']);
 
 if(size(dirlist,1))
     lastone=dirlist(end);
