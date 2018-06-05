@@ -170,8 +170,8 @@ Low-pass filter</sigName>
 		<signal>
 			<sigName>Named Mux</sigName>
 			<xpcsigName>Data Logging/Named Mux</xpcsigName>
-			<sigWidth>140</sigWidth>
-			<sigDim>[140, 1]</sigDim>
+			<sigWidth>143</sigWidth>
+			<sigDim>[143, 1]</sigDim>
 		</signal>
 	</SubSystem>
 	<SubSystem>
@@ -559,6 +559,38 @@ Initialization</Name>
 			<SubSystem>
 				<Name>VS330 GPS Data</Name>
 				<xPCName>p1/Hardware I//O/Input/VS330 GPS Data</xPCName>
+				<SubSystem>
+					<Name>Subsystem</Name>
+					<xPCName>p1/Hardware I//O/Input/VS330 GPS Data/Subsystem</xPCName>
+					<SubSystem>
+						<Name>Degrees to
+Radians</Name>
+						<xPCName>p1/Hardware I//O/Input/VS330 GPS Data/Subsystem/Degrees to Radians</xPCName>
+					</SubSystem>
+					<SubSystem>
+						<Name>Degrees to
+Radians1</Name>
+						<xPCName>p1/Hardware I//O/Input/VS330 GPS Data/Subsystem/Degrees to Radians1</xPCName>
+					</SubSystem>
+					<signal>
+						<sigName>Product</sigName>
+						<xpcsigName>Hardware I//O/Input/VS330 GPS Data/Subsystem/Product</xpcsigName>
+						<sigWidth>1</sigWidth>
+						<sigDim>[1, 1]</sigDim>
+					</signal>
+					<signal>
+						<sigName>Product4</sigName>
+						<xpcsigName>Hardware I//O/Input/VS330 GPS Data/Subsystem/Product4</xpcsigName>
+						<sigWidth>1</sigWidth>
+						<sigDim>[1, 1]</sigDim>
+					</signal>
+					<signal>
+						<sigName>Product5</sigName>
+						<xpcsigName>Hardware I//O/Input/VS330 GPS Data/Subsystem/Product5</xpcsigName>
+						<sigWidth>1</sigWidth>
+						<sigDim>[1, 1]</sigDim>
+					</signal>
+				</SubSystem>
 				<signal>
 					<sigName>Hemisphere VS330/p1</sigName>
 					<xpcsigName>Hardware I//O/Input/VS330 GPS Data/Hemisphere VS330/p1</xpcsigName>
@@ -770,6 +802,24 @@ Initialization</Name>
 				<signal>
 					<sigName>Receive /p3</sigName>
 					<xpcsigName>Hardware I//O/Input/Wheel Force Transducers/Receive /p3</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>Receive /p4</sigName>
+					<xpcsigName>Hardware I//O/Input/Wheel Force Transducers/Receive /p4</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>Receive /p5</sigName>
+					<xpcsigName>Hardware I//O/Input/Wheel Force Transducers/Receive /p5</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>Receive /p6</sigName>
+					<xpcsigName>Hardware I//O/Input/Wheel Force Transducers/Receive /p6</xpcsigName>
 					<sigWidth>1</sigWidth>
 					<sigDim>[1, 1]</sigDim>
 				</signal>
