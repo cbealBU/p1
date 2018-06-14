@@ -52,9 +52,9 @@ DataDescription(ii).desc='Contains wheelspeed in order data for FR, FL, RR, and 
 
 ii=7;
 DataDescription(ii).name='07 Commands';
-DataDescription(ii).size=6;
-DataDescription(ii).units={ 'A' 'A' 'A' 'A' 'A' 'rad'};
-DataDescription(ii).desc='Contains L&R steering motor current commands, L&R traction motor commands, & handwheel motor command, HAL command';
+DataDescription(ii).size=8;
+DataDescription(ii).units={ 'A' 'A' 'rad' 'rad' 'A' 'A' 'A' 'rad'};
+DataDescription(ii).desc='Contains L&R steering motor current commands, L&R steering angle commands, L&R traction motor commands, & handwheel motor command, HAL command';
 
 ii=8;
 DataDescription(ii).name='08 SSest';
