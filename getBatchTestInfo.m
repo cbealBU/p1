@@ -1,6 +1,6 @@
 % Script to extract test info from a directory of P1 data files
 
-files = dir('craig_2015-08-19*.mat');
+files = dir('*.mat');
 fid = fopen('test_log.txt','w');
 fprintf(fid,'Test ID\t Descrip\t Max Speed\t Max Lat Acc\t Test Time\n');
 for i = 1:length(files)

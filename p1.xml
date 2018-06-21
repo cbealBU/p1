@@ -112,6 +112,18 @@ Low-pass filter 2</sigName>
 				<Name>Steering Geometry &amp;
 Gearbox Correction</Name>
 				<xPCName>p1/Controllers and Output/Steering Controller/Steering Geometry &amp; Gearbox Correction</xPCName>
+				<signal>
+					<sigName>Left Steering Ratio</sigName>
+					<xpcsigName>Controllers and Output/Steering Controller/Steering Geometry &amp; Gearbox Correction/Left Steering Ratio</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>Right Steering Ratio</sigName>
+					<xpcsigName>Controllers and Output/Steering Controller/Steering Geometry &amp; Gearbox Correction/Right Steering Ratio</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
 			</SubSystem>
 			<SubSystem>
 				<Name>standby</Name>
@@ -170,8 +182,8 @@ Low-pass filter</sigName>
 		<signal>
 			<sigName>Named Mux</sigName>
 			<xpcsigName>Data Logging/Named Mux</xpcsigName>
-			<sigWidth>143</sigWidth>
-			<sigDim>[143, 1]</sigDim>
+			<sigWidth>145</sigWidth>
+			<sigDim>[145, 1]</sigDim>
 		</signal>
 	</SubSystem>
 	<SubSystem>
@@ -939,8 +951,8 @@ volts</sigName>
 			<signal>
 				<sigName>voltage gain</sigName>
 				<xpcsigName>Hardware I//O/Output/voltage gain</xpcsigName>
-				<sigWidth>2</sigWidth>
-				<sigDim>[2, 1]</sigDim>
+				<sigWidth>4</sigWidth>
+				<sigDim>[4, 1]</sigDim>
 			</signal>
 			<signal>
 				<sigName>saturation</sigName>
@@ -1501,8 +1513,8 @@ To Constant</Name>
 				</signal>
 			</SubSystem>
 			<signal>
-				<sigName>Sum1</sigName>
-				<xpcsigName>User Controllers/Cruise Control/Sum1</xpcsigName>
+				<sigName>Quantizer</sigName>
+				<xpcsigName>User Controllers/Cruise Control/Quantizer</xpcsigName>
 				<sigWidth>1</sigWidth>
 				<sigDim>[1, 1]</sigDim>
 			</signal>
