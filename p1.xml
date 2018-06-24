@@ -1392,6 +1392,12 @@ To Constant</Name>
 						<sigDim>[1, 1]</sigDim>
 					</signal>
 					<signal>
+						<sigName>Position Filter</sigName>
+						<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Position Filter</xpcsigName>
+						<sigWidth>42</sigWidth>
+						<sigDim>[42, 1]</sigDim>
+					</signal>
+					<signal>
 						<sigName>Super Filter!</sigName>
 						<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Super Filter!</xpcsigName>
 						<sigWidth>44</sigWidth>
