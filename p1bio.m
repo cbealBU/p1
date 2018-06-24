@@ -1141,796 +1141,916 @@ bio(114).ndims=2;
 bio(114).size=[];
 
 
-bio(115).blkName='Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Disable';
-bio(115).sigName='';
+bio(115).blkName='Sensor Data and Estimation/Nonlinear Observer/Normal Loads/Left Normal Load';
+bio(115).sigName='Left';
 bio(115).portIdx=0;
 bio(115).dim=[1,1];
 bio(115).sigWidth=1;
-bio(115).sigAddress='&p1_B.Disable';
+bio(115).sigAddress='&p1_B.Left_d';
 bio(115).ndims=2;
 bio(115).size=[];
 
 
-bio(116).blkName='Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Disable1';
-bio(116).sigName='';
+bio(116).blkName='Sensor Data and Estimation/Nonlinear Observer/Normal Loads/Right Normal Load';
+bio(116).sigName='Right';
 bio(116).portIdx=0;
 bio(116).dim=[1,1];
 bio(116).sigWidth=1;
-bio(116).sigAddress='&p1_B.Disable1';
+bio(116).sigAddress='&p1_B.Right_o';
 bio(116).ndims=2;
 bio(116).size=[];
 
 
-bio(117).blkName='Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Disable3';
+bio(117).blkName='Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Disable';
 bio(117).sigName='';
 bio(117).portIdx=0;
 bio(117).dim=[1,1];
 bio(117).sigWidth=1;
-bio(117).sigAddress='&p1_B.Disable3';
+bio(117).sigAddress='&p1_B.Disable';
 bio(117).ndims=2;
 bio(117).size=[];
 
 
-bio(118).blkName='Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Disable4';
+bio(118).blkName='Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Disable1';
 bio(118).sigName='';
 bio(118).portIdx=0;
 bio(118).dim=[1,1];
 bio(118).sigWidth=1;
-bio(118).sigAddress='&p1_B.Disable4';
+bio(118).sigAddress='&p1_B.Disable1';
 bio(118).ndims=2;
 bio(118).size=[];
 
 
-bio(119).blkName='Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Disable6';
-bio(119).sigName='Left';
+bio(119).blkName='Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Disable3';
+bio(119).sigName='';
 bio(119).portIdx=0;
 bio(119).dim=[1,1];
 bio(119).sigWidth=1;
-bio(119).sigAddress='&p1_B.Left_p';
+bio(119).sigAddress='&p1_B.Disable3';
 bio(119).ndims=2;
 bio(119).size=[];
 
 
-bio(120).blkName='Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Disable7';
-bio(120).sigName='Right';
+bio(120).blkName='Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Disable4';
+bio(120).sigName='';
 bio(120).portIdx=0;
 bio(120).dim=[1,1];
 bio(120).sigWidth=1;
-bio(120).sigAddress='&p1_B.Right_b';
+bio(120).sigAddress='&p1_B.Disable4';
 bio(120).ndims=2;
 bio(120).size=[];
 
 
-bio(121).blkName='Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Damping';
+bio(121).blkName='Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Disable6';
 bio(121).sigName='Left';
 bio(121).portIdx=0;
 bio(121).dim=[1,1];
 bio(121).sigWidth=1;
-bio(121).sigAddress='&p1_B.Left_l';
+bio(121).sigAddress='&p1_B.Left_p';
 bio(121).ndims=2;
 bio(121).size=[];
 
 
-bio(122).blkName='Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Damping1';
+bio(122).blkName='Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Disable7';
 bio(122).sigName='Right';
 bio(122).portIdx=0;
 bio(122).dim=[1,1];
 bio(122).sigWidth=1;
-bio(122).sigAddress='&p1_B.Right_e';
+bio(122).sigAddress='&p1_B.Right_b';
 bio(122).ndims=2;
 bio(122).size=[];
 
 
-bio(123).blkName='Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Friction';
-bio(123).sigName='';
+bio(123).blkName='Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Damping';
+bio(123).sigName='Left';
 bio(123).portIdx=0;
 bio(123).dim=[1,1];
 bio(123).sigWidth=1;
-bio(123).sigAddress='&p1_B.WheelFriction';
+bio(123).sigAddress='&p1_B.Left_l';
 bio(123).ndims=2;
 bio(123).size=[];
 
 
-bio(124).blkName='Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Friction1';
-bio(124).sigName='';
+bio(124).blkName='Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Damping1';
+bio(124).sigName='Right';
 bio(124).portIdx=0;
 bio(124).dim=[1,1];
 bio(124).sigWidth=1;
-bio(124).sigAddress='&p1_B.WheelFriction1';
+bio(124).sigAddress='&p1_B.Right_e';
 bio(124).ndims=2;
 bio(124).size=[];
 
 
-bio(125).blkName='Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Inertia';
-bio(125).sigName='Left';
+bio(125).blkName='Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Friction';
+bio(125).sigName='';
 bio(125).portIdx=0;
 bio(125).dim=[1,1];
 bio(125).sigWidth=1;
-bio(125).sigAddress='&p1_B.Left_e';
+bio(125).sigAddress='&p1_B.WheelFriction';
 bio(125).ndims=2;
 bio(125).size=[];
 
 
-bio(126).blkName='Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Inertia1';
-bio(126).sigName='Right';
+bio(126).blkName='Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Friction1';
+bio(126).sigName='';
 bio(126).portIdx=0;
 bio(126).dim=[1,1];
 bio(126).sigWidth=1;
-bio(126).sigAddress='&p1_B.Right_h';
+bio(126).sigAddress='&p1_B.WheelFriction1';
 bio(126).ndims=2;
 bio(126).size=[];
 
 
-bio(127).blkName='Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Product';
+bio(127).blkName='Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Inertia';
 bio(127).sigName='Left';
 bio(127).portIdx=0;
 bio(127).dim=[1,1];
 bio(127).sigWidth=1;
-bio(127).sigAddress='&p1_B.Left_k';
+bio(127).sigAddress='&p1_B.Left_e';
 bio(127).ndims=2;
 bio(127).size=[];
 
 
-bio(128).blkName='Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Product1';
+bio(128).blkName='Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Inertia1';
 bio(128).sigName='Right';
 bio(128).portIdx=0;
 bio(128).dim=[1,1];
 bio(128).sigWidth=1;
-bio(128).sigAddress='&p1_B.Right_k';
+bio(128).sigAddress='&p1_B.Right_h';
 bio(128).ndims=2;
 bio(128).size=[];
 
 
-bio(129).blkName='Sensor Data and Estimation/Steering Kinematics/Steer Torque Calculation/Left Arm Length Look-up';
-bio(129).sigName='';
+bio(129).blkName='Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Product';
+bio(129).sigName='Left';
 bio(129).portIdx=0;
 bio(129).dim=[1,1];
 bio(129).sigWidth=1;
-bio(129).sigAddress='&p1_B.LeftArmLengthLookup';
+bio(129).sigAddress='&p1_B.Left_k';
 bio(129).ndims=2;
 bio(129).size=[];
 
 
-bio(130).blkName='Sensor Data and Estimation/Steering Kinematics/Steer Torque Calculation/Right Arm Length Look-up';
-bio(130).sigName='';
+bio(130).blkName='Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Product1';
+bio(130).sigName='Right';
 bio(130).portIdx=0;
 bio(130).dim=[1,1];
 bio(130).sigWidth=1;
-bio(130).sigAddress='&p1_B.RightArmLengthLookup';
+bio(130).sigAddress='&p1_B.Right_k';
 bio(130).ndims=2;
 bio(130).size=[];
 
 
-bio(131).blkName='Sensor Data and Estimation/Steering Kinematics/Steer Torque Calculation/Product';
-bio(131).sigName='Left';
+bio(131).blkName='Sensor Data and Estimation/Steering Kinematics/Steer Torque Calculation/Left Arm Length Look-up';
+bio(131).sigName='';
 bio(131).portIdx=0;
 bio(131).dim=[1,1];
 bio(131).sigWidth=1;
-bio(131).sigAddress='&p1_B.Left_o';
+bio(131).sigAddress='&p1_B.LeftArmLengthLookup';
 bio(131).ndims=2;
 bio(131).size=[];
 
 
-bio(132).blkName='Sensor Data and Estimation/Steering Kinematics/Steer Torque Calculation/Product1';
-bio(132).sigName='Right';
+bio(132).blkName='Sensor Data and Estimation/Steering Kinematics/Steer Torque Calculation/Right Arm Length Look-up';
+bio(132).sigName='';
 bio(132).portIdx=0;
 bio(132).dim=[1,1];
 bio(132).sigWidth=1;
-bio(132).sigAddress='&p1_B.Right_p';
+bio(132).sigAddress='&p1_B.RightArmLengthLookup';
 bio(132).ndims=2;
 bio(132).size=[];
 
 
-bio(133).blkName='Sensor Data and Estimation/Steering Kinematics/Steering Angle Calculation/Left Steer Angle Look-up';
+bio(133).blkName='Sensor Data and Estimation/Steering Kinematics/Steer Torque Calculation/Product';
 bio(133).sigName='Left';
 bio(133).portIdx=0;
 bio(133).dim=[1,1];
 bio(133).sigWidth=1;
-bio(133).sigAddress='&p1_B.Left';
+bio(133).sigAddress='&p1_B.Left_o';
 bio(133).ndims=2;
 bio(133).size=[];
 
 
-bio(134).blkName='Sensor Data and Estimation/Steering Kinematics/Steering Angle Calculation/Right Steer Angle Look-up';
+bio(134).blkName='Sensor Data and Estimation/Steering Kinematics/Steer Torque Calculation/Product1';
 bio(134).sigName='Right';
 bio(134).portIdx=0;
 bio(134).dim=[1,1];
 bio(134).sigWidth=1;
-bio(134).sigAddress='&p1_B.Right';
+bio(134).sigAddress='&p1_B.Right_p';
 bio(134).ndims=2;
 bio(134).size=[];
 
 
-bio(135).blkName='Sensor Data and Estimation/Vehicle State Estimator/Select: Yaw Rate/Gain';
-bio(135).sigName='';
+bio(135).blkName='Sensor Data and Estimation/Steering Kinematics/Steering Angle Calculation/Left Steer Angle Look-up';
+bio(135).sigName='Left';
 bio(135).portIdx=0;
 bio(135).dim=[1,1];
 bio(135).sigWidth=1;
-bio(135).sigAddress='&p1_B.Gain';
+bio(135).sigAddress='&p1_B.Left';
 bio(135).ndims=2;
 bio(135).size=[];
 
 
-bio(136).blkName='Sensor Data and Estimation/Vehicle State Estimator/state estimation/DegtoRad1';
-bio(136).sigName='Yaw Rate';
+bio(136).blkName='Sensor Data and Estimation/Steering Kinematics/Steering Angle Calculation/Right Steer Angle Look-up';
+bio(136).sigName='Right';
 bio(136).portIdx=0;
 bio(136).dim=[1,1];
 bio(136).sigWidth=1;
-bio(136).sigAddress='&p1_ConstB.YawRate';
+bio(136).sigAddress='&p1_B.Right';
 bio(136).ndims=2;
 bio(136).size=[];
 
 
-bio(137).blkName='Sensor Data and Estimation/Vehicle State Estimator/state estimation/DegtoRad2';
-bio(137).sigName='Yaw Angle';
+bio(137).blkName='Sensor Data and Estimation/Vehicle State Estimator/Select: Yaw Rate/Gain';
+bio(137).sigName='';
 bio(137).portIdx=0;
 bio(137).dim=[1,1];
 bio(137).sigWidth=1;
-bio(137).sigAddress='&p1_ConstB.YawAngle';
+bio(137).sigAddress='&p1_B.Gain_a';
 bio(137).ndims=2;
 bio(137).size=[];
 
 
-bio(138).blkName='Sensor Data and Estimation/Vehicle State Estimator/state estimation/DegtoRad3';
-bio(138).sigName='Roll Angle';
+bio(138).blkName='Sensor Data and Estimation/Vehicle State Estimator/state estimation/DegtoRad1';
+bio(138).sigName='Yaw Rate';
 bio(138).portIdx=0;
 bio(138).dim=[1,1];
 bio(138).sigWidth=1;
-bio(138).sigAddress='&p1_ConstB.RollAngle';
+bio(138).sigAddress='&p1_B.YawRate';
 bio(138).ndims=2;
 bio(138).size=[];
 
 
-bio(139).blkName='Sensor Data and Estimation/Vehicle State Estimator/state estimation/DegtoRad4';
-bio(139).sigName='Roll Rate';
+bio(139).blkName='Sensor Data and Estimation/Vehicle State Estimator/state estimation/DegtoRad2';
+bio(139).sigName='Yaw Angle';
 bio(139).portIdx=0;
 bio(139).dim=[1,1];
 bio(139).sigWidth=1;
-bio(139).sigAddress='&p1_ConstB.RollRate';
+bio(139).sigAddress='&p1_B.YawAngle';
 bio(139).ndims=2;
 bio(139).size=[];
 
 
-bio(140).blkName='Sensor Data and Estimation/Vehicle State Estimator/state estimation/DegtoRad5';
-bio(140).sigName='Yaw Gyro Bias';
+bio(140).blkName='Sensor Data and Estimation/Vehicle State Estimator/state estimation/DegtoRad3';
+bio(140).sigName='Roll Angle';
 bio(140).portIdx=0;
 bio(140).dim=[1,1];
 bio(140).sigWidth=1;
-bio(140).sigAddress='&p1_ConstB.YawGyroBias';
+bio(140).sigAddress='&p1_B.RollAngle_d';
 bio(140).ndims=2;
 bio(140).size=[];
 
 
-bio(141).blkName='Sensor Data and Estimation/Vehicle State Estimator/state estimation/DegtoRad6';
-bio(141).sigName='Roll Gyro Bias';
+bio(141).blkName='Sensor Data and Estimation/Vehicle State Estimator/state estimation/DegtoRad4';
+bio(141).sigName='Roll Rate';
 bio(141).portIdx=0;
 bio(141).dim=[1,1];
 bio(141).sigWidth=1;
-bio(141).sigAddress='&p1_ConstB.RollGyroBias';
+bio(141).sigAddress='&p1_B.RollRate';
 bio(141).ndims=2;
 bio(141).size=[];
 
 
-bio(142).blkName='Sensor Data and Estimation/Vehicle State Estimator/state estimation/DegtoRad7';
-bio(142).sigName='Sideslip';
+bio(142).blkName='Sensor Data and Estimation/Vehicle State Estimator/state estimation/DegtoRad5';
+bio(142).sigName='Yaw Gyro Bias';
 bio(142).portIdx=0;
 bio(142).dim=[1,1];
 bio(142).sigWidth=1;
-bio(142).sigAddress='&p1_ConstB.Sideslip';
+bio(142).sigAddress='&p1_B.YawGyroBias';
 bio(142).ndims=2;
 bio(142).size=[];
 
 
-bio(143).blkName='User Controllers/Cruise Control/Pedal Latch/In1';
-bio(143).sigName='';
+bio(143).blkName='Sensor Data and Estimation/Vehicle State Estimator/state estimation/DegtoRad6';
+bio(143).sigName='Roll Gyro Bias';
 bio(143).portIdx=0;
 bio(143).dim=[1,1];
 bio(143).sigWidth=1;
-bio(143).sigAddress='&p1_B.PedalLatch.In1';
+bio(143).sigAddress='&p1_B.RollGyroBias';
 bio(143).ndims=2;
 bio(143).size=[];
 
 
-bio(144).blkName='User Controllers/Cruise Control/Speed Latch/In1';
-bio(144).sigName='';
+bio(144).blkName='Sensor Data and Estimation/Vehicle State Estimator/state estimation/DegtoRad7';
+bio(144).sigName='Sideslip';
 bio(144).portIdx=0;
 bio(144).dim=[1,1];
 bio(144).sigWidth=1;
-bio(144).sigAddress='&p1_B.SpeedLatch.In1';
+bio(144).sigAddress='&p1_B.Sideslip';
 bio(144).ndims=2;
 bio(144).size=[];
 
 
-bio(145).blkName='User Controllers/Steering Controller/HAL-9000/Clock';
+bio(145).blkName='User Controllers/Cruise Control/Pedal Latch/In1';
 bio(145).sigName='';
 bio(145).portIdx=0;
 bio(145).dim=[1,1];
 bio(145).sigWidth=1;
-bio(145).sigAddress='&p1_B.Clock';
+bio(145).sigAddress='&p1_B.PedalLatch.In1';
 bio(145).ndims=2;
 bio(145).size=[];
 
 
-bio(146).blkName='User Controllers/Steering Controller/HAL-9000/Product';
+bio(146).blkName='User Controllers/Cruise Control/Speed Latch/In1';
 bio(146).sigName='';
 bio(146).portIdx=0;
 bio(146).dim=[1,1];
 bio(146).sigWidth=1;
-bio(146).sigAddress='&p1_B.Product_k';
+bio(146).sigAddress='&p1_B.SpeedLatch.In1';
 bio(146).ndims=2;
 bio(146).size=[];
 
 
-bio(147).blkName='User Controllers/Steering Controller/HAL-9000/Product1';
+bio(147).blkName='User Controllers/Steering Controller/HAL-9000/Clock';
 bio(147).sigName='';
 bio(147).portIdx=0;
 bio(147).dim=[1,1];
 bio(147).sigWidth=1;
-bio(147).sigAddress='&p1_B.Product1';
+bio(147).sigAddress='&p1_B.Clock';
 bio(147).ndims=2;
 bio(147).size=[];
 
 
-bio(148).blkName='User Controllers/Steering Controller/HAL-9000/Sum';
+bio(148).blkName='User Controllers/Steering Controller/HAL-9000/Product';
 bio(148).sigName='';
 bio(148).portIdx=0;
 bio(148).dim=[1,1];
 bio(148).sigWidth=1;
-bio(148).sigAddress='&p1_B.Sum_hm';
+bio(148).sigAddress='&p1_B.Product_k';
 bio(148).ndims=2;
 bio(148).size=[];
 
 
-bio(149).blkName='Hardware I//O/Input/Handwheel Scaling & Initialization/Encoder Initialization/Encoder Initializer';
+bio(149).blkName='User Controllers/Steering Controller/HAL-9000/Product1';
 bio(149).sigName='';
 bio(149).portIdx=0;
 bio(149).dim=[1,1];
 bio(149).sigWidth=1;
-bio(149).sigAddress='&p1_B.EncoderInitializer';
+bio(149).sigAddress='&p1_B.Product1';
 bio(149).ndims=2;
 bio(149).size=[];
 
 
-bio(150).blkName='Hardware I//O/Input/Handwheel Scaling & Initialization/Encoder Initialization/Unwrapper';
+bio(150).blkName='User Controllers/Steering Controller/HAL-9000/Sum';
 bio(150).sigName='';
 bio(150).portIdx=0;
 bio(150).dim=[1,1];
 bio(150).sigWidth=1;
-bio(150).sigAddress='&p1_B.Unwrapper';
+bio(150).sigAddress='&p1_B.Sum_hm';
 bio(150).ndims=2;
 bio(150).size=[];
 
 
-bio(151).blkName='Hardware I//O/Input/Rear Wheel Speed Processing/Speed Calc/Unwrapping';
+bio(151).blkName='Hardware I//O/Input/Handwheel Scaling & Initialization/Encoder Initialization/Encoder Initializer';
 bio(151).sigName='';
 bio(151).portIdx=0;
 bio(151).dim=[1,1];
 bio(151).sigWidth=1;
-bio(151).sigAddress='&p1_B.Unwrapping';
+bio(151).sigAddress='&p1_B.EncoderInitializer';
 bio(151).ndims=2;
 bio(151).size=[];
 
 
-bio(152).blkName='Hardware I//O/Input/Rear Wheel Speed Processing/Speed Calc1/Unwrapping';
+bio(152).blkName='Hardware I//O/Input/Handwheel Scaling & Initialization/Encoder Initialization/Unwrapper';
 bio(152).sigName='';
 bio(152).portIdx=0;
 bio(152).dim=[1,1];
 bio(152).sigWidth=1;
-bio(152).sigAddress='&p1_B.Unwrapping_n';
+bio(152).sigAddress='&p1_B.Unwrapper';
 bio(152).ndims=2;
 bio(152).size=[];
 
 
-bio(153).blkName='Hardware I//O/Input/Steering Motor Encoder Initialization/Left/Encoder Initializer';
+bio(153).blkName='Hardware I//O/Input/Rear Wheel Speed Processing/Speed Calc/Unwrapping';
 bio(153).sigName='';
 bio(153).portIdx=0;
 bio(153).dim=[1,1];
 bio(153).sigWidth=1;
-bio(153).sigAddress='&p1_B.EncoderInitializer_i';
+bio(153).sigAddress='&p1_B.Unwrapping';
 bio(153).ndims=2;
 bio(153).size=[];
 
 
-bio(154).blkName='Hardware I//O/Input/Steering Motor Encoder Initialization/Left/Unwrapper';
+bio(154).blkName='Hardware I//O/Input/Rear Wheel Speed Processing/Speed Calc1/Unwrapping';
 bio(154).sigName='';
 bio(154).portIdx=0;
 bio(154).dim=[1,1];
 bio(154).sigWidth=1;
-bio(154).sigAddress='&p1_B.Unwrapper_o';
+bio(154).sigAddress='&p1_B.Unwrapping_n';
 bio(154).ndims=2;
 bio(154).size=[];
 
 
-bio(155).blkName='Hardware I//O/Input/Steering Motor Encoder Initialization/Right/Encoder Initializer';
+bio(155).blkName='Hardware I//O/Input/Steering Motor Encoder Initialization/Left/Encoder Initializer';
 bio(155).sigName='';
 bio(155).portIdx=0;
 bio(155).dim=[1,1];
 bio(155).sigWidth=1;
-bio(155).sigAddress='&p1_B.EncoderInitializer_k';
+bio(155).sigAddress='&p1_B.EncoderInitializer_i';
 bio(155).ndims=2;
 bio(155).size=[];
 
 
-bio(156).blkName='Hardware I//O/Input/Steering Motor Encoder Initialization/Right/Unwrapper';
+bio(156).blkName='Hardware I//O/Input/Steering Motor Encoder Initialization/Left/Unwrapper';
 bio(156).sigName='';
 bio(156).portIdx=0;
 bio(156).dim=[1,1];
 bio(156).sigWidth=1;
-bio(156).sigAddress='&p1_B.Unwrapper_a';
+bio(156).sigAddress='&p1_B.Unwrapper_o';
 bio(156).ndims=2;
 bio(156).size=[];
 
 
-bio(157).blkName='Hardware I//O/Input/VS330 GPS Data/Subsystem/Product';
+bio(157).blkName='Hardware I//O/Input/Steering Motor Encoder Initialization/Right/Encoder Initializer';
 bio(157).sigName='';
 bio(157).portIdx=0;
 bio(157).dim=[1,1];
 bio(157).sigWidth=1;
-bio(157).sigAddress='&p1_B.Product';
+bio(157).sigAddress='&p1_B.EncoderInitializer_k';
 bio(157).ndims=2;
 bio(157).size=[];
 
 
-bio(158).blkName='Hardware I//O/Input/VS330 GPS Data/Subsystem/Product4';
+bio(158).blkName='Hardware I//O/Input/Steering Motor Encoder Initialization/Right/Unwrapper';
 bio(158).sigName='';
 bio(158).portIdx=0;
 bio(158).dim=[1,1];
 bio(158).sigWidth=1;
-bio(158).sigAddress='&p1_B.Product4';
+bio(158).sigAddress='&p1_B.Unwrapper_a';
 bio(158).ndims=2;
 bio(158).size=[];
 
 
-bio(159).blkName='Hardware I//O/Input/VS330 GPS Data/Subsystem/Product5';
+bio(159).blkName='Hardware I//O/Input/VS330 GPS Data/Subsystem/Product';
 bio(159).sigName='';
 bio(159).portIdx=0;
 bio(159).dim=[1,1];
 bio(159).sigWidth=1;
-bio(159).sigAddress='&p1_B.Product5';
+bio(159).sigAddress='&p1_B.Product';
 bio(159).ndims=2;
 bio(159).size=[];
 
 
-bio(160).blkName='Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Steering Geometry Calculation/Left Steer Angle Look-up1';
-bio(160).sigName='Left';
+bio(160).blkName='Hardware I//O/Input/VS330 GPS Data/Subsystem/Product4';
+bio(160).sigName='';
 bio(160).portIdx=0;
 bio(160).dim=[1,1];
 bio(160).sigWidth=1;
-bio(160).sigAddress='&p1_B.Left_j';
+bio(160).sigAddress='&p1_B.Product4';
 bio(160).ndims=2;
 bio(160).size=[];
 
 
-bio(161).blkName='Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Steering Geometry Calculation/Right Steer Angle Look-up1';
-bio(161).sigName='Right';
+bio(161).blkName='Hardware I//O/Input/VS330 GPS Data/Subsystem/Product5';
+bio(161).sigName='';
 bio(161).portIdx=0;
 bio(161).dim=[1,1];
 bio(161).sigWidth=1;
-bio(161).sigAddress='&p1_B.Right_h0';
+bio(161).sigAddress='&p1_B.Product5';
 bio(161).ndims=2;
 bio(161).size=[];
 
 
-bio(162).blkName='Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Accelerations/Diff';
-bio(162).sigName='';
+bio(162).blkName='Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Steering Geometry Calculation/Left Steer Angle Look-up1';
+bio(162).sigName='Left';
 bio(162).portIdx=0;
 bio(162).dim=[1,1];
 bio(162).sigWidth=1;
-bio(162).sigAddress='&p1_B.Diff';
+bio(162).sigAddress='&p1_B.Left_j';
 bio(162).ndims=2;
 bio(162).size=[];
 
 
-bio(163).blkName='Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Accelerations/TSamp';
-bio(163).sigName='';
+bio(163).blkName='Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Steering Geometry Calculation/Right Steer Angle Look-up1';
+bio(163).sigName='Right';
 bio(163).portIdx=0;
 bio(163).dim=[1,1];
 bio(163).sigWidth=1;
-bio(163).sigAddress='&p1_B.TSamp';
+bio(163).sigAddress='&p1_B.Right_h0';
 bio(163).ndims=2;
 bio(163).size=[];
 
 
-bio(164).blkName='Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Accelerations1/Diff';
+bio(164).blkName='Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Accelerations/Diff';
 bio(164).sigName='';
 bio(164).portIdx=0;
 bio(164).dim=[1,1];
 bio(164).sigWidth=1;
-bio(164).sigAddress='&p1_B.Diff_b';
+bio(164).sigAddress='&p1_B.Diff';
 bio(164).ndims=2;
 bio(164).size=[];
 
 
-bio(165).blkName='Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Accelerations1/TSamp';
+bio(165).blkName='Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Accelerations/TSamp';
 bio(165).sigName='';
 bio(165).portIdx=0;
 bio(165).dim=[1,1];
 bio(165).sigWidth=1;
-bio(165).sigAddress='&p1_B.TSamp_i';
+bio(165).sigAddress='&p1_B.TSamp';
 bio(165).ndims=2;
 bio(165).size=[];
 
 
-bio(166).blkName='Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Velocities/Diff';
+bio(166).blkName='Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Accelerations1/Diff';
 bio(166).sigName='';
 bio(166).portIdx=0;
 bio(166).dim=[1,1];
 bio(166).sigWidth=1;
-bio(166).sigAddress='&p1_B.Diff_o';
+bio(166).sigAddress='&p1_B.Diff_b';
 bio(166).ndims=2;
 bio(166).size=[];
 
 
-bio(167).blkName='Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Velocities/TSamp';
+bio(167).blkName='Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Accelerations1/TSamp';
 bio(167).sigName='';
 bio(167).portIdx=0;
 bio(167).dim=[1,1];
 bio(167).sigWidth=1;
-bio(167).sigAddress='&p1_B.TSamp_a';
+bio(167).sigAddress='&p1_B.TSamp_i';
 bio(167).ndims=2;
 bio(167).size=[];
 
 
-bio(168).blkName='Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Velocities1/Diff';
+bio(168).blkName='Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Velocities/Diff';
 bio(168).sigName='';
 bio(168).portIdx=0;
 bio(168).dim=[1,1];
 bio(168).sigWidth=1;
-bio(168).sigAddress='&p1_B.Diff_ok';
+bio(168).sigAddress='&p1_B.Diff_o';
 bio(168).ndims=2;
 bio(168).size=[];
 
 
-bio(169).blkName='Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Velocities1/TSamp';
+bio(169).blkName='Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Velocities/TSamp';
 bio(169).sigName='';
 bio(169).portIdx=0;
 bio(169).dim=[1,1];
 bio(169).sigWidth=1;
-bio(169).sigAddress='&p1_B.TSamp_h';
+bio(169).sigAddress='&p1_B.TSamp_a';
 bio(169).ndims=2;
 bio(169).size=[];
 
 
-bio(170).blkName='User Controllers/Cruise Control/Enable Logic/Delay/Unit Delay';
+bio(170).blkName='Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Velocities1/Diff';
 bio(170).sigName='';
 bio(170).portIdx=0;
 bio(170).dim=[1,1];
 bio(170).sigWidth=1;
-bio(170).sigAddress='&p1_B.UnitDelay';
+bio(170).sigAddress='&p1_B.Diff_ok';
 bio(170).ndims=2;
 bio(170).size=[];
 
 
-bio(171).blkName='User Controllers/Cruise Control/Enable Logic/Delay/Unit Delay1';
+bio(171).blkName='Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Velocities1/TSamp';
 bio(171).sigName='';
 bio(171).portIdx=0;
 bio(171).dim=[1,1];
 bio(171).sigWidth=1;
-bio(171).sigAddress='&p1_B.UnitDelay1';
+bio(171).sigAddress='&p1_B.TSamp_h';
 bio(171).ndims=2;
 bio(171).size=[];
 
 
-bio(172).blkName='User Controllers/Cruise Control/Enable Logic/Delay/Unit Delay2';
+bio(172).blkName='Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Gain to make CCW';
 bio(172).sigName='';
 bio(172).portIdx=0;
 bio(172).dim=[1,1];
 bio(172).sigWidth=1;
-bio(172).sigAddress='&p1_B.UnitDelay2';
+bio(172).sigAddress='&p1_B.GaintomakeCCW';
 bio(172).ndims=2;
 bio(172).size=[];
 
 
-bio(173).blkName='User Controllers/Cruise Control/Enable Logic/Delay/Unit Delay3';
+bio(173).blkName='Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Super Filter!';
 bio(173).sigName='';
 bio(173).portIdx=0;
-bio(173).dim=[1,1];
-bio(173).sigWidth=1;
-bio(173).sigAddress='&p1_B.UnitDelay3';
+bio(173).dim=[44,1];
+bio(173).sigWidth=44;
+bio(173).sigAddress='&p1_B.SuperFilter[0]';
 bio(173).ndims=2;
 bio(173).size=[];
 
 
-bio(174).blkName='User Controllers/Cruise Control/Enable Logic/Latch1/In1';
+bio(174).blkName='User Controllers/Cruise Control/Enable Logic/Delay/Unit Delay';
 bio(174).sigName='';
 bio(174).portIdx=0;
 bio(174).dim=[1,1];
 bio(174).sigWidth=1;
-bio(174).sigAddress='&p1_B.Latch1.In1';
+bio(174).sigAddress='&p1_B.UnitDelay';
 bio(174).ndims=2;
 bio(174).size=[];
 
 
-bio(175).blkName='User Controllers/Steering Controller/HAL-9000/Latch/In1';
+bio(175).blkName='User Controllers/Cruise Control/Enable Logic/Delay/Unit Delay1';
 bio(175).sigName='';
 bio(175).portIdx=0;
 bio(175).dim=[1,1];
 bio(175).sigWidth=1;
-bio(175).sigAddress='&p1_B.In1';
+bio(175).sigAddress='&p1_B.UnitDelay1';
 bio(175).ndims=2;
 bio(175).size=[];
 
 
-bio(176).blkName='Hardware I//O/Input/Handwheel Scaling & Initialization/Handwheel Sensor Fault Detection/Descision Logic/Logical Operator4';
+bio(176).blkName='User Controllers/Cruise Control/Enable Logic/Delay/Unit Delay2';
 bio(176).sigName='';
 bio(176).portIdx=0;
 bio(176).dim=[1,1];
 bio(176).sigWidth=1;
-bio(176).sigAddress='&p1_B.LogicalOperator4';
+bio(176).sigAddress='&p1_B.UnitDelay2';
 bio(176).ndims=2;
 bio(176).size=[];
 
 
-bio(177).blkName='Hardware I//O/Input/Handwheel Scaling & Initialization/Handwheel Sensor Fault Detection/Descision Logic/Memory3';
+bio(177).blkName='User Controllers/Cruise Control/Enable Logic/Delay/Unit Delay3';
 bio(177).sigName='';
 bio(177).portIdx=0;
 bio(177).dim=[1,1];
 bio(177).sigWidth=1;
-bio(177).sigAddress='&p1_B.Memory3';
+bio(177).sigAddress='&p1_B.UnitDelay3';
 bio(177).ndims=2;
 bio(177).size=[];
 
 
-bio(178).blkName='Hardware I//O/Input/Handwheel Scaling & Initialization/Handwheel Sensor Fault Detection/Enable Timer/Relational Operator';
+bio(178).blkName='User Controllers/Cruise Control/Enable Logic/Latch1/In1';
 bio(178).sigName='';
 bio(178).portIdx=0;
 bio(178).dim=[1,1];
 bio(178).sigWidth=1;
-bio(178).sigAddress='&p1_B.RelationalOperator';
+bio(178).sigAddress='&p1_B.Latch1.In1';
 bio(178).ndims=2;
 bio(178).size=[];
 
 
-bio(179).blkName='Hardware I//O/Input/Handwheel Scaling & Initialization/Handwheel Sensor Fault Detection/Fault Detection1/Memory2';
+bio(179).blkName='User Controllers/Steering Controller/HAL-9000/Latch/In1';
 bio(179).sigName='';
 bio(179).portIdx=0;
 bio(179).dim=[1,1];
 bio(179).sigWidth=1;
-bio(179).sigAddress='&p1_B.Memory2';
+bio(179).sigAddress='&p1_B.In1';
 bio(179).ndims=2;
 bio(179).size=[];
 
 
-bio(180).blkName='Hardware I//O/Input/Handwheel Scaling & Initialization/Handwheel Sensor Fault Detection/Switch Over/Switch';
+bio(180).blkName='Hardware I//O/Input/Handwheel Scaling & Initialization/Handwheel Sensor Fault Detection/Descision Logic/Logical Operator4';
 bio(180).sigName='';
 bio(180).portIdx=0;
 bio(180).dim=[1,1];
 bio(180).sigWidth=1;
-bio(180).sigAddress='&p1_B.Switch';
+bio(180).sigAddress='&p1_B.LogicalOperator4';
 bio(180).ndims=2;
 bio(180).size=[];
 
 
-bio(181).blkName='Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Beeline GPS Pre-Processing/Data Type Conversion';
+bio(181).blkName='Hardware I//O/Input/Handwheel Scaling & Initialization/Handwheel Sensor Fault Detection/Descision Logic/Memory3';
 bio(181).sigName='';
 bio(181).portIdx=0;
 bio(181).dim=[1,1];
 bio(181).sigWidth=1;
-bio(181).sigAddress='&p1_B.DataTypeConversion';
+bio(181).sigAddress='&p1_B.Memory3';
 bio(181).ndims=2;
 bio(181).size=[];
 
 
-bio(182).blkName='Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Beeline GPS Pre-Processing/Delay function';
+bio(182).blkName='Hardware I//O/Input/Handwheel Scaling & Initialization/Handwheel Sensor Fault Detection/Enable Timer/Relational Operator';
 bio(182).sigName='';
 bio(182).portIdx=0;
 bio(182).dim=[1,1];
 bio(182).sigWidth=1;
-bio(182).sigAddress='&p1_B.Delayfunction';
+bio(182).sigAddress='&p1_B.RelationalOperator';
 bio(182).ndims=2;
 bio(182).size=[];
 
 
-bio(183).blkName='Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Beeline GPS Pre-Processing/S-Function4';
+bio(183).blkName='Hardware I//O/Input/Handwheel Scaling & Initialization/Handwheel Sensor Fault Detection/Fault Detection1/Memory2';
 bio(183).sigName='';
 bio(183).portIdx=0;
 bio(183).dim=[1,1];
 bio(183).sigWidth=1;
-bio(183).sigAddress='&p1_B.SFunction4';
+bio(183).sigAddress='&p1_B.Memory2';
 bio(183).ndims=2;
 bio(183).size=[];
 
 
-bio(184).blkName='Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Beeline GPS Pre-Processing/Switch2';
+bio(184).blkName='Hardware I//O/Input/Handwheel Scaling & Initialization/Handwheel Sensor Fault Detection/Switch Over/Switch';
 bio(184).sigName='';
 bio(184).portIdx=0;
 bio(184).dim=[1,1];
 bio(184).sigWidth=1;
-bio(184).sigAddress='&p1_B.Switch2';
+bio(184).sigAddress='&p1_B.Switch';
 bio(184).ndims=2;
 bio(184).size=[];
 
 
-bio(185).blkName='Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Beeline GPS Pre-Processing/Switch3.5';
+bio(185).blkName='Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Accelerometer Pre-Processing/cross coupling from ax';
 bio(185).sigName='';
 bio(185).portIdx=0;
 bio(185).dim=[1,1];
 bio(185).sigWidth=1;
-bio(185).sigAddress='&p1_B.Switch35';
+bio(185).sigAddress='&p1_B.crosscouplingfromax';
 bio(185).ndims=2;
 bio(185).size=[];
 
 
-bio(186).blkName='Hardware I//O/Input/Handwheel Scaling & Initialization/Handwheel Sensor Fault Detection/Fault Detection1/Counter/Relational Operator2';
+bio(186).blkName='Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Accelerometer Pre-Processing/Sum4';
 bio(186).sigName='';
 bio(186).portIdx=0;
 bio(186).dim=[1,1];
 bio(186).sigWidth=1;
-bio(186).sigAddress='&p1_B.RelationalOperator2';
+bio(186).sigAddress='&p1_B.Sum4';
 bio(186).ndims=2;
 bio(186).size=[];
 
 
-bio(187).blkName='Hardware I//O/Input/Handwheel Scaling & Initialization/Handwheel Sensor Fault Detection/Fault Detection1/Counter1/Relational Operator2';
+bio(187).blkName='Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Accelerometer Pre-Processing/Sum5';
 bio(187).sigName='';
 bio(187).portIdx=0;
 bio(187).dim=[1,1];
 bio(187).sigWidth=1;
-bio(187).sigAddress='&p1_B.RelationalOperator2_h';
+bio(187).sigAddress='&p1_B.Sum5_p';
 bio(187).ndims=2;
 bio(187).size=[];
 
 
-bio(188).blkName='Hardware I//O/Input/Handwheel Scaling & Initialization/Handwheel Sensor Fault Detection/Fault Detection1/Enabled Subsystem/In1';
+bio(188).blkName='Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Beeline GPS Pre-Processing/Data Type Conversion';
 bio(188).sigName='';
 bio(188).portIdx=0;
 bio(188).dim=[1,1];
 bio(188).sigWidth=1;
-bio(188).sigAddress='&p1_B.EnabledSubsystem_i.In1';
+bio(188).sigAddress='&p1_B.DataTypeConversion';
 bio(188).ndims=2;
 bio(188).size=[];
 
 
-bio(189).blkName='Hardware I//O/Input/Handwheel Scaling & Initialization/Handwheel Sensor Fault Detection/Fault Detection1/Enabled Subsystem1/In1';
+bio(189).blkName='Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Beeline GPS Pre-Processing/Gain';
 bio(189).sigName='';
 bio(189).portIdx=0;
 bio(189).dim=[1,1];
 bio(189).sigWidth=1;
-bio(189).sigAddress='&p1_B.EnabledSubsystem1.In1';
+bio(189).sigAddress='&p1_B.Gain';
 bio(189).ndims=2;
 bio(189).size=[];
 
 
-bio(190).blkName='Hardware I//O/Input/Handwheel Scaling & Initialization/Handwheel Sensor Fault Detection/Fault Detection1/Nearly the Same/Relational Operator';
+bio(190).blkName='Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Beeline GPS Pre-Processing/Delay function';
 bio(190).sigName='';
 bio(190).portIdx=0;
 bio(190).dim=[1,1];
 bio(190).sigWidth=1;
-bio(190).sigAddress='&p1_B.RelationalOperator_m';
+bio(190).sigAddress='&p1_B.Delayfunction';
 bio(190).ndims=2;
 bio(190).size=[];
 
 
-bio(191).blkName='Hardware I//O/Input/Handwheel Scaling & Initialization/Handwheel Sensor Fault Detection/Fault Detection1/Nearly the Same2/Relational Operator';
+bio(191).blkName='Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Beeline GPS Pre-Processing/S-Function4';
 bio(191).sigName='';
 bio(191).portIdx=0;
 bio(191).dim=[1,1];
 bio(191).sigWidth=1;
-bio(191).sigAddress='&p1_B.RelationalOperator_k';
+bio(191).sigAddress='&p1_B.SFunction4';
 bio(191).ndims=2;
 bio(191).size=[];
 
 
-bio(192).blkName='Hardware I//O/Input/Handwheel Scaling & Initialization/Handwheel Sensor Fault Detection/Descision Logic/Latch/Enabled Subsystem/In1';
+bio(192).blkName='Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Beeline GPS Pre-Processing/Sum1';
 bio(192).sigName='';
 bio(192).portIdx=0;
 bio(192).dim=[1,1];
 bio(192).sigWidth=1;
-bio(192).sigAddress='&p1_B.EnabledSubsystem.In1';
+bio(192).sigAddress='&p1_B.Sum1_b';
 bio(192).ndims=2;
 bio(192).size=[];
 
 
-bio(193).blkName='Hardware I//O/Input/Handwheel Scaling & Initialization/Handwheel Sensor Fault Detection/Descision Logic/Latch1/Enabled Subsystem/In1';
+bio(193).blkName='Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Beeline GPS Pre-Processing/Switch2';
 bio(193).sigName='';
 bio(193).portIdx=0;
 bio(193).dim=[1,1];
 bio(193).sigWidth=1;
-bio(193).sigAddress='&p1_B.EnabledSubsystem_h.In1';
+bio(193).sigAddress='&p1_B.Switch2';
 bio(193).ndims=2;
 bio(193).size=[];
 
 
+bio(194).blkName='Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Beeline GPS Pre-Processing/Switch3.5';
+bio(194).sigName='';
+bio(194).portIdx=0;
+bio(194).dim=[1,1];
+bio(194).sigWidth=1;
+bio(194).sigAddress='&p1_B.Switch35';
+bio(194).ndims=2;
+bio(194).size=[];
+
+
+bio(195).blkName='Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Roll//Yaw Gyro Pre-processing/cross coupling from roll';
+bio(195).sigName='';
+bio(195).portIdx=0;
+bio(195).dim=[1,1];
+bio(195).sigWidth=1;
+bio(195).sigAddress='&p1_B.crosscouplingfromroll';
+bio(195).ndims=2;
+bio(195).size=[];
+
+
+bio(196).blkName='Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Roll//Yaw Gyro Pre-processing/Sum3';
+bio(196).sigName='';
+bio(196).portIdx=0;
+bio(196).dim=[1,1];
+bio(196).sigWidth=1;
+bio(196).sigAddress='&p1_B.Sum3';
+bio(196).ndims=2;
+bio(196).size=[];
+
+
+bio(197).blkName='Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Roll//Yaw Gyro Pre-processing/Sum5';
+bio(197).sigName='';
+bio(197).portIdx=0;
+bio(197).dim=[1,1];
+bio(197).sigWidth=1;
+bio(197).sigAddress='&p1_B.Sum5';
+bio(197).ndims=2;
+bio(197).size=[];
+
+
+bio(198).blkName='Hardware I//O/Input/Handwheel Scaling & Initialization/Handwheel Sensor Fault Detection/Fault Detection1/Counter/Relational Operator2';
+bio(198).sigName='';
+bio(198).portIdx=0;
+bio(198).dim=[1,1];
+bio(198).sigWidth=1;
+bio(198).sigAddress='&p1_B.RelationalOperator2';
+bio(198).ndims=2;
+bio(198).size=[];
+
+
+bio(199).blkName='Hardware I//O/Input/Handwheel Scaling & Initialization/Handwheel Sensor Fault Detection/Fault Detection1/Counter1/Relational Operator2';
+bio(199).sigName='';
+bio(199).portIdx=0;
+bio(199).dim=[1,1];
+bio(199).sigWidth=1;
+bio(199).sigAddress='&p1_B.RelationalOperator2_h';
+bio(199).ndims=2;
+bio(199).size=[];
+
+
+bio(200).blkName='Hardware I//O/Input/Handwheel Scaling & Initialization/Handwheel Sensor Fault Detection/Fault Detection1/Enabled Subsystem/In1';
+bio(200).sigName='';
+bio(200).portIdx=0;
+bio(200).dim=[1,1];
+bio(200).sigWidth=1;
+bio(200).sigAddress='&p1_B.EnabledSubsystem_i.In1';
+bio(200).ndims=2;
+bio(200).size=[];
+
+
+bio(201).blkName='Hardware I//O/Input/Handwheel Scaling & Initialization/Handwheel Sensor Fault Detection/Fault Detection1/Enabled Subsystem1/In1';
+bio(201).sigName='';
+bio(201).portIdx=0;
+bio(201).dim=[1,1];
+bio(201).sigWidth=1;
+bio(201).sigAddress='&p1_B.EnabledSubsystem1.In1';
+bio(201).ndims=2;
+bio(201).size=[];
+
+
+bio(202).blkName='Hardware I//O/Input/Handwheel Scaling & Initialization/Handwheel Sensor Fault Detection/Fault Detection1/Nearly the Same/Relational Operator';
+bio(202).sigName='';
+bio(202).portIdx=0;
+bio(202).dim=[1,1];
+bio(202).sigWidth=1;
+bio(202).sigAddress='&p1_B.RelationalOperator_m';
+bio(202).ndims=2;
+bio(202).size=[];
+
+
+bio(203).blkName='Hardware I//O/Input/Handwheel Scaling & Initialization/Handwheel Sensor Fault Detection/Fault Detection1/Nearly the Same2/Relational Operator';
+bio(203).sigName='';
+bio(203).portIdx=0;
+bio(203).dim=[1,1];
+bio(203).sigWidth=1;
+bio(203).sigAddress='&p1_B.RelationalOperator_k';
+bio(203).ndims=2;
+bio(203).size=[];
+
+
+bio(204).blkName='Hardware I//O/Input/Handwheel Scaling & Initialization/Handwheel Sensor Fault Detection/Descision Logic/Latch/Enabled Subsystem/In1';
+bio(204).sigName='';
+bio(204).portIdx=0;
+bio(204).dim=[1,1];
+bio(204).sigWidth=1;
+bio(204).sigAddress='&p1_B.EnabledSubsystem.In1';
+bio(204).ndims=2;
+bio(204).size=[];
+
+
+bio(205).blkName='Hardware I//O/Input/Handwheel Scaling & Initialization/Handwheel Sensor Fault Detection/Descision Logic/Latch1/Enabled Subsystem/In1';
+bio(205).sigName='';
+bio(205).portIdx=0;
+bio(205).dim=[1,1];
+bio(205).sigWidth=1;
+bio(205).sigAddress='&p1_B.EnabledSubsystem_h.In1';
+bio(205).ndims=2;
+bio(205).size=[];
+
+
 function len = getlenBIO
-len = 193;
+len = 205;
 
