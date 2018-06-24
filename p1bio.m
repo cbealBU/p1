@@ -1711,12 +1711,12 @@ bio(171).ndims=2;
 bio(171).size=[];
 
 
-bio(172).blkName='Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Gain to make CCW';
+bio(172).blkName='Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Gain to make CCW and rad';
 bio(172).sigName='';
 bio(172).portIdx=0;
 bio(172).dim=[1,1];
 bio(172).sigWidth=1;
-bio(172).sigAddress='&p1_B.GaintomakeCCW';
+bio(172).sigAddress='&p1_B.GaintomakeCCWandrad';
 bio(172).ndims=2;
 bio(172).size=[];
 

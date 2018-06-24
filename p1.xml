@@ -1386,8 +1386,8 @@ To Constant</Name>
 						</signal>
 					</SubSystem>
 					<signal>
-						<sigName>Gain to make CCW</sigName>
-						<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Gain to make CCW</xpcsigName>
+						<sigName>Gain to make CCW and rad</sigName>
+						<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Gain to make CCW and rad</xpcsigName>
 						<sigWidth>1</sigWidth>
 						<sigDim>[1, 1]</sigDim>
 					</signal>

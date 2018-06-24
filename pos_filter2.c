@@ -294,7 +294,7 @@ static void mdlOutputs(SimStruct *S, int_T tid)
     status = U(8);
 
 //     delay = 1;
-    if (status != NO_POS_DATA) {
+    if (status != NO_POS_DATA && delay >= 0) {
         an=ax*cos(heading)-ay*sin(heading); /* Conversion to acceleration in the north and east directions */
         ae=-ax*sin(heading)-ay*cos(heading);
 
