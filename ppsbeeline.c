@@ -153,7 +153,8 @@ static void mdlOutputs(SimStruct *S, int_T tid)
 	    if (UTC - (int_T)(oldUTCppsBee) >= 1) {
 	    	PPStimeBee = PPStimeNewBee;
 	    }
-	    delayPPSbee = (time - (PPStimeBee + UTC - (int_T)(UTC))) / Ts;
+	    //delayPPSbee = (time - (PPStimeBee + UTC - (int_T)(UTC))) / Ts;
+	    delayPPSbee = (time - PPStimeBee - (UTC - (int_T)(UTC))) / Ts;
 	    oldUTCppsBee = UTC;
     }
     /* before the first PPS pulse or exceed the limit */
