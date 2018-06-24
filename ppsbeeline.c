@@ -72,6 +72,8 @@ static real_T PPStimeNewBee, PPStimeBee, oldUTCppsBee, delayPPSbee;
  *====================*/
 static void mdlInitializeSizes(SimStruct *S)
 {
+    int i; // iteration variable for input port init
+    
     ssSetNumSFcnParams(S, 2);
     if (ssGetNumSFcnParams(S) != ssGetSFcnParamsCount(S)) {
         return;
@@ -80,11 +82,16 @@ static void mdlInitializeSizes(SimStruct *S)
     ssSetNumContStates(S, 0);
     ssSetNumDiscStates(S, 0);
 
-    if (!ssSetNumInputPorts(S, 1)) {
+    if (!ssSetNumInputPorts(S, NUMOFINPUTS)) {
     	return;
     }
-    ssSetInputPortWidth(S, 0, NUMOFINPUTS);
-    ssSetInputPortDirectFeedThrough(S, 0, 1);
+    //for(i = 0; i < NUMOFINPUTS; i++)
+    //{
+        ssSetInputPortWidth(S, 0, 1);
+        ssSetInputPortDirectFeedThrough(S, 0, 1);
+        ssSetInputPortWidth(S, 1, 1);
+        ssSetInputPortDirectFeedThrough(S, 1, 1);
+    //}
 
     if (!ssSetNumOutputPorts(S, 1)) {
     	return;
@@ -121,8 +128,9 @@ static void mdlOutputs(SimStruct *S, int_T tid)
     InputRealPtrsType uPtrs = ssGetInputPortRealSignalPtrs(S, 0);
     real_T *y = ssGetOutputPortRealSignal(S, 0);
     real_T time = ssGetT(S);
-    real_T PPS = *uPtrs[0];
-    real_T UTC = *uPtrs[1];
+    real_T PPS = (real_T)*
+            ssGetInputPortRealSignal(S,1);//*uPtrs[0];
+    real_T UTC = (real_T)*ssGetInputPortRealSignal(S,2);//*uPtrs[1];
     
     const real_T Ts = mxGetPr(ssGetSFcnParam(S,1))[0];
     const real_T max_delay = mxGetPr(ssGetSFcnParam(S,0))[0];
@@ -148,12 +156,16 @@ static void mdlOutputs(SimStruct *S, int_T tid)
     	oldUTCppsBee = UTC; // default the last UTC time of PPS signal to zero
     }
     /* when UTC changes */
-    if (((UTC - oldUTCppsBee) > 0.01) || ((UTC - oldUTCppsBee) < -0.01)) {
+    if (((UTC - oldUTCppsBee) > 0.01) || ((UTC - oldUTCppsBee) < -0.01)) { // CEB: why are we looking for negative changes?
 	    /* looking for integer jumps of UTC */
 	    if (UTC - (int_T)(oldUTCppsBee) >= 1) { // (int_T) cast makes this test for jumps of 1 AND even seconds
 	    	PPStimeBee = PPStimeNewBee; // record the time of the new PPS signal
 	    }
-	    delayPPSbee = (time - (PPStimeBee + UTC - (int_T)(UTC))) / Ts; // if an integer UTC time, this is just the diff between the current time (also UTC) and the last PPS edge
+        // CEB: could this be overflowing? rearranged order of ops. Time is largest value, so subtract PPStimeBee from it. Then,
+        // subtract the difference between UTC and it's integer value. Since this difference is pre-calculated, this subtraction is
+        // between fairly small numbers. Maybe this works?
+	    delayPPSbee = (time - PPStimeBee - (UTC - (int_T)(UTC))) / Ts; // if an integer UTC time, this is just the diff between the current time (also UTC) and the last PPS edge
+	    //delayPPSbee = (time - (PPStimeBee + UTC - (int_T)(UTC))) / Ts; // if an integer UTC time, this is just the diff between the current time (also UTC) and the last PPS edge
 	    oldUTCppsBee = UTC; // store the current time as the most recent UTC change
     }
     /* before the first PPS pulse or exceed the limit */
