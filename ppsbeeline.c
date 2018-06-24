@@ -130,31 +130,31 @@ static void mdlOutputs(SimStruct *S, int_T tid)
 	/* round UTC */
 	UTC = floor((UTC * 10.0) + 0.5) / 10.0;
     /* looking for PPS pulse changes and record the time */
-    if (PPS >= PPS_THRESHHOLD) {
-    	if (time == 0) {
-    	    BEGINHIGHbee = TRU;
+    if (PPS >= PPS_THRESHHOLD) { // check for a logical high
+    	if (time == 0) { // if high on the first sample
+    	    BEGINHIGHbee = TRU; // set flag to handle starting high
     	}
-    	else if (!PPSHIGHbee && !BEGINHIGHbee) {
-    		PPSHIGHbee = TRU;
-    		PPStimeNewBee = time;
+        else if (!PPSHIGHbee && !BEGINHIGHbee) { // if high and last state was not high and the first sample wasn't high
+    		PPSHIGHbee = TRU; // store that this sample was high
+    		PPStimeNewBee = time; // record the time of the rising edge
     	}
     }
-    else {
-    	PPSHIGHbee = FALS;
-    	BEGINHIGHbee = FALS;
+    else { // if a logical low
+    	PPSHIGHbee = FALS; // store that this sample was low
+    	BEGINHIGHbee = FALS; // flag that we're not starting low (only needed once)
     }
 
-    if (time == 0) {
-    	oldUTCppsBee = UTC;
+    if (time == 0) { // one-time initialization (CEB: probably should be moved to init function since seeing time = 0 might not be guaranteed)
+    	oldUTCppsBee = UTC; // default the last UTC time of PPS signal to zero
     }
     /* when UTC changes */
     if (((UTC - oldUTCppsBee) > 0.01) || ((UTC - oldUTCppsBee) < -0.01)) {
 	    /* looking for integer jumps of UTC */
-	    if (UTC - (int_T)(oldUTCppsBee) >= 1) {
-	    	PPStimeBee = PPStimeNewBee;
+	    if (UTC - (int_T)(oldUTCppsBee) >= 1) { // (int_T) cast makes this test for jumps of 1 AND even seconds
+	    	PPStimeBee = PPStimeNewBee; // record the time of the new PPS signal
 	    }
-	    delayPPSbee = (time - (PPStimeBee + UTC - (int_T)(UTC))) / Ts;
-	    oldUTCppsBee = UTC;
+	    delayPPSbee = (time - (PPStimeBee + UTC - (int_T)(UTC))) / Ts; // if an integer UTC time, this is just the diff between the current time (also UTC) and the last PPS edge
+	    oldUTCppsBee = UTC; // store the current time as the most recent UTC change
     }
     /* before the first PPS pulse or exceed the limit */
     if (PPStimeBee < 0) {

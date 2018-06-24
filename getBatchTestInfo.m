@@ -6,8 +6,8 @@ fprintf(fid,'Test ID\t Descrip\t Max Speed\t Max Lat Acc\t Test Time\n');
 for i = 1:length(files)
     load(files(i).name);
     names;
-    topSpeed = max(SSest(:,9));
-    maxLatAcc = max(abs(SSest(:,14)));
+    topSpeed = max(GPS(:,10));
+    maxLatAcc = max(abs(INS(:,4)));
     endTime = t(end);
     
     % Hack the newline characters out of the description field

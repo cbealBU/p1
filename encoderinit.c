@@ -159,6 +159,7 @@ static void mdlUpdate(SimStruct *S, int_T tid)
 			}
 			else  
 				x[1]+=(pot-unwrapped)*Ts/firstCalTime;
+                // CEB: this isn't accurate until the end of the time window
 			break;
 		case ROUGHCAL:
 			// A rough calibration has been completed.  Now we wait until we

@@ -1513,8 +1513,8 @@ To Constant</Name>
 				</signal>
 			</SubSystem>
 			<signal>
-				<sigName>Quantizer</sigName>
-				<xpcsigName>User Controllers/Cruise Control/Quantizer</xpcsigName>
+				<sigName>Sum1</sigName>
+				<xpcsigName>User Controllers/Cruise Control/Sum1</xpcsigName>
 				<sigWidth>1</sigWidth>
 				<sigDim>[1, 1]</sigDim>
 			</signal>
@@ -1606,12 +1606,6 @@ To Constant</Name>
 					<sigDim>[1, 1]</sigDim>
 				</signal>
 			</SubSystem>
-			<signal>
-				<sigName>Sum</sigName>
-				<xpcsigName>User Controllers/Steering Controller/Sum</xpcsigName>
-				<sigWidth>1</sigWidth>
-				<sigDim>[1, 1]</sigDim>
-			</signal>
 			<signal>
 				<sigName>Heavy Filter</sigName>
 				<xpcsigName>User Controllers/Steering Controller/Heavy Filter</xpcsigName>
