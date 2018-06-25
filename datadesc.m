@@ -60,7 +60,7 @@ ii=8;
 DataDescription(ii).name='08 SSest';
 DataDescription(ii).size=21;
 DataDescription(ii).units={'rad' 'unitless' 'rad/s' 'rad/s' 'rad' 'unitless' 'rad/s' 'rad/s' 'm/s' 'm/s^2' 'm/s^2' 'm/s' 'm/s^2' 'm/s^2' 'rad' 'm' 'm' 'time steps' 'time steps' 'unitless' 'unitless'};
-DataDescription(ii).desc= 'Contains in order: 1) YAW angle, gyro sf, gyro bias, 4) rate; 5) ROLL angle, gyro sf, gyro bias, 8) rate; 9) LONGITUDINAL velocity, accel bias, 11) accel at CG; LATERAL velocity at CG, accel bias, 14) accel at CG; 15) SIDESLIP ANGLE; POSITION east (x), north (y); DELAY vel/pos, attitude; UPDATE vel/pos, attitude';
+DataDescription(ii).desc= 'Contains in order: 1) YAW angle, gyro sf, gyro bias, 4) rate; 5) ROLL angle, gyro sf, gyro bias, 8) rate; 9) LONGITUDINAL velocity, accel bias, 11) accel at CG; LATERAL velocity at CG, accel bias, 14) accel at CG; 15) SIDESLIP ANGLE; POSITION east (x), north (y); attitude flag, GPS delay, pos/vel flag, UPDATE pulse';
 
 ii=9;
 DataDescription(ii).name='09 Switches';

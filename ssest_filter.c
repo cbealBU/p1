@@ -361,7 +361,7 @@ static void mdlInitializeConditions(SimStruct *S)
     x0V[1] = (real_T)mxGetPr(INIT_STATE_ARGV)[0]; /* ax bias */
     x0V[3] = (real_T)mxGetPr(INIT_STATE_ARGV)[1]; /* ay bias */
 
-    /* setting the diagonal elements of the Covarianve matrix */
+    /* setting the diagonal elements of the Covariance matrix */
     for (i = 0; i < ORDV; i++) {
         x0V[ORDV + i*ORDV + i] = (real_T)mxGetPr(INIT_COV_ARGV)[i];
     }
@@ -464,6 +464,11 @@ static void mdlInitializeConditions(SimStruct *S)
     delayOEM4_global = 0;
 }
 
+/*********************************************************************
+ *
+ *  START OF MDLOUTPUTS
+ *
+ *********************************************************************/
 static void mdlOutputs(SimStruct *S, int_T tid)
 {
     real_T *x = ssGetRealDiscStates(S);
@@ -542,9 +547,9 @@ static void mdlOutputs(SimStruct *S, int_T tid)
     const int_T num_grade_avg = mxGetPr(ssGetSFcnParam(S,29))[0];
     const int_T MaxLatency = 0.05/Ts;
     
-    gpsUpdateBeeline = (int_T) *uPtrs[0]; /* Time Pulse from UTC time, Beeline */
+    gpsUpdateBeeline = (int_T) *uPtrs[0]; /* Time Pulse from UTC time */
  	delayBeeline = (int_T) *uPtrs[1]; /* Delay of Beeline GPS in number of samples */
-    gpsUpdateOEM4 = (int_T) *uPtrs[2]; /*Time Pulse from UTC time, OEM4*/
+    gpsUpdateOEM4 = (int_T) *uPtrs[2]; /*Time Pulse from UTC time - redundant with one receiver!*/
     delayOEM4 = (int_T) *uPtrs[3]; /*Delay of OEM4 GPS in number of samples*/
     oneSatBeeline = *uPtrs[4]; /* Avg_One_Sat_Yaw (for beeline set to 0)*/
 	gpsFlagBeeline = (int_T) *uPtrs[5]; /* UseGPSFlag (1 when gps is valid) */
@@ -563,7 +568,7 @@ static void mdlOutputs(SimStruct *S, int_T tid)
 	ax = *uPtrs[12];				/* longitudinal acceleration, ax (m/s^2) */
 	ay = *uPtrs[13];				/* lateral acceleration, ay (m/s^2) */
 	gpsSpeed = *uPtrs[14];		/* GPS horizontal speed (m/s) */
-	gpsVdir = AngleMod180(*uPtrs[15]) * D2R;	/* GPS velocity direction (rad) */ 			/* time Pulse from UTC time */
+	gpsVdir = AngleMod180(*uPtrs[15]) * D2R;	/* GPS velocity direction (rad) */
 //     printf("%f\r\n", gpsVdir);
 	gpsVerSpeed = *uPtrs[16];		/* GPS vertical speed (m/s) */
     latency = (int_T) (*uPtrs[17] / Ts); 	/* GPS velocity latency (converted to number of samples) */
@@ -1206,10 +1211,32 @@ static void mdlOutputs(SimStruct *S, int_T tid)
     buff_indexV = buff_counter - delayOEM4; //-1; 			/* account for delay */
 	buff_indexV += buff_indexV < 0 ? BUFF_LENGTH : 0; /* [0, BUFF_LENGTH) */
     
+    /* at first valid GPS, initialize velocities to GPS value */
+    /* CEB: This should be moved to where it will execute regardless
+     * of simultaneous update status or not, otherwise it may
+     * never get executed. */
+    if (!initializedFlagV && gpsFlagOEM4 && latency <= MAX_LATENCY) {
+        for (i = 0; i < NUMOFSTATESV; i++) {
+            xhatV[i] = initStatesV[i];
+        }
+        /* define the angle between velocity vector and vehicle heading */
+        slipAngleGPS = gpsVdir - yawAngle;
+        /* measurements */
+        VxGPS =  gpsSpeed * cos(slipAngleGPS);	/* Vx */
+        VyGPS =  gpsSpeed * sin(slipAngleGPS);	/* Vy */
+        
+        xhatV[0] = VxGPS;
+        xhatV[2] = VyGPS;
+        initializedFlagV = TRU;
+    }
+
+    /* Determine whether there is enough excitation to determine the
+     * road grade from GPS data. If so, calculate it by the relative
+     * horizontal and vertical speeds. */
 	if (gpsSpeed > 1 && gpsFlagOEM4 && latency <= MAX_LATENCY) {
 		gpsGradeV = atan2(gpsVerSpeed, gpsSpeed);
 	}
-	else {
+    else { // if not enough excitation, output a zero
 		gpsGradeV = 0;
 		for (i = 1; i <= num_grade_avg; i++) { /* average last values */
 			j = buff_indexV - i;
@@ -1248,7 +1275,7 @@ static void mdlOutputs(SimStruct *S, int_T tid)
 		gpsUpdateOEM4 = FALS;
 	}
 	
-//     printf("%d %f\r\n", gpsUpdateOEM4, t);
+    //printf("%d %d %d %f\n", gpsFlagOEM4, gpsUpdateOEM4, SimulUpdate, t);
     if (gpsFlagOEM4 && gpsUpdateOEM4 && !SimulUpdate) { /* when new GPS measurement available */
         SimulUpdate_prev = FALS;
         if (delayOEM4 >= BUFF_LENGTH) {
@@ -1274,18 +1301,7 @@ static void mdlOutputs(SimStruct *S, int_T tid)
         VyGPS =  gpsSpeed * sin(slipAngleGPS);	/* Vy */
         VyGPS += h_gps_ant * rollRateCorr;	/* roll rate correction */
         VyGPS -= l_gps_ant * yawRateCorr;	/* yaw rate correction */
-		/* at first valid GPS, initialize velocities to GPS value */
         
-		if (!initializedFlagV) {
-		    for (i = 0; i < NUMOFSTATESV; i++) {
-		        xhatV[i] = initStatesV[i];
-		    }
-			xhatV[0] = VxGPS;
-			xhatV[2] = VyGPS;
-			initializedFlagV = TRU;
-		}
-        
-
 		/* checking that gps and ins yaw are close. if not don't trust GPS */
         if (fabs(xhatV[0] - VxGPS) < diff_vel_x
 				&& fabs(xhatV[2] - VyGPS) < diff_vel_y) {

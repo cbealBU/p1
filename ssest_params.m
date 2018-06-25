@@ -2,7 +2,8 @@
 
 %   Offsets/biases ADDED to raw Beeline signals (deg)
     gpsins.roll_angle_offset = -0.4925;
-    gpsins.yaw_angle_offset = 90.6;    % nominal is 90, not zero!
+%    gpsins.yaw_angle_offset = 90.6;    % nominal is 90, not zero!
+    gpsins.yaw_angle_offset = 0;    % set to zero for new VS330 since rotated in GPS unit (untuned)
 %     gpsins.yaw_angle_offset = 91.2;    % nominal is 90, not zero!
 %   Offsets/biases ADDED to raw INS signals (deg/s)
     gpsins.roll_rate_bias = -0.2179;
