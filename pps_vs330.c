@@ -46,7 +46,12 @@
 /* EDIT, RYH 5/12/07: Set sample time to Ts, not inherited for compatibility
  *with simulation */
 
-#define S_FUNCTION_NAME  ppsbeeline
+/* EDIT, CEB 6/24/18: renamed to pps_vs330 for new P1 GPS system as well
+ * as included the functionality of the utcchange block into this block.
+ * Also changed the rounding of the UTC time from 0.1 to 0.01 since it
+ * caused incorrect output with data rates above 10 Hz. */
+
+#define S_FUNCTION_NAME  pps_vs330
 #define S_FUNCTION_LEVEL 2
 
 #include "simstruc.h"
