@@ -483,7 +483,7 @@ static void mdlOutputs(SimStruct *S, int_T tid)
     int_T i, j;
     int_T rem;
     real_T oneSatBeeline;
-    int_T  gpsFlagBeeline, oneSatFlagBeeline, angleFlagBeeline;
+    int_T gpsFlagBeeline, oneSatFlagBeeline, angleFlagBeeline;
     int_T gpsFlagOEM4;
     
     /*HEADING FILTER DECLARATIONS*/
@@ -689,7 +689,6 @@ static void mdlOutputs(SimStruct *S, int_T tid)
 			xhatH[0] = yawAngle;
 			initializedFlagH = TRU;
 		}
-//         printf("Yaw Angle at 620 = %f\n", xhatH[0]);
 		/* checking that gps and ins yaw are close. if not don't trust GPS */
 		if (fabs(AngleMod180(xhatH[0] - yawAngle)) < diff_yaw) {
 			diffYawCount = 0;
@@ -1207,7 +1206,6 @@ static void mdlOutputs(SimStruct *S, int_T tid)
     /*BE SURE TO CONVERT ATTITUDE FILTER OUTPUTS TO RAD FOR VELFILTER!*/
     /*MDLOUTPUTS FOR VELOCITY FILTER*/
     	/* grade from velocity ratio only when moving and gps is good */
-    
     buff_indexV = buff_counter - delayOEM4; //-1; 			/* account for delay */
 	buff_indexV += buff_indexV < 0 ? BUFF_LENGTH : 0; /* [0, BUFF_LENGTH) */
     
@@ -1216,20 +1214,33 @@ static void mdlOutputs(SimStruct *S, int_T tid)
      * of simultaneous update status or not, otherwise it may
      * never get executed. */
     if (!initializedFlagV && gpsFlagOEM4 && latency <= MAX_LATENCY) {
-        for (i = 0; i < NUMOFSTATESV; i++) {
-            xhatV[i] = initStatesV[i];
+    	/* start reintegrating after initialized and relevant data exists */
+        if (buff_counter < delayOEM4) {
+            gpsUpdateOEM4 = FALS;
         }
-        /* define the angle between velocity vector and vehicle heading */
-        slipAngleGPS = gpsVdir - yawAngle;
-        /* measurements */
-        VxGPS =  gpsSpeed * cos(slipAngleGPS);	/* Vx */
-        VyGPS =  gpsSpeed * sin(slipAngleGPS);	/* Vy */
-        
-        xhatV[0] = VxGPS;
-        xhatV[2] = VyGPS;
-        initializedFlagV = TRU;
+        else {	/* check whether yaw and roll is ready */
+            if(!initializedFlagH || !initializedFlagR) {
+            //if (bufferV_u[buff_indexV+2] >= PI || bufferH_x[buff_indexV*NUMOFSTATESH]*D2R >= PI) {
+                gpsUpdateOEM4 = FALS;
+            }
+            else {
+                for (i = 0; i < NUMOFSTATESV; i++) {
+                    xhatV[i] = initStatesV[i];
+                }
+                /* define the angle between velocity vector and vehicle heading */
+                slipAngleGPS = gpsVdir - yawAngle;
+                /* measurements */
+                VxGPS =  gpsSpeed * cos(slipAngleGPS);	/* Vx */
+                VyGPS =  gpsSpeed * sin(slipAngleGPS);	/* Vy */
+                
+                xhatV[0] = VxGPS;
+                xhatV[2] = VyGPS;
+                
+                initializedFlagV = TRU;
+                
+            }
+        }
     }
-
     /* Determine whether there is enough excitation to determine the
      * road grade from GPS data. If so, calculate it by the relative
      * horizontal and vertical speeds. */
@@ -1259,23 +1270,11 @@ static void mdlOutputs(SimStruct *S, int_T tid)
         bufferV_x[buff_counter*NUMOFSTATESV+i] = x[NUMOFSTATESH+NUMOFSTATESR+i];
 	}
 
-	/* start reintegrating after initialized and relevant data exists */
-	if (!initializedFlagV) {
-		if (buff_counter < delayOEM4) {
-			gpsUpdateOEM4 = FALS;
-		}
-		else {	/* check whether yaw and roll is ready */
-            if (bufferV_u[buff_indexV+2] >= PI || bufferH_x[buff_indexV*NUMOFSTATESH]*D2R >= PI) {
-                gpsUpdateOEM4 = FALS;
-            }
-		}
-	}
 	/* check if latency is too big or delay is negative */
 	if (latency > MAX_LATENCY || delayOEM4 < 0) {
 		gpsUpdateOEM4 = FALS;
 	}
 	
-    //printf("%d %d %d %f\n", gpsFlagOEM4, gpsUpdateOEM4, SimulUpdate, t);
     if (gpsFlagOEM4 && gpsUpdateOEM4 && !SimulUpdate) { /* when new GPS measurement available */
         SimulUpdate_prev = FALS;
         if (delayOEM4 >= BUFF_LENGTH) {
@@ -1417,7 +1416,7 @@ static void mdlOutputs(SimStruct *S, int_T tid)
 //RH 			xhat[i] = bufferV[buff_indexV_copy*BUFF_NOSIGS + ORDU + ORDV + i];
             xhatV[i] = bufferV_x[buff_indexV_copy*NUMOFSTATESV + i];
 		}
-		/* define the angle between velocity vector and vehicle heading */
+        /* define the angle between velocity vector and vehicle heading */
 		slipAngleGPS = gpsVdir - yawAngle;
 		/* measurements */
         VxGPS =  gpsSpeed * cos(slipAngleGPS);	/* Vx */
@@ -1434,8 +1433,8 @@ static void mdlOutputs(SimStruct *S, int_T tid)
 // 			initializedFlagV = TRU;
 // 		}
 		/* checking that gps and ins yaw are close. if not don't trust GPS */
-		if (fabs(xhatV[0] - VxGPS) < diff_vel_x
-				&& fabs(xhatV[2] - VyGPS) < diff_vel_y) {
+        
+		if (fabs(xhatV[0] - VxGPS) < diff_vel_x || fabs(xhatV[2] - VyGPS) < diff_vel_y) {
 			diffVelCount = 0;
 			/* Kalman Gain K = P(-)Cv'*inv[CP(-)Cv'+Rv] */
 			sMatTrsp(Cv, CtV, ORDYV, ORDV);	/* transpose Cv */
