@@ -1367,7 +1367,8 @@ To Constant</Name>
 						<Name>Roll//Yaw Gyro Pre-processing</Name>
 						<xPCName>p1/Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Roll//Yaw Gyro Pre-processing</xPCName>
 						<signal>
-							<sigName>cross coupling from roll</sigName>
+							<sigName>cross coupling
+from roll</sigName>
 							<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Roll//Yaw Gyro Pre-processing/cross coupling from roll</xpcsigName>
 							<sigWidth>1</sigWidth>
 							<sigDim>[1, 1]</sigDim>
@@ -1386,8 +1387,8 @@ To Constant</Name>
 						</signal>
 					</SubSystem>
 					<signal>
-						<sigName>Gain to make CCW and rad</sigName>
-						<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Gain to make CCW and rad</xpcsigName>
+						<sigName>Gain</sigName>
+						<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Gain</xpcsigName>
 						<sigWidth>1</sigWidth>
 						<sigDim>[1, 1]</sigDim>
 					</signal>
@@ -1686,6 +1687,12 @@ To Constant</Name>
 					<sigDim>[1, 1]</sigDim>
 				</signal>
 			</SubSystem>
+			<signal>
+				<sigName>Sum</sigName>
+				<xpcsigName>User Controllers/Steering Controller/Sum</xpcsigName>
+				<sigWidth>1</sigWidth>
+				<sigDim>[1, 1]</sigDim>
+			</signal>
 			<signal>
 				<sigName>Heavy Filter</sigName>
 				<xpcsigName>User Controllers/Steering Controller/Heavy Filter</xpcsigName>

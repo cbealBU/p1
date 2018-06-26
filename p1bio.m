@@ -361,12 +361,12 @@ bio(36).ndims=2;
 bio(36).size=[];
 
 
-bio(37).blkName='User Controllers/Cruise Control/Quantizer';
+bio(37).blkName='User Controllers/Cruise Control/Sum1';
 bio(37).sigName='';
 bio(37).portIdx=0;
 bio(37).dim=[1,1];
 bio(37).sigWidth=1;
-bio(37).sigAddress='&p1_B.Quantizer';
+bio(37).sigAddress='&p1_B.Sum1_i';
 bio(37).ndims=2;
 bio(37).size=[];
 
@@ -386,7 +386,7 @@ bio(39).sigName='';
 bio(39).portIdx=0;
 bio(39).dim=[1,1];
 bio(39).sigWidth=1;
-bio(39).sigAddress='&p1_B.Sum_gj';
+bio(39).sigAddress='&p1_B.Sum_g';
 bio(39).ndims=2;
 bio(39).size=[];
 
@@ -766,7 +766,7 @@ bio(77).sigName='';
 bio(77).portIdx=0;
 bio(77).dim=[1,1];
 bio(77).sigWidth=1;
-bio(77).sigAddress='&p1_B.Sum_g';
+bio(77).sigAddress='&p1_B.Sum_h';
 bio(77).ndims=2;
 bio(77).size=[];
 
@@ -776,7 +776,7 @@ bio(78).sigName='';
 bio(78).portIdx=0;
 bio(78).dim=[1,1];
 bio(78).sigWidth=1;
-bio(78).sigAddress='&p1_B.Sum_l';
+bio(78).sigAddress='&p1_B.Sum_k';
 bio(78).ndims=2;
 bio(78).size=[];
 
@@ -1136,7 +1136,7 @@ bio(114).sigName='';
 bio(114).portIdx=0;
 bio(114).dim=[2,1];
 bio(114).sigWidth=2;
-bio(114).sigAddress='&p1_B.Sum_h[0]';
+bio(114).sigAddress='&p1_B.Sum_f[0]';
 bio(114).ndims=2;
 bio(114).size=[];
 
@@ -1536,7 +1536,7 @@ bio(154).sigName='';
 bio(154).portIdx=0;
 bio(154).dim=[1,1];
 bio(154).sigWidth=1;
-bio(154).sigAddress='&p1_B.Unwrapping_n';
+bio(154).sigAddress='&p1_B.Unwrapping_o';
 bio(154).ndims=2;
 bio(154).size=[];
 
@@ -1546,7 +1546,7 @@ bio(155).sigName='';
 bio(155).portIdx=0;
 bio(155).dim=[1,1];
 bio(155).sigWidth=1;
-bio(155).sigAddress='&p1_B.EncoderInitializer_i';
+bio(155).sigAddress='&p1_B.EncoderInitializer_c';
 bio(155).ndims=2;
 bio(155).size=[];
 
@@ -1566,7 +1566,7 @@ bio(157).sigName='';
 bio(157).portIdx=0;
 bio(157).dim=[1,1];
 bio(157).sigWidth=1;
-bio(157).sigAddress='&p1_B.EncoderInitializer_k';
+bio(157).sigAddress='&p1_B.EncoderInitializer_h';
 bio(157).ndims=2;
 bio(157).size=[];
 
@@ -1576,7 +1576,7 @@ bio(158).sigName='';
 bio(158).portIdx=0;
 bio(158).dim=[1,1];
 bio(158).sigWidth=1;
-bio(158).sigAddress='&p1_B.Unwrapper_a';
+bio(158).sigAddress='&p1_B.Unwrapper_b';
 bio(158).ndims=2;
 bio(158).size=[];
 
@@ -1711,12 +1711,12 @@ bio(171).ndims=2;
 bio(171).size=[];
 
 
-bio(172).blkName='Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Gain to make CCW and rad';
+bio(172).blkName='Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Gain';
 bio(172).sigName='';
 bio(172).portIdx=0;
 bio(172).dim=[1,1];
 bio(172).sigWidth=1;
-bio(172).sigAddress='&p1_B.GaintomakeCCWandrad';
+bio(172).sigAddress='&p1_B.Gain_h';
 bio(172).ndims=2;
 bio(172).size=[];
 
@@ -1996,7 +1996,7 @@ bio(200).sigName='';
 bio(200).portIdx=0;
 bio(200).dim=[1,1];
 bio(200).sigWidth=1;
-bio(200).sigAddress='&p1_B.RelationalOperator2_h';
+bio(200).sigAddress='&p1_B.RelationalOperator2_i';
 bio(200).ndims=2;
 bio(200).size=[];
 
@@ -2006,7 +2006,7 @@ bio(201).sigName='';
 bio(201).portIdx=0;
 bio(201).dim=[1,1];
 bio(201).sigWidth=1;
-bio(201).sigAddress='&p1_B.EnabledSubsystem_i.In1';
+bio(201).sigAddress='&p1_B.EnabledSubsystem_j0.In1';
 bio(201).ndims=2;
 bio(201).size=[];
 
@@ -2026,7 +2026,7 @@ bio(203).sigName='';
 bio(203).portIdx=0;
 bio(203).dim=[1,1];
 bio(203).sigWidth=1;
-bio(203).sigAddress='&p1_B.RelationalOperator_m';
+bio(203).sigAddress='&p1_B.RelationalOperator_g';
 bio(203).ndims=2;
 bio(203).size=[];
 
@@ -2036,7 +2036,7 @@ bio(204).sigName='';
 bio(204).portIdx=0;
 bio(204).dim=[1,1];
 bio(204).sigWidth=1;
-bio(204).sigAddress='&p1_B.RelationalOperator_k';
+bio(204).sigAddress='&p1_B.RelationalOperator_l';
 bio(204).ndims=2;
 bio(204).size=[];
 
@@ -2056,7 +2056,7 @@ bio(206).sigName='';
 bio(206).portIdx=0;
 bio(206).dim=[1,1];
 bio(206).sigWidth=1;
-bio(206).sigAddress='&p1_B.EnabledSubsystem_h.In1';
+bio(206).sigAddress='&p1_B.EnabledSubsystem_j.In1';
 bio(206).ndims=2;
 bio(206).size=[];
 
