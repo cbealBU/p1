@@ -490,10 +490,6 @@ Gear Ratio1</sigName>
 				</signal>
 			</SubSystem>
 			<SubSystem>
-				<Name>Scope 1</Name>
-				<xPCName>p1/Hardware I//O/Input/Scope 1</xPCName>
-			</SubSystem>
-			<SubSystem>
 				<Name>Steering Motor Encoder
 Initialization</Name>
 				<xPCName>p1/Hardware I//O/Input/Steering Motor Encoder Initialization</xPCName>
