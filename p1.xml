@@ -9,6 +9,196 @@
 			<SubSystem>
 				<Name>LF steering controller</Name>
 				<xPCName>p1/Controllers and Output/Steering Controller/LF steering controller</xPCName>
+				<block>
+					<blkName>339 current offset</blkName>
+					<xpcblkName>Controllers and Output/Steering Controller/LF steering controller/339 current offset</xpcblkName>
+					<SLblockPath>p1/Controllers and Output/Steering Controller/LF steering controller/339 current offset</SLblockPath>
+					<isSrc>[1 0 1]</isSrc>
+					<parameter>
+						<paramName>Value</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Discrete-Time
+Integrator</blkName>
+					<xpcblkName>Controllers and Output/Steering Controller/LF steering controller/Discrete-Time Integrator</xpcblkName>
+					<SLblockPath>p1/Controllers and Output/Steering Controller/LF steering controller/Discrete-Time Integrator</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>gainval</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+					<parameter>
+						<paramName>InitialCondition</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Convert to
+output shaft
+angle</blkName>
+					<xpcblkName>Controllers and Output/Steering Controller/LF steering controller/Convert to output shaft angle</xpcblkName>
+					<SLblockPath>p1/Controllers and Output/Steering Controller/LF steering controller/Convert to output shaft angle</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Gain</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Convert to
+output shaft
+angle (too)</blkName>
+					<xpcblkName>Controllers and Output/Steering Controller/LF steering controller/Convert to output shaft angle (too)</xpcblkName>
+					<SLblockPath>p1/Controllers and Output/Steering Controller/LF steering controller/Convert to output shaft angle (too)</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Gain</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Kd</blkName>
+					<xpcblkName>Controllers and Output/Steering Controller/LF steering controller/Kd</xpcblkName>
+					<SLblockPath>p1/Controllers and Output/Steering Controller/LF steering controller/Kd</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Gain</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Ki</blkName>
+					<xpcblkName>Controllers and Output/Steering Controller/LF steering controller/Ki</xpcblkName>
+					<SLblockPath>p1/Controllers and Output/Steering Controller/LF steering controller/Ki</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Gain</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Kp</blkName>
+					<xpcblkName>Controllers and Output/Steering Controller/LF steering controller/Kp</xpcblkName>
+					<SLblockPath>p1/Controllers and Output/Steering Controller/LF steering controller/Kp</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Gain</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>accel gain</blkName>
+					<xpcblkName>Controllers and Output/Steering Controller/LF steering controller/accel gain</xpcblkName>
+					<SLblockPath>p1/Controllers and Output/Steering Controller/LF steering controller/accel gain</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Gain</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>current gain</blkName>
+					<xpcblkName>Controllers and Output/Steering Controller/LF steering controller/current gain</xpcblkName>
+					<SLblockPath>p1/Controllers and Output/Steering Controller/LF steering controller/current gain</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Gain</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>friction gain</blkName>
+					<xpcblkName>Controllers and Output/Steering Controller/LF steering controller/friction gain</xpcblkName>
+					<SLblockPath>p1/Controllers and Output/Steering Controller/LF steering controller/friction gain</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Gain</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>rate gain</blkName>
+					<xpcblkName>Controllers and Output/Steering Controller/LF steering controller/rate gain</xpcblkName>
+					<SLblockPath>p1/Controllers and Output/Steering Controller/LF steering controller/rate gain</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Gain</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>current limit</blkName>
+					<xpcblkName>Controllers and Output/Steering Controller/LF steering controller/current limit</xpcblkName>
+					<SLblockPath>p1/Controllers and Output/Steering Controller/LF steering controller/current limit</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>UpperLimit</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+					<parameter>
+						<paramName>LowerLimit</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Derivative &amp;
+Low-pass filter</blkName>
+					<xpcblkName>Controllers and Output/Steering Controller/LF steering controller/Derivative &amp; Low-pass filter</xpcblkName>
+					<SLblockPath>p1/Controllers and Output/Steering Controller/LF steering controller/Derivative &amp; Low-pass filter</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Numerator</paramName>
+						<dim>[1, 2]</dim>
+					</parameter>
+					<parameter>
+						<paramName>Denominator</paramName>
+						<dim>[1, 2]</dim>
+					</parameter>
+					<parameter>
+						<paramName>InitialStates</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Derivative &amp;
+Low-pass filter 2</blkName>
+					<xpcblkName>Controllers and Output/Steering Controller/LF steering controller/Derivative &amp; Low-pass filter 2</xpcblkName>
+					<SLblockPath>p1/Controllers and Output/Steering Controller/LF steering controller/Derivative &amp; Low-pass filter 2</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Numerator</paramName>
+						<dim>[1, 2]</dim>
+					</parameter>
+					<parameter>
+						<paramName>Denominator</paramName>
+						<dim>[1, 2]</dim>
+					</parameter>
+					<parameter>
+						<paramName>InitialStates</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Derivative &amp;
+Low-pass filter 3</blkName>
+					<xpcblkName>Controllers and Output/Steering Controller/LF steering controller/Derivative &amp; Low-pass filter 3</xpcblkName>
+					<SLblockPath>p1/Controllers and Output/Steering Controller/LF steering controller/Derivative &amp; Low-pass filter 3</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Numerator</paramName>
+						<dim>[1, 2]</dim>
+					</parameter>
+					<parameter>
+						<paramName>Denominator</paramName>
+						<dim>[1, 2]</dim>
+					</parameter>
+					<parameter>
+						<paramName>InitialStates</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
 				<signal>
 					<sigName>Convert to
 output shaft
@@ -60,6 +250,196 @@ Low-pass filter 2</sigName>
 			<SubSystem>
 				<Name>RF steering controller</Name>
 				<xPCName>p1/Controllers and Output/Steering Controller/RF steering controller</xPCName>
+				<block>
+					<blkName>339 current offset</blkName>
+					<xpcblkName>Controllers and Output/Steering Controller/RF steering controller/339 current offset</xpcblkName>
+					<SLblockPath>p1/Controllers and Output/Steering Controller/RF steering controller/339 current offset</SLblockPath>
+					<isSrc>[1 0 1]</isSrc>
+					<parameter>
+						<paramName>Value</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Discrete-Time
+Integrator</blkName>
+					<xpcblkName>Controllers and Output/Steering Controller/RF steering controller/Discrete-Time Integrator</xpcblkName>
+					<SLblockPath>p1/Controllers and Output/Steering Controller/RF steering controller/Discrete-Time Integrator</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>gainval</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+					<parameter>
+						<paramName>InitialCondition</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Convert to
+output shaft
+angle</blkName>
+					<xpcblkName>Controllers and Output/Steering Controller/RF steering controller/Convert to output shaft angle</xpcblkName>
+					<SLblockPath>p1/Controllers and Output/Steering Controller/RF steering controller/Convert to output shaft angle</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Gain</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Convert to
+output shaft
+angle (too)</blkName>
+					<xpcblkName>Controllers and Output/Steering Controller/RF steering controller/Convert to output shaft angle (too)</xpcblkName>
+					<SLblockPath>p1/Controllers and Output/Steering Controller/RF steering controller/Convert to output shaft angle (too)</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Gain</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Kd</blkName>
+					<xpcblkName>Controllers and Output/Steering Controller/RF steering controller/Kd</xpcblkName>
+					<SLblockPath>p1/Controllers and Output/Steering Controller/RF steering controller/Kd</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Gain</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Ki</blkName>
+					<xpcblkName>Controllers and Output/Steering Controller/RF steering controller/Ki</xpcblkName>
+					<SLblockPath>p1/Controllers and Output/Steering Controller/RF steering controller/Ki</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Gain</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Kp</blkName>
+					<xpcblkName>Controllers and Output/Steering Controller/RF steering controller/Kp</xpcblkName>
+					<SLblockPath>p1/Controllers and Output/Steering Controller/RF steering controller/Kp</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Gain</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>accel gain</blkName>
+					<xpcblkName>Controllers and Output/Steering Controller/RF steering controller/accel gain</xpcblkName>
+					<SLblockPath>p1/Controllers and Output/Steering Controller/RF steering controller/accel gain</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Gain</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>current gain</blkName>
+					<xpcblkName>Controllers and Output/Steering Controller/RF steering controller/current gain</xpcblkName>
+					<SLblockPath>p1/Controllers and Output/Steering Controller/RF steering controller/current gain</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Gain</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>friction gain</blkName>
+					<xpcblkName>Controllers and Output/Steering Controller/RF steering controller/friction gain</xpcblkName>
+					<SLblockPath>p1/Controllers and Output/Steering Controller/RF steering controller/friction gain</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Gain</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>rate gain</blkName>
+					<xpcblkName>Controllers and Output/Steering Controller/RF steering controller/rate gain</xpcblkName>
+					<SLblockPath>p1/Controllers and Output/Steering Controller/RF steering controller/rate gain</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Gain</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>current limit</blkName>
+					<xpcblkName>Controllers and Output/Steering Controller/RF steering controller/current limit</xpcblkName>
+					<SLblockPath>p1/Controllers and Output/Steering Controller/RF steering controller/current limit</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>UpperLimit</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+					<parameter>
+						<paramName>LowerLimit</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Derivative &amp;
+Low-pass filter</blkName>
+					<xpcblkName>Controllers and Output/Steering Controller/RF steering controller/Derivative &amp; Low-pass filter</xpcblkName>
+					<SLblockPath>p1/Controllers and Output/Steering Controller/RF steering controller/Derivative &amp; Low-pass filter</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Numerator</paramName>
+						<dim>[1, 2]</dim>
+					</parameter>
+					<parameter>
+						<paramName>Denominator</paramName>
+						<dim>[1, 2]</dim>
+					</parameter>
+					<parameter>
+						<paramName>InitialStates</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Derivative &amp;
+Low-pass filter 2</blkName>
+					<xpcblkName>Controllers and Output/Steering Controller/RF steering controller/Derivative &amp; Low-pass filter 2</xpcblkName>
+					<SLblockPath>p1/Controllers and Output/Steering Controller/RF steering controller/Derivative &amp; Low-pass filter 2</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Numerator</paramName>
+						<dim>[1, 2]</dim>
+					</parameter>
+					<parameter>
+						<paramName>Denominator</paramName>
+						<dim>[1, 2]</dim>
+					</parameter>
+					<parameter>
+						<paramName>InitialStates</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Derivative &amp;
+Low-pass filter 3</blkName>
+					<xpcblkName>Controllers and Output/Steering Controller/RF steering controller/Derivative &amp; Low-pass filter 3</xpcblkName>
+					<SLblockPath>p1/Controllers and Output/Steering Controller/RF steering controller/Derivative &amp; Low-pass filter 3</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Numerator</paramName>
+						<dim>[1, 2]</dim>
+					</parameter>
+					<parameter>
+						<paramName>Denominator</paramName>
+						<dim>[1, 2]</dim>
+					</parameter>
+					<parameter>
+						<paramName>InitialStates</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
 				<signal>
 					<sigName>Convert to
 output shaft
@@ -112,6 +492,54 @@ Low-pass filter 2</sigName>
 				<Name>Steering Geometry &amp;
 Gearbox Correction</Name>
 				<xPCName>p1/Controllers and Output/Steering Controller/Steering Geometry &amp; Gearbox Correction</xPCName>
+				<block>
+					<blkName>Left Steering Ratio</blkName>
+					<xpcblkName>Controllers and Output/Steering Controller/Steering Geometry &amp; Gearbox Correction/Left Steering Ratio</xpcblkName>
+					<SLblockPath>p1/Controllers and Output/Steering Controller/Steering Geometry &amp; Gearbox Correction/Left Steering Ratio</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Gain</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Right Steering Ratio</blkName>
+					<xpcblkName>Controllers and Output/Steering Controller/Steering Geometry &amp; Gearbox Correction/Right Steering Ratio</xpcblkName>
+					<SLblockPath>p1/Controllers and Output/Steering Controller/Steering Geometry &amp; Gearbox Correction/Right Steering Ratio</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Gain</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Left Steer Angle Look-up</blkName>
+					<xpcblkName>Controllers and Output/Steering Controller/Steering Geometry &amp; Gearbox Correction/Left Steer Angle Look-up</xpcblkName>
+					<SLblockPath>p1/Controllers and Output/Steering Controller/Steering Geometry &amp; Gearbox Correction/Left Steer Angle Look-up</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Table</paramName>
+						<dim>[1, 101]</dim>
+					</parameter>
+					<parameter>
+						<paramName>BreakpointsForDimension1</paramName>
+						<dim>[1, 101]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Right Steer Angle Look-up</blkName>
+					<xpcblkName>Controllers and Output/Steering Controller/Steering Geometry &amp; Gearbox Correction/Right Steer Angle Look-up</xpcblkName>
+					<SLblockPath>p1/Controllers and Output/Steering Controller/Steering Geometry &amp; Gearbox Correction/Right Steer Angle Look-up</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Table</paramName>
+						<dim>[1, 101]</dim>
+					</parameter>
+					<parameter>
+						<paramName>BreakpointsForDimension1</paramName>
+						<dim>[1, 101]</dim>
+					</parameter>
+				</block>
 				<signal>
 					<sigName>Left Steering Ratio</sigName>
 					<xpcsigName>Controllers and Output/Steering Controller/Steering Geometry &amp; Gearbox Correction/Left Steering Ratio</xpcsigName>
@@ -128,6 +556,79 @@ Gearbox Correction</Name>
 			<SubSystem>
 				<Name>standby</Name>
 				<xPCName>p1/Controllers and Output/Steering Controller/standby</xPCName>
+				<block>
+					<blkName>Enable Controller</blkName>
+					<xpcblkName>Controllers and Output/Steering Controller/standby/Enable Controller</xpcblkName>
+					<SLblockPath>p1/Controllers and Output/Steering Controller/standby/Enable Controller</SLblockPath>
+					<isSrc>[0 4 1]</isSrc>
+					<parameter>
+						<paramName>P1</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+					<parameter>
+						<paramName>P2</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+					<parameter>
+						<paramName>P3</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Derivative &amp;
+Low-pass filter</blkName>
+					<xpcblkName>Controllers and Output/Steering Controller/standby/Derivative &amp; Low-pass filter</xpcblkName>
+					<SLblockPath>p1/Controllers and Output/Steering Controller/standby/Derivative &amp; Low-pass filter</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Numerator</paramName>
+						<dim>[1, 2]</dim>
+					</parameter>
+					<parameter>
+						<paramName>Denominator</paramName>
+						<dim>[1, 2]</dim>
+					</parameter>
+					<parameter>
+						<paramName>InitialStates</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>filter</blkName>
+					<xpcblkName>Controllers and Output/Steering Controller/standby/filter</xpcblkName>
+					<SLblockPath>p1/Controllers and Output/Steering Controller/standby/filter</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Numerator</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+					<parameter>
+						<paramName>Denominator</paramName>
+						<dim>[1, 2]</dim>
+					</parameter>
+					<parameter>
+						<paramName>InitialStates</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>filter1</blkName>
+					<xpcblkName>Controllers and Output/Steering Controller/standby/filter1</xpcblkName>
+					<SLblockPath>p1/Controllers and Output/Steering Controller/standby/filter1</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Numerator</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+					<parameter>
+						<paramName>Denominator</paramName>
+						<dim>[1, 2]</dim>
+					</parameter>
+					<parameter>
+						<paramName>InitialStates</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
 				<signal>
 					<sigName>Enable Controller</sigName>
 					<xpcsigName>Controllers and Output/Steering Controller/standby/Enable Controller</xpcsigName>
@@ -154,6 +655,16 @@ Low-pass filter</sigName>
 					<sigDim>[1, 1]</sigDim>
 				</signal>
 			</SubSystem>
+			<block>
+				<blkName>Constant</blkName>
+				<xpcblkName>Controllers and Output/Steering Controller/Constant</xpcblkName>
+				<SLblockPath>p1/Controllers and Output/Steering Controller/Constant</SLblockPath>
+				<isSrc>[1 0 1]</isSrc>
+				<parameter>
+					<paramName>Value</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+			</block>
 			<signal>
 				<sigName>Product</sigName>
 				<xpcsigName>Controllers and Output/Steering Controller/Product</xpcsigName>
@@ -167,7 +678,39 @@ Low-pass filter</sigName>
 			<SubSystem>
 				<Name>Speedometer</Name>
 				<xPCName>p1/Controllers and Output/UI Controller/Speedometer</xPCName>
+				<block>
+					<blkName>Gain</blkName>
+					<xpcblkName>Controllers and Output/UI Controller/Speedometer/Gain</xpcblkName>
+					<SLblockPath>p1/Controllers and Output/UI Controller/Speedometer/Gain</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Gain</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
 			</SubSystem>
+			<block>
+				<blkName>Heartbeat Signal</blkName>
+				<xpcblkName>Controllers and Output/UI Controller/Heartbeat Signal</xpcblkName>
+				<SLblockPath>p1/Controllers and Output/UI Controller/Heartbeat Signal</SLblockPath>
+				<isSrc>[1 0 1]</isSrc>
+				<parameter>
+					<paramName>Amplitude</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+				<parameter>
+					<paramName>Period</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+				<parameter>
+					<paramName>PulseWidth</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+				<parameter>
+					<paramName>PhaseDelay</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+			</block>
 			<signal>
 				<sigName>Heartbeat Signal</sigName>
 				<xpcsigName>Controllers and Output/UI Controller/Heartbeat Signal</xpcsigName>
@@ -179,6 +722,20 @@ Low-pass filter</sigName>
 	<SubSystem>
 		<Name>Data Logging</Name>
 		<xPCName>p1/Data Logging</xPCName>
+		<block>
+			<blkName>Named Mux</blkName>
+			<xpcblkName>Data Logging/Named Mux</xpcblkName>
+			<SLblockPath>p1/Data Logging/Named Mux</SLblockPath>
+			<isSrc>[0 15 1]</isSrc>
+			<parameter>
+				<paramName>P1</paramName>
+				<dim>[1, 1]</dim>
+			</parameter>
+			<parameter>
+				<paramName>P2</paramName>
+				<dim>[1, 15]</dim>
+			</parameter>
+		</block>
 		<signal>
 			<sigName>Named Mux</sigName>
 			<xpcsigName>Data Logging/Named Mux</xpcsigName>
@@ -199,6 +756,44 @@ Low-pass filter</sigName>
 			<SubSystem>
 				<Name>Encoder Board</Name>
 				<xPCName>p1/Hardware I//O/Input/Encoder Board</xPCName>
+				<block>
+					<blkName>reset</blkName>
+					<xpcblkName>Hardware I//O/Input/Encoder Board/reset</xpcblkName>
+					<SLblockPath>p1/Hardware I//O/Input/Encoder Board/reset</SLblockPath>
+					<isSrc>[1 0 1]</isSrc>
+					<parameter>
+						<paramName>Value</paramName>
+						<dim>[1, 5]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>encoder board </blkName>
+					<xpcblkName>Hardware I//O/Input/Encoder Board/encoder board </xpcblkName>
+					<SLblockPath>p1/Hardware I//O/Input/Encoder Board/encoder board </SLblockPath>
+					<isSrc>[0 1 5]</isSrc>
+					<parameter>
+						<paramName>P1</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+					<parameter>
+						<paramName>P2</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+					<parameter>
+						<paramName>P3</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+					<parameter>
+						<paramName>P4</paramName>
+						<dim>[1, 6]</dim>
+					</parameter>
+				</block>
+				<signal>
+					<sigName>reset</sigName>
+					<xpcsigName>Hardware I//O/Input/Encoder Board/reset</xpcsigName>
+					<sigWidth>5</sigWidth>
+					<sigDim>[5, 1]</sigDim>
+				</signal>
 				<signal>
 					<sigName>encoder board /p1</sigName>
 					<xpcsigName>Hardware I//O/Input/Encoder Board/encoder board /p1</xpcsigName>
@@ -233,6 +828,27 @@ Low-pass filter</sigName>
 			<SubSystem>
 				<Name>Gearbox angle scaling</Name>
 				<xPCName>p1/Hardware I//O/Input/Gearbox angle scaling</xPCName>
+				<block>
+					<blkName>Pot readings with wheels centered</blkName>
+					<xpcblkName>Hardware I//O/Input/Gearbox angle scaling/Pot readings with wheels centered</xpcblkName>
+					<SLblockPath>p1/Hardware I//O/Input/Gearbox angle scaling/Pot readings with wheels centered</SLblockPath>
+					<isSrc>[1 0 1]</isSrc>
+					<parameter>
+						<paramName>Value</paramName>
+						<dim>[2, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Volts//Rad
+(Left//right pots wired in reverse)</blkName>
+					<xpcblkName>Hardware I//O/Input/Gearbox angle scaling/Volts//Rad (Left//right pots wired in reverse)</xpcblkName>
+					<SLblockPath>p1/Hardware I//O/Input/Gearbox angle scaling/Volts//Rad (Left//right pots wired in reverse)</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Gain</paramName>
+						<dim>[2, 1]</dim>
+					</parameter>
+				</block>
 			</SubSystem>
 			<SubSystem>
 				<Name>Handwheel Scaling &amp; Initialization</Name>
@@ -240,6 +856,30 @@ Low-pass filter</sigName>
 				<SubSystem>
 					<Name>Encoder Initialization</Name>
 					<xPCName>p1/Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Encoder Initialization</xPCName>
+					<block>
+						<blkName>Encoder Initializer</blkName>
+						<xpcblkName>Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Encoder Initialization/Encoder Initializer</xpcblkName>
+						<SLblockPath>p1/Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Encoder Initialization/Encoder Initializer</SLblockPath>
+						<isSrc>[0 3 1]</isSrc>
+						<parameter>
+							<paramName>P2</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+						<parameter>
+							<paramName>P3</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+					</block>
+					<block>
+						<blkName>Unwrapper</blkName>
+						<xpcblkName>Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Encoder Initialization/Unwrapper</xpcblkName>
+						<SLblockPath>p1/Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Encoder Initialization/Unwrapper</SLblockPath>
+						<isSrc>[0 1 1]</isSrc>
+						<parameter>
+							<paramName>P2</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+					</block>
 					<signal>
 						<sigName>Encoder Initializer</sigName>
 						<xpcsigName>Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Encoder Initialization/Encoder Initializer</xpcsigName>
@@ -263,6 +903,16 @@ Fault Detection</Name>
 						<SubSystem>
 							<Name>Change Detect</Name>
 							<xPCName>p1/Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Descision Logic/Change Detect</xPCName>
+							<block>
+								<blkName>Constant</blkName>
+								<xpcblkName>Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Descision Logic/Change Detect/Constant</xpcblkName>
+								<SLblockPath>p1/Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Descision Logic/Change Detect/Constant</SLblockPath>
+								<isSrc>[1 0 1]</isSrc>
+								<parameter>
+									<paramName>Value</paramName>
+									<dim>[1, 1]</dim>
+								</parameter>
+							</block>
 						</SubSystem>
 						<SubSystem>
 							<Name>Latch</Name>
@@ -271,6 +921,16 @@ Fault Detection</Name>
 								<Name>Enabled
 Subsystem</Name>
 								<xPCName>p1/Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Descision Logic/Latch/Enabled Subsystem</xPCName>
+								<block>
+									<blkName>Out1</blkName>
+									<xpcblkName>Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Descision Logic/Latch/Enabled Subsystem/Out1</xpcblkName>
+									<SLblockPath>p1/Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Descision Logic/Latch/Enabled Subsystem/Out1</SLblockPath>
+									<isSrc>[0 1 0]</isSrc>
+									<parameter>
+										<paramName>InitialOutput</paramName>
+										<dim>[1, 1]</dim>
+									</parameter>
+								</block>
 								<signal>
 									<sigName>In1</sigName>
 									<xpcsigName>Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Descision Logic/Latch/Enabled Subsystem/In1</xpcsigName>
@@ -278,6 +938,16 @@ Subsystem</Name>
 									<sigDim>[1, 1]</sigDim>
 								</signal>
 							</SubSystem>
+							<block>
+								<blkName>Constant</blkName>
+								<xpcblkName>Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Descision Logic/Latch/Constant</xpcblkName>
+								<SLblockPath>p1/Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Descision Logic/Latch/Constant</SLblockPath>
+								<isSrc>[1 0 1]</isSrc>
+								<parameter>
+									<paramName>Value</paramName>
+									<dim>[1, 1]</dim>
+								</parameter>
+							</block>
 						</SubSystem>
 						<SubSystem>
 							<Name>Latch1</Name>
@@ -286,6 +956,16 @@ Subsystem</Name>
 								<Name>Enabled
 Subsystem</Name>
 								<xPCName>p1/Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Descision Logic/Latch1/Enabled Subsystem</xPCName>
+								<block>
+									<blkName>Out1</blkName>
+									<xpcblkName>Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Descision Logic/Latch1/Enabled Subsystem/Out1</xpcblkName>
+									<SLblockPath>p1/Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Descision Logic/Latch1/Enabled Subsystem/Out1</SLblockPath>
+									<isSrc>[0 1 0]</isSrc>
+									<parameter>
+										<paramName>InitialOutput</paramName>
+										<dim>[1, 1]</dim>
+									</parameter>
+								</block>
 								<signal>
 									<sigName>In1</sigName>
 									<xpcsigName>Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Descision Logic/Latch1/Enabled Subsystem/In1</xpcsigName>
@@ -293,11 +973,52 @@ Subsystem</Name>
 									<sigDim>[1, 1]</sigDim>
 								</signal>
 							</SubSystem>
+							<block>
+								<blkName>Constant</blkName>
+								<xpcblkName>Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Descision Logic/Latch1/Constant</xpcblkName>
+								<SLblockPath>p1/Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Descision Logic/Latch1/Constant</SLblockPath>
+								<isSrc>[1 0 1]</isSrc>
+								<parameter>
+									<paramName>Value</paramName>
+									<dim>[1, 1]</dim>
+								</parameter>
+							</block>
 						</SubSystem>
+						<block>
+							<blkName>Memory3</blkName>
+							<xpcblkName>Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Descision Logic/Memory3</xpcblkName>
+							<SLblockPath>p1/Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Descision Logic/Memory3</SLblockPath>
+							<isSrc>[0 1 1]</isSrc>
+							<parameter>
+								<paramName>X0</paramName>
+								<dim>[1, 1]</dim>
+							</parameter>
+						</block>
+						<signal>
+							<sigName>Logical
+Operator</sigName>
+							<xpcsigName>Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Descision Logic/Logical Operator</xpcsigName>
+							<sigWidth>1</sigWidth>
+							<sigDim>[1, 1]</sigDim>
+						</signal>
+						<signal>
+							<sigName>Logical
+Operator3</sigName>
+							<xpcsigName>Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Descision Logic/Logical Operator3</xpcsigName>
+							<sigWidth>1</sigWidth>
+							<sigDim>[1, 1]</sigDim>
+						</signal>
 						<signal>
 							<sigName>Logical
 Operator4</sigName>
 							<xpcsigName>Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Descision Logic/Logical Operator4</xpcsigName>
+							<sigWidth>1</sigWidth>
+							<sigDim>[1, 1]</sigDim>
+						</signal>
+						<signal>
+							<sigName>Logical
+Operator6</sigName>
+							<xpcsigName>Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Descision Logic/Logical Operator6</xpcsigName>
 							<sigWidth>1</sigWidth>
 							<sigDim>[1, 1]</sigDim>
 						</signal>
@@ -311,6 +1032,16 @@ Operator4</sigName>
 					<SubSystem>
 						<Name>Enable Timer</Name>
 						<xPCName>p1/Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Enable Timer</xPCName>
+						<block>
+							<blkName>Constant</blkName>
+							<xpcblkName>Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Enable Timer/Constant</xpcblkName>
+							<SLblockPath>p1/Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Enable Timer/Constant</SLblockPath>
+							<isSrc>[1 0 1]</isSrc>
+							<parameter>
+								<paramName>Value</paramName>
+								<dim>[1, 1]</dim>
+							</parameter>
+						</block>
 						<signal>
 							<sigName>Relational
 Operator</sigName>
@@ -325,6 +1056,49 @@ Operator</sigName>
 						<SubSystem>
 							<Name>Counter</Name>
 							<xPCName>p1/Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Fault Detection1/Counter</xPCName>
+							<block>
+								<blkName>Constant</blkName>
+								<xpcblkName>Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Fault Detection1/Counter/Constant</xpcblkName>
+								<SLblockPath>p1/Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Fault Detection1/Counter/Constant</SLblockPath>
+								<isSrc>[1 0 1]</isSrc>
+								<parameter>
+									<paramName>Value</paramName>
+									<dim>[1, 1]</dim>
+								</parameter>
+							</block>
+							<block>
+								<blkName>Constant1</blkName>
+								<xpcblkName>Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Fault Detection1/Counter/Constant1</xpcblkName>
+								<SLblockPath>p1/Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Fault Detection1/Counter/Constant1</SLblockPath>
+								<isSrc>[1 0 1]</isSrc>
+								<parameter>
+									<paramName>Value</paramName>
+									<dim>[1, 1]</dim>
+								</parameter>
+							</block>
+							<block>
+								<blkName>Discrete-Time
+Integrator</blkName>
+								<xpcblkName>Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Fault Detection1/Counter/Discrete-Time Integrator</xpcblkName>
+								<SLblockPath>p1/Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Fault Detection1/Counter/Discrete-Time Integrator</SLblockPath>
+								<isSrc>[0 2 1]</isSrc>
+								<parameter>
+									<paramName>gainval</paramName>
+									<dim>[1, 1]</dim>
+								</parameter>
+								<parameter>
+									<paramName>InitialCondition</paramName>
+									<dim>[1, 1]</dim>
+								</parameter>
+								<parameter>
+									<paramName>UpperSaturationLimit</paramName>
+									<dim>[1, 1]</dim>
+								</parameter>
+								<parameter>
+									<paramName>LowerSaturationLimit</paramName>
+									<dim>[1, 1]</dim>
+								</parameter>
+							</block>
 							<signal>
 								<sigName>Relational
 Operator2</sigName>
@@ -336,6 +1110,49 @@ Operator2</sigName>
 						<SubSystem>
 							<Name>Counter1</Name>
 							<xPCName>p1/Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Fault Detection1/Counter1</xPCName>
+							<block>
+								<blkName>Constant</blkName>
+								<xpcblkName>Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Fault Detection1/Counter1/Constant</xpcblkName>
+								<SLblockPath>p1/Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Fault Detection1/Counter1/Constant</SLblockPath>
+								<isSrc>[1 0 1]</isSrc>
+								<parameter>
+									<paramName>Value</paramName>
+									<dim>[1, 1]</dim>
+								</parameter>
+							</block>
+							<block>
+								<blkName>Constant1</blkName>
+								<xpcblkName>Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Fault Detection1/Counter1/Constant1</xpcblkName>
+								<SLblockPath>p1/Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Fault Detection1/Counter1/Constant1</SLblockPath>
+								<isSrc>[1 0 1]</isSrc>
+								<parameter>
+									<paramName>Value</paramName>
+									<dim>[1, 1]</dim>
+								</parameter>
+							</block>
+							<block>
+								<blkName>Discrete-Time
+Integrator</blkName>
+								<xpcblkName>Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Fault Detection1/Counter1/Discrete-Time Integrator</xpcblkName>
+								<SLblockPath>p1/Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Fault Detection1/Counter1/Discrete-Time Integrator</SLblockPath>
+								<isSrc>[0 2 1]</isSrc>
+								<parameter>
+									<paramName>gainval</paramName>
+									<dim>[1, 1]</dim>
+								</parameter>
+								<parameter>
+									<paramName>InitialCondition</paramName>
+									<dim>[1, 1]</dim>
+								</parameter>
+								<parameter>
+									<paramName>UpperSaturationLimit</paramName>
+									<dim>[1, 1]</dim>
+								</parameter>
+								<parameter>
+									<paramName>LowerSaturationLimit</paramName>
+									<dim>[1, 1]</dim>
+								</parameter>
+							</block>
 							<signal>
 								<sigName>Relational
 Operator2</sigName>
@@ -348,6 +1165,16 @@ Operator2</sigName>
 							<Name>Enabled
 Subsystem</Name>
 							<xPCName>p1/Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Fault Detection1/Enabled Subsystem</xPCName>
+							<block>
+								<blkName>Out1</blkName>
+								<xpcblkName>Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Fault Detection1/Enabled Subsystem/Out1</xpcblkName>
+								<SLblockPath>p1/Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Fault Detection1/Enabled Subsystem/Out1</SLblockPath>
+								<isSrc>[0 1 0]</isSrc>
+								<parameter>
+									<paramName>InitialOutput</paramName>
+									<dim>[1, 1]</dim>
+								</parameter>
+							</block>
 							<signal>
 								<sigName>In1</sigName>
 								<xpcsigName>Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Fault Detection1/Enabled Subsystem/In1</xpcsigName>
@@ -359,6 +1186,16 @@ Subsystem</Name>
 							<Name>Enabled
 Subsystem1</Name>
 							<xPCName>p1/Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Fault Detection1/Enabled Subsystem1</xPCName>
+							<block>
+								<blkName>Out1</blkName>
+								<xpcblkName>Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Fault Detection1/Enabled Subsystem1/Out1</xpcblkName>
+								<SLblockPath>p1/Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Fault Detection1/Enabled Subsystem1/Out1</SLblockPath>
+								<isSrc>[0 1 0]</isSrc>
+								<parameter>
+									<paramName>InitialOutput</paramName>
+									<dim>[1, 1]</dim>
+								</parameter>
+							</block>
 							<signal>
 								<sigName>In1</sigName>
 								<xpcsigName>Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Fault Detection1/Enabled Subsystem1/In1</xpcsigName>
@@ -369,6 +1206,16 @@ Subsystem1</Name>
 						<SubSystem>
 							<Name>Nearly the Same</Name>
 							<xPCName>p1/Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Fault Detection1/Nearly the Same</xPCName>
+							<block>
+								<blkName>Constant</blkName>
+								<xpcblkName>Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Fault Detection1/Nearly the Same/Constant</xpcblkName>
+								<SLblockPath>p1/Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Fault Detection1/Nearly the Same/Constant</SLblockPath>
+								<isSrc>[1 0 1]</isSrc>
+								<parameter>
+									<paramName>Value</paramName>
+									<dim>[1, 1]</dim>
+								</parameter>
+							</block>
 							<signal>
 								<sigName>Relational
 Operator</sigName>
@@ -380,10 +1227,30 @@ Operator</sigName>
 						<SubSystem>
 							<Name>Nearly the Same1</Name>
 							<xPCName>p1/Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Fault Detection1/Nearly the Same1</xPCName>
+							<block>
+								<blkName>Constant</blkName>
+								<xpcblkName>Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Fault Detection1/Nearly the Same1/Constant</xpcblkName>
+								<SLblockPath>p1/Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Fault Detection1/Nearly the Same1/Constant</SLblockPath>
+								<isSrc>[1 0 1]</isSrc>
+								<parameter>
+									<paramName>Value</paramName>
+									<dim>[1, 1]</dim>
+								</parameter>
+							</block>
 						</SubSystem>
 						<SubSystem>
 							<Name>Nearly the Same2</Name>
 							<xPCName>p1/Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Fault Detection1/Nearly the Same2</xPCName>
+							<block>
+								<blkName>Constant</blkName>
+								<xpcblkName>Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Fault Detection1/Nearly the Same2/Constant</xpcblkName>
+								<SLblockPath>p1/Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Fault Detection1/Nearly the Same2/Constant</SLblockPath>
+								<isSrc>[1 0 1]</isSrc>
+								<parameter>
+									<paramName>Value</paramName>
+									<dim>[1, 1]</dim>
+								</parameter>
+							</block>
 							<signal>
 								<sigName>Relational
 Operator</sigName>
@@ -395,7 +1262,47 @@ Operator</sigName>
 						<SubSystem>
 							<Name>Nearly the Same3</Name>
 							<xPCName>p1/Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Fault Detection1/Nearly the Same3</xPCName>
+							<block>
+								<blkName>Constant</blkName>
+								<xpcblkName>Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Fault Detection1/Nearly the Same3/Constant</xpcblkName>
+								<SLblockPath>p1/Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Fault Detection1/Nearly the Same3/Constant</SLblockPath>
+								<isSrc>[1 0 1]</isSrc>
+								<parameter>
+									<paramName>Value</paramName>
+									<dim>[1, 1]</dim>
+								</parameter>
+							</block>
 						</SubSystem>
+						<block>
+							<blkName>Memory</blkName>
+							<xpcblkName>Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Fault Detection1/Memory</xpcblkName>
+							<SLblockPath>p1/Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Fault Detection1/Memory</SLblockPath>
+							<isSrc>[0 1 1]</isSrc>
+							<parameter>
+								<paramName>X0</paramName>
+								<dim>[1, 1]</dim>
+							</parameter>
+						</block>
+						<block>
+							<blkName>Memory1</blkName>
+							<xpcblkName>Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Fault Detection1/Memory1</xpcblkName>
+							<SLblockPath>p1/Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Fault Detection1/Memory1</SLblockPath>
+							<isSrc>[0 1 1]</isSrc>
+							<parameter>
+								<paramName>X0</paramName>
+								<dim>[1, 1]</dim>
+							</parameter>
+						</block>
+						<block>
+							<blkName>Memory2</blkName>
+							<xpcblkName>Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Fault Detection1/Memory2</xpcblkName>
+							<SLblockPath>p1/Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Fault Detection1/Memory2</SLblockPath>
+							<isSrc>[0 1 1]</isSrc>
+							<parameter>
+								<paramName>X0</paramName>
+								<dim>[1, 1]</dim>
+							</parameter>
+						</block>
 						<signal>
 							<sigName>Memory2</sigName>
 							<xpcsigName>Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Fault Detection1/Memory2</xpcsigName>
@@ -406,6 +1313,33 @@ Operator</sigName>
 					<SubSystem>
 						<Name>Switch Over</Name>
 						<xPCName>p1/Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Switch Over</xPCName>
+						<block>
+							<blkName>Switch</blkName>
+							<xpcblkName>Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Switch Over/Switch</xpcblkName>
+							<SLblockPath>p1/Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Switch Over/Switch</SLblockPath>
+							<isSrc>[0 3 1]</isSrc>
+							<parameter>
+								<paramName>Threshold</paramName>
+								<dim>[1, 1]</dim>
+							</parameter>
+						</block>
+						<block>
+							<blkName>Switch1</blkName>
+							<xpcblkName>Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Switch Over/Switch1</xpcblkName>
+							<SLblockPath>p1/Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Switch Over/Switch1</SLblockPath>
+							<isSrc>[0 3 1]</isSrc>
+							<parameter>
+								<paramName>Threshold</paramName>
+								<dim>[1, 1]</dim>
+							</parameter>
+						</block>
+						<signal>
+							<sigName>Logical
+Operator5</sigName>
+							<xpcsigName>Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Switch Over/Logical Operator5</xpcsigName>
+							<sigWidth>1</sigWidth>
+							<sigDim>[1, 1]</sigDim>
+						</signal>
 						<signal>
 							<sigName>Switch</sigName>
 							<xpcsigName>Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Sensor Fault Detection/Switch Over/Switch</xpcsigName>
@@ -414,6 +1348,58 @@ Operator</sigName>
 						</signal>
 					</SubSystem>
 				</SubSystem>
+				<block>
+					<blkName>handwheel offset</blkName>
+					<xpcblkName>Hardware I//O/Input/Handwheel Scaling &amp; Initialization/handwheel offset</xpcblkName>
+					<SLblockPath>p1/Hardware I//O/Input/Handwheel Scaling &amp; Initialization/handwheel offset</SLblockPath>
+					<isSrc>[1 0 1]</isSrc>
+					<parameter>
+						<paramName>Value</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Handwheel Gear Ratio</blkName>
+					<xpcblkName>Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Gear Ratio</xpcblkName>
+					<SLblockPath>p1/Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Gear Ratio</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Gain</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Harmonic Drive
+Gear Ratio</blkName>
+					<xpcblkName>Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Harmonic Drive Gear Ratio</xpcblkName>
+					<SLblockPath>p1/Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Harmonic Drive Gear Ratio</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Gain</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Harmonic Drive
+Gear Ratio1</blkName>
+					<xpcblkName>Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Harmonic Drive Gear Ratio1</xpcblkName>
+					<SLblockPath>p1/Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Harmonic Drive Gear Ratio1</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Gain</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>encoder scaling</blkName>
+					<xpcblkName>Hardware I//O/Input/Handwheel Scaling &amp; Initialization/encoder scaling</xpcblkName>
+					<SLblockPath>p1/Hardware I//O/Input/Handwheel Scaling &amp; Initialization/encoder scaling</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Gain</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
 				<signal>
 					<sigName>Handwheel Gear Ratio</sigName>
 					<xpcsigName>Hardware I//O/Input/Handwheel Scaling &amp; Initialization/Handwheel Gear Ratio</xpcsigName>
@@ -451,6 +1437,76 @@ Gear Ratio1</sigName>
 			<SubSystem>
 				<Name>INS scaling</Name>
 				<xPCName>p1/Hardware I//O/Input/INS scaling</xPCName>
+				<block>
+					<blkName>Gain</blkName>
+					<xpcblkName>Hardware I//O/Input/INS scaling/Gain</xpcblkName>
+					<SLblockPath>p1/Hardware I//O/Input/INS scaling/Gain</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Gain</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Gain1</blkName>
+					<xpcblkName>Hardware I//O/Input/INS scaling/Gain1</xpcblkName>
+					<SLblockPath>p1/Hardware I//O/Input/INS scaling/Gain1</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Gain</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Gain2</blkName>
+					<xpcblkName>Hardware I//O/Input/INS scaling/Gain2</xpcblkName>
+					<SLblockPath>p1/Hardware I//O/Input/INS scaling/Gain2</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Gain</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Gain3</blkName>
+					<xpcblkName>Hardware I//O/Input/INS scaling/Gain3</xpcblkName>
+					<SLblockPath>p1/Hardware I//O/Input/INS scaling/Gain3</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Gain</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Gain4</blkName>
+					<xpcblkName>Hardware I//O/Input/INS scaling/Gain4</xpcblkName>
+					<SLblockPath>p1/Hardware I//O/Input/INS scaling/Gain4</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Gain</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Gain5</blkName>
+					<xpcblkName>Hardware I//O/Input/INS scaling/Gain5</xpcblkName>
+					<SLblockPath>p1/Hardware I//O/Input/INS scaling/Gain5</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Gain</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>deg to rad</blkName>
+					<xpcblkName>Hardware I//O/Input/INS scaling/deg to rad</xpcblkName>
+					<SLblockPath>p1/Hardware I//O/Input/INS scaling/deg to rad</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Gain</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
 				<signal>
 					<sigName>deg to rad</sigName>
 					<xpcsigName>Hardware I//O/Input/INS scaling/deg to rad</xpcsigName>
@@ -465,6 +1521,24 @@ Gear Ratio1</sigName>
 				<SubSystem>
 					<Name>Speed Calc</Name>
 					<xPCName>p1/Hardware I//O/Input/Rear Wheel Speed Processing/Speed Calc</xPCName>
+					<block>
+						<blkName>Difference</blkName>
+						<xpcblkName>Hardware I//O/Input/Rear Wheel Speed Processing/Speed Calc/Difference</xpcblkName>
+						<SLblockPath>p1/Hardware I//O/Input/Rear Wheel Speed Processing/Speed Calc/Difference</SLblockPath>
+						<isSrc>[0 1 1]</isSrc>
+						<parameter>
+							<paramName>Numerator</paramName>
+							<dim>[1, 2]</dim>
+						</parameter>
+						<parameter>
+							<paramName>Denominator</paramName>
+							<dim>[1, 2]</dim>
+						</parameter>
+						<parameter>
+							<paramName>InitialStates</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+					</block>
 					<signal>
 						<sigName>Unwrapping</sigName>
 						<xpcsigName>Hardware I//O/Input/Rear Wheel Speed Processing/Speed Calc/Unwrapping</xpcsigName>
@@ -475,6 +1549,24 @@ Gear Ratio1</sigName>
 				<SubSystem>
 					<Name>Speed Calc1</Name>
 					<xPCName>p1/Hardware I//O/Input/Rear Wheel Speed Processing/Speed Calc1</xPCName>
+					<block>
+						<blkName>Difference</blkName>
+						<xpcblkName>Hardware I//O/Input/Rear Wheel Speed Processing/Speed Calc1/Difference</xpcblkName>
+						<SLblockPath>p1/Hardware I//O/Input/Rear Wheel Speed Processing/Speed Calc1/Difference</SLblockPath>
+						<isSrc>[0 1 1]</isSrc>
+						<parameter>
+							<paramName>Numerator</paramName>
+							<dim>[1, 2]</dim>
+						</parameter>
+						<parameter>
+							<paramName>Denominator</paramName>
+							<dim>[1, 2]</dim>
+						</parameter>
+						<parameter>
+							<paramName>InitialStates</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+					</block>
 					<signal>
 						<sigName>Unwrapping</sigName>
 						<xpcsigName>Hardware I//O/Input/Rear Wheel Speed Processing/Speed Calc1/Unwrapping</xpcsigName>
@@ -482,6 +1574,16 @@ Gear Ratio1</sigName>
 						<sigDim>[1, 1]</sigDim>
 					</signal>
 				</SubSystem>
+				<block>
+					<blkName>de-quadrature</blkName>
+					<xpcblkName>Hardware I//O/Input/Rear Wheel Speed Processing/de-quadrature</xpcblkName>
+					<SLblockPath>p1/Hardware I//O/Input/Rear Wheel Speed Processing/de-quadrature</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Gain</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
 				<signal>
 					<sigName>de-quadrature</sigName>
 					<xpcsigName>Hardware I//O/Input/Rear Wheel Speed Processing/de-quadrature</xpcsigName>
@@ -490,16 +1592,36 @@ Gear Ratio1</sigName>
 				</signal>
 			</SubSystem>
 			<SubSystem>
-				<Name>Scope 1</Name>
-				<xPCName>p1/Hardware I//O/Input/Scope 1</xPCName>
-			</SubSystem>
-			<SubSystem>
 				<Name>Steering Motor Encoder
 Initialization</Name>
 				<xPCName>p1/Hardware I//O/Input/Steering Motor Encoder Initialization</xPCName>
 				<SubSystem>
 					<Name>Left</Name>
 					<xPCName>p1/Hardware I//O/Input/Steering Motor Encoder Initialization/Left</xPCName>
+					<block>
+						<blkName>Encoder Initializer</blkName>
+						<xpcblkName>Hardware I//O/Input/Steering Motor Encoder Initialization/Left/Encoder Initializer</xpcblkName>
+						<SLblockPath>p1/Hardware I//O/Input/Steering Motor Encoder Initialization/Left/Encoder Initializer</SLblockPath>
+						<isSrc>[0 3 1]</isSrc>
+						<parameter>
+							<paramName>P2</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+						<parameter>
+							<paramName>P3</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+					</block>
+					<block>
+						<blkName>Unwrapper</blkName>
+						<xpcblkName>Hardware I//O/Input/Steering Motor Encoder Initialization/Left/Unwrapper</xpcblkName>
+						<SLblockPath>p1/Hardware I//O/Input/Steering Motor Encoder Initialization/Left/Unwrapper</SLblockPath>
+						<isSrc>[0 1 1]</isSrc>
+						<parameter>
+							<paramName>P2</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+					</block>
 					<signal>
 						<sigName>Encoder Initializer</sigName>
 						<xpcsigName>Hardware I//O/Input/Steering Motor Encoder Initialization/Left/Encoder Initializer</xpcsigName>
@@ -516,6 +1638,30 @@ Initialization</Name>
 				<SubSystem>
 					<Name>Right</Name>
 					<xPCName>p1/Hardware I//O/Input/Steering Motor Encoder Initialization/Right</xPCName>
+					<block>
+						<blkName>Encoder Initializer</blkName>
+						<xpcblkName>Hardware I//O/Input/Steering Motor Encoder Initialization/Right/Encoder Initializer</xpcblkName>
+						<SLblockPath>p1/Hardware I//O/Input/Steering Motor Encoder Initialization/Right/Encoder Initializer</SLblockPath>
+						<isSrc>[0 3 1]</isSrc>
+						<parameter>
+							<paramName>P2</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+						<parameter>
+							<paramName>P3</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+					</block>
+					<block>
+						<blkName>Unwrapper</blkName>
+						<xpcblkName>Hardware I//O/Input/Steering Motor Encoder Initialization/Right/Unwrapper</xpcblkName>
+						<SLblockPath>p1/Hardware I//O/Input/Steering Motor Encoder Initialization/Right/Unwrapper</SLblockPath>
+						<isSrc>[0 1 1]</isSrc>
+						<parameter>
+							<paramName>P2</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+					</block>
 					<signal>
 						<sigName>Encoder Initializer</sigName>
 						<xpcsigName>Hardware I//O/Input/Steering Motor Encoder Initialization/Right/Encoder Initializer</xpcsigName>
@@ -529,6 +1675,26 @@ Initialization</Name>
 						<sigDim>[1, 1]</sigDim>
 					</signal>
 				</SubSystem>
+				<block>
+					<blkName>gearbox ratio</blkName>
+					<xpcblkName>Hardware I//O/Input/Steering Motor Encoder Initialization/gearbox ratio</xpcblkName>
+					<SLblockPath>p1/Hardware I//O/Input/Steering Motor Encoder Initialization/gearbox ratio</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Gain</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>gearbox ratio1</blkName>
+					<xpcblkName>Hardware I//O/Input/Steering Motor Encoder Initialization/gearbox ratio1</xpcblkName>
+					<SLblockPath>p1/Hardware I//O/Input/Steering Motor Encoder Initialization/gearbox ratio1</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Gain</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
 				<signal>
 					<sigName>gearbox ratio</sigName>
 					<xpcsigName>Hardware I//O/Input/Steering Motor Encoder Initialization/gearbox ratio</xpcsigName>
@@ -551,6 +1717,16 @@ Initialization</Name>
 			<SubSystem>
 				<Name>Subsystem1</Name>
 				<xPCName>p1/Hardware I//O/Input/Subsystem1</xPCName>
+				<block>
+					<blkName>Constant</blkName>
+					<xpcblkName>Hardware I//O/Input/Subsystem1/Constant</xpcblkName>
+					<SLblockPath>p1/Hardware I//O/Input/Subsystem1/Constant</SLblockPath>
+					<isSrc>[1 0 1]</isSrc>
+					<parameter>
+						<paramName>Value</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
 				<signal>
 					<sigName>Sum</sigName>
 					<xpcsigName>Hardware I//O/Input/Subsystem1/Sum</xpcsigName>
@@ -561,6 +1737,16 @@ Initialization</Name>
 			<SubSystem>
 				<Name>Subsystem2</Name>
 				<xPCName>p1/Hardware I//O/Input/Subsystem2</xPCName>
+				<block>
+					<blkName>Constant</blkName>
+					<xpcblkName>Hardware I//O/Input/Subsystem2/Constant</xpcblkName>
+					<SLblockPath>p1/Hardware I//O/Input/Subsystem2/Constant</SLblockPath>
+					<isSrc>[1 0 1]</isSrc>
+					<parameter>
+						<paramName>Value</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
 				<signal>
 					<sigName>Sum</sigName>
 					<xpcsigName>Hardware I//O/Input/Subsystem2/Sum</xpcsigName>
@@ -578,12 +1764,85 @@ Initialization</Name>
 						<Name>Degrees to
 Radians</Name>
 						<xPCName>p1/Hardware I//O/Input/VS330 GPS Data/Subsystem/Degrees to Radians</xPCName>
+						<block>
+							<blkName>Gain1</blkName>
+							<xpcblkName>Hardware I//O/Input/VS330 GPS Data/Subsystem/Degrees to Radians/Gain1</xpcblkName>
+							<SLblockPath>p1/Hardware I//O/Input/VS330 GPS Data/Subsystem/Degrees to Radians/Gain1</SLblockPath>
+							<isSrc>[0 1 1]</isSrc>
+							<parameter>
+								<paramName>Gain</paramName>
+								<dim>[1, 1]</dim>
+							</parameter>
+						</block>
 					</SubSystem>
 					<SubSystem>
 						<Name>Degrees to
 Radians1</Name>
 						<xPCName>p1/Hardware I//O/Input/VS330 GPS Data/Subsystem/Degrees to Radians1</xPCName>
+						<block>
+							<blkName>Gain1</blkName>
+							<xpcblkName>Hardware I//O/Input/VS330 GPS Data/Subsystem/Degrees to Radians1/Gain1</xpcblkName>
+							<SLblockPath>p1/Hardware I//O/Input/VS330 GPS Data/Subsystem/Degrees to Radians1/Gain1</SLblockPath>
+							<isSrc>[0 1 1]</isSrc>
+							<parameter>
+								<paramName>Gain</paramName>
+								<dim>[1, 1]</dim>
+							</parameter>
+						</block>
 					</SubSystem>
+					<block>
+						<blkName>Constant</blkName>
+						<xpcblkName>Hardware I//O/Input/VS330 GPS Data/Subsystem/Constant</xpcblkName>
+						<SLblockPath>p1/Hardware I//O/Input/VS330 GPS Data/Subsystem/Constant</SLblockPath>
+						<isSrc>[1 0 1]</isSrc>
+						<parameter>
+							<paramName>Value</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+					</block>
+					<block>
+						<blkName>WGS84 Eccentricity</blkName>
+						<xpcblkName>Hardware I//O/Input/VS330 GPS Data/Subsystem/WGS84 Eccentricity</xpcblkName>
+						<SLblockPath>p1/Hardware I//O/Input/VS330 GPS Data/Subsystem/WGS84 Eccentricity</SLblockPath>
+						<isSrc>[1 0 1]</isSrc>
+						<parameter>
+							<paramName>Value</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+					</block>
+					<block>
+						<blkName>WGS84 Semi-Major Axis</blkName>
+						<xpcblkName>Hardware I//O/Input/VS330 GPS Data/Subsystem/WGS84 Semi-Major Axis</xpcblkName>
+						<SLblockPath>p1/Hardware I//O/Input/VS330 GPS Data/Subsystem/WGS84 Semi-Major Axis</SLblockPath>
+						<isSrc>[1 0 1]</isSrc>
+						<parameter>
+							<paramName>Value</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+					</block>
+					<block>
+						<blkName>WGS84 Semi-Minor Axis</blkName>
+						<xpcblkName>Hardware I//O/Input/VS330 GPS Data/Subsystem/WGS84 Semi-Minor Axis</xpcblkName>
+						<SLblockPath>p1/Hardware I//O/Input/VS330 GPS Data/Subsystem/WGS84 Semi-Minor Axis</SLblockPath>
+						<isSrc>[1 0 1]</isSrc>
+						<parameter>
+							<paramName>Value</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+					</block>
+					<signal>
+						<sigName>Math
+Function2</sigName>
+						<xpcsigName>Hardware I//O/Input/VS330 GPS Data/Subsystem/Math Function2</xpcsigName>
+						<sigWidth>1</sigWidth>
+						<sigDim>[1, 1]</sigDim>
+					</signal>
+					<signal>
+						<sigName>Divide1</sigName>
+						<xpcsigName>Hardware I//O/Input/VS330 GPS Data/Subsystem/Divide1</xpcsigName>
+						<sigWidth>1</sigWidth>
+						<sigDim>[1, 1]</sigDim>
+					</signal>
 					<signal>
 						<sigName>Product</sigName>
 						<xpcsigName>Hardware I//O/Input/VS330 GPS Data/Subsystem/Product</xpcsigName>
@@ -603,6 +1862,16 @@ Radians1</Name>
 						<sigDim>[1, 1]</sigDim>
 					</signal>
 				</SubSystem>
+				<block>
+					<blkName>Roll Axis Reversed</blkName>
+					<xpcblkName>Hardware I//O/Input/VS330 GPS Data/Roll Axis Reversed</xpcblkName>
+					<SLblockPath>p1/Hardware I//O/Input/VS330 GPS Data/Roll Axis Reversed</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Gain</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
 				<signal>
 					<sigName>Roll Axis Reversed</sigName>
 					<xpcsigName>Hardware I//O/Input/VS330 GPS Data/Roll Axis Reversed</xpcsigName>
@@ -625,10 +1894,88 @@ Radians1</Name>
 			<SubSystem>
 				<Name>VSBC Analog Demux</Name>
 				<xPCName>p1/Hardware I//O/Input/VSBC Analog Demux</xPCName>
+				<block>
+					<blkName>Constant</blkName>
+					<xpcblkName>Hardware I//O/Input/VSBC Analog Demux/Constant</xpcblkName>
+					<SLblockPath>p1/Hardware I//O/Input/VSBC Analog Demux/Constant</SLblockPath>
+					<isSrc>[1 0 1]</isSrc>
+					<parameter>
+						<paramName>Value</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Voltage to Rad</blkName>
+					<xpcblkName>Hardware I//O/Input/VSBC Analog Demux/Voltage to Rad</xpcblkName>
+					<SLblockPath>p1/Hardware I//O/Input/VSBC Analog Demux/Voltage to Rad</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Gain</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
 			</SubSystem>
 			<SubSystem>
 				<Name>Wheel Force Transducers</Name>
 				<xPCName>p1/Hardware I//O/Input/Wheel Force Transducers</xPCName>
+				<SubSystem>
+					<Name>Scope </Name>
+					<xPCName>p1/Hardware I//O/Input/Wheel Force Transducers/Scope </xPCName>
+				</SubSystem>
+				<block>
+					<blkName>Setup </blkName>
+					<xpcblkName>Hardware I//O/Input/Wheel Force Transducers/Setup </xpcblkName>
+					<SLblockPath>p1/Hardware I//O/Input/Wheel Force Transducers/Setup </SLblockPath>
+					<isSrc>[0 0 0]</isSrc>
+					<parameter>
+						<paramName>P1</paramName>
+						<dim>[1, 4]</dim>
+					</parameter>
+					<parameter>
+						<paramName>P2</paramName>
+						<dim>[1, 4]</dim>
+					</parameter>
+					<parameter>
+						<paramName>P4</paramName>
+						<dim>[1, 6]</dim>
+					</parameter>
+					<parameter>
+						<paramName>P11</paramName>
+						<dim>[1, 6]</dim>
+					</parameter>
+					<parameter>
+						<paramName>P15</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+					<parameter>
+						<paramName>P16</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+					<parameter>
+						<paramName>P17</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+					<parameter>
+						<paramName>P18</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+					<parameter>
+						<paramName>P19</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+					<parameter>
+						<paramName>P20</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+					<parameter>
+						<paramName>P21</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+					<parameter>
+						<paramName>P22</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
 				<signal>
 					<sigName>CAN Unpack/p1</sigName>
 					<xpcsigName>Hardware I//O/Input/Wheel Force Transducers/CAN Unpack/p1</xpcsigName>
@@ -845,6 +2192,27 @@ Radians1</Name>
 			<SubSystem>
 				<Name>current scaling</Name>
 				<xPCName>p1/Hardware I//O/Input/current scaling</xPCName>
+				<block>
+					<blkName>Constant</blkName>
+					<xpcblkName>Hardware I//O/Input/current scaling/Constant</xpcblkName>
+					<SLblockPath>p1/Hardware I//O/Input/current scaling/Constant</SLblockPath>
+					<isSrc>[1 0 1]</isSrc>
+					<parameter>
+						<paramName>Value</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>current
+scaling</blkName>
+					<xpcblkName>Hardware I//O/Input/current scaling/current scaling</xpcblkName>
+					<SLblockPath>p1/Hardware I//O/Input/current scaling/current scaling</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Gain</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
 				<signal>
 					<sigName>Sum</sigName>
 					<xpcsigName>Hardware I//O/Input/current scaling/Sum</xpcsigName>
@@ -852,6 +2220,117 @@ Radians1</Name>
 					<sigDim>[2, 1]</sigDim>
 				</signal>
 			</SubSystem>
+			<block>
+				<blkName>alignment
+(rack 7//16)</blkName>
+				<xpcblkName>Hardware I//O/Input/alignment (rack 7//16)</xpcblkName>
+				<SLblockPath>p1/Hardware I//O/Input/alignment (rack 7//16)</SLblockPath>
+				<isSrc>[1 0 1]</isSrc>
+				<parameter>
+					<paramName>Value</paramName>
+					<dim>[1, 2]</dim>
+				</parameter>
+			</block>
+			<block>
+				<blkName>Load Cell Scaling</blkName>
+				<xpcblkName>Hardware I//O/Input/Load Cell Scaling</xpcblkName>
+				<SLblockPath>p1/Hardware I//O/Input/Load Cell Scaling</SLblockPath>
+				<isSrc>[0 1 1]</isSrc>
+				<parameter>
+					<paramName>Gain</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+			</block>
+			<block>
+				<blkName>Load Cell Scaling Rear</blkName>
+				<xpcblkName>Hardware I//O/Input/Load Cell Scaling Rear</xpcblkName>
+				<SLblockPath>p1/Hardware I//O/Input/Load Cell Scaling Rear</SLblockPath>
+				<isSrc>[0 1 1]</isSrc>
+				<parameter>
+					<paramName>Gain</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+			</block>
+			<block>
+				<blkName>encoder scaling</blkName>
+				<xpcblkName>Hardware I//O/Input/encoder scaling</xpcblkName>
+				<SLblockPath>p1/Hardware I//O/Input/encoder scaling</SLblockPath>
+				<isSrc>[0 1 1]</isSrc>
+				<parameter>
+					<paramName>Gain</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+			</block>
+			<block>
+				<blkName>voltage scaling</blkName>
+				<xpcblkName>Hardware I//O/Input/voltage scaling</xpcblkName>
+				<SLblockPath>p1/Hardware I//O/Input/voltage scaling</SLblockPath>
+				<isSrc>[0 1 1]</isSrc>
+				<parameter>
+					<paramName>Gain</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+			</block>
+			<block>
+				<blkName>Analog Input
+(DAS)</blkName>
+				<xpcblkName>Hardware I//O/Input/Analog Input (DAS)</xpcblkName>
+				<SLblockPath>p1/Hardware I//O/Input/Analog Input (DAS)</SLblockPath>
+				<isSrc>[1 0 1]</isSrc>
+				<parameter>
+					<paramName>P1</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+				<parameter>
+					<paramName>P2</paramName>
+					<dim>[1, 16]</dim>
+				</parameter>
+			</block>
+			<block>
+				<blkName>Analog Input
+(VSBC)</blkName>
+				<xpcblkName>Hardware I//O/Input/Analog Input (VSBC)</xpcblkName>
+				<SLblockPath>p1/Hardware I//O/Input/Analog Input (VSBC)</SLblockPath>
+				<isSrc>[1 0 1]</isSrc>
+				<parameter>
+					<paramName>P1</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+				<parameter>
+					<paramName>P2</paramName>
+					<dim>[1, 8]</dim>
+				</parameter>
+			</block>
+			<block>
+				<blkName>Ruby-MM</blkName>
+				<xpcblkName>Hardware I//O/Input/Ruby-MM</xpcblkName>
+				<SLblockPath>p1/Hardware I//O/Input/Ruby-MM</SLblockPath>
+				<isSrc>[1 0 4]</isSrc>
+				<parameter>
+					<paramName>P1</paramName>
+					<dim>[1, 4]</dim>
+				</parameter>
+				<parameter>
+					<paramName>P2</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+				<parameter>
+					<paramName>P3</paramName>
+					<dim>[1, 3]</dim>
+				</parameter>
+				<parameter>
+					<paramName>P4</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+				<parameter>
+					<paramName>P5</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+				<parameter>
+					<paramName>P6</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+			</block>
 			<signal>
 				<sigName>Load Cell Scaling</sigName>
 				<xpcsigName>Hardware I//O/Input/Load Cell Scaling</xpcsigName>
@@ -941,6 +2420,123 @@ Radians1</Name>
 				<Name>ConvertForce2Volt</Name>
 				<xPCName>p1/Hardware I//O/Output/ConvertForce2Volt</xPCName>
 			</SubSystem>
+			<block>
+				<blkName>1.0 = full scale</blkName>
+				<xpcblkName>Hardware I//O/Output/1.0 = full scale</xpcblkName>
+				<SLblockPath>p1/Hardware I//O/Output/1.0 = full scale</SLblockPath>
+				<isSrc>[0 1 1]</isSrc>
+				<parameter>
+					<paramName>Gain</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+			</block>
+			<block>
+				<blkName>amps to
+volts</blkName>
+				<xpcblkName>Hardware I//O/Output/amps to volts</xpcblkName>
+				<SLblockPath>p1/Hardware I//O/Output/amps to volts</SLblockPath>
+				<isSrc>[0 1 1]</isSrc>
+				<parameter>
+					<paramName>Gain</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+			</block>
+			<block>
+				<blkName>raw signal</blkName>
+				<xpcblkName>Hardware I//O/Output/raw signal</xpcblkName>
+				<SLblockPath>p1/Hardware I//O/Output/raw signal</SLblockPath>
+				<isSrc>[0 1 1]</isSrc>
+				<parameter>
+					<paramName>Gain</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+			</block>
+			<block>
+				<blkName>voltage gain</blkName>
+				<xpcblkName>Hardware I//O/Output/voltage gain</xpcblkName>
+				<SLblockPath>p1/Hardware I//O/Output/voltage gain</SLblockPath>
+				<isSrc>[0 1 1]</isSrc>
+				<parameter>
+					<paramName>Gain</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+			</block>
+			<block>
+				<blkName>saturation</blkName>
+				<xpcblkName>Hardware I//O/Output/saturation</xpcblkName>
+				<SLblockPath>p1/Hardware I//O/Output/saturation</SLblockPath>
+				<isSrc>[0 1 1]</isSrc>
+				<parameter>
+					<paramName>UpperLimit</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+				<parameter>
+					<paramName>LowerLimit</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+			</block>
+			<block>
+				<blkName>saturation 2</blkName>
+				<xpcblkName>Hardware I//O/Output/saturation 2</xpcblkName>
+				<SLblockPath>p1/Hardware I//O/Output/saturation 2</SLblockPath>
+				<isSrc>[0 1 1]</isSrc>
+				<parameter>
+					<paramName>UpperLimit</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+				<parameter>
+					<paramName>LowerLimit</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+			</block>
+			<block>
+				<blkName>saturation1</blkName>
+				<xpcblkName>Hardware I//O/Output/saturation1</xpcblkName>
+				<SLblockPath>p1/Hardware I//O/Output/saturation1</SLblockPath>
+				<isSrc>[0 1 1]</isSrc>
+				<parameter>
+					<paramName>UpperLimit</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+				<parameter>
+					<paramName>LowerLimit</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+			</block>
+			<block>
+				<blkName>Ruby-MM </blkName>
+				<xpcblkName>Hardware I//O/Output/Ruby-MM </xpcblkName>
+				<SLblockPath>p1/Hardware I//O/Output/Ruby-MM </SLblockPath>
+				<isSrc>[0 7 0]</isSrc>
+				<parameter>
+					<paramName>P1</paramName>
+					<dim>[1, 7]</dim>
+				</parameter>
+				<parameter>
+					<paramName>P2</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+				<parameter>
+					<paramName>P3</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+				<parameter>
+					<paramName>P4</paramName>
+					<dim>[1, 7]</dim>
+				</parameter>
+				<parameter>
+					<paramName>P5</paramName>
+					<dim>[1, 7]</dim>
+				</parameter>
+				<parameter>
+					<paramName>P6</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+				<parameter>
+					<paramName>P7</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+			</block>
 			<signal>
 				<sigName>amps to
 volts</sigName>
@@ -985,6 +2581,93 @@ volts</sigName>
 			<SubSystem>
 				<Name>Normal Loads</Name>
 				<xPCName>p1/Sensor Data and Estimation/Nonlinear Observer/Normal Loads</xPCName>
+				<block>
+					<blkName>CG
+height</blkName>
+					<xpcblkName>Sensor Data and Estimation/Nonlinear Observer/Normal Loads/CG height</xpcblkName>
+					<SLblockPath>p1/Sensor Data and Estimation/Nonlinear Observer/Normal Loads/CG height</SLblockPath>
+					<isSrc>[1 0 1]</isSrc>
+					<parameter>
+						<paramName>Value</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Fnf_nom</blkName>
+					<xpcblkName>Sensor Data and Estimation/Nonlinear Observer/Normal Loads/Fnf_nom</xpcblkName>
+					<SLblockPath>p1/Sensor Data and Estimation/Nonlinear Observer/Normal Loads/Fnf_nom</SLblockPath>
+					<isSrc>[1 0 1]</isSrc>
+					<parameter>
+						<paramName>Value</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Fnr_nom</blkName>
+					<xpcblkName>Sensor Data and Estimation/Nonlinear Observer/Normal Loads/Fnr_nom</xpcblkName>
+					<SLblockPath>p1/Sensor Data and Estimation/Nonlinear Observer/Normal Loads/Fnr_nom</SLblockPath>
+					<isSrc>[1 0 1]</isSrc>
+					<parameter>
+						<paramName>Value</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Front Mass</blkName>
+					<xpcblkName>Sensor Data and Estimation/Nonlinear Observer/Normal Loads/Front Mass</xpcblkName>
+					<SLblockPath>p1/Sensor Data and Estimation/Nonlinear Observer/Normal Loads/Front Mass</SLblockPath>
+					<isSrc>[1 0 1]</isSrc>
+					<parameter>
+						<paramName>Value</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Roll Stiffness</blkName>
+					<xpcblkName>Sensor Data and Estimation/Nonlinear Observer/Normal Loads/Roll Stiffness</xpcblkName>
+					<SLblockPath>p1/Sensor Data and Estimation/Nonlinear Observer/Normal Loads/Roll Stiffness</SLblockPath>
+					<isSrc>[1 0 1]</isSrc>
+					<parameter>
+						<paramName>Value</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Track
+Width</blkName>
+					<xpcblkName>Sensor Data and Estimation/Nonlinear Observer/Normal Loads/Track Width</xpcblkName>
+					<SLblockPath>p1/Sensor Data and Estimation/Nonlinear Observer/Normal Loads/Track Width</SLblockPath>
+					<isSrc>[1 0 1]</isSrc>
+					<parameter>
+						<paramName>Value</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Track
+Width1</blkName>
+					<xpcblkName>Sensor Data and Estimation/Nonlinear Observer/Normal Loads/Track Width1</xpcblkName>
+					<SLblockPath>p1/Sensor Data and Estimation/Nonlinear Observer/Normal Loads/Track Width1</SLblockPath>
+					<isSrc>[1 0 1]</isSrc>
+					<parameter>
+						<paramName>Value</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Saturation</blkName>
+					<xpcblkName>Sensor Data and Estimation/Nonlinear Observer/Normal Loads/Saturation</xpcblkName>
+					<SLblockPath>p1/Sensor Data and Estimation/Nonlinear Observer/Normal Loads/Saturation</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>UpperLimit</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+					<parameter>
+						<paramName>LowerLimit</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
 				<signal>
 					<sigName>Left
 Normal Load</sigName>
@@ -1006,6 +2689,62 @@ Normal Load</sigName>
 				<SubSystem>
 					<Name>Steering Geometry Calculation</Name>
 					<xPCName>p1/Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Steering Geometry Calculation</xPCName>
+					<block>
+						<blkName>Left Steer Angle Look-up</blkName>
+						<xpcblkName>Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Steering Geometry Calculation/Left Steer Angle Look-up</xpcblkName>
+						<SLblockPath>p1/Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Steering Geometry Calculation/Left Steer Angle Look-up</SLblockPath>
+						<isSrc>[0 1 1]</isSrc>
+						<parameter>
+							<paramName>Table</paramName>
+							<dim>[1, 101]</dim>
+						</parameter>
+						<parameter>
+							<paramName>BreakpointsForDimension1</paramName>
+							<dim>[1, 101]</dim>
+						</parameter>
+					</block>
+					<block>
+						<blkName>Left Steer Angle Look-up1</blkName>
+						<xpcblkName>Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Steering Geometry Calculation/Left Steer Angle Look-up1</xpcblkName>
+						<SLblockPath>p1/Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Steering Geometry Calculation/Left Steer Angle Look-up1</SLblockPath>
+						<isSrc>[0 1 1]</isSrc>
+						<parameter>
+							<paramName>Table</paramName>
+							<dim>[1, 101]</dim>
+						</parameter>
+						<parameter>
+							<paramName>BreakpointsForDimension1</paramName>
+							<dim>[1, 101]</dim>
+						</parameter>
+					</block>
+					<block>
+						<blkName>Right Steer Angle Look-up</blkName>
+						<xpcblkName>Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Steering Geometry Calculation/Right Steer Angle Look-up</xpcblkName>
+						<SLblockPath>p1/Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Steering Geometry Calculation/Right Steer Angle Look-up</SLblockPath>
+						<isSrc>[0 1 1]</isSrc>
+						<parameter>
+							<paramName>Table</paramName>
+							<dim>[1, 101]</dim>
+						</parameter>
+						<parameter>
+							<paramName>BreakpointsForDimension1</paramName>
+							<dim>[1, 101]</dim>
+						</parameter>
+					</block>
+					<block>
+						<blkName>Right Steer Angle Look-up1</blkName>
+						<xpcblkName>Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Steering Geometry Calculation/Right Steer Angle Look-up1</xpcblkName>
+						<SLblockPath>p1/Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Steering Geometry Calculation/Right Steer Angle Look-up1</SLblockPath>
+						<isSrc>[0 1 1]</isSrc>
+						<parameter>
+							<paramName>Table</paramName>
+							<dim>[1, 101]</dim>
+						</parameter>
+						<parameter>
+							<paramName>BreakpointsForDimension1</paramName>
+							<dim>[1, 101]</dim>
+						</parameter>
+					</block>
 					<signal>
 						<sigName>Left Steer Angle Look-up1</sigName>
 						<xpcsigName>Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Steering Geometry Calculation/Left Steer Angle Look-up1</xpcsigName>
@@ -1022,6 +2761,16 @@ Normal Load</sigName>
 				<SubSystem>
 					<Name>Wheel Accelerations</Name>
 					<xPCName>p1/Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Accelerations</xPCName>
+					<block>
+						<blkName>TSamp</blkName>
+						<xpcblkName>Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Accelerations/TSamp</xpcblkName>
+						<SLblockPath>p1/Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Accelerations/TSamp</SLblockPath>
+						<isSrc>[0 1 1]</isSrc>
+						<parameter>
+							<paramName>WtEt</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+					</block>
 					<signal>
 						<sigName>Diff</sigName>
 						<xpcsigName>Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Accelerations/Diff</xpcsigName>
@@ -1038,6 +2787,16 @@ Normal Load</sigName>
 				<SubSystem>
 					<Name>Wheel Accelerations1</Name>
 					<xPCName>p1/Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Accelerations1</xPCName>
+					<block>
+						<blkName>TSamp</blkName>
+						<xpcblkName>Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Accelerations1/TSamp</xpcblkName>
+						<SLblockPath>p1/Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Accelerations1/TSamp</SLblockPath>
+						<isSrc>[0 1 1]</isSrc>
+						<parameter>
+							<paramName>WtEt</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+					</block>
 					<signal>
 						<sigName>Diff</sigName>
 						<xpcsigName>Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Accelerations1/Diff</xpcsigName>
@@ -1054,6 +2813,16 @@ Normal Load</sigName>
 				<SubSystem>
 					<Name>Wheel Velocities</Name>
 					<xPCName>p1/Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Velocities</xPCName>
+					<block>
+						<blkName>TSamp</blkName>
+						<xpcblkName>Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Velocities/TSamp</xpcblkName>
+						<SLblockPath>p1/Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Velocities/TSamp</SLblockPath>
+						<isSrc>[0 1 1]</isSrc>
+						<parameter>
+							<paramName>WtEt</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+					</block>
 					<signal>
 						<sigName>Diff</sigName>
 						<xpcsigName>Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Velocities/Diff</xpcsigName>
@@ -1070,6 +2839,16 @@ Normal Load</sigName>
 				<SubSystem>
 					<Name>Wheel Velocities1</Name>
 					<xPCName>p1/Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Velocities1</xPCName>
+					<block>
+						<blkName>TSamp</blkName>
+						<xpcblkName>Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Velocities1/TSamp</xpcblkName>
+						<SLblockPath>p1/Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Velocities1/TSamp</SLblockPath>
+						<isSrc>[0 1 1]</isSrc>
+						<parameter>
+							<paramName>WtEt</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+					</block>
 					<signal>
 						<sigName>Diff</sigName>
 						<xpcsigName>Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Velocities1/Diff</xpcsigName>
@@ -1083,6 +2862,286 @@ Normal Load</sigName>
 						<sigDim>[1, 1]</sigDim>
 					</signal>
 				</SubSystem>
+				<block>
+					<blkName>Wheel Accelerations</blkName>
+					<xpcblkName>Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Accelerations</xpcblkName>
+					<SLblockPath>p1/Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Accelerations</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>ICPrevScaledInput</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Wheel Accelerations1</blkName>
+					<xpcblkName>Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Accelerations1</xpcblkName>
+					<SLblockPath>p1/Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Accelerations1</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>ICPrevScaledInput</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Wheel Velocities</blkName>
+					<xpcblkName>Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Velocities</xpcblkName>
+					<SLblockPath>p1/Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Velocities</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>ICPrevScaledInput</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Wheel Velocities1</blkName>
+					<xpcblkName>Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Velocities1</xpcblkName>
+					<SLblockPath>p1/Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Velocities1</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>ICPrevScaledInput</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Dead Zone</blkName>
+					<xpcblkName>Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Dead Zone</xpcblkName>
+					<SLblockPath>p1/Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Dead Zone</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>LowerValue</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+					<parameter>
+						<paramName>UpperValue</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Dead Zone1</blkName>
+					<xpcblkName>Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Dead Zone1</xpcblkName>
+					<SLblockPath>p1/Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Dead Zone1</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>LowerValue</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+					<parameter>
+						<paramName>UpperValue</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Disable</blkName>
+					<xpcblkName>Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Disable</xpcblkName>
+					<SLblockPath>p1/Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Disable</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Gain</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Disable1</blkName>
+					<xpcblkName>Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Disable1</xpcblkName>
+					<SLblockPath>p1/Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Disable1</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Gain</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Disable2</blkName>
+					<xpcblkName>Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Disable2</xpcblkName>
+					<SLblockPath>p1/Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Disable2</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Gain</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Disable3</blkName>
+					<xpcblkName>Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Disable3</xpcblkName>
+					<SLblockPath>p1/Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Disable3</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Gain</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Disable4</blkName>
+					<xpcblkName>Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Disable4</xpcblkName>
+					<SLblockPath>p1/Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Disable4</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Gain</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Disable5</blkName>
+					<xpcblkName>Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Disable5</xpcblkName>
+					<SLblockPath>p1/Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Disable5</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Gain</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Disable6</blkName>
+					<xpcblkName>Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Disable6</xpcblkName>
+					<SLblockPath>p1/Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Disable6</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Gain</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Disable7</blkName>
+					<xpcblkName>Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Disable7</xpcblkName>
+					<SLblockPath>p1/Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Disable7</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Gain</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Wheel Damping</blkName>
+					<xpcblkName>Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Damping</xpcblkName>
+					<SLblockPath>p1/Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Damping</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Gain</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Wheel Damping1</blkName>
+					<xpcblkName>Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Damping1</xpcblkName>
+					<SLblockPath>p1/Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Damping1</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Gain</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Wheel Friction</blkName>
+					<xpcblkName>Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Friction</xpcblkName>
+					<SLblockPath>p1/Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Friction</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Gain</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Wheel Friction1</blkName>
+					<xpcblkName>Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Friction1</xpcblkName>
+					<SLblockPath>p1/Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Friction1</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Gain</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Wheel Inertia</blkName>
+					<xpcblkName>Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Inertia</xpcblkName>
+					<SLblockPath>p1/Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Inertia</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Gain</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Wheel Inertia1</blkName>
+					<xpcblkName>Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Inertia1</xpcblkName>
+					<SLblockPath>p1/Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Wheel Inertia1</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Gain</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Low-pass filter</blkName>
+					<xpcblkName>Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Low-pass filter</xpcblkName>
+					<SLblockPath>p1/Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Low-pass filter</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Numerator</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+					<parameter>
+						<paramName>Denominator</paramName>
+						<dim>[1, 2]</dim>
+					</parameter>
+					<parameter>
+						<paramName>InitialStates</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Low-pass filter1</blkName>
+					<xpcblkName>Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Low-pass filter1</xpcblkName>
+					<SLblockPath>p1/Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Low-pass filter1</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Numerator</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+					<parameter>
+						<paramName>Denominator</paramName>
+						<dim>[1, 2]</dim>
+					</parameter>
+					<parameter>
+						<paramName>InitialStates</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Low-pass filter2</blkName>
+					<xpcblkName>Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Low-pass filter2</xpcblkName>
+					<SLblockPath>p1/Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Low-pass filter2</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Numerator</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+					<parameter>
+						<paramName>Denominator</paramName>
+						<dim>[1, 2]</dim>
+					</parameter>
+					<parameter>
+						<paramName>InitialStates</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Low-pass filter3</blkName>
+					<xpcblkName>Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Low-pass filter3</xpcblkName>
+					<SLblockPath>p1/Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Low-pass filter3</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Numerator</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+					<parameter>
+						<paramName>Denominator</paramName>
+						<dim>[1, 2]</dim>
+					</parameter>
+					<parameter>
+						<paramName>InitialStates</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
 				<signal>
 					<sigName>Disable</sigName>
 					<xpcsigName>Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Disable</xpcsigName>
@@ -1096,6 +3155,12 @@ Normal Load</sigName>
 					<sigDim>[1, 1]</sigDim>
 				</signal>
 				<signal>
+					<sigName>Disable2</sigName>
+					<xpcsigName>Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Disable2</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+				<signal>
 					<sigName>Disable3</sigName>
 					<xpcsigName>Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Disable3</xpcsigName>
 					<sigWidth>1</sigWidth>
@@ -1104,6 +3169,12 @@ Normal Load</sigName>
 				<signal>
 					<sigName>Disable4</sigName>
 					<xpcsigName>Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Disable4</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+				<signal>
+					<sigName>Disable5</sigName>
+					<xpcsigName>Sensor Data and Estimation/Nonlinear Observer/Steering Torque Components/Disable5</xpcsigName>
 					<sigWidth>1</sigWidth>
 					<sigDim>[1, 1]</sigDim>
 				</signal>
@@ -1168,6 +3239,164 @@ Normal Load</sigName>
 					<sigDim>[1, 1]</sigDim>
 				</signal>
 			</SubSystem>
+			<block>
+				<blkName>Enable
+Observer</blkName>
+				<xpcblkName>Sensor Data and Estimation/Nonlinear Observer/Enable Observer</xpcblkName>
+				<SLblockPath>p1/Sensor Data and Estimation/Nonlinear Observer/Enable Observer</SLblockPath>
+				<isSrc>[1 0 1]</isSrc>
+				<parameter>
+					<paramName>Value</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+			</block>
+			<block>
+				<blkName>Enable
+Shoreline Gravel</blkName>
+				<xpcblkName>Sensor Data and Estimation/Nonlinear Observer/Enable Shoreline Gravel</xpcblkName>
+				<SLblockPath>p1/Sensor Data and Estimation/Nonlinear Observer/Enable Shoreline Gravel</SLblockPath>
+				<isSrc>[1 0 1]</isSrc>
+				<parameter>
+					<paramName>Value</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+			</block>
+			<block>
+				<blkName>1//Fnf</blkName>
+				<xpcblkName>Sensor Data and Estimation/Nonlinear Observer/1//Fnf</xpcblkName>
+				<SLblockPath>p1/Sensor Data and Estimation/Nonlinear Observer/1//Fnf</SLblockPath>
+				<isSrc>[0 1 1]</isSrc>
+				<parameter>
+					<paramName>Gain</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+			</block>
+			<block>
+				<blkName>rad//s
+to
+m//s</blkName>
+				<xpcblkName>Sensor Data and Estimation/Nonlinear Observer/rad//s to m//s</xpcblkName>
+				<SLblockPath>p1/Sensor Data and Estimation/Nonlinear Observer/rad//s to m//s</SLblockPath>
+				<isSrc>[0 1 1]</isSrc>
+				<parameter>
+					<paramName>Gain</paramName>
+					<dim>[1, 2]</dim>
+				</parameter>
+			</block>
+			<block>
+				<blkName>If_alpha_observer</blkName>
+				<xpcblkName>Sensor Data and Estimation/Nonlinear Observer/If_alpha_observer</xpcblkName>
+				<SLblockPath>p1/Sensor Data and Estimation/Nonlinear Observer/If_alpha_observer</SLblockPath>
+				<isSrc>[0 11 5]</isSrc>
+				<parameter>
+					<paramName>P2</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+				<parameter>
+					<paramName>P3</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+				<parameter>
+					<paramName>P4</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+				<parameter>
+					<paramName>P5</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+				<parameter>
+					<paramName>P6</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+				<parameter>
+					<paramName>P7</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+				<parameter>
+					<paramName>P8</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+				<parameter>
+					<paramName>P9</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+				<parameter>
+					<paramName>P10</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+				<parameter>
+					<paramName>P11</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+				<parameter>
+					<paramName>P12</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+				<parameter>
+					<paramName>P13</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+				<parameter>
+					<paramName>P14</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+				<parameter>
+					<paramName>P15</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+				<parameter>
+					<paramName>P16</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+				<parameter>
+					<paramName>P17</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+				<parameter>
+					<paramName>P18</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+				<parameter>
+					<paramName>P19</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+				<parameter>
+					<paramName>P20</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+				<parameter>
+					<paramName>P21</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+				<parameter>
+					<paramName>P22</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+			</block>
+			<block>
+				<blkName>Trust Wheelspeeds?</blkName>
+				<xpcblkName>Sensor Data and Estimation/Nonlinear Observer/Trust Wheelspeeds?</xpcblkName>
+				<SLblockPath>p1/Sensor Data and Estimation/Nonlinear Observer/Trust Wheelspeeds?</SLblockPath>
+				<isSrc>[0 2 1]</isSrc>
+				<parameter>
+					<paramName>CurrentSetting</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+			</block>
+			<signal>
+				<sigName>Enable
+Observer</sigName>
+				<xpcsigName>Sensor Data and Estimation/Nonlinear Observer/Enable Observer</xpcsigName>
+				<sigWidth>1</sigWidth>
+				<sigDim>[1, 1]</sigDim>
+			</signal>
+			<signal>
+				<sigName>Enable
+Shoreline Gravel</sigName>
+				<xpcsigName>Sensor Data and Estimation/Nonlinear Observer/Enable Shoreline Gravel</xpcsigName>
+				<sigWidth>1</sigWidth>
+				<sigDim>[1, 1]</sigDim>
+			</signal>
 			<signal>
 				<sigName>1//Fnf</sigName>
 				<xpcsigName>Sensor Data and Estimation/Nonlinear Observer/1//Fnf</xpcsigName>
@@ -1210,6 +3439,12 @@ Normal Load</sigName>
 				<sigDim>[2, 1]</sigDim>
 				<sigLabel>peak_forces</sigLabel>
 			</signal>
+			<signal>
+				<sigName>Trust Wheelspeeds?</sigName>
+				<xpcsigName>Sensor Data and Estimation/Nonlinear Observer/Trust Wheelspeeds?</xpcsigName>
+				<sigWidth>1</sigWidth>
+				<sigDim>[1, 1]</sigDim>
+			</signal>
 		</SubSystem>
 		<SubSystem>
 			<Name>Steering Kinematics</Name>
@@ -1217,6 +3452,54 @@ Normal Load</sigName>
 			<SubSystem>
 				<Name>Steer Torque Calculation</Name>
 				<xPCName>p1/Sensor Data and Estimation/Steering Kinematics/Steer Torque Calculation</xPCName>
+				<block>
+					<blkName>Left Steering Ratio</blkName>
+					<xpcblkName>Sensor Data and Estimation/Steering Kinematics/Steer Torque Calculation/Left Steering Ratio</xpcblkName>
+					<SLblockPath>p1/Sensor Data and Estimation/Steering Kinematics/Steer Torque Calculation/Left Steering Ratio</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Gain</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Right Steering Ratio</blkName>
+					<xpcblkName>Sensor Data and Estimation/Steering Kinematics/Steer Torque Calculation/Right Steering Ratio</xpcblkName>
+					<SLblockPath>p1/Sensor Data and Estimation/Steering Kinematics/Steer Torque Calculation/Right Steering Ratio</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Gain</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Left Arm Length Look-up</blkName>
+					<xpcblkName>Sensor Data and Estimation/Steering Kinematics/Steer Torque Calculation/Left Arm Length Look-up</xpcblkName>
+					<SLblockPath>p1/Sensor Data and Estimation/Steering Kinematics/Steer Torque Calculation/Left Arm Length Look-up</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Table</paramName>
+						<dim>[1, 101]</dim>
+					</parameter>
+					<parameter>
+						<paramName>BreakpointsForDimension1</paramName>
+						<dim>[1, 101]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Right Arm Length Look-up</blkName>
+					<xpcblkName>Sensor Data and Estimation/Steering Kinematics/Steer Torque Calculation/Right Arm Length Look-up</xpcblkName>
+					<SLblockPath>p1/Sensor Data and Estimation/Steering Kinematics/Steer Torque Calculation/Right Arm Length Look-up</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Table</paramName>
+						<dim>[1, 101]</dim>
+					</parameter>
+					<parameter>
+						<paramName>BreakpointsForDimension1</paramName>
+						<dim>[1, 101]</dim>
+					</parameter>
+				</block>
 				<signal>
 					<sigName>Left Arm Length Look-up</sigName>
 					<xpcsigName>Sensor Data and Estimation/Steering Kinematics/Steer Torque Calculation/Left Arm Length Look-up</xpcsigName>
@@ -1245,6 +3528,54 @@ Normal Load</sigName>
 			<SubSystem>
 				<Name>Steering Angle Calculation</Name>
 				<xPCName>p1/Sensor Data and Estimation/Steering Kinematics/Steering Angle Calculation</xPCName>
+				<block>
+					<blkName>Left Steering Ratio</blkName>
+					<xpcblkName>Sensor Data and Estimation/Steering Kinematics/Steering Angle Calculation/Left Steering Ratio</xpcblkName>
+					<SLblockPath>p1/Sensor Data and Estimation/Steering Kinematics/Steering Angle Calculation/Left Steering Ratio</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Gain</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Right Steering Ratio</blkName>
+					<xpcblkName>Sensor Data and Estimation/Steering Kinematics/Steering Angle Calculation/Right Steering Ratio</xpcblkName>
+					<SLblockPath>p1/Sensor Data and Estimation/Steering Kinematics/Steering Angle Calculation/Right Steering Ratio</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Gain</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Left Steer Angle Look-up</blkName>
+					<xpcblkName>Sensor Data and Estimation/Steering Kinematics/Steering Angle Calculation/Left Steer Angle Look-up</xpcblkName>
+					<SLblockPath>p1/Sensor Data and Estimation/Steering Kinematics/Steering Angle Calculation/Left Steer Angle Look-up</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Table</paramName>
+						<dim>[1, 101]</dim>
+					</parameter>
+					<parameter>
+						<paramName>BreakpointsForDimension1</paramName>
+						<dim>[1, 101]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Right Steer Angle Look-up</blkName>
+					<xpcblkName>Sensor Data and Estimation/Steering Kinematics/Steering Angle Calculation/Right Steer Angle Look-up</xpcblkName>
+					<SLblockPath>p1/Sensor Data and Estimation/Steering Kinematics/Steering Angle Calculation/Right Steer Angle Look-up</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Table</paramName>
+						<dim>[1, 101]</dim>
+					</parameter>
+					<parameter>
+						<paramName>BreakpointsForDimension1</paramName>
+						<dim>[1, 101]</dim>
+					</parameter>
+				</block>
 				<signal>
 					<sigName>Left Steer Angle Look-up</sigName>
 					<xpcsigName>Sensor Data and Estimation/Steering Kinematics/Steering Angle Calculation/Left Steer Angle Look-up</xpcsigName>
@@ -1277,6 +3608,16 @@ Angle Calculation</sigName>
 			<SubSystem>
 				<Name>Select: Yaw Rate</Name>
 				<xPCName>p1/Sensor Data and Estimation/Vehicle State Estimator/Select: Yaw Rate</xPCName>
+				<block>
+					<blkName>Gain</blkName>
+					<xpcblkName>Sensor Data and Estimation/Vehicle State Estimator/Select: Yaw Rate/Gain</xpcblkName>
+					<SLblockPath>p1/Sensor Data and Estimation/Vehicle State Estimator/Select: Yaw Rate/Gain</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Gain</paramName>
+						<dim>[1, 6]</dim>
+					</parameter>
+				</block>
 				<signal>
 					<sigName>Gain</sigName>
 					<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/Select: Yaw Rate/Gain</xpcsigName>
@@ -1293,6 +3634,76 @@ Angle Calculation</sigName>
 					<SubSystem>
 						<Name>Accelerometer Pre-Processing</Name>
 						<xPCName>p1/Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Accelerometer Pre-Processing</xPCName>
+						<block>
+							<blkName>ax Bias</blkName>
+							<xpcblkName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Accelerometer Pre-Processing/ax Bias</xpcblkName>
+							<SLblockPath>p1/Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Accelerometer Pre-Processing/ax Bias</SLblockPath>
+							<isSrc>[1 0 1]</isSrc>
+							<parameter>
+								<paramName>Value</paramName>
+								<dim>[1, 1]</dim>
+							</parameter>
+						</block>
+						<block>
+							<blkName>ay Bias</blkName>
+							<xpcblkName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Accelerometer Pre-Processing/ay Bias</xpcblkName>
+							<SLblockPath>p1/Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Accelerometer Pre-Processing/ay Bias</SLblockPath>
+							<isSrc>[1 0 1]</isSrc>
+							<parameter>
+								<paramName>Value</paramName>
+								<dim>[1, 1]</dim>
+							</parameter>
+						</block>
+						<block>
+							<blkName>ax sf</blkName>
+							<xpcblkName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Accelerometer Pre-Processing/ax sf</xpcblkName>
+							<SLblockPath>p1/Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Accelerometer Pre-Processing/ax sf</SLblockPath>
+							<isSrc>[0 1 1]</isSrc>
+							<parameter>
+								<paramName>Gain</paramName>
+								<dim>[1, 1]</dim>
+							</parameter>
+						</block>
+						<block>
+							<blkName>ay sf</blkName>
+							<xpcblkName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Accelerometer Pre-Processing/ay sf</xpcblkName>
+							<SLblockPath>p1/Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Accelerometer Pre-Processing/ay sf</SLblockPath>
+							<isSrc>[0 1 1]</isSrc>
+							<parameter>
+								<paramName>Gain</paramName>
+								<dim>[1, 1]</dim>
+							</parameter>
+						</block>
+						<block>
+							<blkName>cross coupling from ax</blkName>
+							<xpcblkName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Accelerometer Pre-Processing/cross coupling from ax</xpcblkName>
+							<SLblockPath>p1/Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Accelerometer Pre-Processing/cross coupling from ax</SLblockPath>
+							<isSrc>[0 1 1]</isSrc>
+							<parameter>
+								<paramName>Gain</paramName>
+								<dim>[1, 1]</dim>
+							</parameter>
+						</block>
+						<block>
+							<blkName>cross coupling from ay</blkName>
+							<xpcblkName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Accelerometer Pre-Processing/cross coupling from ay</xpcblkName>
+							<SLblockPath>p1/Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Accelerometer Pre-Processing/cross coupling from ay</SLblockPath>
+							<isSrc>[0 1 1]</isSrc>
+							<parameter>
+								<paramName>Gain</paramName>
+								<dim>[1, 1]</dim>
+							</parameter>
+						</block>
+						<block>
+							<blkName>Memory</blkName>
+							<xpcblkName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Accelerometer Pre-Processing/Memory</xpcblkName>
+							<SLblockPath>p1/Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Accelerometer Pre-Processing/Memory</SLblockPath>
+							<isSrc>[0 1 1]</isSrc>
+							<parameter>
+								<paramName>X0</paramName>
+								<dim>[1, 1]</dim>
+							</parameter>
+						</block>
 						<signal>
 							<sigName>cross coupling from ax</sigName>
 							<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Accelerometer Pre-Processing/cross coupling from ax</xpcsigName>
@@ -1320,6 +3731,154 @@ Angle Calculation</sigName>
 To Constant</Name>
 							<xPCName>p1/Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/GPS Pre-Processing/Compare To Constant</xPCName>
 						</SubSystem>
+						<block>
+							<blkName>Compare
+To Constant</blkName>
+							<xpcblkName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/GPS Pre-Processing/Compare To Constant</xpcblkName>
+							<SLblockPath>p1/Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/GPS Pre-Processing/Compare To Constant</SLblockPath>
+							<isSrc>[0 1 1]</isSrc>
+							<parameter>
+								<paramName>const</paramName>
+								<dim>[1, 1]</dim>
+							</parameter>
+						</block>
+						<block>
+							<blkName>GPS Roll Offset</blkName>
+							<xpcblkName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/GPS Pre-Processing/GPS Roll Offset</xpcblkName>
+							<SLblockPath>p1/Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/GPS Pre-Processing/GPS Roll Offset</SLblockPath>
+							<isSrc>[1 0 1]</isSrc>
+							<parameter>
+								<paramName>Value</paramName>
+								<dim>[1, 1]</dim>
+							</parameter>
+						</block>
+						<block>
+							<blkName>GPS Yaw Offset</blkName>
+							<xpcblkName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/GPS Pre-Processing/GPS Yaw Offset</xpcblkName>
+							<SLblockPath>p1/Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/GPS Pre-Processing/GPS Yaw Offset</SLblockPath>
+							<isSrc>[1 0 1]</isSrc>
+							<parameter>
+								<paramName>Value</paramName>
+								<dim>[1, 1]</dim>
+							</parameter>
+						</block>
+						<block>
+							<blkName>bad</blkName>
+							<xpcblkName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/GPS Pre-Processing/bad</xpcblkName>
+							<SLblockPath>p1/Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/GPS Pre-Processing/bad</SLblockPath>
+							<isSrc>[1 0 1]</isSrc>
+							<parameter>
+								<paramName>Value</paramName>
+								<dim>[1, 1]</dim>
+							</parameter>
+						</block>
+						<block>
+							<blkName>bad1</blkName>
+							<xpcblkName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/GPS Pre-Processing/bad1</xpcblkName>
+							<SLblockPath>p1/Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/GPS Pre-Processing/bad1</SLblockPath>
+							<isSrc>[1 0 1]</isSrc>
+							<parameter>
+								<paramName>Value</paramName>
+								<dim>[1, 1]</dim>
+							</parameter>
+						</block>
+						<block>
+							<blkName>good</blkName>
+							<xpcblkName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/GPS Pre-Processing/good</xpcblkName>
+							<SLblockPath>p1/Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/GPS Pre-Processing/good</SLblockPath>
+							<isSrc>[1 0 1]</isSrc>
+							<parameter>
+								<paramName>Value</paramName>
+								<dim>[1, 1]</dim>
+							</parameter>
+						</block>
+						<block>
+							<blkName>good1</blkName>
+							<xpcblkName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/GPS Pre-Processing/good1</xpcblkName>
+							<SLblockPath>p1/Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/GPS Pre-Processing/good1</SLblockPath>
+							<isSrc>[1 0 1]</isSrc>
+							<parameter>
+								<paramName>Value</paramName>
+								<dim>[1, 1]</dim>
+							</parameter>
+						</block>
+						<block>
+							<blkName>obsolete1</blkName>
+							<xpcblkName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/GPS Pre-Processing/obsolete1</xpcblkName>
+							<SLblockPath>p1/Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/GPS Pre-Processing/obsolete1</SLblockPath>
+							<isSrc>[1 0 1]</isSrc>
+							<parameter>
+								<paramName>Value</paramName>
+								<dim>[1, 1]</dim>
+							</parameter>
+						</block>
+						<block>
+							<blkName>obsolete2</blkName>
+							<xpcblkName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/GPS Pre-Processing/obsolete2</xpcblkName>
+							<SLblockPath>p1/Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/GPS Pre-Processing/obsolete2</SLblockPath>
+							<isSrc>[1 0 1]</isSrc>
+							<parameter>
+								<paramName>Value</paramName>
+								<dim>[1, 1]</dim>
+							</parameter>
+						</block>
+						<block>
+							<blkName>Gain</blkName>
+							<xpcblkName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/GPS Pre-Processing/Gain</xpcblkName>
+							<SLblockPath>p1/Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/GPS Pre-Processing/Gain</SLblockPath>
+							<isSrc>[0 1 1]</isSrc>
+							<parameter>
+								<paramName>Gain</paramName>
+								<dim>[1, 1]</dim>
+							</parameter>
+						</block>
+						<block>
+							<blkName>Bitwise
+Operator</blkName>
+							<xpcblkName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/GPS Pre-Processing/Bitwise Operator</xpcblkName>
+							<SLblockPath>p1/Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/GPS Pre-Processing/Bitwise Operator</SLblockPath>
+							<isSrc>[0 1 1]</isSrc>
+							<parameter>
+								<paramName>BitMask</paramName>
+								<dim>[1, 1]</dim>
+							</parameter>
+						</block>
+						<block>
+							<blkName>Delay function</blkName>
+							<xpcblkName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/GPS Pre-Processing/Delay function</xpcblkName>
+							<SLblockPath>p1/Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/GPS Pre-Processing/Delay function</SLblockPath>
+							<isSrc>[0 1 2]</isSrc>
+							<parameter>
+								<paramName>P1</paramName>
+								<dim>[1, 1]</dim>
+							</parameter>
+							<parameter>
+								<paramName>P2</paramName>
+								<dim>[1, 1]</dim>
+							</parameter>
+						</block>
+						<block>
+							<blkName>Switch2</blkName>
+							<xpcblkName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/GPS Pre-Processing/Switch2</xpcblkName>
+							<SLblockPath>p1/Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/GPS Pre-Processing/Switch2</SLblockPath>
+							<isSrc>[0 3 1]</isSrc>
+							<parameter>
+								<paramName>Threshold</paramName>
+								<dim>[1, 1]</dim>
+							</parameter>
+						</block>
+						<signal>
+							<sigName>obsolete1</sigName>
+							<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/GPS Pre-Processing/obsolete1</xpcsigName>
+							<sigWidth>1</sigWidth>
+							<sigDim>[1, 1]</sigDim>
+						</signal>
+						<signal>
+							<sigName>obsolete2</sigName>
+							<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/GPS Pre-Processing/obsolete2</xpcsigName>
+							<sigWidth>1</sigWidth>
+							<sigDim>[1, 1]</sigDim>
+						</signal>
 						<signal>
 							<sigName>Data Type Conversion</sigName>
 							<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/GPS Pre-Processing/Data Type Conversion</xpcsigName>
@@ -1366,6 +3925,78 @@ To Constant</Name>
 					<SubSystem>
 						<Name>Roll//Yaw Gyro Pre-processing</Name>
 						<xPCName>p1/Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Roll//Yaw Gyro Pre-processing</xPCName>
+						<block>
+							<blkName>Roll Gyro Bias</blkName>
+							<xpcblkName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Roll//Yaw Gyro Pre-processing/Roll Gyro Bias</xpcblkName>
+							<SLblockPath>p1/Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Roll//Yaw Gyro Pre-processing/Roll Gyro Bias</SLblockPath>
+							<isSrc>[1 0 1]</isSrc>
+							<parameter>
+								<paramName>Value</paramName>
+								<dim>[1, 1]</dim>
+							</parameter>
+						</block>
+						<block>
+							<blkName>Yaw Gyro Bias</blkName>
+							<xpcblkName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Roll//Yaw Gyro Pre-processing/Yaw Gyro Bias</xpcblkName>
+							<SLblockPath>p1/Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Roll//Yaw Gyro Pre-processing/Yaw Gyro Bias</SLblockPath>
+							<isSrc>[1 0 1]</isSrc>
+							<parameter>
+								<paramName>Value</paramName>
+								<dim>[1, 1]</dim>
+							</parameter>
+						</block>
+						<block>
+							<blkName>cross coupling
+from roll</blkName>
+							<xpcblkName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Roll//Yaw Gyro Pre-processing/cross coupling from roll</xpcblkName>
+							<SLblockPath>p1/Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Roll//Yaw Gyro Pre-processing/cross coupling from roll</SLblockPath>
+							<isSrc>[0 1 1]</isSrc>
+							<parameter>
+								<paramName>Gain</paramName>
+								<dim>[1, 1]</dim>
+							</parameter>
+						</block>
+						<block>
+							<blkName>cross coupling
+from yaw</blkName>
+							<xpcblkName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Roll//Yaw Gyro Pre-processing/cross coupling from yaw</xpcblkName>
+							<SLblockPath>p1/Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Roll//Yaw Gyro Pre-processing/cross coupling from yaw</SLblockPath>
+							<isSrc>[0 1 1]</isSrc>
+							<parameter>
+								<paramName>Gain</paramName>
+								<dim>[1, 1]</dim>
+							</parameter>
+						</block>
+						<block>
+							<blkName>roll rate sf</blkName>
+							<xpcblkName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Roll//Yaw Gyro Pre-processing/roll rate sf</xpcblkName>
+							<SLblockPath>p1/Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Roll//Yaw Gyro Pre-processing/roll rate sf</SLblockPath>
+							<isSrc>[0 1 1]</isSrc>
+							<parameter>
+								<paramName>Gain</paramName>
+								<dim>[1, 1]</dim>
+							</parameter>
+						</block>
+						<block>
+							<blkName>yaw rate sf</blkName>
+							<xpcblkName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Roll//Yaw Gyro Pre-processing/yaw rate sf</xpcblkName>
+							<SLblockPath>p1/Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Roll//Yaw Gyro Pre-processing/yaw rate sf</SLblockPath>
+							<isSrc>[0 1 1]</isSrc>
+							<parameter>
+								<paramName>Gain</paramName>
+								<dim>[1, 1]</dim>
+							</parameter>
+						</block>
+						<block>
+							<blkName>Memory</blkName>
+							<xpcblkName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Roll//Yaw Gyro Pre-processing/Memory</xpcblkName>
+							<SLblockPath>p1/Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Roll//Yaw Gyro Pre-processing/Memory</SLblockPath>
+							<isSrc>[0 1 1]</isSrc>
+							<parameter>
+								<paramName>X0</paramName>
+								<dim>[1, 1]</dim>
+							</parameter>
+						</block>
 						<signal>
 							<sigName>cross coupling
 from roll</sigName>
@@ -1386,6 +4017,160 @@ from roll</sigName>
 							<sigDim>[1, 1]</sigDim>
 						</signal>
 					</SubSystem>
+					<block>
+						<blkName>Gain</blkName>
+						<xpcblkName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Gain</xpcblkName>
+						<SLblockPath>p1/Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Gain</SLblockPath>
+						<isSrc>[0 1 1]</isSrc>
+						<parameter>
+							<paramName>Gain</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+					</block>
+					<block>
+						<blkName>Position Filter</blkName>
+						<xpcblkName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Position Filter</xpcblkName>
+						<SLblockPath>p1/Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Position Filter</SLblockPath>
+						<isSrc>[0 1 1]</isSrc>
+						<parameter>
+							<paramName>P1</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+						<parameter>
+							<paramName>P2</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+					</block>
+					<block>
+						<blkName>Super Filter!</blkName>
+						<xpcblkName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Super Filter!</xpcblkName>
+						<SLblockPath>p1/Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Super Filter!</SLblockPath>
+						<isSrc>[0 1 1]</isSrc>
+						<parameter>
+							<paramName>P1</paramName>
+							<dim>[1, 2]</dim>
+						</parameter>
+						<parameter>
+							<paramName>P2</paramName>
+							<dim>[1, 9]</dim>
+						</parameter>
+						<parameter>
+							<paramName>P3</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+						<parameter>
+							<paramName>P4</paramName>
+							<dim>[1, 4]</dim>
+						</parameter>
+						<parameter>
+							<paramName>P5</paramName>
+							<dim>[1, 2]</dim>
+						</parameter>
+						<parameter>
+							<paramName>P6</paramName>
+							<dim>[1, 16]</dim>
+						</parameter>
+						<parameter>
+							<paramName>P7</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+						<parameter>
+							<paramName>P8</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+						<parameter>
+							<paramName>P9</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+						<parameter>
+							<paramName>P10</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+						<parameter>
+							<paramName>P11</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+						<parameter>
+							<paramName>P12</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+						<parameter>
+							<paramName>P13</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+						<parameter>
+							<paramName>P14</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+						<parameter>
+							<paramName>P15</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+						<parameter>
+							<paramName>P16</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+						<parameter>
+							<paramName>P17</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+						<parameter>
+							<paramName>P18</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+						<parameter>
+							<paramName>P19</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+						<parameter>
+							<paramName>P20</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+						<parameter>
+							<paramName>P21</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+						<parameter>
+							<paramName>P22</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+						<parameter>
+							<paramName>P23</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+						<parameter>
+							<paramName>P24</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+						<parameter>
+							<paramName>P25</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+						<parameter>
+							<paramName>P26</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+						<parameter>
+							<paramName>P27</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+						<parameter>
+							<paramName>P28</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+						<parameter>
+							<paramName>P29</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+						<parameter>
+							<paramName>P30</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+						<parameter>
+							<paramName>P31</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+					</block>
 					<signal>
 						<sigName>Gain</sigName>
 						<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Super Filter/Gain</xpcsigName>
@@ -1405,6 +4190,93 @@ from roll</sigName>
 						<sigDim>[44, 1]</sigDim>
 					</signal>
 				</SubSystem>
+				<block>
+					<blkName>Roll Gyro Sf</blkName>
+					<xpcblkName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Roll Gyro Sf</xpcblkName>
+					<SLblockPath>p1/Sensor Data and Estimation/Vehicle State Estimator/state estimation/Roll Gyro Sf</SLblockPath>
+					<isSrc>[1 0 1]</isSrc>
+					<parameter>
+						<paramName>Value</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>DegtoRad1</blkName>
+					<xpcblkName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/DegtoRad1</xpcblkName>
+					<SLblockPath>p1/Sensor Data and Estimation/Vehicle State Estimator/state estimation/DegtoRad1</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Gain</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>DegtoRad2</blkName>
+					<xpcblkName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/DegtoRad2</xpcblkName>
+					<SLblockPath>p1/Sensor Data and Estimation/Vehicle State Estimator/state estimation/DegtoRad2</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Gain</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>DegtoRad3</blkName>
+					<xpcblkName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/DegtoRad3</xpcblkName>
+					<SLblockPath>p1/Sensor Data and Estimation/Vehicle State Estimator/state estimation/DegtoRad3</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Gain</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>DegtoRad4</blkName>
+					<xpcblkName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/DegtoRad4</xpcblkName>
+					<SLblockPath>p1/Sensor Data and Estimation/Vehicle State Estimator/state estimation/DegtoRad4</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Gain</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>DegtoRad5</blkName>
+					<xpcblkName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/DegtoRad5</xpcblkName>
+					<SLblockPath>p1/Sensor Data and Estimation/Vehicle State Estimator/state estimation/DegtoRad5</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Gain</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>DegtoRad6</blkName>
+					<xpcblkName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/DegtoRad6</xpcblkName>
+					<SLblockPath>p1/Sensor Data and Estimation/Vehicle State Estimator/state estimation/DegtoRad6</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Gain</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>DegtoRad7</blkName>
+					<xpcblkName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/DegtoRad7</xpcblkName>
+					<SLblockPath>p1/Sensor Data and Estimation/Vehicle State Estimator/state estimation/DegtoRad7</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Gain</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<signal>
+					<sigName>Roll Gyro Sf</sigName>
+					<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/Roll Gyro Sf</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+					<sigLabel>Roll Gyro Sf</sigLabel>
+				</signal>
 				<signal>
 					<sigName>DegtoRad1</sigName>
 					<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/state estimation/DegtoRad1</xpcsigName>
@@ -1454,6 +4326,106 @@ from roll</sigName>
 					<sigLabel>Sideslip</sigLabel>
 				</signal>
 			</SubSystem>
+			<block>
+				<blkName>rad to deg</blkName>
+				<xpcblkName>Sensor Data and Estimation/Vehicle State Estimator/rad to deg</xpcblkName>
+				<SLblockPath>p1/Sensor Data and Estimation/Vehicle State Estimator/rad to deg</SLblockPath>
+				<isSrc>[0 1 1]</isSrc>
+				<parameter>
+					<paramName>Gain</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+			</block>
+			<block>
+				<blkName>Low-pass filter</blkName>
+				<xpcblkName>Sensor Data and Estimation/Vehicle State Estimator/Low-pass filter</xpcblkName>
+				<SLblockPath>p1/Sensor Data and Estimation/Vehicle State Estimator/Low-pass filter</SLblockPath>
+				<isSrc>[0 1 1]</isSrc>
+				<parameter>
+					<paramName>Numerator</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+				<parameter>
+					<paramName>Denominator</paramName>
+					<dim>[1, 2]</dim>
+				</parameter>
+				<parameter>
+					<paramName>InitialStates</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+			</block>
+			<block>
+				<blkName>Low-pass filter1</blkName>
+				<xpcblkName>Sensor Data and Estimation/Vehicle State Estimator/Low-pass filter1</xpcblkName>
+				<SLblockPath>p1/Sensor Data and Estimation/Vehicle State Estimator/Low-pass filter1</SLblockPath>
+				<isSrc>[0 1 1]</isSrc>
+				<parameter>
+					<paramName>Numerator</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+				<parameter>
+					<paramName>Denominator</paramName>
+					<dim>[1, 2]</dim>
+				</parameter>
+				<parameter>
+					<paramName>InitialStates</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+			</block>
+			<block>
+				<blkName>Low-pass filter2</blkName>
+				<xpcblkName>Sensor Data and Estimation/Vehicle State Estimator/Low-pass filter2</xpcblkName>
+				<SLblockPath>p1/Sensor Data and Estimation/Vehicle State Estimator/Low-pass filter2</SLblockPath>
+				<isSrc>[0 1 1]</isSrc>
+				<parameter>
+					<paramName>Numerator</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+				<parameter>
+					<paramName>Denominator</paramName>
+					<dim>[1, 2]</dim>
+				</parameter>
+				<parameter>
+					<paramName>InitialStates</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+			</block>
+			<block>
+				<blkName>Low-pass filter3</blkName>
+				<xpcblkName>Sensor Data and Estimation/Vehicle State Estimator/Low-pass filter3</xpcblkName>
+				<SLblockPath>p1/Sensor Data and Estimation/Vehicle State Estimator/Low-pass filter3</SLblockPath>
+				<isSrc>[0 1 1]</isSrc>
+				<parameter>
+					<paramName>Numerator</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+				<parameter>
+					<paramName>Denominator</paramName>
+					<dim>[1, 2]</dim>
+				</parameter>
+				<parameter>
+					<paramName>InitialStates</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+			</block>
+			<block>
+				<blkName>Low-pass filter4</blkName>
+				<xpcblkName>Sensor Data and Estimation/Vehicle State Estimator/Low-pass filter4</xpcblkName>
+				<SLblockPath>p1/Sensor Data and Estimation/Vehicle State Estimator/Low-pass filter4</SLblockPath>
+				<isSrc>[0 1 1]</isSrc>
+				<parameter>
+					<paramName>Numerator</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+				<parameter>
+					<paramName>Denominator</paramName>
+					<dim>[1, 2]</dim>
+				</parameter>
+				<parameter>
+					<paramName>InitialStates</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+			</block>
 			<signal>
 				<sigName>Gain1</sigName>
 				<xpcsigName>Sensor Data and Estimation/Vehicle State Estimator/Gain1</xpcsigName>
@@ -1537,6 +4509,56 @@ from roll</sigName>
 				<SubSystem>
 					<Name>Delay</Name>
 					<xPCName>p1/User Controllers/Cruise Control/Enable Logic/Delay</xPCName>
+					<block>
+						<blkName>Unit Delay</blkName>
+						<xpcblkName>User Controllers/Cruise Control/Enable Logic/Delay/Unit Delay</xpcblkName>
+						<SLblockPath>p1/User Controllers/Cruise Control/Enable Logic/Delay/Unit Delay</SLblockPath>
+						<isSrc>[0 1 1]</isSrc>
+						<parameter>
+							<paramName>InitialCondition</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+					</block>
+					<block>
+						<blkName>Unit Delay1</blkName>
+						<xpcblkName>User Controllers/Cruise Control/Enable Logic/Delay/Unit Delay1</xpcblkName>
+						<SLblockPath>p1/User Controllers/Cruise Control/Enable Logic/Delay/Unit Delay1</SLblockPath>
+						<isSrc>[0 1 1]</isSrc>
+						<parameter>
+							<paramName>InitialCondition</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+					</block>
+					<block>
+						<blkName>Unit Delay2</blkName>
+						<xpcblkName>User Controllers/Cruise Control/Enable Logic/Delay/Unit Delay2</xpcblkName>
+						<SLblockPath>p1/User Controllers/Cruise Control/Enable Logic/Delay/Unit Delay2</SLblockPath>
+						<isSrc>[0 1 1]</isSrc>
+						<parameter>
+							<paramName>InitialCondition</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+					</block>
+					<block>
+						<blkName>Unit Delay3</blkName>
+						<xpcblkName>User Controllers/Cruise Control/Enable Logic/Delay/Unit Delay3</xpcblkName>
+						<SLblockPath>p1/User Controllers/Cruise Control/Enable Logic/Delay/Unit Delay3</SLblockPath>
+						<isSrc>[0 1 1]</isSrc>
+						<parameter>
+							<paramName>InitialCondition</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+					</block>
+					<block>
+						<blkName>Unit Delay4</blkName>
+						<xpcblkName>User Controllers/Cruise Control/Enable Logic/Delay/Unit Delay4</xpcblkName>
+						<SLblockPath>p1/User Controllers/Cruise Control/Enable Logic/Delay/Unit Delay4</SLblockPath>
+						<isSrc>[0 1 1]</isSrc>
+						<parameter>
+							<paramName>InitialCondition</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+					</block>
 					<signal>
 						<sigName>Unit Delay</sigName>
 						<xpcsigName>User Controllers/Cruise Control/Enable Logic/Delay/Unit Delay</xpcsigName>
@@ -1565,6 +4587,16 @@ from roll</sigName>
 				<SubSystem>
 					<Name>Latch1</Name>
 					<xPCName>p1/User Controllers/Cruise Control/Enable Logic/Latch1</xPCName>
+					<block>
+						<blkName>Out1</blkName>
+						<xpcblkName>User Controllers/Cruise Control/Enable Logic/Latch1/Out1</xpcblkName>
+						<SLblockPath>p1/User Controllers/Cruise Control/Enable Logic/Latch1/Out1</SLblockPath>
+						<isSrc>[0 1 0]</isSrc>
+						<parameter>
+							<paramName>InitialOutput</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+					</block>
 					<signal>
 						<sigName>In1</sigName>
 						<xpcsigName>User Controllers/Cruise Control/Enable Logic/Latch1/In1</xpcsigName>
@@ -1576,6 +4608,16 @@ from roll</sigName>
 			<SubSystem>
 				<Name>Pedal Latch</Name>
 				<xPCName>p1/User Controllers/Cruise Control/Pedal Latch</xPCName>
+				<block>
+					<blkName>Out1</blkName>
+					<xpcblkName>User Controllers/Cruise Control/Pedal Latch/Out1</xpcblkName>
+					<SLblockPath>p1/User Controllers/Cruise Control/Pedal Latch/Out1</SLblockPath>
+					<isSrc>[0 1 0]</isSrc>
+					<parameter>
+						<paramName>InitialOutput</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
 				<signal>
 					<sigName>In1</sigName>
 					<xpcsigName>User Controllers/Cruise Control/Pedal Latch/In1</xpcsigName>
@@ -1586,6 +4628,16 @@ from roll</sigName>
 			<SubSystem>
 				<Name>Speed Latch</Name>
 				<xPCName>p1/User Controllers/Cruise Control/Speed Latch</xPCName>
+				<block>
+					<blkName>Out1</blkName>
+					<xpcblkName>User Controllers/Cruise Control/Speed Latch/Out1</xpcblkName>
+					<SLblockPath>p1/User Controllers/Cruise Control/Speed Latch/Out1</SLblockPath>
+					<isSrc>[0 1 0]</isSrc>
+					<parameter>
+						<paramName>InitialOutput</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
 				<signal>
 					<sigName>In1</sigName>
 					<xpcsigName>User Controllers/Cruise Control/Speed Latch/In1</xpcsigName>
@@ -1593,6 +4645,36 @@ from roll</sigName>
 					<sigDim>[1, 1]</sigDim>
 				</signal>
 			</SubSystem>
+			<block>
+				<blkName>Gain</blkName>
+				<xpcblkName>User Controllers/Cruise Control/Gain</xpcblkName>
+				<SLblockPath>p1/User Controllers/Cruise Control/Gain</SLblockPath>
+				<isSrc>[0 1 1]</isSrc>
+				<parameter>
+					<paramName>Gain</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+			</block>
+			<block>
+				<blkName>Quantizer</blkName>
+				<xpcblkName>User Controllers/Cruise Control/Quantizer</xpcblkName>
+				<SLblockPath>p1/User Controllers/Cruise Control/Quantizer</SLblockPath>
+				<isSrc>[0 1 1]</isSrc>
+				<parameter>
+					<paramName>QuantizationInterval</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+			</block>
+			<block>
+				<blkName>Switch</blkName>
+				<xpcblkName>User Controllers/Cruise Control/Switch</xpcblkName>
+				<SLblockPath>p1/User Controllers/Cruise Control/Switch</SLblockPath>
+				<isSrc>[0 3 1]</isSrc>
+				<parameter>
+					<paramName>Threshold</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+			</block>
 			<signal>
 				<sigName>Sum1</sigName>
 				<xpcsigName>User Controllers/Cruise Control/Sum1</xpcsigName>
@@ -1619,6 +4701,36 @@ from roll</sigName>
 				<SubSystem>
 					<Name>Chirp Signal</Name>
 					<xPCName>p1/User Controllers/Steering Controller/HAL-9000/Chirp Signal</xPCName>
+					<block>
+						<blkName>Gain</blkName>
+						<xpcblkName>User Controllers/Steering Controller/HAL-9000/Chirp Signal/Gain</xpcblkName>
+						<SLblockPath>p1/User Controllers/Steering Controller/HAL-9000/Chirp Signal/Gain</SLblockPath>
+						<isSrc>[0 1 1]</isSrc>
+						<parameter>
+							<paramName>Gain</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+					</block>
+					<block>
+						<blkName>Saturation</blkName>
+						<xpcblkName>User Controllers/Steering Controller/HAL-9000/Chirp Signal/Saturation</xpcblkName>
+						<SLblockPath>p1/User Controllers/Steering Controller/HAL-9000/Chirp Signal/Saturation</SLblockPath>
+						<isSrc>[0 1 1]</isSrc>
+						<parameter>
+							<paramName>UpperLimit</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+						<parameter>
+							<paramName>LowerLimit</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+					</block>
+					<signal>
+						<sigName>Gain</sigName>
+						<xpcsigName>User Controllers/Steering Controller/HAL-9000/Chirp Signal/Gain</xpcsigName>
+						<sigWidth>1</sigWidth>
+						<sigDim>[1, 1]</sigDim>
+					</signal>
 				</SubSystem>
 				<SubSystem>
 					<Name>Double chirp</Name>
@@ -1626,11 +4738,133 @@ from roll</sigName>
 					<SubSystem>
 						<Name>Chirp One</Name>
 						<xPCName>p1/User Controllers/Steering Controller/HAL-9000/Double chirp/Chirp One</xPCName>
+						<block>
+							<blkName>Gain</blkName>
+							<xpcblkName>User Controllers/Steering Controller/HAL-9000/Double chirp/Chirp One/Gain</xpcblkName>
+							<SLblockPath>p1/User Controllers/Steering Controller/HAL-9000/Double chirp/Chirp One/Gain</SLblockPath>
+							<isSrc>[0 1 1]</isSrc>
+							<parameter>
+								<paramName>Gain</paramName>
+								<dim>[1, 1]</dim>
+							</parameter>
+						</block>
+						<block>
+							<blkName>Saturation</blkName>
+							<xpcblkName>User Controllers/Steering Controller/HAL-9000/Double chirp/Chirp One/Saturation</xpcblkName>
+							<SLblockPath>p1/User Controllers/Steering Controller/HAL-9000/Double chirp/Chirp One/Saturation</SLblockPath>
+							<isSrc>[0 1 1]</isSrc>
+							<parameter>
+								<paramName>UpperLimit</paramName>
+								<dim>[1, 1]</dim>
+							</parameter>
+							<parameter>
+								<paramName>LowerLimit</paramName>
+								<dim>[1, 1]</dim>
+							</parameter>
+						</block>
+						<signal>
+							<sigName>Gain</sigName>
+							<xpcsigName>User Controllers/Steering Controller/HAL-9000/Double chirp/Chirp One/Gain</xpcsigName>
+							<sigWidth>1</sigWidth>
+							<sigDim>[1, 1]</sigDim>
+						</signal>
 					</SubSystem>
 					<SubSystem>
 						<Name>Chirp Two</Name>
 						<xPCName>p1/User Controllers/Steering Controller/HAL-9000/Double chirp/Chirp Two</xPCName>
+						<block>
+							<blkName>Gain</blkName>
+							<xpcblkName>User Controllers/Steering Controller/HAL-9000/Double chirp/Chirp Two/Gain</xpcblkName>
+							<SLblockPath>p1/User Controllers/Steering Controller/HAL-9000/Double chirp/Chirp Two/Gain</SLblockPath>
+							<isSrc>[0 1 1]</isSrc>
+							<parameter>
+								<paramName>Gain</paramName>
+								<dim>[1, 1]</dim>
+							</parameter>
+						</block>
+						<block>
+							<blkName>Saturation</blkName>
+							<xpcblkName>User Controllers/Steering Controller/HAL-9000/Double chirp/Chirp Two/Saturation</xpcblkName>
+							<SLblockPath>p1/User Controllers/Steering Controller/HAL-9000/Double chirp/Chirp Two/Saturation</SLblockPath>
+							<isSrc>[0 1 1]</isSrc>
+							<parameter>
+								<paramName>UpperLimit</paramName>
+								<dim>[1, 1]</dim>
+							</parameter>
+							<parameter>
+								<paramName>LowerLimit</paramName>
+								<dim>[1, 1]</dim>
+							</parameter>
+						</block>
+						<signal>
+							<sigName>Gain</sigName>
+							<xpcsigName>User Controllers/Steering Controller/HAL-9000/Double chirp/Chirp Two/Gain</xpcsigName>
+							<sigWidth>1</sigWidth>
+							<sigDim>[1, 1]</sigDim>
+						</signal>
 					</SubSystem>
+					<block>
+						<blkName>Chirp One</blkName>
+						<xpcblkName>User Controllers/Steering Controller/HAL-9000/Double chirp/Chirp One</xpcblkName>
+						<SLblockPath>p1/User Controllers/Steering Controller/HAL-9000/Double chirp/Chirp One</SLblockPath>
+						<isSrc>[0 1 1]</isSrc>
+						<parameter>
+							<paramName>f1</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+						<parameter>
+							<paramName>T</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+						<parameter>
+							<paramName>f2</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+					</block>
+					<block>
+						<blkName>Chirp Two</blkName>
+						<xpcblkName>User Controllers/Steering Controller/HAL-9000/Double chirp/Chirp Two</xpcblkName>
+						<SLblockPath>p1/User Controllers/Steering Controller/HAL-9000/Double chirp/Chirp Two</SLblockPath>
+						<isSrc>[0 1 1]</isSrc>
+						<parameter>
+							<paramName>f1</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+						<parameter>
+							<paramName>T</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+						<parameter>
+							<paramName>f2</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+					</block>
+					<block>
+						<blkName>initialFreq</blkName>
+						<xpcblkName>User Controllers/Steering Controller/HAL-9000/Double chirp/initialFreq</xpcblkName>
+						<SLblockPath>p1/User Controllers/Steering Controller/HAL-9000/Double chirp/initialFreq</SLblockPath>
+						<isSrc>[1 0 1]</isSrc>
+						<parameter>
+							<paramName>Value</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+					</block>
+					<block>
+						<blkName>Switch</blkName>
+						<xpcblkName>User Controllers/Steering Controller/HAL-9000/Double chirp/Switch</xpcblkName>
+						<SLblockPath>p1/User Controllers/Steering Controller/HAL-9000/Double chirp/Switch</SLblockPath>
+						<isSrc>[0 3 1]</isSrc>
+						<parameter>
+							<paramName>Threshold</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+					</block>
+					<signal>
+						<sigName>Sum</sigName>
+						<xpcsigName>User Controllers/Steering Controller/HAL-9000/Double chirp/Sum</xpcsigName>
+						<sigWidth>1</sigWidth>
+						<sigDim>[1, 1]</sigDim>
+					</signal>
 				</SubSystem>
 				<SubSystem>
 					<Name>Double-step</Name>
@@ -1643,10 +4877,48 @@ from roll</sigName>
 						<Name>Right Pulse</Name>
 						<xPCName>p1/User Controllers/Steering Controller/HAL-9000/Double-step/Right Pulse</xPCName>
 					</SubSystem>
+					<block>
+						<blkName>Left Pulse</blkName>
+						<xpcblkName>User Controllers/Steering Controller/HAL-9000/Double-step/Left Pulse</xpcblkName>
+						<SLblockPath>p1/User Controllers/Steering Controller/HAL-9000/Double-step/Left Pulse</SLblockPath>
+						<isSrc>[0 1 1]</isSrc>
+						<parameter>
+							<paramName>uplimit</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+						<parameter>
+							<paramName>lowlimit</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+					</block>
+					<block>
+						<blkName>Right Pulse</blkName>
+						<xpcblkName>User Controllers/Steering Controller/HAL-9000/Double-step/Right Pulse</xpcblkName>
+						<SLblockPath>p1/User Controllers/Steering Controller/HAL-9000/Double-step/Right Pulse</SLblockPath>
+						<isSrc>[0 1 1]</isSrc>
+						<parameter>
+							<paramName>uplimit</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+						<parameter>
+							<paramName>lowlimit</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+					</block>
 				</SubSystem>
 				<SubSystem>
 					<Name>Latch</Name>
 					<xPCName>p1/User Controllers/Steering Controller/HAL-9000/Latch</xPCName>
+					<block>
+						<blkName>Out1</blkName>
+						<xpcblkName>User Controllers/Steering Controller/HAL-9000/Latch/Out1</xpcblkName>
+						<SLblockPath>p1/User Controllers/Steering Controller/HAL-9000/Latch/Out1</SLblockPath>
+						<isSrc>[0 1 0]</isSrc>
+						<parameter>
+							<paramName>InitialOutput</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+					</block>
 					<signal>
 						<sigName>In1</sigName>
 						<xpcsigName>User Controllers/Steering Controller/HAL-9000/Latch/In1</xpcsigName>
@@ -1657,11 +4929,53 @@ from roll</sigName>
 				<SubSystem>
 					<Name>Ramp</Name>
 					<xPCName>p1/User Controllers/Steering Controller/HAL-9000/Ramp</xPCName>
+					<block>
+						<blkName>Slope</blkName>
+						<xpcblkName>User Controllers/Steering Controller/HAL-9000/Ramp/Slope</xpcblkName>
+						<SLblockPath>p1/User Controllers/Steering Controller/HAL-9000/Ramp/Slope</SLblockPath>
+						<isSrc>[0 1 1]</isSrc>
+						<parameter>
+							<paramName>Gain</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+					</block>
+					<block>
+						<blkName>Saturation</blkName>
+						<xpcblkName>User Controllers/Steering Controller/HAL-9000/Ramp/Saturation</xpcblkName>
+						<SLblockPath>p1/User Controllers/Steering Controller/HAL-9000/Ramp/Saturation</SLblockPath>
+						<isSrc>[0 1 1]</isSrc>
+						<parameter>
+							<paramName>UpperLimit</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+						<parameter>
+							<paramName>LowerLimit</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+					</block>
 				</SubSystem>
 				<SubSystem>
 					<Name>Step</Name>
 					<xPCName>p1/User Controllers/Steering Controller/HAL-9000/Step</xPCName>
 				</SubSystem>
+				<block>
+					<blkName>Chirp Signal</blkName>
+					<xpcblkName>User Controllers/Steering Controller/HAL-9000/Chirp Signal</xpcblkName>
+					<SLblockPath>p1/User Controllers/Steering Controller/HAL-9000/Chirp Signal</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>f1</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+					<parameter>
+						<paramName>T</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+					<parameter>
+						<paramName>f2</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
 				<signal>
 					<sigName>Clock</sigName>
 					<xpcsigName>User Controllers/Steering Controller/HAL-9000/Clock</xpcsigName>
@@ -1687,6 +5001,171 @@ from roll</sigName>
 					<sigDim>[1, 1]</sigDim>
 				</signal>
 			</SubSystem>
+			<block>
+				<blkName>HAL-9000</blkName>
+				<xpcblkName>User Controllers/Steering Controller/HAL-9000</xpcblkName>
+				<SLblockPath>p1/User Controllers/Steering Controller/HAL-9000</SLblockPath>
+				<isSrc>[0 1 1]</isSrc>
+				<parameter>
+					<paramName>enabled</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+				<parameter>
+					<paramName>maneuver</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+				<parameter>
+					<paramName>amplitude</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+				<parameter>
+					<paramName>delay</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+			</block>
+			<block>
+				<blkName>Input Selector</blkName>
+				<xpcblkName>User Controllers/Steering Controller/Input Selector</xpcblkName>
+				<SLblockPath>p1/User Controllers/Steering Controller/Input Selector</SLblockPath>
+				<isSrc>[1 0 1]</isSrc>
+				<parameter>
+					<paramName>Value</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+			</block>
+			<block>
+				<blkName>Positive Toe Offset
+(per wheel)</blkName>
+				<xpcblkName>User Controllers/Steering Controller/Positive Toe Offset (per wheel)</xpcblkName>
+				<SLblockPath>p1/User Controllers/Steering Controller/Positive Toe Offset (per wheel)</SLblockPath>
+				<isSrc>[1 0 1]</isSrc>
+				<parameter>
+					<paramName>Value</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+			</block>
+			<block>
+				<blkName>D2R</blkName>
+				<xpcblkName>User Controllers/Steering Controller/D2R</xpcblkName>
+				<SLblockPath>p1/User Controllers/Steering Controller/D2R</SLblockPath>
+				<isSrc>[0 1 1]</isSrc>
+				<parameter>
+					<paramName>Gain</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+			</block>
+			<block>
+				<blkName>Steering
+Ratio1</blkName>
+				<xpcblkName>User Controllers/Steering Controller/Steering Ratio1</xpcblkName>
+				<SLblockPath>p1/User Controllers/Steering Controller/Steering Ratio1</SLblockPath>
+				<isSrc>[0 1 1]</isSrc>
+				<parameter>
+					<paramName>Gain</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+			</block>
+			<block>
+				<blkName>Steering Ratio</blkName>
+				<xpcblkName>User Controllers/Steering Controller/Steering Ratio</xpcblkName>
+				<SLblockPath>p1/User Controllers/Steering Controller/Steering Ratio</SLblockPath>
+				<isSrc>[0 1 1]</isSrc>
+				<parameter>
+					<paramName>Gain</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+			</block>
+			<block>
+				<blkName>Software
+Steering
+Limit</blkName>
+				<xpcblkName>User Controllers/Steering Controller/Software Steering Limit</xpcblkName>
+				<SLblockPath>p1/User Controllers/Steering Controller/Software Steering Limit</SLblockPath>
+				<isSrc>[0 1 1]</isSrc>
+				<parameter>
+					<paramName>UpperLimit</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+				<parameter>
+					<paramName>LowerLimit</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+			</block>
+			<block>
+				<blkName>Software
+Steering
+Limit1</blkName>
+				<xpcblkName>User Controllers/Steering Controller/Software Steering Limit1</xpcblkName>
+				<SLblockPath>p1/User Controllers/Steering Controller/Software Steering Limit1</SLblockPath>
+				<isSrc>[0 1 1]</isSrc>
+				<parameter>
+					<paramName>UpperLimit</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+				<parameter>
+					<paramName>LowerLimit</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+			</block>
+			<block>
+				<blkName>Switch</blkName>
+				<xpcblkName>User Controllers/Steering Controller/Switch</xpcblkName>
+				<SLblockPath>p1/User Controllers/Steering Controller/Switch</SLblockPath>
+				<isSrc>[0 3 1]</isSrc>
+				<parameter>
+					<paramName>Threshold</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+			</block>
+			<block>
+				<blkName>Heavy Filter</blkName>
+				<xpcblkName>User Controllers/Steering Controller/Heavy Filter</xpcblkName>
+				<SLblockPath>p1/User Controllers/Steering Controller/Heavy Filter</SLblockPath>
+				<isSrc>[0 1 1]</isSrc>
+				<parameter>
+					<paramName>Numerator</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+				<parameter>
+					<paramName>Denominator</paramName>
+					<dim>[1, 2]</dim>
+				</parameter>
+				<parameter>
+					<paramName>InitialStates</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+			</block>
+			<block>
+				<blkName>Nominal Filter</blkName>
+				<xpcblkName>User Controllers/Steering Controller/Nominal Filter</xpcblkName>
+				<SLblockPath>p1/User Controllers/Steering Controller/Nominal Filter</SLblockPath>
+				<isSrc>[0 1 1]</isSrc>
+				<parameter>
+					<paramName>Numerator</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+				<parameter>
+					<paramName>Denominator</paramName>
+					<dim>[1, 2]</dim>
+				</parameter>
+				<parameter>
+					<paramName>InitialStates</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+			</block>
+			<signal>
+				<sigName>D2R</sigName>
+				<xpcsigName>User Controllers/Steering Controller/D2R</xpcsigName>
+				<sigWidth>1</sigWidth>
+				<sigDim>[1, 1]</sigDim>
+			</signal>
+			<signal>
+				<sigName>Steering
+Ratio1</sigName>
+				<xpcsigName>User Controllers/Steering Controller/Steering Ratio1</xpcsigName>
+				<sigWidth>1</sigWidth>
+				<sigDim>[1, 1]</sigDim>
+			</signal>
 			<signal>
 				<sigName>Sum</sigName>
 				<xpcsigName>User Controllers/Steering Controller/Sum</xpcsigName>
@@ -1706,5 +5185,61 @@ from roll</sigName>
 				<sigDim>[1, 1]</sigDim>
 			</signal>
 		</SubSystem>
+		<block>
+			<blkName>Constant</blkName>
+			<xpcblkName>User Controllers/Constant</xpcblkName>
+			<SLblockPath>p1/User Controllers/Constant</SLblockPath>
+			<isSrc>[1 0 1]</isSrc>
+			<parameter>
+				<paramName>Value</paramName>
+				<dim>[1, 1]</dim>
+			</parameter>
+		</block>
+		<block>
+			<blkName>Constant1</blkName>
+			<xpcblkName>User Controllers/Constant1</xpcblkName>
+			<SLblockPath>p1/User Controllers/Constant1</SLblockPath>
+			<isSrc>[1 0 1]</isSrc>
+			<parameter>
+				<paramName>Value</paramName>
+				<dim>[1, 1]</dim>
+			</parameter>
+		</block>
+		<block>
+			<blkName>Constant5</blkName>
+			<xpcblkName>User Controllers/Constant5</xpcblkName>
+			<SLblockPath>p1/User Controllers/Constant5</SLblockPath>
+			<isSrc>[1 0 1]</isSrc>
+			<parameter>
+				<paramName>Value</paramName>
+				<dim>[1, 1]</dim>
+			</parameter>
+		</block>
+		<block>
+			<blkName>Switch</blkName>
+			<xpcblkName>User Controllers/Switch</xpcblkName>
+			<SLblockPath>p1/User Controllers/Switch</SLblockPath>
+			<isSrc>[0 3 1]</isSrc>
+			<parameter>
+				<paramName>Threshold</paramName>
+				<dim>[1, 1]</dim>
+			</parameter>
+		</block>
+		<signal>
+			<sigName>Constant</sigName>
+			<xpcsigName>User Controllers/Constant</xpcsigName>
+			<sigWidth>1</sigWidth>
+			<sigDim>[1, 1]</sigDim>
+		</signal>
 	</SubSystem>
+	<block>
+		<blkName>Model Parameters</blkName>
+		<xpcblkName>Model Parameters</xpcblkName>
+		<SLblockPath>. </SLblockPath>
+		<isSrc>[0 1 1]</isSrc>
+		<parameter>
+			<paramName>Ts</paramName>
+			<dim>[1,1]</dim>
+		</parameter>
+	</block>
 </Root>
