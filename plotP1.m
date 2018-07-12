@@ -35,22 +35,23 @@ alphafl = atan2(Vy + r*param.a,Vx - r*param.c) - (delta_LF - offset_delta_LF);
 alphafr = atan2(Vy + r*param.a,Vx + r*param.c) - (delta_RF - offset_delta_RF);
 
 %% Calculate a brush tire model
-param.Ca = 50000; param.mu = 2.8; param.mu_s = 1.0; % inside wheel 
+param.Ca = 50000; param.mu = 2.8; param.mu_s = 2.8; % inside wheel 
 %param.Ca = 45000; param.mu = 1.9; param.mu_s = 0.8; % outside wheel?
 alphaModel = (-20:0.5:20)'*pi/180;
-FzModel = (1800:200:6200)';
+FzModel = (1400:200:6200)';
 [alphaModel,FzModel] = meshgrid(alphaModel,FzModel);
 Calpha = param.Ca*sin(1.82*atan(2.9e-4*FzModel));   % from Chris' notes (see adaption from Pacejka using variable a with cp_\alpha instead of C_\alpha)
 mup = param.mu - (2e-5)*FzModel;                    % from Chris' notes
 mus = param.mu_s - (2e-5)*FzModel;                  % from Chris' notes
-mup = mup/4; mus = mus/4; % for comparison at different friction coeffs
+%mup = mup/4; mus = mus/4; % for comparison at different friction coeffs
 thetay = Calpha./(3*mup.*FzModel);
 sigmay = tan(alphaModel);
-asq = 1/3*FzModel*10^(-4); % half contact patch length
+asq = 1/2*FzModel*10^(-4); % half contact patch length
 FyModel = -Calpha.*sigmay + Calpha.^2./(3*mup.*FzModel).*(2-mus./mup).*abs(sigmay).*sigmay - Calpha.^3./(9*(mup.*FzModel).^2).*(1-2/3*mus./mup).*sigmay.^3;
 % Pacejka model - simpler but missing sliding friction
 %FyModel = -3*mup.*FzModel.*thetay.*sigmay*(1 - abs(thetay.*sigmay) + 1/3*(thetay.*sigmay).^2);
-MzModel = param.mu.*FzModel.*sqrt(asq).*thetay.*sigmay.*(1 - 3*abs(thetay.*sigmay) + 3*(thetay.*sigmay).^2 - abs(thetay.*sigmay).^3); % fill in with details from Pacejka book */
+%MzModel = param.mu.*FzModel.*sqrt(asq).*thetay.*sigmay.*(1 - 3*abs(thetay.*sigmay) + 3*(thetay.*sigmay).^2 - abs(thetay.*sigmay).^3); % fill in with details from Pacejka book */
+MzModel = sqrt(asq).*sigmay.*Calpha/3.*(1 - Calpha.*abs(sigmay)./(mup.*FzModel).*(2-mus./mup) + (Calpha.*sigmay./(mup.*FzModel)).^2.*(1-2/3*mus./mup) - (Calpha.*abs(sigmay)./(mup.*FzModel)).^3.*(4/27 - 1/9*mus./mup));
 satInds = abs(alphaModel) > 3*mup.*FzModel./(Calpha);
 FyModel(satInds) = -sign(alphaModel(satInds)).*mus(satInds).*FzModel(satInds);
 MzModel(satInds) = 0;
@@ -160,7 +161,7 @@ xlabel('Slip Angle (deg)')
 ylabel('Vertical Load (N)')
 zlabel('Lateral Force (N)')
 xlim([-15 15])
-ylim([1600 6200])
+ylim([1300 6200])
 hold on;
 hsurf = surf(alphaModel*180/pi,FzModel,FyModel,1.8*ones(size(FyModel)),'facecolor',[1 0.8 0.8],'edgealpha',1);
 %set(hsurf,'cdata',1.8*ones(size(FyModel)));
@@ -178,7 +179,8 @@ xlabel('Slip Angle (deg)')
 ylabel('Vertical Load (N)')
 zlabel('Steering Moment (Nm)')
 xlim([-15 15])
-ylim([1600 6200])
+ylim([1300 6200])
+zlim([-900 900])
 hold on;
 hsurf = surf(alphaModel*180/pi,FzModel,MzModel,1.8*ones(size(MzModel)),'facecolor',[1 0.8 0.8],'edgealpha',1);
 %set(hsurf,'cdata',1.8*ones(size(MzModel)));
