@@ -2,7 +2,7 @@
 % Force Transducers
 
 %clear all
-close all
+%close all
 
 % Load in a file if it's not already loaded
 if(~exist('fname','var'))
@@ -35,23 +35,22 @@ alphafl = atan2(Vy + r*param.a,Vx - r*param.c) - (delta_LF - offset_delta_LF);
 alphafr = atan2(Vy + r*param.a,Vx + r*param.c) - (delta_RF - offset_delta_RF);
 
 %% Calculate a brush tire model
-param.Ca = 50000; param.mu = 2.8; param.mu_s = 2.8; % inside wheel 
-%param.Ca = 45000; param.mu = 1.9; param.mu_s = 0.8; % outside wheel?
+param.Ca = 43000; param.mu = 2.6; param.mu_s = param.mu*0.93; % best values from fitting process
 alphaModel = (-20:0.5:20)'*pi/180;
 FzModel = (1400:200:6200)';
 [alphaModel,FzModel] = meshgrid(alphaModel,FzModel);
-Calpha = param.Ca*sin(1.82*atan(2.9e-4*FzModel));   % from Chris' notes (see adaption from Pacejka using variable a with cp_\alpha instead of C_\alpha)
+Calpha = param.Ca*sin(2.43*atan(1.54e-4*FzModel));   % from Chris' notes (see adaption from Pacejka using variable a with c_{px} instead of C_\alpha)
 mup = param.mu - (2e-5)*FzModel;                    % from Chris' notes
 mus = param.mu_s - (2e-5)*FzModel;                  % from Chris' notes
 %mup = mup/4; mus = mus/4; % for comparison at different friction coeffs
 thetay = Calpha./(3*mup.*FzModel);
 sigmay = tan(alphaModel);
-asq = 1/2*FzModel*10^(-4); % half contact patch length
+asq = 0.258*FzModel*1.5e-4; % half contact patch length
 FyModel = -Calpha.*sigmay + Calpha.^2./(3*mup.*FzModel).*(2-mus./mup).*abs(sigmay).*sigmay - Calpha.^3./(9*(mup.*FzModel).^2).*(1-2/3*mus./mup).*sigmay.^3;
 % Pacejka model - simpler but missing sliding friction
 %FyModel = -3*mup.*FzModel.*thetay.*sigmay*(1 - abs(thetay.*sigmay) + 1/3*(thetay.*sigmay).^2);
 %MzModel = param.mu.*FzModel.*sqrt(asq).*thetay.*sigmay.*(1 - 3*abs(thetay.*sigmay) + 3*(thetay.*sigmay).^2 - abs(thetay.*sigmay).^3); % fill in with details from Pacejka book */
-MzModel = sqrt(asq).*sigmay.*Calpha/3.*(1 - Calpha.*abs(sigmay)./(mup.*FzModel).*(2-mus./mup) + (Calpha.*sigmay./(mup.*FzModel)).^2.*(1-2/3*mus./mup) - (Calpha.*abs(sigmay)./(mup.*FzModel)).^3.*(4/27 - 1/9*mus./mup));
+MzModel = sqrt(asq).*sigmay.*Calpha/3.*(1 - Calpha.*abs(sigmay)./(mup.*FzModel).*(2-mus./mup) + (Calpha.^2.*sigmay./(mup.*FzModel)).^2.*(1-2/3*mus./mup) - (Calpha.^3.*abs(sigmay)./(mup.*FzModel)).^3.*(4/27 - 1/9*mus./mup));
 satInds = abs(alphaModel) > 3*mup.*FzModel./(Calpha);
 FyModel(satInds) = -sign(alphaModel(satInds)).*mus(satInds).*FzModel(satInds);
 MzModel(satInds) = 0;
@@ -126,7 +125,7 @@ figure('Name','Trail Calculations','NumberTitle','off')
 %tmr = 0;%.073;        % (m) mechanical trail of right wheel
 offset_Fy_LF = 0; offset_Fy_RF = 0;
 %offset_Fy_LF = -220; offset_Fy_RF = 375;  % needed if there are misalignments, but not too effective
-offset_Mz_LF = 48; offset_Mz_RF = -48;
+offset_Mz_LF = 40; offset_Mz_RF = -85;
 plot(t,[((-Wheel_Forces(:,11) + offset_Mz_LF - Tj_LF)./(Wheel_Forces(:,3) - offset_Fy_LF)).*(abs(Wheel_Forces(:,3)) > 100) ((-Wheel_Forces(:,12) + offset_Mz_RF - Tj_RF)./(Wheel_Forces(:,4) - offset_Fy_RF)).*(abs(Wheel_Forces(:,4)) > 100)]);
 linkHands(4) = gca;
 xlabel('Time (s)')
@@ -189,9 +188,9 @@ view([6 -8])
 %%
 figure('Name','Trail Curves','NumberTitle','off')
 hold off
-plot3(alphafl(dirInds)*180/pi,Wheel_Forces(dirInds,5),(-Wheel_Forces(dirInds,11) + offset_Mz_LF - Ma_LF(dirInds) - Tj_LF(dirInds))./(Wheel_Forces(dirInds,3)-offset_Fy_LF),'b.')
+plot3(alphafl(dirInds)*180/pi,Wheel_Forces(dirInds,5),(-Wheel_Forces(dirInds,11) + offset_Mz_LF + Tj_LF(dirInds))./(Wheel_Forces(dirInds,3)-offset_Fy_LF),'b.') % WHY IS THE SIGN CHANGED ON THE LEFT SIDE?
 hold on
-plot3(alphafr(dirInds)*180/pi,Wheel_Forces(dirInds,6),(-Wheel_Forces(dirInds,12) + offset_Mz_RF - Ma_RF(dirInds) - Tj_RF(dirInds))./(Wheel_Forces(dirInds,4)-offset_Fy_RF),'.','color',[0 0.5 0])
+plot3(alphafr(dirInds)*180/pi,Wheel_Forces(dirInds,6),(-Wheel_Forces(dirInds,12) + offset_Mz_RF + Tj_RF(dirInds))./(Wheel_Forces(dirInds,4)-offset_Fy_RF),'.','color',[0 0.5 0])
 hsurf = surf(alphaModel*180/pi,FzModel,-MzModel./FyModel,1.8*ones(size(MzModel)),'facecolor',[1 0.8 0.8],'edgealpha',0.5);
 xlabel('Slip Angle (deg)')
 ylabel('Vertical Load (N)')
@@ -200,5 +199,9 @@ xlim([-15 15])
 ylim([1600 6200])
 zlim([-0.05 0.5]);
 view([-83 -30])
+
+%% Try to back out the friction coefficient
+
+
 %% Link the x-axes of each of the time-based plots
 linkaxes(linkHands,'x')
