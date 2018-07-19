@@ -4976,6 +4976,36 @@ from roll</sigName>
 						<dim>[1, 1]</dim>
 					</parameter>
 				</block>
+				<block>
+					<blkName>Amplitude</blkName>
+					<xpcblkName>User Controllers/Steering Controller/HAL-9000/Amplitude</xpcblkName>
+					<SLblockPath>p1/User Controllers/Steering Controller/HAL-9000/Amplitude</SLblockPath>
+					<isSrc>[1 0 1]</isSrc>
+					<parameter>
+						<paramName>Value</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Delay</blkName>
+					<xpcblkName>User Controllers/Steering Controller/HAL-9000/Delay</xpcblkName>
+					<SLblockPath>p1/User Controllers/Steering Controller/HAL-9000/Delay</SLblockPath>
+					<isSrc>[1 0 1]</isSrc>
+					<parameter>
+						<paramName>Value</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Maneuver</blkName>
+					<xpcblkName>User Controllers/Steering Controller/HAL-9000/Maneuver</xpcblkName>
+					<SLblockPath>p1/User Controllers/Steering Controller/HAL-9000/Maneuver</SLblockPath>
+					<isSrc>[1 0 1]</isSrc>
+					<parameter>
+						<paramName>Value</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
 				<signal>
 					<sigName>Clock</sigName>
 					<xpcsigName>User Controllers/Steering Controller/HAL-9000/Clock</xpcsigName>
@@ -5008,18 +5038,6 @@ from roll</sigName>
 				<isSrc>[0 1 1]</isSrc>
 				<parameter>
 					<paramName>enabled</paramName>
-					<dim>[1, 1]</dim>
-				</parameter>
-				<parameter>
-					<paramName>maneuver</paramName>
-					<dim>[1, 1]</dim>
-				</parameter>
-				<parameter>
-					<paramName>amplitude</paramName>
-					<dim>[1, 1]</dim>
-				</parameter>
-				<parameter>
-					<paramName>delay</paramName>
 					<dim>[1, 1]</dim>
 				</parameter>
 			</block>

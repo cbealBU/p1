@@ -68,8 +68,9 @@ else
 end
 
 info.driver=lower(deblank(input('Driver: ','s')));
-info.testnum=str2num(input('Test number: ','s'));
 info.testloc=lower(deblank(input('Test Location: ','s')));
+info.testloc=lower(deblank(input('Tire Pressures: ','s')));
+info.testloc=lower(deblank(input('Ambient Temp: ','s')));
 
 description='';
 des=input('Description:  (End with a . on a line by itself.)\n','s');
