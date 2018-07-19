@@ -35,17 +35,17 @@ alphafl = atan2(Vy + r*param.a,Vx - r*param.c) - (delta_LF - offset_delta_LF);
 alphafr = atan2(Vy + r*param.a,Vx + r*param.c) - (delta_RF - offset_delta_RF);
 
 %% Calculate a brush tire model
-param.Ca = 43000; param.mu = 2.6; param.mu_s = param.mu*0.93; % best values from fitting process
+param.Ca = 44300; param.mu = 1.22; param.mu_s = param.mu*0.95; % best values from fitting process
 alphaModel = (-20:0.5:20)'*pi/180;
 FzModel = (1400:200:6200)';
 [alphaModel,FzModel] = meshgrid(alphaModel,FzModel);
-Calpha = param.Ca*sin(2.43*atan(1.54e-4*FzModel));   % from Chris' notes (see adaption from Pacejka using variable a with c_{px} instead of C_\alpha)
+Calpha = param.Ca*sin(1.446*atan(3.19e-4*FzModel));   % from Chris' notes (see adaption from Pacejka using variable a with c_{px} instead of C_\alpha)
 mup = param.mu - (2e-5)*FzModel;                    % from Chris' notes
 mus = param.mu_s - (2e-5)*FzModel;                  % from Chris' notes
 %mup = mup/4; mus = mus/4; % for comparison at different friction coeffs
 thetay = Calpha./(3*mup.*FzModel);
 sigmay = tan(alphaModel);
-asq = 0.258*FzModel*1.5e-4; % half contact patch length
+asq = 0.146*FzModel*1.5e-4; % half contact patch length
 FyModel = -Calpha.*sigmay + Calpha.^2./(3*mup.*FzModel).*(2-mus./mup).*abs(sigmay).*sigmay - Calpha.^3./(9*(mup.*FzModel).^2).*(1-2/3*mus./mup).*sigmay.^3;
 % Pacejka model - simpler but missing sliding friction
 %FyModel = -3*mup.*FzModel.*thetay.*sigmay*(1 - abs(thetay.*sigmay) + 1/3*(thetay.*sigmay).^2);

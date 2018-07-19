@@ -1,6 +1,6 @@
 % Tire model fitting code for data with new VS330 GPS and Michigan Scientific Wheel
 % Force Transducers
-%clear all
+clear all
 close all hidden
 
 livePlots = 1;
@@ -112,11 +112,11 @@ legend('\alpha_{FL}','\alpha_{FR}','\delta_{FL}','\delta_{FR}')
 
 % Range of params
 n = 7;
-CaRange = 40000 + 20000*rand(n,1); %(40000:5000:65000)';
+CaRange = 150000 + 20000*rand(n,1); %(40000:5000:65000)';
 CaSinARange = 1 + 2*rand(n,1); %(1:0.2:3)';
 CaSinPRange = 2.5 + 2*rand(n,1); %(2.5:0.2:4.5)';
-MuRange = 1.8 + 1.2*rand(n,1); %(1.8:0.1:3.0)';
-MusRange = 1.6 + 1.2*rand(n,1); %(1.6:0.1:2.8)';
+MuRange = 0.4 + 1.2*rand(n,1); %(1.8:0.1:3.0)';
+MusRange = 0.4 + 1.2*rand(n,1); %(1.6:0.1:2.8)';
 aRange = 0.1 + 0.2*rand(n,1); %(0.1:0.05:0.3)';
 
 
@@ -231,16 +231,16 @@ for jj = j1:length(MuRange)
                     
                     for nn = n1:length(CaSinPRange)
                         
-                        testMuVal = 1.0 + 1.8*rand(1);
+                        testMuVal = 0.7 + 1.2*rand(1);
                         testMu = testMuVal - (2e-5)*FzFinal;
-                        testMusVal = 0.7 + 0.3*rand(1);
+                        testMusVal = 0.7 + 0.4*rand(1);
                         testMus = testMuVal*testMusVal - (2e-5)*FzFinal;
                         
                         %testa = aRange(ll)*Fz*10^(-4); % half contact patch length
-                        testaVal = (0.25 + 0.25*rand(1));
-                        testa = testaVal*FzFinal*1.5e-4; % half contact patch length
+                        testaVal = (0.1 + 0.35*rand(1));
+                        testa = testaVal*FzFinal*1.0e-4; % half contact patch length
                         %testCa = CaRange(ii)*sin(CaSinARange(mm)*atan(CaSinPRange(nn)*1e-4*Fz));
-                        testCaVal = (25000 + 35000*rand(1));
+                        testCaVal = (20000 + 25000*rand(1));
                         testCaSinA = 0.75 + 3.75*rand(1);
                         testCaSinP = 1.5 + 3.5*rand(1);
                         testCa = testCaVal*sin(testCaSinA*atan(testCaSinP*1e-4*FzFinal));
@@ -256,10 +256,10 @@ for jj = j1:length(MuRange)
                         FyFit(satInds) = -sign(alphaFinal(satInds)).*testMus(satInds).*FzFinal(satInds);
                         MzFit(satInds) = 0;
                         
-                        %fitVal = sqrt(mean(([FyFinal.*abs(FyFinal).*abs(alphaFinal); 0.1*MzFinal.*abs(MzFinal).*abs(alphaFinal)] - [FyFit.*abs(FyFinal).*abs(alphaFinal); 0.1*MzFit.*abs(MzFinal).*abs(alphaFinal)]).^2)); 
-                        
+                        fitVal = sqrt(mean(([FyFinal.*abs(FyFinal).*abs(alphaFinal); 0.1*MzFinal.*abs(MzFinal).*abs(alphaFinal)] - [FyFit.*abs(FyFinal).*abs(alphaFinal); 0.1*MzFit.*abs(MzFinal).*abs(alphaFinal)]).^2)); 
                         % fit only moments
-                        fitVal = sqrt(mean((MzFinal.*abs(MzFinal).*abs(alphaFinal) - MzFit.*abs(MzFinal).*abs(alphaFinal)).^2)); 
+                        %fitVal = sqrt(mean((MzFinal.*abs(MzFinal).*abs(alphaFinal) - MzFit.*abs(MzFinal).*abs(alphaFinal)).^2)); 
+                        
                         iterations = iterations + 1;
                         if fitVal < bestFit % if a better fit has been found, update the latch variables
                             bestCa = testCaVal;
@@ -281,7 +281,7 @@ for jj = j1:length(MuRange)
                                 CaPlot = testCaVal;%*sin(testCaSinA*atan(testCaSinP*(1e-4).*FzModel));
                                 testMu = testMuVal - (2e-5)*FzModel;
                                 testMus = testMuVal*testMusVal - (2e-5)*FzModel;
-                                testa = testaVal*FzModel*1.5e-4; % half contact patch length
+                                testa = testaVal*FzModel*1.0e-4; % half contact patch length
                                 FyModel = -CaPlot.*sigmay + CaPlot.^2./(3*testMu.*FzModel).*(2-testMus./testMu).*abs(sigmay).*sigmay - CaPlot.^3./(9*(testMu.*FzModel).^2).*(1-2/3*testMus./testMu).*sigmay.^3;
                                 MzModel = CaPlot.*sqrt(testa).*sigmay/3.*(1 - CaPlot.*abs(sigmay)./(testMu.*FzModel).*(2-testMus./testMu) + CaPlot.^2.*sigmay.^2./(testMu.*FzModel).^2.*(1 - 2/3*testMus./testMu) - CaPlot.^3.*abs(sigmay).^3./(testMu.*FzModel).^3.*(4/27-1/9*testMus./testMu)); % fill in with details from Pacejka book */
                                 satInds = abs(alphaModel) > 3*testMu.*FzModel./(CaPlot);
