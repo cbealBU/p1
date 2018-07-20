@@ -4,18 +4,23 @@ function [Fy, Mz, tp] =  LuGre(alpha, Ux, Fz, profile)
 % LuGre Parameters
 gamma = 1; %0.75;     % Constant parameter to capture the steady-steady 
                  % friction-slip characteristic
-sigma_0 = 170;   % Bristle Stiffness
+sigma_0 = 100;   % Bristle Stiffness
 sigma_2 = 0;%.0024;% Bristle Viscosity
 mu_c = 1.3;     % Normalized Coulomb Friction
 mu_s = 1.2;      % Normalized Stiction Friction
 V_s = 3.96;      % Stribeck Velocity
-P_i = 235000;    % Inflation pressure (Pa)
+P_i = 0.3*235000;    % Inflation pressure (Pa)
 w = 0.185;      % Effective inflated width (m)
-%L = 8/7*Fz/(P_i*w);   % Calculated tire contact length (using trapezoidal model and a = 0.02L, b = 0.77L)
-L = 0.25;        % Tire Contact Length
 
-a = 0.02*L;       % Trasition point from linear to constant load distribution
-b = 0.85*L;       % Transition point from constant back to linear load distribution 
+if('t' == profile)
+    xsi_a = 0.10;
+    xsi_b = 0.75;
+    fmax = P_i*w;     % assume that the maximum force is equivalent to the tire air pressure (times width)
+    L = (2*Fz)/(fmax*(1 - xsi_a + xsi_b));   % Calculated tire contact length (using trapezoidal model and xsi_a and xsi_b)    
+else
+    L = 0.12; %35;        % Tire Contact Length
+end
+
 
 % Intermediate variables for the lateral deflections
 vr = -Ux*sin(alpha);
@@ -46,7 +51,9 @@ end
 
 % Trapezoidal normal force profile
 if('t' == profile)
-    fmax = 2/(L - a + b)*Fz;
+    a = xsi_a*L;       % Trasition point from linear to constant load distribution
+    b = xsi_b*L;       % Transition point from constant back to linear load distribution 
+
     alpha1 = fmax/a;
     alpha2 = -fmax/(L-b);
     beta2 = L*fmax/(L-b);

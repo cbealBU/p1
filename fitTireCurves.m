@@ -1,6 +1,6 @@
 % Tire model fitting code for data with new VS330 GPS and Michigan Scientific Wheel
 % Force Transducers
-clear all
+%clear all
 close all hidden
 
 livePlots = 1;
@@ -9,43 +9,12 @@ livePlots = 1;
 if(~exist('fname','var'))
     [fname, pathname] = uigetfile('*.mat','Choose data file to open');
     load([pathname fname])
-    % Break up the data into the different variables
-    names
-    % Pull out some useful kinematic info
-    beta = SSest(:,15); % sideslip
-    Vx = SSest(:,9); % longitudinal velocity
-    Vy = SSest(:,12); % lateray velocity
-    r = SSest(:,4); % yaw rate
-    delta_LF = PostProc(:,1);
-    delta_RF = PostProc(:,2);
-    
-    clear tInds % clear the time indices if a new file is loaded
+    loadP1data
+    clear tInds % clear the time indices if a new file is loaded    
 end
-
-
-% Determine the steering angle for straight-line driving
-offset_delta_LF = 0*pi/180;
-offset_delta_RF = 0*pi/180;
-
-% Calculate the slip angles
-param.a = 1.35; param.b = 1.15; param.c = 0.81; param.m = 1724;
-alphafl = atan2(Vy + r*param.a,Vx - r*param.c) - (delta_LF - offset_delta_LF);
-alphafr = atan2(Vy + r*param.a,Vx + r*param.c) - (delta_RF - offset_delta_RF);
-
 
 % If we're starting with a fresh data set
 if(~exist('tInds','var'))
-    % Pull out some useful kinematic info
-    beta = SSest(:,15); % sideslip
-    Vx = SSest(:,9); % longitudinal velocity
-    Vy = SSest(:,12); % lateray velocity
-    r = SSest(:,4); % yaw rate
-    delta_LF = PostProc(:,1);
-    delta_RF = PostProc(:,2);
-    % Calculate the slip angles
-    alphafl = atan2(Vy + r*param.a,Vx - r*param.c) - (delta_LF - offset_delta_LF);
-    alphafr = atan2(Vy + r*param.a,Vx + r*param.c) - (delta_RF - offset_delta_RF);
-    
     figure(1)
     subplot(211)
     plot(t,[beta r Vx]);
@@ -84,7 +53,12 @@ if(~exist('tInds','var'))
     alphafr = alphafr(tInds);
     delta_LF = delta_LF(tInds);
     delta_RF = delta_RF(tInds);
-    
+    Fy_LF = Fy_LF(tInds);
+    Fy_RF = Fy_RF(tInds);
+    Fz_LF = Fz_LF(tInds);
+    Fz_RF = Fz_RF(tInds);
+    Mz_LF = Mz_LF(tInds);
+    Mz_RF = Mz_RF(tInds);    
 end
 
 % Plot/replot with the selected time subset
@@ -111,40 +85,27 @@ legend('\alpha_{FL}','\alpha_{FR}','\delta_{FL}','\delta_{FR}')
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Range of params
-n = 7;
-CaRange = 150000 + 20000*rand(n,1); %(40000:5000:65000)';
-CaSinARange = 1 + 2*rand(n,1); %(1:0.2:3)';
-CaSinPRange = 2.5 + 2*rand(n,1); %(2.5:0.2:4.5)';
-MuRange = 0.4 + 1.2*rand(n,1); %(1.8:0.1:3.0)';
-MusRange = 0.4 + 1.2*rand(n,1); %(1.6:0.1:2.8)';
-aRange = 0.1 + 0.2*rand(n,1); %(0.1:0.05:0.3)';
+n = 10;
+CaRange = linspace(35000,44000,n);
+CaSinARange = linspace(1,3,n);
+CaSinPRange = linspace(2.5,4.5,n);
+MuRange = linspace(0.8,1.4,n);
+MusRange = linspace(0.8,1.0,n);
+aRange = linspace(0.1,0.5,n);
 
 
 if(~exist('alphaFinal','var'))
     
-    % Look up mechanical trail and calculate aligning moment from mechanical
-    % trail
-    p1_params;
-    sglu = p1_sglu(param);
-    tml = interp1(sglu.fl.sa,sglu.fl.mt,delta_LF);
-    tmr = interp1(sglu.fr.sa,sglu.fr.mt,delta_RF);
-    jal = interp1(sglu.fl.sa,sglu.fl.ja,delta_LF);
-    jar = interp1(sglu.fr.sa,sglu.fr.ja,delta_RF);
-    Ma_LF = tml.*Wheel_Forces(tInds,3);
-    Ma_RF = tmr.*Wheel_Forces(tInds,4);
-    Tj_LF = jal.*Wheel_Forces(tInds,5);
-    Tj_RF = jar.*Wheel_Forces(tInds,6);
-    
     % Vectors to fit (after offsets)
     alpha = [alphafl; alphafr];
     offset_Fy_LF = 0; offset_Fy_RF = 0;
-    offset_Mz_LF = 40; offset_Mz_RF = -85;
-    Fz = [Wheel_Forces(tInds,5); Wheel_Forces(tInds,6)];
-    Fy = [Wheel_Forces(tInds,3) - offset_Fy_LF; Wheel_Forces(tInds,4) - offset_Fy_RF];
-    Mz = [Wheel_Forces(tInds,11) - offset_Mz_LF - Tj_LF; Wheel_Forces(tInds,12) - offset_Mz_RF - Tj_RF];
+    offset_Mz_LF = 0; offset_Mz_RF = 0;
+    Fz = [Fz_LF; Fz_RF];
+    Fy = [Fy_LF - offset_Fy_LF; Fy_RF - offset_Fy_RF];
+    Mz = [Mz_LF - offset_Mz_LF; Mz_RF - offset_Mz_RF];
     
-    alphaGrid = linspace(-20,20,80)*pi/180;
-    FzGrid = linspace(1600,6600,80);
+    alphaGrid = linspace(-20,20,120)*pi/180;
+    FzGrid = linspace(1600,6600,120);
     FyGrid = zeros(length(alphaGrid));
     MzGrid = zeros(length(alphaGrid));
     dataCnt = zeros(length(alphaGrid));
@@ -159,7 +120,7 @@ if(~exist('alphaFinal','var'))
     end
     
     [alphaGridM,FzGridM] = meshgrid(alphaGrid,FzGrid);
-    nonZeros = find(dataCnt > 2000);
+    nonZeros = find(dataCnt > 200);
     alphaFinal = alphaGridM(nonZeros);
     FzFinal = FzGridM(nonZeros);
     FyFinal = FyGrid(nonZeros);
@@ -217,7 +178,7 @@ iterations = 1;
 N = length(CaRange)*length(aRange)*length(MuRange)*length(MuRange)*length(CaSinARange)*length(CaSinPRange); % determine number of valid iterations (taking into account Mus can't be greater than Mu)
 msgStrg = sprintf('Calculating fit... %d vars, est %.2f mins',N,0.13*N/60);
 hWait = waitbar(0,msgStrg);
-for jj = j1:length(MuRange)
+%for jj = j1:length(MuRange)
     %testMu = MuRange(jj) - (2e-5)*Fz;
     for kk = k1:length(MusRange)
         %testMus = MusRange(kk) - (2e-5)*Fz;
@@ -231,18 +192,19 @@ for jj = j1:length(MuRange)
                     
                     for nn = n1:length(CaSinPRange)
                         
-                        testMuVal = 0.7 + 1.2*rand(1);
-                        testMu = testMuVal - (2e-5)*FzFinal;
-                        testMusVal = 0.7 + 0.4*rand(1);
+                        testMuVal = 1.25; %0.7 + 1.2*rand(1);
+                        testMu = 1.25 - (2e-5)*FzFinal;
+                        testMusVal = 0.7 + 0.3*rand(1);
                         testMus = testMuVal*testMusVal - (2e-5)*FzFinal;
                         
                         %testa = aRange(ll)*Fz*10^(-4); % half contact patch length
-                        testaVal = (0.1 + 0.35*rand(1));
-                        testa = testaVal*FzFinal*1.0e-4; % half contact patch length
+                        testaVal = (0.8 + 0.35*rand(1));
+                        testMuVal = 3e-5 + 8e-5*rand(1);
+                        testa = testaVal*FzFinal*testMuVal; % half contact patch length
                         %testCa = CaRange(ii)*sin(CaSinARange(mm)*atan(CaSinPRange(nn)*1e-4*Fz));
-                        testCaVal = (20000 + 25000*rand(1));
-                        testCaSinA = 0.75 + 3.75*rand(1);
-                        testCaSinP = 1.5 + 3.5*rand(1);
+                        testCaVal = (38000 + 12000*rand(1));
+                        testCaSinA = 1 + 1.75*rand(1);
+                        testCaSinP = 2.5 + 1.5*rand(1);
                         testCa = testCaVal*sin(testCaSinA*atan(testCaSinP*1e-4*FzFinal));
                         % Calculate the model
                         sigmay = tan(alphaFinal);
@@ -256,9 +218,9 @@ for jj = j1:length(MuRange)
                         FyFit(satInds) = -sign(alphaFinal(satInds)).*testMus(satInds).*FzFinal(satInds);
                         MzFit(satInds) = 0;
                         
-                        fitVal = sqrt(mean(([FyFinal.*abs(FyFinal).*abs(alphaFinal); 0.1*MzFinal.*abs(MzFinal).*abs(alphaFinal)] - [FyFit.*abs(FyFinal).*abs(alphaFinal); 0.1*MzFit.*abs(MzFinal).*abs(alphaFinal)]).^2)); 
+                        %fitVal = sqrt(mean(([FyFinal; MzFinal] - [FyFit; MzFit]).^2)); 
                         % fit only moments
-                        %fitVal = sqrt(mean((MzFinal.*abs(MzFinal).*abs(alphaFinal) - MzFit.*abs(MzFinal).*abs(alphaFinal)).^2)); 
+                        fitVal = sqrt(mean((MzFinal - MzFit).^2)); 
                         
                         iterations = iterations + 1;
                         if fitVal < bestFit % if a better fit has been found, update the latch variables
@@ -279,9 +241,9 @@ for jj = j1:length(MuRange)
                                 % Calculate the model
                                 sigmay = tan(alphaModel);
                                 CaPlot = testCaVal;%*sin(testCaSinA*atan(testCaSinP*(1e-4).*FzModel));
-                                testMu = testMuVal - (2e-5)*FzModel;
-                                testMus = testMuVal*testMusVal - (2e-5)*FzModel;
-                                testa = testaVal*FzModel*1.0e-4; % half contact patch length
+                                testMu = 1.25 - (2e-5)*FzModel;
+                                testMus = 1.25*testMusVal - (2e-5)*FzModel;
+                                testa = testaVal*FzModel*testMuVal; % half contact patch length
                                 FyModel = -CaPlot.*sigmay + CaPlot.^2./(3*testMu.*FzModel).*(2-testMus./testMu).*abs(sigmay).*sigmay - CaPlot.^3./(9*(testMu.*FzModel).^2).*(1-2/3*testMus./testMu).*sigmay.^3;
                                 MzModel = CaPlot.*sqrt(testa).*sigmay/3.*(1 - CaPlot.*abs(sigmay)./(testMu.*FzModel).*(2-testMus./testMu) + CaPlot.^2.*sigmay.^2./(testMu.*FzModel).^2.*(1 - 2/3*testMus./testMu) - CaPlot.^3.*abs(sigmay).^3./(testMu.*FzModel).^3.*(4/27-1/9*testMus./testMu)); % fill in with details from Pacejka book */
                                 satInds = abs(alphaModel) > 3*testMu.*FzModel./(CaPlot);
@@ -316,7 +278,7 @@ for jj = j1:length(MuRange)
                                 ylim([1600 6200])
                                 hold on;
                                 hsurf = surf(alphaModel*180/pi,FzModel,MzModel,1.8*ones(size(MzModel)),'facecolor',[1 0.8 0.8],'edgealpha',1);
-                                view([6 -8])
+                                view([4 20])
                             end
                         end
                     end
@@ -324,7 +286,7 @@ for jj = j1:length(MuRange)
             end
         end
     end
-end
+%end
 close(hWait);
 
 % Give final RMS values

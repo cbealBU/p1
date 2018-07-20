@@ -30,25 +30,58 @@ Fz = [0; 0; 3850];
 F = dot(WFT - CPC, Fz)
 M = cross(WFT - CPC, Fz)
 
-% Back-calculate the suspension angles
-WzL = sqrt(Wheel_Forces(:,1).^2 + Wheel_Forces(:,3).^2 + Wheel_Forces(:,5).^2);
-WzR = sqrt(Wheel_Forces(:,2).^2 + Wheel_Forces(:,4).^2 + Wheel_Forces(:,6).^2);
+% From here on, working with data, so make sure names.m has been run
+names
 
-% anglesL = zeros(length(t),2);
-% flagsL = zeros(length(t),1);
-% fValL = zeros(length(t),3);
-% anglesR = zeros(length(t),2);
-% flagsR = zeros(length(t),1);
-% fValR = zeros(length(t),3);
-% 
-% options = optimoptions(@fsolve,'Algorithm','levenberg-marquardt','Display','off','TolFun',1e-4);
-% hWait = waitbar(0,'Solving for angles');
-% for i = 1:20:length(t)
-%     [anglesL(i,:),fValL(i,:),flagsL(i)] = fsolve(@(x)SuspAngles(x,[Wheel_Forces(i,1); Wheel_Forces(i,3); Wheel_Forces(i,5)],WzL(i)),[0; -8]*pi/180,options);
-%     [anglesR(i,:),fValR(i,:),flagsR(i)] = fsolve(@(x)SuspAngles(x,[Wheel_Forces(i,2); Wheel_Forces(i,4); Wheel_Forces(i,6)],WzR(i)),[0; 8]*pi/180,options);
-%     waitbar(i/length(t),hWait);
-% end
-% close(hWait);
+% Back-calculate the suspension angles
+%WzL = sqrt(Wheel_Forces(:,1).^2 + Wheel_Forces(:,3).^2 + Wheel_Forces(:,5).^2);
+%WzR = sqrt(Wheel_Forces(:,2).^2 + Wheel_Forces(:,4).^2 + Wheel_Forces(:,6).^2);
+
+anglesL = zeros(length(t),2);
+flagsL = zeros(length(t),1);
+fValL = zeros(length(t),3);
+anglesR = zeros(length(t),2);
+flagsR = zeros(length(t),1);
+fValR = zeros(length(t),3);
+
+options = optimoptions(@fsolve,'Algorithm','levenberg-marquardt','Display','off','TolFun',1e-4);
+hWait = waitbar(0,'Solving for angles');
+iterations = 0;
+for i = 1:length(t)
+    iterations = iterations + 1;
+    [anglesL(iterations,:),fValL(iterations,:),flagsL(iterations)] = fsolve(@(x)SuspAngles(x,[Wheel_Forces(i,1); Wheel_Forces(i,3); Wheel_Forces(i,5)]),[0; -8]*pi/180,options);
+    [anglesR(iterations,:),fValR(iterations,:),flagsR(iterations)] = fsolve(@(x)SuspAngles(x,[Wheel_Forces(i,2); Wheel_Forces(i,4); Wheel_Forces(i,6)]),[0; 8]*pi/180,options);
+    waitbar(i/length(t),hWait);
+end
+close(hWait);
+
+%%
+deltaL = PostProc(:,1);
+deltaR = PostProc(:,2);
+gammaL = anglesL(:,1);
+thetaL = anglesL(:,2);
+gammaR = anglesR(:,1);
+thetaR = anglesR(:,2);
+
+%thetaCoefsL = polyfit(deltaL,thetaL,2);
+%thetaCoefsR = polyfit(deltaR,thetaR,2);
+%gammaCoefsL = polyfit(deltaL,gammaL,8);
+%gammaCoefsR = polyfit(deltaR,gammaR,8);
+
+figure(1); hold off; plot(deltaL*180/pi,thetaL*180/pi,deltaR*180/pi,thetaR*180/pi)
+hold all; plot(deltaL*180/pi,polyval(thetaCoefsL,deltaL)*180/pi,deltaR*180/pi,polyval(thetaCoefsR,deltaR)*180/pi,'linewidth',2)
+legend('LF Data','RF Data','LF PolyFit','RF PolyFit')
+xlabel('Tire Steer Angle (deg)'); ylabel('WFT Stator Rotation (deg)');
+figure(2); hold off; plot(deltaL*180/pi,gammaL*180/pi,deltaR*180/pi,gammaR*180/pi)
+hold all; plot(deltaL*180/pi,polyval(gammaCoefsL,deltaL)*180/pi,deltaR*180/pi,polyval(gammaCoefsR,deltaR)*180/pi,'linewidth',2)
+legend('LF Data','RF Data','LF PolyFit','RF PolyFit')
+xlabel('Tire Steer Angle (deg)'); ylabel('Wheel Lean Angle (deg)');
+
+return;
+
+inds = linspace(1,length(t),20);
+
+
 %%
 zRotL = zeros(length(t),3);
 zRotR = zeros(length(t),3);

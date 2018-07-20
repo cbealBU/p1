@@ -8,76 +8,14 @@
 if(~exist('fname','var'))
     [fname, pathname] = uigetfile('*.mat','Choose data file to open');
     load([pathname fname])
+    loadP1data
 end
 
-% Break up the data into the different variables
-names
-
-% Pull out some useful kinematic info
-beta = SSest(:,15); %GPS(:,13)-GPS(:,12);
-Vx = SSest(:,9);
-Vy = SSest(:,12);
-r = SSest(:,4); % yaw rate
-delta_LF = PostProc(:,1);
-delta_RF = PostProc(:,2);
-
-% Determine the steering angle for straight-line driving
-offset_delta_LF = 0; %0.1*pi/180;
-offset_delta_RF = 0; %-0.1*pi/180;
-%offset_delta_RF = offset_delta_RF + 2.25*pi/180; % because of bad initialization
-
-% Calculate the slip angles
-%param.a = 1.35; param.b = 1.15; param.c = 0.81; param.m = 1724;
-p1_params;
-% watch units here: GPS speed in m/s, beta in rad, yaw rate (INS(:,1)) in
-% rad/s, and steering angle PostProc(:,1/2) in rad
-alphafl = atan2(Vy + r*param.a,Vx - r*param.c) - (delta_LF - offset_delta_LF);
-alphafr = atan2(Vy + r*param.a,Vx + r*param.c) - (delta_RF - offset_delta_RF);
-
-%% Calculate a brush tire model
-param.Ca = 44300; param.mu = 1.22; param.mu_s = param.mu*0.95; % best values from fitting process
-alphaModel = (-20:0.5:20)'*pi/180;
-FzModel = (1400:200:6200)';
-[alphaModel,FzModel] = meshgrid(alphaModel,FzModel);
-Calpha = param.Ca*sin(1.446*atan(3.19e-4*FzModel));   % from Chris' notes (see adaption from Pacejka using variable a with c_{px} instead of C_\alpha)
-mup = param.mu - (2e-5)*FzModel;                    % from Chris' notes
-mus = param.mu_s - (2e-5)*FzModel;                  % from Chris' notes
-%mup = mup/4; mus = mus/4; % for comparison at different friction coeffs
-thetay = Calpha./(3*mup.*FzModel);
-sigmay = tan(alphaModel);
-asq = 0.146*FzModel*1.5e-4; % half contact patch length
-FyModel = -Calpha.*sigmay + Calpha.^2./(3*mup.*FzModel).*(2-mus./mup).*abs(sigmay).*sigmay - Calpha.^3./(9*(mup.*FzModel).^2).*(1-2/3*mus./mup).*sigmay.^3;
-% Pacejka model - simpler but missing sliding friction
-%FyModel = -3*mup.*FzModel.*thetay.*sigmay*(1 - abs(thetay.*sigmay) + 1/3*(thetay.*sigmay).^2);
-%MzModel = param.mu.*FzModel.*sqrt(asq).*thetay.*sigmay.*(1 - 3*abs(thetay.*sigmay) + 3*(thetay.*sigmay).^2 - abs(thetay.*sigmay).^3); % fill in with details from Pacejka book */
-MzModel = sqrt(asq).*sigmay.*Calpha/3.*(1 - Calpha.*abs(sigmay)./(mup.*FzModel).*(2-mus./mup) + (Calpha.^2.*sigmay./(mup.*FzModel)).^2.*(1-2/3*mus./mup) - (Calpha.^3.*abs(sigmay)./(mup.*FzModel)).^3.*(4/27 - 1/9*mus./mup));
-satInds = abs(alphaModel) > 3*mup.*FzModel./(Calpha);
-FyModel(satInds) = -sign(alphaModel(satInds)).*mus(satInds).*FzModel(satInds);
-MzModel(satInds) = 0;
-CamberThrust_LF = 0; %-1200/(9*pi/180)*GPS(:,14)*2/3;
-CamberThrust_RF = 0; % 1200/(9*pi/180)*GPS(:,14)*1.5;
-
-% Look up mechanical trail and calculate aligning moment from mechanical
-% trail
-sglu = p1_sglu(param);
-tml = interp1(sglu.fl.sa,sglu.fl.mt,delta_LF);
-tmr = interp1(sglu.fr.sa,sglu.fr.mt,delta_RF);
-jal = interp1(sglu.fl.sa,sglu.fl.ja,delta_LF);
-jar = interp1(sglu.fr.sa,sglu.fr.ja,delta_RF);
-Ma_LF = tml.*Wheel_Forces(:,3);
-Ma_RF = tmr.*Wheel_Forces(:,4);
-Tj_LF = jal.*Wheel_Forces(:,5);
-Tj_RF = jar.*Wheel_Forces(:,6);
-
-%% a simple low-pass differentiating filter
-wc = 10; Ts = 0.002;
-num=wc*2*pi*[1 -1];
-den=[1 wc*2*pi*Ts-1];
-tInds = t > 0 & t < 450; %ibegin = 70*500; iend = 430*500;
-deltadotLF = filter(num,den,PostProc(:,1))/160;
-deltadotRF = filter(num,den,PostProc(:,2))/160;
-
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%   Data plotting section
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Plot the vehicle states
 figure('Name','Vehicle States','NumberTitle','off')
 plot(t,[beta r Vx]);
@@ -87,13 +25,14 @@ ylim([-10 20])
 title('Vehicle States (not Kalman Filtered)')
 legend('Sideslip Angle (deg)','Yaw Rate (rad/s)','Longitudinal Velocity (m/s)')
 
-figure('Name','Vehicle Position','NumberTitle','off')
-%idx = find(GPS(:,15) == 4);
-plot(SSest(:,16),SSest(:,17))
-axis equal;
-xlabel('East (m)')
-ylabel('North (m)')
-%overheadPlot() % CEB: swap this in later
+% CEB: this does not seem to work with the KF data (coordinate system issue?)
+% figure('Name','Vehicle Position','NumberTitle','off')
+% %idx = find(GPS(:,15) == 4);
+% plot(SSest(:,16),SSest(:,17))
+% axis equal;
+% xlabel('East (m)')
+% ylabel('North (m)')
+% %overheadPlot() % CEB: swap this in later
 
 figure('Name','Accelerations','NumberTitle','off')
 plot(t,SSest(:,[11 14])/9.81);
@@ -105,15 +44,15 @@ legend('CG ax','CG ay')
 
 figure('Name','Forces/Moments','NumberTitle','off')
 hold off;
-plot(t,Wheel_Forces(:,5),'color',[0 0 0.7]);
+plot(t,Fz_LF,'color',[0 0 0.7]);
 hold on;
-plot(t,Wheel_Forces(:,6),'color',[0 0.4 0]);
-plot(t,-Wheel_Forces(:,5),'color',[0 0 0.7]);
-plot(t,-Wheel_Forces(:,6),'color',[0 0.4 0]);
-hl(1) = plot(t,Wheel_Forces(:,3),'color',[0 0 1]);
-hl(2) = plot(t,Wheel_Forces(:,4),'color',[0 0.7 0]);
-hl(3) = plot(t,Wheel_Forces(:,11),'r');
-hl(4) = plot(t,Wheel_Forces(:,12),'c');
+plot(t,Fz_RF,'color',[0 0.4 0]);
+plot(t,-Fz_LF,'color',[0 0 0.7]);
+plot(t,-Fz_RF,'color',[0 0.4 0]);
+hl(1) = plot(t,Fy_LF,'color',[0 0 1]);
+hl(2) = plot(t,Fy_RF,'color',[0 0.7 0]);
+hl(3) = plot(t,Mz_LF,'r');
+hl(4) = plot(t,Mz_RF,'c');
 linkHands(3) = gca;
 xlabel('Time (s)')
 ylabel('UNCORRECTED Forces/Moments (N/Nm)')
@@ -124,16 +63,15 @@ figure('Name','Trail Calculations','NumberTitle','off')
 %tml = 0;%.058;        % (m) mechanical trail of left wheel
 %tmr = 0;%.073;        % (m) mechanical trail of right wheel
 offset_Fy_LF = 0; offset_Fy_RF = 0;
-%offset_Fy_LF = -220; offset_Fy_RF = 375;  % needed if there are misalignments, but not too effective
-offset_Mz_LF = 40; offset_Mz_RF = -85;
-plot(t,[((-Wheel_Forces(:,11) + offset_Mz_LF - Tj_LF)./(Wheel_Forces(:,3) - offset_Fy_LF)).*(abs(Wheel_Forces(:,3)) > 100) ((-Wheel_Forces(:,12) + offset_Mz_RF - Tj_RF)./(Wheel_Forces(:,4) - offset_Fy_RF)).*(abs(Wheel_Forces(:,4)) > 100)]);
+offset_Mz_LF = 0; offset_Mz_RF = 0;
+plot(t,[(-(Mz_LF - offset_Mz_LF)./(Fy_LF - offset_Fy_LF)).*(abs(Fy_LF) > 100) (-(Mz_RF - offset_Mz_RF)./(Fy_RF - offset_Fy_RF)).*(abs(Fy_RF) > 100)]);
 linkHands(4) = gca;
 xlabel('Time (s)')
 ylabel('Pneumatic Trail (m)')
 legend('LF','RF')
 
 figure('Name','Longitudinal Force/Rolling Moment','NumberTitle','off')
-plot(t,Wheel_Forces(:,[1:2 9:10]));
+plot(t,[Fx_LF Fx_RF My_LF My_RF]);
 linkHands(5) = gca;
 xlabel('Time (s)')
 ylabel('Forces/Moments (N/Nm) - (+) indicates braking force')
@@ -147,61 +85,90 @@ xlabel('Time (s)')
 ylabel('Slip Angle (deg)')
 legend('\alpha_{FL}','\alpha_{FR}','\delta_{FL}','\delta_{FR}')
 
-%%
-figure('Name','Tire Force Curves','NumberTitle','off')
+% Link the x-axes of each of the time-based plots
+linkaxes(linkHands,'x')
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%   Model matching section
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Calculate a brush tire model
+param.Ca = 55000; param.mu = 1.18; param.mu_s = param.mu*0.96; % best values from fitting process
+alphaModel = (-25:0.5:25)'*pi/180;
+FzModel = (1400:200:6200)';
+[alphaModel,FzModel] = meshgrid(alphaModel,FzModel);
+Calpha = param.Ca*sin(1.0*atan(3.25e-4*FzModel));   % from Chris' notes (see adaption from Pacejka using variable a with c_{px} instead of C_\alpha)
+mup = param.mu - (2e-5)*FzModel;                    % from Chris' notes
+mus = param.mu_s - (2e-5)*FzModel;                  % from Chris' notes
+%mup = mup/4; mus = mus/4; % for comparison at different friction coeffs
+thetay = Calpha./(3*mup.*FzModel);
+sigmay = tan(alphaModel);
+asq = 0.3*FzModel*2e-5; % half contact patch length
+FyModel = -Calpha.*sigmay + Calpha.^2./(3*mup.*FzModel).*(2-mus./mup).*abs(sigmay).*sigmay - Calpha.^3./(9*(mup.*FzModel).^2).*(1-2/3*mus./mup).*sigmay.^3;
+% Pacejka model - simpler but missing sliding friction
+%FyModel = -3*mup.*FzModel.*thetay.*sigmay*(1 - abs(thetay.*sigmay) + 1/3*(thetay.*sigmay).^2);
+%MzModel = param.mu.*FzModel.*sqrt(asq).*thetay.*sigmay.*(1 - 3*abs(thetay.*sigmay) + 3*(thetay.*sigmay).^2 - abs(thetay.*sigmay).^3); % fill in with details from Pacejka book */
+MzModel = sqrt(asq).*sigmay.*Calpha/3.*(1 - Calpha.*abs(sigmay)./(mup.*FzModel).*(2-mus./mup) + (Calpha.*sigmay./(mup.*FzModel)).^2.*(1-2/3*mus./mup) - (Calpha.*abs(sigmay)./(mup.*FzModel)).^3.*(4/27 - 1/9*mus./mup));
+satInds = abs(alphaModel) > 3*mup.*FzModel./(Calpha);
+FyModel(satInds) = -sign(alphaModel(satInds)).*mus(satInds).*FzModel(satInds);
+MzModel(satInds) = 0;
+
+
+%
+%figure('Name','Tire Force Curves','NumberTitle','off')
+figure(8)
 %subplot(121)
+tInds = t > 0; % & t < 450;
 dirInds = logical(tInds .* GPS(:,10)>0.5);
 hold off
-plot3(alphafl(dirInds,1)*180/pi,Wheel_Forces(dirInds,5),Wheel_Forces(dirInds,3)-offset_Fy_LF,'b.');
+plot3(alphafl(dirInds,1)*180/pi,Fz_LF(dirInds),Fy_LF(dirInds)-offset_Fy_LF,'b.');
 hold on
 dirInds = logical(tInds .* GPS(:,10)>0.5);
-plot3(alphafr(dirInds,1)*180/pi,Wheel_Forces(dirInds,6),Wheel_Forces(dirInds,4)-offset_Fy_RF,'.','color',[0 0.5 0]);
+plot3(alphafr(dirInds,1)*180/pi,Fz_RF(dirInds),Fy_RF(dirInds)-offset_Fy_RF,'.','color',[0 0.5 0]);
 xlabel('Slip Angle (deg)')
 ylabel('Vertical Load (N)')
 zlabel('Lateral Force (N)')
-xlim([-15 15])
+xlim([-25 25])
 ylim([1300 6200])
 hold on;
 hsurf = surf(alphaModel*180/pi,FzModel,FyModel,1.8*ones(size(FyModel)),'facecolor',[1 0.8 0.8],'edgealpha',1);
 %set(hsurf,'cdata',1.8*ones(size(FyModel)));
 view([6 -8])
 
-%%
-figure('Name','Tire Moment Curves','NumberTitle','off')
+%
+figure(9)
+%figure('Name','Tire Moment Curves','NumberTitle','off')
 %subplot(121)
-dirInds = logical(tInds .* GPS(:,10) > 0.5);
+dirInds = logical(tInds .* SSest(:,9) > 0.5);
 hold off
-plot3(alphafl(dirInds,1)*180/pi,Wheel_Forces(dirInds,5),Wheel_Forces(dirInds,11)-offset_Mz_LF,'b.');
+plot3(alphafl(dirInds)*180/pi,Fz_LF(dirInds),Mz_LF(dirInds)-offset_Mz_LF,'b.');
 hold on
-plot3(alphafr(dirInds,1)*180/pi,Wheel_Forces(dirInds,6),Wheel_Forces(dirInds,12)-offset_Mz_RF,'.','color',[0 0.5 0]);
+plot3(alphafr(dirInds)*180/pi,Fz_RF(dirInds),Mz_RF(dirInds)-offset_Mz_RF,'.','color',[0 0.5 0]);
 xlabel('Slip Angle (deg)')
 ylabel('Vertical Load (N)')
 zlabel('Steering Moment (Nm)')
-xlim([-15 15])
+xlim([-25 25])
 ylim([1300 6200])
-zlim([-900 900])
+zlim([-300 300])
 hold on;
 hsurf = surf(alphaModel*180/pi,FzModel,MzModel,1.8*ones(size(MzModel)),'facecolor',[1 0.8 0.8],'edgealpha',1);
 %set(hsurf,'cdata',1.8*ones(size(MzModel)));
 view([6 -8])
 
-%%
-figure('Name','Trail Curves','NumberTitle','off')
+%
+%figure('Name','Trail Curves','NumberTitle','off')
+figure(10)
 hold off
-plot3(alphafl(dirInds)*180/pi,Wheel_Forces(dirInds,5),(-Wheel_Forces(dirInds,11) + offset_Mz_LF + Tj_LF(dirInds))./(Wheel_Forces(dirInds,3)-offset_Fy_LF),'b.') % WHY IS THE SIGN CHANGED ON THE LEFT SIDE?
+plot3(alphafl(dirInds)*180/pi,Fz_LF(dirInds),(-Mz_LF(dirInds) + offset_Mz_LF)./(Fy_LF(dirInds)-offset_Fy_LF),'b.') % WHY IS THE SIGN CHANGED ON THE LEFT SIDE?
 hold on
-plot3(alphafr(dirInds)*180/pi,Wheel_Forces(dirInds,6),(-Wheel_Forces(dirInds,12) + offset_Mz_RF + Tj_RF(dirInds))./(Wheel_Forces(dirInds,4)-offset_Fy_RF),'.','color',[0 0.5 0])
+plot3(alphafr(dirInds)*180/pi,Fz_RF(dirInds),(-Mz_RF(dirInds) + offset_Mz_RF)./(Fy_RF(dirInds)-offset_Fy_RF),'.','color',[0 0.5 0])
 hsurf = surf(alphaModel*180/pi,FzModel,-MzModel./FyModel,1.8*ones(size(MzModel)),'facecolor',[1 0.8 0.8],'edgealpha',0.5);
 xlabel('Slip Angle (deg)')
 ylabel('Vertical Load (N)')
 zlabel('Pneumatic Trail (m)')
 xlim([-15 15])
 ylim([1600 6200])
-zlim([-0.05 0.5]);
-view([-83 -30])
+zlim([-0.05 0.15]);
+view([-6 1])
 
-%% Try to back out the friction coefficient
-
-
-%% Link the x-axes of each of the time-based plots
-linkaxes(linkHands,'x')
