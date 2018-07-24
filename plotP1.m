@@ -115,14 +115,15 @@ FyModel(satInds) = -sign(alphaModel(satInds)).*mus(satInds).*FzModel(satInds);
 MzModel(satInds) = 0;
 
 
-%
-%figure('Name','Tire Force Curves','NumberTitle','off')
-figure(8)
-%subplot(121)
+% Subset the data before making the surface plots
 tInds = t > 0; % & t < 450;
 dirInds = logical(tInds .* GPS(:,10)>0.5);
+
+figure('Name','Tire Force Curves','NumberTitle','off')
+%figure(8)
 hold off
 plot3(alphafl(dirInds,1)*180/pi,Fz_LF(dirInds),Fy_LF(dirInds)-offset_Fy_LF,'b.');
+set(gca,'FontName', 'Times New Roman','fontsize',14)
 hold on
 dirInds = logical(tInds .* GPS(:,10)>0.5);
 plot3(alphafr(dirInds,1)*180/pi,Fz_RF(dirInds),Fy_RF(dirInds)-offset_Fy_RF,'.','color',[0 0.5 0]);
@@ -135,14 +136,18 @@ hold on;
 hsurf = surf(alphaModel*180/pi,FzModel,FyModel,1.8*ones(size(FyModel)),'facecolor',[1 0.8 0.8],'edgealpha',1);
 %set(hsurf,'cdata',1.8*ones(size(FyModel)));
 view([6 -8])
-
-%
-figure(9)
-%figure('Name','Tire Moment Curves','NumberTitle','off')
-%subplot(121)
+hDummyL = plot(NaN,NaN,'.')
+set(hDummyL,'markersize',16,'color','b'); 
+hDummyR = plot(NaN,NaN,'.')
+set(hDummyR,'markersize',16,'color',[0 0.5 0]); 
+legend([hDummyL hDummyR hsurf],'Left','Right','Model Fit','location','best')
+ 
+figure('Name','Tire Moment Curves','NumberTitle','off')
+%figure(9)
 dirInds = logical(tInds .* SSest(:,9) > 0.5);
 hold off
 plot3(alphafl(dirInds)*180/pi,Fz_LF(dirInds),Mz_LF(dirInds)-offset_Mz_LF,'b.');
+set(gca,'FontName', 'Times New Roman','fontsize',14)
 hold on
 plot3(alphafr(dirInds)*180/pi,Fz_RF(dirInds),Mz_RF(dirInds)-offset_Mz_RF,'.','color',[0 0.5 0]);
 xlabel('Slip Angle (deg)')
@@ -155,14 +160,19 @@ hold on;
 hsurf = surf(alphaModel*180/pi,FzModel,MzModel,1.8*ones(size(MzModel)),'facecolor',[1 0.8 0.8],'edgealpha',1);
 %set(hsurf,'cdata',1.8*ones(size(MzModel)));
 view([6 -8])
+hDummyL = plot(NaN,NaN,'.')
+set(hDummyL,'markersize',16,'color','b'); 
+hDummyR = plot(NaN,NaN,'.')
+set(hDummyR,'markersize',16,'color',[0 0.5 0]); 
+legend([hDummyL hDummyR hsurf],'Left','Right','Model Fit','location','best')
 
-%
-%figure('Name','Trail Curves','NumberTitle','off')
-figure(10)
+figure('Name','Trail Curves','NumberTitle','off')
+%figure(10)
 hold off
-plot3(alphafl(dirInds)*180/pi,Fz_LF(dirInds),(-Mz_LF(dirInds) + offset_Mz_LF)./(Fy_LF(dirInds)-offset_Fy_LF),'b.') % WHY IS THE SIGN CHANGED ON THE LEFT SIDE?
+plot3(alphafl(dirInds)*180/pi,Fz_LF(dirInds),-(Mz_LF(dirInds) - offset_Mz_LF)./(Fy_LF(dirInds)-offset_Fy_LF),'b.')
+set(gca,'FontName', 'Times New Roman','fontsize',14)
 hold on
-plot3(alphafr(dirInds)*180/pi,Fz_RF(dirInds),(-Mz_RF(dirInds) + offset_Mz_RF)./(Fy_RF(dirInds)-offset_Fy_RF),'.','color',[0 0.5 0])
+plot3(alphafr(dirInds)*180/pi,Fz_RF(dirInds),-(Mz_RF(dirInds) - offset_Mz_RF)./(Fy_RF(dirInds)-offset_Fy_RF),'.','color',[0 0.5 0])
 hsurf = surf(alphaModel*180/pi,FzModel,-MzModel./FyModel,1.8*ones(size(MzModel)),'facecolor',[1 0.8 0.8],'edgealpha',0.5);
 xlabel('Slip Angle (deg)')
 ylabel('Vertical Load (N)')
@@ -171,4 +181,95 @@ xlim([-15 15])
 ylim([1600 6200])
 zlim([-0.05 0.15]);
 view([-6 1])
+hDummyL = plot(NaN,NaN,'.')
+set(hDummyL,'markersize',16,'color','b'); 
+hDummyR = plot(NaN,NaN,'.')
+set(hDummyR,'markersize',16,'color',[0 0.5 0]); 
+legend([hDummyL hDummyR hsurf],'Left','Right','Model Fit','location','best')
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%   Friction estimation section
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Precalculate some quantities that will be used several times
+tanAlphaLF = tan(alphafl);
+tanAlphaRF = tan(alphafr);
+absAlphaLF = abs(tanAlphaLF);
+absAlphaRF = abs(tanAlphaRF);
+cubeAlphaLF = tanAlphaLF.^3;
+cubeAlphaRF = tanAlphaRF.^3;
+aFactor = 0.3;
+muRatio = 1;
+a_LF = sqrt(aFactor*Fz_LF*2.5e-5);
+a_RF = sqrt(aFactor*Fz_RF*2.5e-5);
+Calpha_LF = param.Ca*sin(1.0*atan(3.25e-4*Fz_LF));  
+Calpha_RF = param.Ca*sin(1.0*atan(3.25e-4*Fz_RF));  
+
+% Calculate the coefficients of the polynomial model to solve
+cubeCoef_LF = 3*Mz_LF./a_LF - Calpha_LF.*tanAlphaLF;
+sqCoef_LF = Calpha_LF.^2.*tanAlphaLF.*absAlphaLF*(2 - muRatio);
+linCoef_LF = -Calpha_LF.^3.*cubeAlphaLF*(1 - 2/3*muRatio);
+constCoef_LF = Calpha_LF.^4.*absAlphaLF.*cubeAlphaLF*(4/27 - 1/9*muRatio);
+cubeCoef_RF = 3*Mz_RF./a_RF - Calpha_RF.*tanAlphaRF;
+sqCoef_RF = Calpha_RF.^2.*tanAlphaRF.*absAlphaRF*(2 - muRatio);
+linCoef_RF = -Calpha_RF.^3.*cubeAlphaRF*(1 - 2/3*muRatio);
+constCoef_RF = Calpha_RF.^4.*absAlphaRF.*cubeAlphaRF*(4/27 - 1/9*muRatio);
+
+muFz_LF = zeros(length(alphafl),3);
+mu_LF = zeros(length(alphafl),1);
+muFz_RF = zeros(length(alphafr),3);
+mu_RF = zeros(length(alphafr),1);
+
+for ii = 1:length(alphafl)
+    % compute the roots to find mu
+    temp = roots([cubeCoef_LF(ii) sqCoef_LF(ii) linCoef_LF(ii) constCoef_LF(ii)]);
+    %muFz(ii,:) = temp;
+    % Find the real values of mu
+    inds = find(abs(angle(temp)) < 0.0001);
+    % Store the real values, discard the rest
+    if ~isempty(inds)
+        muFz_LF(ii,1) = max(temp(inds));
+        mu_LF(ii,1) = (muFz_LF(ii,1) + Fz_LF(ii)^2*2e-5)/Fz_LF(ii);
+    end
+end
+
+for ii = 1:length(alphafr)
+    % compute the roots to find mu
+    temp = roots([cubeCoef_RF(ii) sqCoef_RF(ii) linCoef_RF(ii) constCoef_RF(ii)]);
+    %muFz(ii,:) = temp;
+    % Find the real values of mu
+    inds = find(abs(angle(temp)) < 0.0001);
+    % Store the real values, discard the rest
+    if ~isempty(inds)
+        muFz_RF(ii,1) = max(temp(inds));
+        mu_RF(ii,1) = (muFz_RF(ii,1) + Fz_RF(ii)^2*2e-5)/Fz_RF(ii);
+    end
+end
+
+% plot
+Nfilt = 1;
+filtMu_LF = filter(ones(Nfilt,1)/Nfilt,1,mu_LF);
+filtMu_RF = filter(ones(Nfilt,1)/Nfilt,1,mu_RF);
+
+negInds_LF = find(muFz_LF(:,1) <= Calpha_LF.*absAlphaLF/3);
+posInds_LF = find(muFz_LF(:,1) > Calpha_LF.*absAlphaLF/3);
+negInds_RF = find(muFz_RF(:,1) <= Calpha_RF.*absAlphaRF/3);
+posInds_RF = find(muFz_RF(:,1) > Calpha_RF.*absAlphaRF/3);
+
+figure(31)
+hold off
+plot(t(posInds_LF),filtMu_LF(posInds_LF,1),'.',t(posInds_RF),filtMu_RF(posInds_RF,1),'.')
+hold on;
+plot(t(negInds_LF),filtMu_LF(negInds_LF,1),'.',t(negInds_RF),filtMu_RF(negInds_RF,1),'.')
+ylim([-0.1 2])
+legend('Left','Right','Left Sat','Right Sat')
+
+figure(32)
+hold off
+plot(INS(posInds_LF,4)/9.81,filtMu_LF(posInds_LF,1),'.')
+hold on
+plot(INS(posInds_RF,4)/9.81,filtMu_RF(posInds_RF,1),'.')
+plot(INS(negInds_LF,4)/9.81,filtMu_LF(negInds_LF,1),'.')
+plot(INS(negInds_RF,4)/9.81,filtMu_RF(negInds_RF,1),'.')
+ylim([-0.1 2])
