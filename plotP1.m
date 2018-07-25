@@ -85,9 +85,6 @@ xlabel('Time (s)')
 ylabel('Slip Angle (deg)')
 legend('\alpha_{FL}','\alpha_{FR}','\delta_{FL}','\delta_{FR}')
 
-% Link the x-axes of each of the time-based plots
-linkaxes(linkHands,'x')
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %   Model matching section
@@ -247,8 +244,8 @@ for ii = 1:length(alphafr)
     end
 end
 
-% plot
-Nfilt = 1;
+%% plot
+Nfilt = 5;
 filtMu_LF = filter(ones(Nfilt,1)/Nfilt,1,mu_LF);
 filtMu_RF = filter(ones(Nfilt,1)/Nfilt,1,mu_RF);
 
@@ -257,19 +254,24 @@ posInds_LF = find(muFz_LF(:,1) > Calpha_LF.*absAlphaLF/3);
 negInds_RF = find(muFz_RF(:,1) <= Calpha_RF.*absAlphaRF/3);
 posInds_RF = find(muFz_RF(:,1) > Calpha_RF.*absAlphaRF/3);
 
-figure(31)
+figure('Name','Estimated Friction Coeff','NumberTitle','off')
 hold off
 plot(t(posInds_LF),filtMu_LF(posInds_LF,1),'.',t(posInds_RF),filtMu_RF(posInds_RF,1),'.')
 hold on;
 plot(t(negInds_LF),filtMu_LF(negInds_LF,1),'.',t(negInds_RF),filtMu_RF(negInds_RF,1),'.')
-ylim([-0.1 2])
+linkHands(7) = gca;
+ylim([0 1.4])
 legend('Left','Right','Left Sat','Right Sat')
 
-figure(32)
+figure('Name','Friction Coeff vs. Lateral Accel','NumberTitle','off')
 hold off
-plot(INS(posInds_LF,4)/9.81,filtMu_LF(posInds_LF,1),'.')
+plot(SSest(posInds_LF,14)/9.81,filtMu_LF(posInds_LF,1),'.')
 hold on
-plot(INS(posInds_RF,4)/9.81,filtMu_RF(posInds_RF,1),'.')
-plot(INS(negInds_LF,4)/9.81,filtMu_LF(negInds_LF,1),'.')
-plot(INS(negInds_RF,4)/9.81,filtMu_RF(negInds_RF,1),'.')
-ylim([-0.1 2])
+plot(SSest(posInds_RF,14)/9.81,filtMu_RF(posInds_RF,1),'.')
+%plot(INS(negInds_LF,4)/9.81,filtMu_LF(negInds_LF,1),'.')
+%plot(INS(negInds_RF,4)/9.81,filtMu_RF(negInds_RF,1),'.')
+ylim([0 1.4])
+xlim([-1 1])
+
+% Link the x-axes of each of the time-based plots
+linkaxes(linkHands,'x')
