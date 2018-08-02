@@ -73,6 +73,10 @@ jal = interp1(sglu.fl.sa,sglu.fl.ja,delta_LF);
 jar = interp1(sglu.fr.sa,sglu.fr.ja,delta_RF);
 Tj_LF = jal.*Fz_LF;
 Tj_RF = jar.*Fz_RF;
+lc_LF =  interp1(sglu.fl.sa,sglu.fl.lc,delta_LF);
+lc_RF =  interp1(sglu.fr.sa,sglu.fr.lc,delta_RF);
+mt_LF = interp1(sglu.fl.sa,sglu.fl.mt,delta_LF);
+mt_RF = interp1(sglu.fr.sa,sglu.fr.mt,delta_RF);
 
 % create a simple low-pass differentiating filter
 wc = 10; Ts = 0.002;

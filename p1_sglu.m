@@ -34,8 +34,10 @@ function [sglu] = p1_sglu(param);
     pitman_x = -(1/1000)*(-34.24);
     pitman_y = -(1/1000)*(-250.3);
     pitman_z =  (1/1000)*268;
-    tc = 4.2/180*pi; %5.46/180*pi;
-    tk = 13.5/180*pi; %13.25/180*pi;
+    tc_LF = 4.7/180*pi; %5.46/180*pi;
+    tk_LF = 13.5/180*pi; %13.25/180*pi;
+    tc_RF = 3.3/180*pi; %5.46/180*pi;
+    tk_RF = 10.9/180*pi; %13.25/180*pi;
     sc0 = 0.0556;
     ca0 = 0;
     tm0 = 0.0263;
@@ -82,8 +84,8 @@ function [sglu] = p1_sglu(param);
     sus_height_r = zeros(size(motor_angle));
 
     for i = 1:length(motor_angle);
-        [sus_height_l(i), sglu.fl.mt(i), scrub_radius_l(i), camber_angle_l(i), sglu.fl.ja(i)] = susgeom(tk,tc,sc0,tm0,ca0,R,1,sglu.fl.sa(i));
-        [sus_height_r(i), sglu.fr.mt(i), scrub_radius_r(i), camber_angle_r(i), sglu.fr.ja(i)] = susgeom(tk,tc,sc0,tm0,ca0,R,1,-sglu.fr.sa(i)); %negative sa becuase susgeom is for left wheels only...
+        [sus_height_l(i), sglu.fl.mt(i), scrub_radius_l(i), camber_angle_l(i), sglu.fl.ja(i)] = susgeom(tk_LF,tc_LF,sc0,tm0,ca0,R,1,sglu.fl.sa(i));
+        [sus_height_r(i), sglu.fr.mt(i), scrub_radius_r(i), camber_angle_r(i), sglu.fr.ja(i)] = susgeom(tk_RF,tc_RF,sc0,tm0,ca0,R,1,-sglu.fr.sa(i)); %negative sa becuase susgeom is for left wheels only...
     end;
     sglu.fr.ja = -sglu.fr.ja; % this fixes the jacking arm since susgeom is for left wheels only
 

@@ -1,5 +1,7 @@
 % Script to calculate the suspension statics based on joint locations and
 % known lines of force/moments.
+% Author: Craig Beal
+% Date: 7/20/18
 
 % Coords: [ X, Y, Z ] -> Positive to Fore, Port, Up
 % Origin: X - wheel center, Y - car centerline, Z - ground
