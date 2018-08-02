@@ -91,8 +91,9 @@ legend('\alpha_{FL}','\alpha_{FR}','\delta_{FL}','\delta_{FR}')
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Calculate a brush tire model
-param.Ca = 55000; param.mu = 1.18; param.mu_s = param.mu*0.96; % best values from fitting process
-alphaModel = (-25:0.5:25)'*pi/180;
+param.Ca = 55000; param.mu = 1.18; 
+param.mu_s = param.mu*0.96; % best values from fitting process
+alphaModel = (-25:0.1:25)'*pi/180;
 FzModel = (1400:200:6200)';
 [alphaModel,FzModel] = meshgrid(alphaModel,FzModel);
 Calpha = param.Ca*sin(1.0*atan(3.25e-4*FzModel));   % from Chris' notes (see adaption from Pacejka using variable a with c_{px} instead of C_\alpha)
@@ -111,8 +112,9 @@ satInds = abs(alphaModel) > 3*mup.*FzModel./(Calpha);
 FyModel(satInds) = -sign(alphaModel(satInds)).*mus(satInds).*FzModel(satInds);
 MzModel(satInds) = 0;
 
+plot(alphaModel*180/pi,MzModel,'k')
 
-% Subset the data before making the surface plots
+%% Subset the data before making the surface plots
 tInds = t > 0; % & t < 450;
 dirInds = logical(tInds .* GPS(:,10)>0.5);
 
@@ -217,32 +219,56 @@ muFz_LF = zeros(length(alphafl),3);
 mu_LF = zeros(length(alphafl),1);
 muFz_RF = zeros(length(alphafr),3);
 mu_RF = zeros(length(alphafr),1);
+partialMz_LF = zeros(length(alphafl),3);
+partialMz_RF = zeros(length(alphafl),3);
 
-for ii = 1:length(alphafl)
+syms Mz Fp C1 C2 C3 C4
+s = solve(((3*Mz/a-C1)*Fp^3 + C2*Fp^2 - C3*Fp + C4),Fp,'MaxDegree',3);
+dsMz = diff(s,Mz);
+
+hWait = waitbar(0,'Computing friction values and partial derivatives');
+
+for ii = 1:100:length(alphafl)
+    waitbar(ii/(length(alphafl)+length(alphafr)),hWait);
     % compute the roots to find mu
     temp = roots([cubeCoef_LF(ii) sqCoef_LF(ii) linCoef_LF(ii) constCoef_LF(ii)]);
     %muFz(ii,:) = temp;
     % Find the real values of mu
-    inds = find(abs(angle(temp)) < 0.0001);
+    %inds = find(angle(temp) < 0.0001 & angle(temp) > -0.0001);
+    inds = find(abs(angle(temp)) < 0.001);
+    
+    % calculate the partial derivative of mu*Fz wrt Mz
+    temp2 = double(subs(dsMz,[Mz a C1 C2 C3 C4],[Mz_LF(ii) a_LF(ii) cubeCoef_LF(ii)-3*Mz_LF(ii)/a_LF(ii) sqCoef_LF(ii) linCoef_LF(ii) constCoef_LF(ii)]));
+
     % Store the real values, discard the rest
     if ~isempty(inds)
         muFz_LF(ii,1) = max(temp(inds));
         mu_LF(ii,1) = (muFz_LF(ii,1) + Fz_LF(ii)^2*2e-5)/Fz_LF(ii);
+        partialMz_LF(ii,:) = temp2(inds);
     end
+
 end
 
-for ii = 1:length(alphafr)
+for ii = 1:100:length(alphafr)
+    waitbar((length(alphafl)+ii)/(length(alphafl)+length(alphafr)),hWait);
     % compute the roots to find mu
     temp = roots([cubeCoef_RF(ii) sqCoef_RF(ii) linCoef_RF(ii) constCoef_RF(ii)]);
     %muFz(ii,:) = temp;
     % Find the real values of mu
-    inds = find(abs(angle(temp)) < 0.0001);
+    inds = find(abs(angle(temp)) < 0.001);
     % Store the real values, discard the rest
+    
+    % calculate the partial derivative of mu*Fz wrt Mz
+    temp2 = double(subs(dsMz,[Mz a C1 C2 C3 C4],[Mz_RF(ii) a_RF(ii) cubeCoef_RF(ii)-3*Mz_RF(ii)/a_RF(ii) sqCoef_RF(ii) linCoef_RF(ii) constCoef_RF(ii)]));
+
     if ~isempty(inds)
         muFz_RF(ii,1) = max(temp(inds));
         mu_RF(ii,1) = (muFz_RF(ii,1) + Fz_RF(ii)^2*2e-5)/Fz_RF(ii);
+        partialMz_RF(ii,:) = temp2(inds);
     end
 end
+
+close(hWait);
 
 %% plot
 Nfilt = 5;
@@ -272,6 +298,20 @@ plot(SSest(posInds_RF,14)/9.81,filtMu_RF(posInds_RF,1),'.')
 %plot(INS(negInds_RF,4)/9.81,filtMu_RF(negInds_RF,1),'.')
 ylim([0 1.4])
 xlim([-1 1])
+
+figure('Name','Mz Partial','NumberTitle','off')
+hold off;
+semilogy(t(posInds_LF),abs(partialMz_LF(posInds_LF)),'.');
+hold on
+semilogy(t(posInds_RF),abs(partialMz_RF(posInds_RF)),'.');
+
+
+figure('Name','Mz Partial vs. Lateral Accel','NumberTitle','off')
+hold off;
+semilogy(SSest(posInds_LF,14)/9.81,abs(partialMz_LF(posInds_LF)),'.');
+hold on
+semilogy(SSest(posInds_RF,14)/9.81,abs(partialMz_RF(posInds_RF)),'.');
+
 
 % Link the x-axes of each of the time-based plots
 linkaxes(linkHands,'x')
