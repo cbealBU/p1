@@ -21,7 +21,7 @@ end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % estimated parameters
-param.Ca = 55000;
+param.Ca = 50000;
 param.hcg = 1.9;
 param.kfr = 0.5;
 
@@ -67,13 +67,13 @@ legend('Data','Load Cell Fit')
 %% Calculate sensitivities of the estimator to the actual friction value
 alphaModel = 0:0.5:20; alphaModel = alphaModel(:)*pi/180;
 FzModel = (1600:100:6200)';
-aFactor = 0.3;
-muRatio = 0.96;
+aFactor = 0.15;
+muRatio = 0.9;
 tanAlphaModel = tan(alphaModel);
 absAlphaModel = abs(tanAlphaModel);
 cubeAlphaModel = tanAlphaModel.^3;
-aModel = sqrt(aFactor*FzModel*2.0e-5);
-CalphaModel = param.Ca*sin(1.0*atan(3.25e-4*FzModel));
+aModel = aFactor*FzModel/4e3;
+CalphaModel = param.Ca*sin(1.0*atan(FzModel/3e3));
 
 % Pre-allocate the result matrix
 Fp = zeros(length(FzModel),length(alphaModel));
@@ -266,16 +266,16 @@ zlabel('\partial F_p/\partial Mz')
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% Precalculate some quantities that will be used several times
-tanAlphaLF = abs(tan(alphafl));
-tanAlphaRF = abs(tan(alphafr));
+tanAlphaLF = tan(alphafl);
+tanAlphaRF = tan(alphafr);
 absAlphaLF = abs(tanAlphaLF);
 absAlphaRF = abs(tanAlphaRF);
 cubeAlphaLF = tanAlphaLF.^3;
 cubeAlphaRF = tanAlphaRF.^3;
-a_LF = sqrt(aFactor*Fz_LF*2.5e-5);
-a_RF = sqrt(aFactor*Fz_RF*2.5e-5);
-Calpha_LF = param.Ca*sin(1.0*atan(3.25e-4*Fz_LF));  
-Calpha_RF = param.Ca*sin(1.0*atan(3.25e-4*Fz_RF));  
+a_LF = aFactor*Fz_LF/4e3;
+a_RF = aFactor*Fz_RF/4e3;
+Calpha_LF = param.Ca*sin(1.0*atan(Fz_LF/3e3));  
+Calpha_RF = param.Ca*sin(1.0*atan(Fz_RF/3e3));  
 
 % Calculate the coefficients of the polynomial model to solve
 C1_LF = a_LF.*Calpha_LF.*tanAlphaLF/3;
