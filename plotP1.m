@@ -129,22 +129,22 @@ legend('\alpha_{FL}','\alpha_{FR}','\delta_{FL}','\delta_{FR}')
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Calculate a brush tire model
-param.Ca = 55000; param.mu = 1.18; param.mu_s = param.mu*0.96; % best values from fitting process
+param.Ca = 50000; param.mu = 1.4; param.mu_s = param.mu*0.9; % best values from fitting process
 alphaModel = (-25:0.5:25)'*pi/180;
 FzModel = (1400:200:6200)';
 [alphaModel,FzModel] = meshgrid(alphaModel,FzModel);
-Calpha = param.Ca*sin(1.0*atan(3.25e-4*FzModel));   % from Chris' notes (see adaption from Pacejka using variable a with c_{px} instead of C_\alpha)
-mup = param.mu - (2e-5)*FzModel;                    % from Chris' notes
-mus = param.mu_s - (2e-5)*FzModel;                  % from Chris' notes
+Calpha = param.Ca*sin(1.0*atan(FzModel/3e3));   % from Chris' notes (see adaption from Pacejka using variable a with c_{px} instead of C_\alpha)
+mup = param.mu - (6e-5)*FzModel;                    % from Chris' notes
+mus = param.mu_s - (6e-5)*FzModel;                  % from Chris' notes
 %mup = mup/4; mus = mus/4; % for comparison at different friction coeffs
 thetay = Calpha./(3*mup.*FzModel);
 sigmay = tan(alphaModel);
-asq = 0.3*FzModel*2e-5; % half contact patch length
+asq = 0.15*FzModel/4e3; % half contact patch length
 FyModel = -Calpha.*sigmay + Calpha.^2./(3*mup.*FzModel).*(2-mus./mup).*abs(sigmay).*sigmay - Calpha.^3./(9*(mup.*FzModel).^2).*(1-2/3*mus./mup).*sigmay.^3;
 % Pacejka model - simpler but missing sliding friction
 %FyModel = -3*mup.*FzModel.*thetay.*sigmay*(1 - abs(thetay.*sigmay) + 1/3*(thetay.*sigmay).^2);
 %MzModel = param.mu.*FzModel.*sqrt(asq).*thetay.*sigmay.*(1 - 3*abs(thetay.*sigmay) + 3*(thetay.*sigmay).^2 - abs(thetay.*sigmay).^3); % fill in with details from Pacejka book */
-MzModel = sqrt(asq).*sigmay.*Calpha/3.*(1 - Calpha.*abs(sigmay)./(mup.*FzModel).*(2-mus./mup) + (Calpha.*sigmay./(mup.*FzModel)).^2.*(1-2/3*mus./mup) - (Calpha.*abs(sigmay)./(mup.*FzModel)).^3.*(4/27 - 1/9*mus./mup));
+MzModel = asq.*sigmay.*Calpha/3.*(1 - Calpha.*abs(sigmay)./(mup.*FzModel).*(2-mus./mup) + (Calpha.*sigmay./(mup.*FzModel)).^2.*(1-2/3*mus./mup) - (Calpha.*abs(sigmay)./(mup.*FzModel)).^3.*(4/27 - 1/9*mus./mup));
 satInds = abs(alphaModel) > 3*mup.*FzModel./(Calpha);
 FyModel(satInds) = -sign(alphaModel(satInds)).*mus(satInds).*FzModel(satInds);
 MzModel(satInds) = 0;
