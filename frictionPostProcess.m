@@ -52,10 +52,11 @@ else
 end
 subplot(211)
 plot(t,Mz_LF,t,Mst_LF - Tj_LF)
+ylim([-20 200])
 subplot(212)
 plot(t,Mz_RF,t,Mst_RF - Tj_RF)
 legend('Data','Load Cell Fit')
-
+ylim([-20 200])
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -178,7 +179,7 @@ for ii = 1:length(alphaModel)
     end
 end
 
-% Make plots
+%% Make plots
 if ~exist('fHand23','var') 
     fHand23 = figure('Name','Fp','NumberTitle','off');
 else
@@ -225,9 +226,9 @@ else
     figure(fHand26) 
 end
 hold off
-surf(alphaGrid*180/pi,FzGrid,unc./FzGrid)
-%zlim([0 1000])
-%caxis([0 1000])
+surf(alphaGrid*180/pi,FzGrid,unc)
+zlim([0 500])
+caxis([200 500])
 xlabel('Slip Angle (deg)')
 ylabel('Fz (N)')
 zlabel('\Delta F_p')
@@ -238,7 +239,7 @@ else
     figure(fHand27) 
 end
 hold off
-surf(alphaGrid*180/pi,MzModel,dFpdtana*RMS_Alpha_LF)
+surf(alphaGrid*180/pi,MzModel,dFpdtana)
 zlim([-10000 2e4])
 caxis([-10000 2e4])
 xlabel('Slip Angle (deg)')
@@ -251,11 +252,11 @@ else
     figure(fHand28) 
 end
 hold off
-surf(alphaGrid*180/pi,MzModel,dFpdMz*RMS_Mz_LF)
+surf(alphaGrid*180/pi,FzGrid,dFpdMz)
 zlim([-500 0])
 caxis([-500 0])
 xlabel('Slip Angle (deg)')
-ylabel('Mz (Nm)')
+ylabel('Fz (N)')
 zlabel('\partial F_p/\partial Mz')
 
 
@@ -289,14 +290,16 @@ C4_RF = a_RF.*Calpha_RF.^4.*absAlphaRF.*cubeAlphaRF/3*(4/27 - 1/9*muRatio);
 
 muFz_LF = zeros(length(alphafl),1);
 mu_LF = zeros(length(alphafl),1);
+flag_LF = zeros(length(alphafl),1);
 muFz_RF = zeros(length(alphafr),1);
 mu_RF = zeros(length(alphafr),1);
+flag_RF = zeros(length(alphafr),1);
 
-myInterp = scatteredInterpolant(reshape(alphaGrid,47*41,1),reshape(FzGrid,47*41,1),reshape(unc./FzGrid,47*41,1));
+myInterp = scatteredInterpolant(reshape(alphaGrid,47*41,1),reshape(FzGrid,47*41,1),reshape(unc,47*41,1));
 %relUnc = unc./FzGrid;
 
 for ii = 1:length(alphafl)
-    if 0.1 > myInterp(abs(alphafl(ii)),abs(Fz_LF(ii))) % if the tire is reasonably sensitive at this point
+    if 600 > myInterp(abs(alphafl(ii)),abs(Fz_LF(ii))) % if the tire is reasonably sensitive at this point
     %if 0.1 > interp2(alphaGrid,FzGrid,relUnc,abs(alphafl(ii)),Fz_LF(ii)) % if the tire is reasonably sensitive at this point
         % compute the roots to find mu
         pVal = (3*(Mz_LF(ii)-C1_LF(ii))*(-C3_LF(ii)) - C2_LF(ii)^2)/(3*(Mz_LF(ii)-C1_LF(ii))^2);
@@ -307,16 +310,19 @@ for ii = 1:length(alphafl)
             t0 = -2*sqrt(pVal/3)*sinh(1/3*asinh(-3*qVal/(2*pVal)*sqrt(3/pVal)));
         end
         muFz_LF(ii) = t0 - C2_LF(ii)/(3*(Mz_LF(ii) - C1_LF(ii)));
-        mu_LF(ii) = muFz_LF(ii)/Fz_LF(ii); %(muFz_LF(ii) + Fz_LF(ii)^2*2e-5)/Fz_LF(ii);
+        mu_LF(ii) = (muFz_LF(ii) + Fz_LF(ii)^2*6e-5)/Fz_LF(ii); %muFz_LF(ii)/Fz_LF(ii); %
+        flag_LF(ii) = 0;
     elseif abs(alphafl(ii)) > 4*pi/180 & abs(Mz_LF(ii)) < 10 % if the tire is out of the linear region and the moment is approaching zero
-        mu_LF(ii) = abs(Fy_LF(ii)/Fz_LF(ii));
+        mu_LF(ii) = (abs(Fy_LF(ii)) + Fz_LF(ii)^2*6e-5)/Fz_LF(ii)/muRatio;
+        flag_LF(ii) = 1;
     else % can't estimate in these conditions
         mu_LF(ii) = NaN; 
+        flag_LF(ii) = -1;
     end
 end
 
 for ii = 1:length(alphafr)
-    if 0.1 > myInterp(abs(alphafr(ii)),abs(Fz_RF(ii))) % if the tire is reasonably sensitive at this point
+    if 600 > myInterp(abs(alphafr(ii)),abs(Fz_RF(ii))) % if the tire is reasonably sensitive at this point
     %if 0.1 > interp2(alphaGrid,FzGrid,relUnc,abs(alphafr(ii)),Fz_RF(ii)) % if the tire is reasonably sensitive at this point
         % compute the roots to find mu
         pVal = (3*(Mz_RF(ii)-C1_RF(ii))*(-C3_RF(ii)) - C2_RF(ii)^2)/(3*(Mz_RF(ii)-C1_RF(ii))^2);
@@ -327,44 +333,74 @@ for ii = 1:length(alphafr)
             t0 = -2*sqrt(pVal/3)*sinh(1/3*asinh(-3*qVal/(2*pVal)*sqrt(3/pVal)));
         end
         muFz_RF(ii) = t0 - C2_RF(ii)/(3*(Mz_RF(ii) - C1_RF(ii)));
-        mu_RF(ii) = muFz_RF(ii)/Fz_RF(ii); %(muFz_RF(ii) + Fz_RF(ii)^2*2e-5)/Fz_RF(ii);
+        mu_RF(ii) = (muFz_RF(ii) + Fz_RF(ii)^2*6e-5)/Fz_RF(ii); %muFz_RF(ii)/Fz_RF(ii); %
+        flag_LF(ii) = 0;
     elseif abs(alphafr(ii)) > 4*pi/180  & abs(Mz_RF(ii)) < 10 % if the tire is out of the linear region and the moment is approaching zero
-        mu_RF(ii) = abs(Fy_RF(ii)/Fz_RF(ii));
+        mu_RF(ii) = (abs(Fy_RF(ii)) + Fz_RF(ii)^2*6e-5)/Fz_RF(ii)/muRatio;
+        flag_RF(ii) = 1;
     else % can't estimate in these conditions
         mu_RF(ii) = NaN; 
+        flag_RF(ii) = -1;
     end
 end
 
-%% plot
+% plot
+
+unsatInds_LF = find(0 == flag_LF);
+satInds_LF = find(1 == flag_LF);
+unsatInds_RF = find(0 == flag_RF);
+satInds_RF = find(1 == flag_RF);
 
 if ~exist('fHand21','var') 
     fHand21 = figure('Name','Estimated Friction Coeff','NumberTitle','off');
 else
     figure(fHand21) 
 end
+subplot(211)
 hold off
-plot(t,mu_LF,'.')
+plot(t(unsatInds_LF),mu_LF(unsatInds_LF),'.')
 hold on
-plot(t,mu_RF,'.')
+plot(t(satInds_LF),mu_LF(satInds_LF),'.')
+ylabel('Left Friction Coefficient')
+legend('Unsaturated','Saturated')
 linkHands(7) = gca;
+subplot(212)
+hold off
+plot(t(unsatInds_RF),mu_RF(unsatInds_RF),'.')
+hold on
+plot(t(satInds_RF),mu_RF(satInds_RF),'.')
+linkHands(8) = gca;
 ylim([0 min(1.1*max(max(mu_LF),max(mu_RF)), 2.4)])
 xlabel('Time (s)')
-ylabel('Friction Coefficient')
-legend('Left','Right','Left Sat','Right Sat')
+ylabel('Right Friction Coefficient')
+legend('Unsaturated','Saturated')
 
 if ~exist('fHand22','var')
     fHand22 = figure('Name','Friction Coeff vs. Lateral Accel','NumberTitle','off');
 else
     figure(fHand22) 
 end
+subplot(211)
 hold off
-plot(SSest(:,14)/9.81,mu_LF,'.')
-%plot(alphafl*180/pi,mu_LF,'.')
+plot(SSest(unsatInds_LF,14)/9.81,mu_LF(unsatInds_LF),'.')
 hold on
-plot(SSest(:,14)/9.81,mu_RF,'.')
-%plot(alphafr*180/pi,mu_RF,'.')
+plot(SSest(satInds_LF,14)/9.81,mu_LF(satInds_LF),'.')
+text(0.5,0.4,'Inside Wheel','fontsize',16,'horizontalalignment','center')
+text(-0.5,0.4,'Outside Wheel','fontsize',16,'horizontalalignment','center')
+ylabel('Left Friction Coefficient')
+ylim([0 1.6])
+xlim([-1 1])
+legend('Unsaturated','Saturated','location','southeast')
+subplot(212)
+hold off
+plot(SSest(unsatInds_RF,14)/9.81,mu_RF(unsatInds_RF),'.')
+hold on
+plot(SSest(satInds_RF,14)/9.81,mu_RF(satInds_RF),'.')
+text(-0.5,0.4,'Inside Wheel','fontsize',16,'horizontalalignment','center')
+text(0.5,0.4,'Outside Wheel','fontsize',16,'horizontalalignment','center')
 ylim([0 1.6])
 xlim([-1 1])
 xlabel('Lateral Acceleration (g)')
-ylabel('Friction Coefficient')
-legend('Left','Right','Left Sat','Right Sat')
+ylabel('Right Friction Coefficient')
+legend('Unsaturated','Saturated','location','southeast')
+
