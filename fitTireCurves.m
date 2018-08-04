@@ -10,7 +10,7 @@ if(~exist('fname','var'))
     [fname, pathname] = uigetfile('*.mat','Choose data file to open');
     load([pathname fname])
     loadP1data
-    clear tInds % clear the time indices if a new file is loaded    
+    clear tInds % clear the time indices if a new file is loaded
 end
 
 % If we're starting with a fresh data set
@@ -58,7 +58,7 @@ if(~exist('tInds','var'))
     Fz_LF = Fz_LF(tInds);
     Fz_RF = Fz_RF(tInds);
     Mz_LF = Mz_LF(tInds);
-    Mz_RF = Mz_RF(tInds);    
+    Mz_RF = Mz_RF(tInds);
 end
 
 % Plot/replot with the selected time subset
@@ -104,8 +104,8 @@ if(~exist('alphaFinal','var'))
     Fy = [Fy_LF - offset_Fy_LF; Fy_RF - offset_Fy_RF];
     Mz = [Mz_LF - offset_Mz_LF; Mz_RF - offset_Mz_RF];
     
-    alphaGrid = linspace(-20,20,120)*pi/180;
-    FzGrid = linspace(1600,6600,120);
+    alphaGrid = linspace(-15,15,200)*pi/180;
+    FzGrid = linspace(1600,6600,400);
     FyGrid = zeros(length(alphaGrid));
     MzGrid = zeros(length(alphaGrid));
     dataCnt = zeros(length(alphaGrid));
@@ -130,163 +130,130 @@ end;
 %% Do the fitting
 if ~exist('bestFit','var')
     % Initialization
-    bestCa = CaRange(1);
-    bestMu = MuRange(1);
-    bestMus = MusRange(1);
-    besta = aRange(1);
-    bestCaSinA = CaSinARange(1);
-    bestCaSinP = CaSinPRange(1);
-    bestFit = 1e20; % huge to make the first iteration found as first best fit
-    clear ii jj kk ll mm nn
+        bestCaVal = 0;
+        bestCaSinVal = 0;
+        bestCaTanVal = 0;
+        bestCaSlope = 0;
+        bestMuVal = 0;
+        bestMuSlope = 0;
+        bestMuRatio = 0;
+        besta = 0;
+        bestaSlope = 0;
+        bestaExp = 0;
+        bestFit = 1e20; % huge to make the first iteration found as first best fit
 end
 
+hWait = waitbar(0,'Trying N combinations of the variables');
+N = 200000;
 
+FzFinal = Fz;
+alphaFinal = alpha;
+MzFinal = Mz;
+FyFinal = Fy;
 
-% To resume
-if exist('ii','var')
-    i1 = ii;
-else
-    i1 = 1;
-end
-if exist('jj','var')
-    j1 = jj;
-else
-    j1 = 1;
-end
-if exist('kk','var')
-    k1 = kk;
-else
-    k1 = 1;
-end
-if exist('ll','var')
-    l1 = ll;
-else
-    l1 = 1;
-end
-if exist('mm','var')
-    m1 = mm;
-else
-    m1 = 1;
-end
-if exist('nn','var')
-    n1 = nn;
-else
-    n1 = 1;
-end
-
-iterations = 1;
-N = length(CaRange)*length(aRange)*length(MuRange)*length(MuRange)*length(CaSinARange)*length(CaSinPRange); % determine number of valid iterations (taking into account Mus can't be greater than Mu)
-msgStrg = sprintf('Calculating fit... %d vars, est %.2f mins',N,0.13*N/60);
-hWait = waitbar(0,msgStrg);
-%for jj = j1:length(MuRange)
-    %testMu = MuRange(jj) - (2e-5)*Fz;
-    for kk = k1:length(MusRange)
-        %testMus = MusRange(kk) - (2e-5)*Fz;
-        % Skip test cases where the sliding friction is greater
-        % than adhesion friction
-        for ii = i1:length(CaRange)
+for ii = 1:N
+    waitbar(ii/N,hWait);
+    
+    % Try variations of the linearly-sloped friction model
+    testMuVal = 0.7 + 1.2*rand(1);
+    testMuSlope = (0.1+4.4*rand(1))*(1e-5);
+    testMuRatio = 0.6 + 0.4*rand(1);
+    testMu = testMuVal - testMuSlope*FzFinal;
+    testMus = testMuVal*testMuRatio - testMuSlope*FzFinal;
+    
+    % Try variations of the contact patch length model
+    testaVal = (0.05 + 0.8*rand(1));
+    testaSlope = 3e-5 + 5e-4*rand(1);
+    testaExp = 1/(1 + 3*rand(1));
+    testa = testaVal*(FzFinal*testaSlope).^testaExp; % half contact patch length
+    
+    % Try variations of the cornering stiffness model
+    testCaVal = (30000 + 20000*rand(1));
+    testCaSinVal = 0.2 + 1.75*rand(1);
+    testCaTanVal = 1.5 + 2.5*rand(1);
+    testCaSlope = (0.1+8.4*rand(1))*1e-4;
+    testCa = testCaVal*sin(testCaSinVal*atan(testCaTanVal*testCaSlope*FzFinal));
+    
+    % Calculate the candidate fit
+    sigmay = tan(alphaFinal);
+    z1 = testMu.*FzFinal;
+    z2 = testMus./testMu;
+    z3 = abs(sigmay).*sigmay;
+    z4 = sigmay.^3;
+    FyFit = -testCa.*sigmay + testCa.^2./(3*z1).*(2-z2).*z3 - testCa.^3./(9*z1.^2).*(1-2/3*z2).*z4;
+    MzFit = testCaVal.*testa/3.*(sigmay - testCa.*z3./z1.*(2-z2) + testCa.^2.*z4./z1.^2.*(1 - 2/3*z2) - testCa.^3.*z4.*abs(sigmay)./z1.^3.*(4/27-1/9*z2));
+    satInds = abs(alphaFinal) > 3*testMu.*FzFinal./(testCa);
+    FyFit(satInds) = -sign(alphaFinal(satInds)).*testMus(satInds).*FzFinal(satInds);
+    MzFit(satInds) = 0;
+    
+    % Check the quality of fit
+    %fitVal = sqrt(mean(([FyFinal; MzFinal.^2.*FzFinal] - [FyFit; MzFit.*MzFinal.*FzFinal]).^2)); % fit both forces and moments
+    fitVal = sqrt(mean((MzFinal.^2.*FzFinal - MzFinal.*MzFit.*FzFinal).^2)); % fit only moments
+    
+    if fitVal < bestFit % if a better fit has been found, update the latch variables
+        bestCaVal = testCaVal;
+        bestCaSinVal = testCaSinVal;
+        bestCaTanVal = testCaTanVal;
+        bestCaSlope = testCaSlope;
+        bestMuVal = testMuVal;
+        bestMuSlope = testMuSlope;
+        bestMuRatio = testMuRatio;
+        bestaVal = testaVal;
+        bestaSlope = testaSlope;
+        bestaExp = testaExp;
+        bestFit = fitVal;
+        fprintf('Best fit found at CaVal: %f, CaSinVal: %f, CaTanVal: %f, CaSlope: %e, \n \t Mu: %f, MuSlope: %e, MuRatio: %f, aVal: %f, aSlope: %e, aExp: %f with fit value %e\n\n',bestCaVal,bestCaSinVal,bestCaTanVal,bestCaSlope,bestMuVal,bestMuSlope,bestMuRatio,bestaVal,bestaSlope,bestaExp,bestFit);
+        
+        if livePlots
+            % Calculate the brush tire model
+            alphaModel = (-20:0.5:20)'*pi/180;
+            FzModel = (1400:150:6600)';
+            [alphaModel,FzModel] = meshgrid(alphaModel,FzModel);
+            % Calculate the model
+            sigmay = tan(alphaModel);
+            CaPlot = bestCaVal*sin(bestCaSinVal*atan(bestCaTanVal*bestCaSlope*FzModel));
+            bestMu = bestMuVal - bestMuSlope*FzModel;
+            bestMus = testMuRatio*bestMuVal - bestMuSlope*FzModel;
+            besta = bestaVal*(FzModel*bestaSlope).^bestaExp; % half contact patch length
+            FyModel = -CaPlot.*sigmay + CaPlot.^2./(3*bestMu.*FzModel).*(2-bestMus./bestMu).*abs(sigmay).*sigmay - CaPlot.^3./(9*(bestMu.*FzModel).^2).*(1-2/3*bestMus./bestMu).*sigmay.^3;
+            MzModel = CaPlot.*besta.*sigmay/3.*(1 - CaPlot.*abs(sigmay)./(bestMu.*FzModel).*(2-bestMus./bestMu) + CaPlot.^2.*sigmay.^2./(bestMu.*FzModel).^2.*(1 - 2/3*bestMus./bestMu) - CaPlot.^3.*abs(sigmay).^3./(bestMu.*FzModel).^3.*(4/27-1/9*bestMus./bestMu)); % fill in with details from Pacejka book */
+            satInds = abs(alphaModel) > 3*bestMu.*FzModel./(CaPlot);
+            FyModel(satInds) = -sign(alphaModel(satInds)).*bestMus(satInds).*FzModel(satInds);
+            MzModel(satInds) = 0;
             
-            for ll = l1:length(aRange)
-                waitbar(iterations/N,hWait);
-                for mm = m1:length(CaSinARange)
-                    
-                    for nn = n1:length(CaSinPRange)
-                        
-                        testMuVal = 1.25; %0.7 + 1.2*rand(1);
-                        testMu = 1.25 - (2e-5)*FzFinal;
-                        testMusVal = 0.7 + 0.3*rand(1);
-                        testMus = testMuVal*testMusVal - (2e-5)*FzFinal;
-                        
-                        %testa = aRange(ll)*Fz*10^(-4); % half contact patch length
-                        testaVal = (0.8 + 0.35*rand(1));
-                        testMuVal = 3e-5 + 8e-5*rand(1);
-                        testa = testaVal*FzFinal*testMuVal; % half contact patch length
-                        %testCa = CaRange(ii)*sin(CaSinARange(mm)*atan(CaSinPRange(nn)*1e-4*Fz));
-                        testCaVal = (38000 + 12000*rand(1));
-                        testCaSinA = 1 + 1.75*rand(1);
-                        testCaSinP = 2.5 + 1.5*rand(1);
-                        testCa = testCaVal*sin(testCaSinA*atan(testCaSinP*1e-4*FzFinal));
-                        % Calculate the model
-                        sigmay = tan(alphaFinal);
-                        z1 = testMu.*FzFinal;
-                        z2 = testMus./testMu;
-                        z3 = abs(sigmay).*sigmay;
-                        z4 = sigmay.^3;
-                        FyFit = -testCa.*sigmay + testCa.^2./(3*z1).*(2-z2).*z3 - testCa.^3./(9*z1.^2).*(1-2/3*z2).*z4;
-                        MzFit = testCaVal.*sqrt(testa)/3.*(sigmay - testCa.*z3./z1.*(2-z2) + testCa.^2.*z4./z1.^2.*(1 - 2/3*z2) - testCa.^3.*z4.*abs(sigmay)./z1.^3.*(4/27-1/9*z2));
-                        satInds = abs(alphaFinal) > 3*testMu.*FzFinal./(testCa);
-                        FyFit(satInds) = -sign(alphaFinal(satInds)).*testMus(satInds).*FzFinal(satInds);
-                        MzFit(satInds) = 0;
-                        
-                        %fitVal = sqrt(mean(([FyFinal; MzFinal] - [FyFit; MzFit]).^2)); 
-                        % fit only moments
-                        fitVal = sqrt(mean((MzFinal - MzFit).^2)); 
-                        
-                        iterations = iterations + 1;
-                        if fitVal < bestFit % if a better fit has been found, update the latch variables
-                            bestCa = testCaVal;
-                            bestMu = testMuVal;
-                            bestMus = testMusVal;
-                            besta = testaVal;
-                            bestCaSinA = testCaSinA;
-                            bestCaSinP = testCaSinP;
-                            bestFit = fitVal;
-                            fprintf('Best fit found at %f, %f, %f, %f, %f, %f, with fit value %e\n',bestCa,bestCaSinA,bestCaSinP,bestMu,bestMus,besta,bestFit);
-                            
-                            if livePlots
-                                % Calculate the brush tire model
-                                alphaModel = (-20:20)'*pi/180;
-                                FzModel = (1400:200:6600)';
-                                [alphaModel,FzModel] = meshgrid(alphaModel,FzModel);
-                                % Calculate the model
-                                sigmay = tan(alphaModel);
-                                CaPlot = testCaVal;%*sin(testCaSinA*atan(testCaSinP*(1e-4).*FzModel));
-                                testMu = 1.25 - (2e-5)*FzModel;
-                                testMus = 1.25*testMusVal - (2e-5)*FzModel;
-                                testa = testaVal*FzModel*testMuVal; % half contact patch length
-                                FyModel = -CaPlot.*sigmay + CaPlot.^2./(3*testMu.*FzModel).*(2-testMus./testMu).*abs(sigmay).*sigmay - CaPlot.^3./(9*(testMu.*FzModel).^2).*(1-2/3*testMus./testMu).*sigmay.^3;
-                                MzModel = CaPlot.*sqrt(testa).*sigmay/3.*(1 - CaPlot.*abs(sigmay)./(testMu.*FzModel).*(2-testMus./testMu) + CaPlot.^2.*sigmay.^2./(testMu.*FzModel).^2.*(1 - 2/3*testMus./testMu) - CaPlot.^3.*abs(sigmay).^3./(testMu.*FzModel).^3.*(4/27-1/9*testMus./testMu)); % fill in with details from Pacejka book */
-                                satInds = abs(alphaModel) > 3*testMu.*FzModel./(CaPlot);
-                                FyModel(satInds) = -sign(alphaModel(satInds)).*testMus(satInds).*FzModel(satInds);
-                                MzModel(satInds) = 0;
-                                
-                                figure(2)
-                                hold off
-                                plot3(alphaFinal*180/pi,FzFinal,FyFinal,'b.');
-                                %plot3(alphafl*180/pi,Wheel_Forces(tInds,5),Wheel_Forces(tInds,3),'b.');
-                                hold on
-                                %plot3(alphafr*180/pi,Wheel_Forces(tInds,6),Wheel_Forces(tInds,4),'.','color',[0 0.5 0]);
-                                xlabel('Slip Angle (deg)')
-                                ylabel('Vertical Load (N)')
-                                zlabel('Lateral Force (N)')
-                                xlim([-15 15])
-                                ylim([1600 6200])
-                                hold on;
-                                hsurf = surf(alphaModel*180/pi,FzModel,FyModel,1.8*ones(size(FyModel)),'facecolor',[1 0.8 0.8],'edgealpha',1);
-                                view([6 -8])
-                                
-                                figure(3)
-                                hold off
-                                plot3(alphaFinal*180/pi,FzFinal,MzFinal,'b.');
-                                %plot3(alphafl*180/pi,Wheel_Forces(tInds,5),Wheel_Forces(tInds,11),'b.');
-                                hold on
-                                %plot3(alphafr*180/pi,Wheel_Forces(tInds,6),Wheel_Forces(tInds,12),'.','color',[0 0.5 0]);
-                                xlabel('Slip Angle (deg)')
-                                ylabel('Vertical Load (N)')
-                                zlabel('Steering Moment (Nm)')
-                                xlim([-15 15])
-                                ylim([1600 6200])
-                                hold on;
-                                hsurf = surf(alphaModel*180/pi,FzModel,MzModel,1.8*ones(size(MzModel)),'facecolor',[1 0.8 0.8],'edgealpha',1);
-                                view([4 20])
-                            end
-                        end
-                    end
-                end
-            end
+            figure(2)
+            hold off
+            plot3(alphaFinal*180/pi,FzFinal,FyFinal,'b.');
+            %plot3(alphafl*180/pi,Wheel_Forces(tInds,5),Wheel_Forces(tInds,3),'b.');
+            hold on
+            %plot3(alphafr*180/pi,Wheel_Forces(tInds,6),Wheel_Forces(tInds,4),'.','color',[0 0.5 0]);
+            xlabel('Slip Angle (deg)')
+            ylabel('Vertical Load (N)')
+            zlabel('Lateral Force (N)')
+            xlim([-20 20])
+            ylim([1600 6200])
+            hold on;
+            hsurf = surf(alphaModel*180/pi,FzModel,FyModel,1.8*ones(size(FyModel)),'facecolor',[1 0.8 0.8],'edgealpha',1);
+            view([177 6])
+            
+            figure(3)
+            hold off
+            plot3(alphaFinal*180/pi,FzFinal,MzFinal,'b.');
+            %plot3(alphafl*180/pi,Wheel_Forces(tInds,5),Wheel_Forces(tInds,11),'b.');
+            hold on
+            %plot3(alphafr*180/pi,Wheel_Forces(tInds,6),Wheel_Forces(tInds,12),'.','color',[0 0.5 0]);
+            xlabel('Slip Angle (deg)')
+            ylabel('Vertical Load (N)')
+            zlabel('Steering Moment (Nm)')
+            xlim([-20 20])
+            ylim([1600 6200])
+            hold on;
+            hsurf = surf(alphaModel*180/pi,FzModel,MzModel,1.8*ones(size(MzModel)),'facecolor',[1 0.8 0.8],'edgealpha',1);
+            view([177 6])
         end
     end
-%end
+end
+
 close(hWait);
 
 % Give final RMS values

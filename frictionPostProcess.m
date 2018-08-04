@@ -4,8 +4,8 @@
 % Date: 7/25/18
 
 %clear all
-close all
-clear fHand*
+%close all
+%clear fHand*
 
 % Load in a file if it's not already loaded
 if(~exist('fname','var'))
@@ -273,10 +273,22 @@ absAlphaLF = abs(tanAlphaLF);
 absAlphaRF = abs(tanAlphaRF);
 cubeAlphaLF = tanAlphaLF.^3;
 cubeAlphaRF = tanAlphaRF.^3;
-a_LF = aFactor*Fz_LF/4e3;
-a_RF = aFactor*Fz_RF/4e3;
-Calpha_LF = param.Ca*sin(1.0*atan(Fz_LF/3e3));  
-Calpha_RF = param.Ca*sin(1.0*atan(Fz_RF/3e3));  
+muRatio = 0.727;
+bestCaVal = 47490;
+bestCaSinVal = 0.885;
+bestCaTanVal = 2.70;
+bestCaSlope =6.256e-04;
+bestMuVal = 1.65;
+bestMuSlope = 1.91e-05;
+bestaVal = 0.180;
+bestaSlope = 1.74e-04;
+bestaExp = 0.948;
+%             Best fit found at CaVal: 47491.557622, CaSinVal: 0.885447, CaTanVal: 2.701395, CaSlope: 6.255713e-04, 
+% 	 Mu: 1.650114, MuSlope: 1.913595e-05, MuRatio: 0.727284, aVal: 0.179549, aSlope: 1.742980e-04, aExp: 0.948077
+a_LF = bestaVal*(Fz_LF*bestaSlope).^bestaExp;
+a_RF = bestaVal*(Fz_RF*bestaSlope).^bestaExp;
+Calpha_LF = bestCaVal*sin(bestCaSinVal*atan(bestCaTanVal*bestCaSlope*Fz_LF));
+Calpha_RF = bestCaVal*sin(bestCaSinVal*atan(bestCaTanVal*bestCaSlope*Fz_RF));
 
 % Calculate the coefficients of the polynomial model to solve
 C1_LF = a_LF.*Calpha_LF.*tanAlphaLF/3;
@@ -297,9 +309,10 @@ flag_RF = zeros(length(alphafr),1);
 
 myInterp = scatteredInterpolant(reshape(alphaGrid,47*41,1),reshape(FzGrid,47*41,1),reshape(unc,47*41,1));
 %relUnc = unc./FzGrid;
+est_threshold = 1000;
 
 for ii = 1:length(alphafl)
-    if 600 > myInterp(abs(alphafl(ii)),abs(Fz_LF(ii))) % if the tire is reasonably sensitive at this point
+    if est_threshold > myInterp(abs(alphafl(ii)),abs(Fz_LF(ii))) % if the tire is reasonably sensitive at this point
     %if 0.1 > interp2(alphaGrid,FzGrid,relUnc,abs(alphafl(ii)),Fz_LF(ii)) % if the tire is reasonably sensitive at this point
         % compute the roots to find mu
         pVal = (3*(Mz_LF(ii)-C1_LF(ii))*(-C3_LF(ii)) - C2_LF(ii)^2)/(3*(Mz_LF(ii)-C1_LF(ii))^2);
@@ -310,10 +323,10 @@ for ii = 1:length(alphafl)
             t0 = -2*sqrt(pVal/3)*sinh(1/3*asinh(-3*qVal/(2*pVal)*sqrt(3/pVal)));
         end
         muFz_LF(ii) = t0 - C2_LF(ii)/(3*(Mz_LF(ii) - C1_LF(ii)));
-        mu_LF(ii) = (muFz_LF(ii) + Fz_LF(ii)^2*6e-5)/Fz_LF(ii); %muFz_LF(ii)/Fz_LF(ii); %
+        mu_LF(ii) = (muFz_LF(ii) + Fz_LF(ii)^2*bestMuSlope)/Fz_LF(ii); %muFz_LF(ii)/Fz_LF(ii); %
         flag_LF(ii) = 0;
-    elseif abs(alphafl(ii)) > 4*pi/180 & abs(Mz_LF(ii)) < 10 % if the tire is out of the linear region and the moment is approaching zero
-        mu_LF(ii) = (abs(Fy_LF(ii)) + Fz_LF(ii)^2*6e-5)/Fz_LF(ii)/muRatio;
+    elseif abs(alphafl(ii)) > 4*pi/180 & abs(Mz_LF(ii)) < 5 % if the tire is out of the linear region and the moment is approaching zero
+        mu_LF(ii) = (abs(Fy_LF(ii)) + Fz_LF(ii)^2*bestMuSlope)/Fz_LF(ii)/muRatio;
         flag_LF(ii) = 1;
     else % can't estimate in these conditions
         mu_LF(ii) = NaN; 
@@ -322,7 +335,7 @@ for ii = 1:length(alphafl)
 end
 
 for ii = 1:length(alphafr)
-    if 600 > myInterp(abs(alphafr(ii)),abs(Fz_RF(ii))) % if the tire is reasonably sensitive at this point
+    if est_threshold > myInterp(abs(alphafr(ii)),abs(Fz_RF(ii))) % if the tire is reasonably sensitive at this point
     %if 0.1 > interp2(alphaGrid,FzGrid,relUnc,abs(alphafr(ii)),Fz_RF(ii)) % if the tire is reasonably sensitive at this point
         % compute the roots to find mu
         pVal = (3*(Mz_RF(ii)-C1_RF(ii))*(-C3_RF(ii)) - C2_RF(ii)^2)/(3*(Mz_RF(ii)-C1_RF(ii))^2);
@@ -333,10 +346,10 @@ for ii = 1:length(alphafr)
             t0 = -2*sqrt(pVal/3)*sinh(1/3*asinh(-3*qVal/(2*pVal)*sqrt(3/pVal)));
         end
         muFz_RF(ii) = t0 - C2_RF(ii)/(3*(Mz_RF(ii) - C1_RF(ii)));
-        mu_RF(ii) = (muFz_RF(ii) + Fz_RF(ii)^2*6e-5)/Fz_RF(ii); %muFz_RF(ii)/Fz_RF(ii); %
+        mu_RF(ii) = (muFz_RF(ii) + Fz_RF(ii)^2*bestMuSlope)/Fz_RF(ii); %muFz_RF(ii)/Fz_RF(ii); %
         flag_LF(ii) = 0;
-    elseif abs(alphafr(ii)) > 4*pi/180  & abs(Mz_RF(ii)) < 10 % if the tire is out of the linear region and the moment is approaching zero
-        mu_RF(ii) = (abs(Fy_RF(ii)) + Fz_RF(ii)^2*6e-5)/Fz_RF(ii)/muRatio;
+    elseif abs(alphafr(ii)) > 4*pi/180  & abs(Mz_RF(ii)) < 5 % if the tire is out of the linear region and the moment is approaching zero
+        mu_RF(ii) = (abs(Fy_RF(ii)) + Fz_RF(ii)^2*bestMuSlope)/Fz_RF(ii)/muRatio;
         flag_RF(ii) = 1;
     else % can't estimate in these conditions
         mu_RF(ii) = NaN; 
@@ -363,6 +376,7 @@ hold on
 plot(t(satInds_LF),mu_LF(satInds_LF),'.')
 ylabel('Left Friction Coefficient')
 legend('Unsaturated','Saturated')
+ylim([0 min(1.1*max(max(mu_LF),max(mu_RF)), 2.4)])
 linkHands(7) = gca;
 subplot(212)
 hold off
@@ -388,7 +402,7 @@ plot(SSest(satInds_LF,14)/9.81,mu_LF(satInds_LF),'.')
 text(0.5,0.4,'Inside Wheel','fontsize',16,'horizontalalignment','center')
 text(-0.5,0.4,'Outside Wheel','fontsize',16,'horizontalalignment','center')
 ylabel('Left Friction Coefficient')
-ylim([0 1.6])
+ylim([0 2])
 xlim([-1 1])
 legend('Unsaturated','Saturated','location','southeast')
 subplot(212)
@@ -398,7 +412,7 @@ hold on
 plot(SSest(satInds_RF,14)/9.81,mu_RF(satInds_RF),'.')
 text(-0.5,0.4,'Inside Wheel','fontsize',16,'horizontalalignment','center')
 text(0.5,0.4,'Outside Wheel','fontsize',16,'horizontalalignment','center')
-ylim([0 1.6])
+ylim([0 2])
 xlim([-1 1])
 xlabel('Lateral Acceleration (g)')
 ylabel('Right Friction Coefficient')
