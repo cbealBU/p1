@@ -2222,9 +2222,9 @@ scaling</blkName>
 			</SubSystem>
 			<block>
 				<blkName>alignment
-(rack 7//16)</blkName>
-				<xpcblkName>Hardware I//O/Input/alignment (rack 7//16)</xpcblkName>
-				<SLblockPath>p1/Hardware I//O/Input/alignment (rack 7//16)</SLblockPath>
+(By Fy 7//19//18)</blkName>
+				<xpcblkName>Hardware I//O/Input/alignment (By Fy 7//19//18)</xpcblkName>
+				<SLblockPath>p1/Hardware I//O/Input/alignment (By Fy 7//19//18)</SLblockPath>
 				<isSrc>[1 0 1]</isSrc>
 				<parameter>
 					<paramName>Value</paramName>
@@ -4976,36 +4976,6 @@ from roll</sigName>
 						<dim>[1, 1]</dim>
 					</parameter>
 				</block>
-				<block>
-					<blkName>Amplitude</blkName>
-					<xpcblkName>User Controllers/Steering Controller/HAL-9000/Amplitude</xpcblkName>
-					<SLblockPath>p1/User Controllers/Steering Controller/HAL-9000/Amplitude</SLblockPath>
-					<isSrc>[1 0 1]</isSrc>
-					<parameter>
-						<paramName>Value</paramName>
-						<dim>[1, 1]</dim>
-					</parameter>
-				</block>
-				<block>
-					<blkName>Delay</blkName>
-					<xpcblkName>User Controllers/Steering Controller/HAL-9000/Delay</xpcblkName>
-					<SLblockPath>p1/User Controllers/Steering Controller/HAL-9000/Delay</SLblockPath>
-					<isSrc>[1 0 1]</isSrc>
-					<parameter>
-						<paramName>Value</paramName>
-						<dim>[1, 1]</dim>
-					</parameter>
-				</block>
-				<block>
-					<blkName>Maneuver</blkName>
-					<xpcblkName>User Controllers/Steering Controller/HAL-9000/Maneuver</xpcblkName>
-					<SLblockPath>p1/User Controllers/Steering Controller/HAL-9000/Maneuver</SLblockPath>
-					<isSrc>[1 0 1]</isSrc>
-					<parameter>
-						<paramName>Value</paramName>
-						<dim>[1, 1]</dim>
-					</parameter>
-				</block>
 				<signal>
 					<sigName>Clock</sigName>
 					<xpcsigName>User Controllers/Steering Controller/HAL-9000/Clock</xpcsigName>
@@ -5038,6 +5008,18 @@ from roll</sigName>
 				<isSrc>[0 1 1]</isSrc>
 				<parameter>
 					<paramName>enabled</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+				<parameter>
+					<paramName>maneuver</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+				<parameter>
+					<paramName>amplitude</paramName>
+					<dim>[1, 1]</dim>
+				</parameter>
+				<parameter>
+					<paramName>delay</paramName>
 					<dim>[1, 1]</dim>
 				</parameter>
 			</block>
@@ -5224,12 +5206,24 @@ Ratio1</sigName>
 			</parameter>
 		</block>
 		<block>
-			<blkName>Constant5</blkName>
-			<xpcblkName>User Controllers/Constant5</xpcblkName>
-			<SLblockPath>p1/User Controllers/Constant5</SLblockPath>
+			<blkName>Sine Wave</blkName>
+			<xpcblkName>User Controllers/Sine Wave</xpcblkName>
+			<SLblockPath>p1/User Controllers/Sine Wave</SLblockPath>
 			<isSrc>[1 0 1]</isSrc>
 			<parameter>
-				<paramName>Value</paramName>
+				<paramName>Amplitude</paramName>
+				<dim>[1, 1]</dim>
+			</parameter>
+			<parameter>
+				<paramName>Bias</paramName>
+				<dim>[1, 1]</dim>
+			</parameter>
+			<parameter>
+				<paramName>Frequency</paramName>
+				<dim>[1, 1]</dim>
+			</parameter>
+			<parameter>
+				<paramName>Phase</paramName>
 				<dim>[1, 1]</dim>
 			</parameter>
 		</block>
