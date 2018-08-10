@@ -59,7 +59,7 @@ for i = 1:length(t)
     % Parse out the components for ease of use
     Fx_LF(i) = ForcesL(1); Fy_LF(i) = ForcesL(2); Fz_LF(i) = ForcesL(3);
     Fx_RF(i) = ForcesR(1); Fy_RF(i) = ForcesR(2); Fz_RF(i) = ForcesR(3);
-    Mx_LF(i) = MomentsL(1); My_LF(i) = ForcesL(2); Mz_LF(i) = MomentsL(3);
+    Mx_LF(i) = MomentsL(1); My_LF(i) = MomentsL(2); Mz_LF(i) = MomentsL(3);
     Mx_RF(i) = MomentsR(1); My_RF(i) = MomentsR(2); Mz_RF(i) = MomentsR(3);
 end
 

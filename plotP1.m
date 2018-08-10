@@ -1,8 +1,8 @@
 % Plotting code for data with new VS330 GPS and Michigan Scientific Wheel
 % Force Transducers
 
-%clear all
-%close all
+clear all
+close all
 
 % Load in a file if it's not already loaded
 if(~exist('fname','var'))
@@ -116,7 +116,7 @@ if ~exist('fHand7','var')
 else
     figure(fHand7) 
 end
-plot(t,180/pi*[alphafl alphafr -delta_LF -delta_RF]);
+plot(t,180/pi*[alphafl alphafr delta_LF delta_RF]);
 linkHands(6) = gca;
 ylim([max(-45,min([alphafl; alphafr; delta_LF; delta_RF])*180/pi) min(45,max([alphafl; alphafr; delta_LF; delta_RF])*180/pi)])
 xlabel('Time (s)')
@@ -129,21 +129,17 @@ legend('\alpha_{FL}','\alpha_{FR}','\delta_{FL}','\delta_{FR}')
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Calculate a brush tire model
-param.Ca = 50000; param.mu = 1.4; param.mu_s = param.mu*0.9; % best values from fitting process
+brush_tire_params; % load the brush tire parameters
 alphaModel = (-25:0.5:25)'*pi/180;
-FzModel = (1400:200:6200)';
+FzModel = linspace(1600,6200,25);
 [alphaModel,FzModel] = meshgrid(alphaModel,FzModel);
-Calpha = param.Ca*sin(1.0*atan(FzModel/3e3));   % from Chris' notes (see adaption from Pacejka using variable a with c_{px} instead of C_\alpha)
-mup = param.mu - (6e-5)*FzModel;                    % from Chris' notes
-mus = param.mu_s - (6e-5)*FzModel;                  % from Chris' notes
-%mup = mup/4; mus = mus/4; % for comparison at different friction coeffs
+Calpha = brush.CaVal*sin(brush.CaSinVal*atan(brush.CaTanVal*FzModel*brush.CaSlope));   % from Chris' notes (see adaption from Pacejka using variable a with c_{px} instead of C_\alpha)
+mup = brush.muVal - brush.muSlope*FzModel;                    % from Chris' notes
+mus = brush.muVal*brush.muRatio - brush.muSlope*FzModel;                  % from Chris' notes
 thetay = Calpha./(3*mup.*FzModel);
 sigmay = tan(alphaModel);
-asq = 0.15*FzModel/4e3; % half contact patch length
+asq = brush.aVal*(FzModel*brush.aSlope).^(brush.aExp); % half contact patch length
 FyModel = -Calpha.*sigmay + Calpha.^2./(3*mup.*FzModel).*(2-mus./mup).*abs(sigmay).*sigmay - Calpha.^3./(9*(mup.*FzModel).^2).*(1-2/3*mus./mup).*sigmay.^3;
-% Pacejka model - simpler but missing sliding friction
-%FyModel = -3*mup.*FzModel.*thetay.*sigmay*(1 - abs(thetay.*sigmay) + 1/3*(thetay.*sigmay).^2);
-%MzModel = param.mu.*FzModel.*sqrt(asq).*thetay.*sigmay.*(1 - 3*abs(thetay.*sigmay) + 3*(thetay.*sigmay).^2 - abs(thetay.*sigmay).^3); % fill in with details from Pacejka book */
 MzModel = asq.*sigmay.*Calpha/3.*(1 - Calpha.*abs(sigmay)./(mup.*FzModel).*(2-mus./mup) + (Calpha.*sigmay./(mup.*FzModel)).^2.*(1-2/3*mus./mup) - (Calpha.*abs(sigmay)./(mup.*FzModel)).^3.*(4/27 - 1/9*mus./mup));
 satInds = abs(alphaModel) > 3*mup.*FzModel./(Calpha);
 FyModel(satInds) = -sign(alphaModel(satInds)).*mus(satInds).*FzModel(satInds);
@@ -169,14 +165,14 @@ xlabel('Slip Angle (deg)')
 ylabel('Vertical Load (N)')
 zlabel('Lateral Force (N)')
 xlim([-25 25])
-ylim([1300 6200])
+%ylim([1300 6200])
 hold on;
 hsurf = surf(alphaModel*180/pi,FzModel,FyModel,1.8*ones(size(FyModel)),'facecolor',[1 0.8 0.8],'edgealpha',1);
 %set(hsurf,'cdata',1.8*ones(size(FyModel)));
 view([6 -8])
-hDummyL = plot(NaN,NaN,'.')
+hDummyL = plot(NaN,NaN,'.');
 set(hDummyL,'markersize',16,'color','b'); 
-hDummyR = plot(NaN,NaN,'.')
+hDummyR = plot(NaN,NaN,'.');
 set(hDummyR,'markersize',16,'color',[0 0.5 0]); 
 legend([hDummyL hDummyR hsurf],'Left','Right','Model Fit','location','best')
  
@@ -195,15 +191,15 @@ xlabel('Slip Angle (deg)')
 ylabel('Vertical Load (N)')
 zlabel('Steering Moment (Nm)')
 xlim([-25 25])
-ylim([1300 6200])
+%ylim([1300 6200])
 zlim([-300 300])
 hold on;
 hsurf = surf(alphaModel*180/pi,FzModel,MzModel,1.8*ones(size(MzModel)),'facecolor',[1 0.8 0.8],'edgealpha',1);
 %set(hsurf,'cdata',1.8*ones(size(MzModel)));
 view([6 -8])
-hDummyL = plot(NaN,NaN,'.')
+hDummyL = plot(NaN,NaN,'.');
 set(hDummyL,'markersize',16,'color','b'); 
-hDummyR = plot(NaN,NaN,'.')
+hDummyR = plot(NaN,NaN,'.');
 set(hDummyR,'markersize',16,'color',[0 0.5 0]); 
 legend([hDummyL hDummyR hsurf],'Left','Right','Model Fit','location','best')
 
@@ -222,14 +218,86 @@ xlabel('Slip Angle (deg)')
 ylabel('Vertical Load (N)')
 zlabel('Pneumatic Trail (m)')
 xlim([-15 15])
-ylim([1600 6200])
+%ylim([1600 6200])
 zlim([-0.05 0.15]);
 view([-6 1])
-hDummyL = plot(NaN,NaN,'.')
+hDummyL = plot(NaN,NaN,'.');
 set(hDummyL,'markersize',16,'color','b'); 
-hDummyR = plot(NaN,NaN,'.')
+hDummyR = plot(NaN,NaN,'.');
 set(hDummyR,'markersize',16,'color',[0 0.5 0]); 
 legend([hDummyL hDummyR hsurf],'Left','Right','Model Fit','location','best')
+
+% plot the time-based model fit
+Calpha_LF = brush.lf.CaVal*sin(brush.lf.CaSinVal*atan(brush.lf.CaTanVal*Fz_LF*brush.lf.CaSlope));   % from Chris' notes (see adaption from Pacejka using variable a with c_{px} instead of C_\alpha)
+mup_LF = brush.lf.muVal - brush.lf.muSlope*Fz_LF;                    % from Chris' notes
+mus_LF = brush.lf.muVal*brush.lf.muRatio - brush.lf.muSlope*Fz_LF;                  % from Chris' notes
+thetay_LF = Calpha_LF./(3*mup_LF.*Fz_LF);
+sigmay_LF = tan(alphafl);
+asq_LF = brush.lf.aVal + (Fz_LF*brush.lf.aSlope).^(brush.lf.aExp); % half contact patch length
+FyFit_LF = -Calpha_LF.*sigmay_LF + Calpha_LF.^2./(3*mup_LF.*Fz_LF).*(2-mus_LF./mup_LF).*abs(sigmay_LF).*sigmay_LF - Calpha_LF.^3./(9*(mup_LF.*Fz_LF).^2).*(1-2/3*mus_LF./mup_LF).*sigmay_LF.^3;
+MzFit_LF = asq_LF.*sigmay_LF.*Calpha_LF/3.*(1 - Calpha_LF.*abs(sigmay_LF)./(mup_LF.*Fz_LF).*(2-mus_LF./mup_LF) + (Calpha_LF.*sigmay_LF./(mup_LF.*Fz_LF)).^2.*(1-2/3*mus_LF./mup_LF) - (Calpha_LF.*abs(sigmay_LF)./(mup_LF.*Fz_LF)).^3.*(4/27 - 1/9*mus_LF./mup_LF));
+satInds = abs(alphafl) > 3*mup_LF.*Fz_LF./(Calpha_LF);
+FyFit_LF(satInds) = -sign(alphafl(satInds)).*mus_LF(satInds).*Fz_LF(satInds);
+MzFit_LF(satInds) = 0;
+Calpha_RF = brush.rf.CaVal*sin(brush.rf.CaSinVal*atan(brush.rf.CaTanVal*Fz_RF*brush.rf.CaSlope));   % from Chris' notes (see adaption from Pacejka using variable a with c_{px} instead of C_\alpha)
+mup_RF = brush.rf.muVal - brush.rf.muSlope*Fz_RF;                    % from Chris' notes
+mus_RF = brush.rf.muVal*brush.rf.muRatio - brush.rf.muSlope*Fz_RF;                  % from Chris' notes
+thetay_RF = Calpha_RF./(3*mup_RF.*Fz_RF);
+sigmay_RF = tan(alphafr);
+asq_RF = brush.rf.aVal + (Fz_RF*brush.rf.aSlope).^(brush.rf.aExp); % half contact patch length
+FyFit_RF = -Calpha_RF.*sigmay_RF + Calpha_RF.^2./(3*mup_RF.*Fz_RF).*(2-mus_RF./mup_RF).*abs(sigmay_RF).*sigmay_RF - Calpha_RF.^3./(9*(mup_RF.*Fz_RF).^2).*(1-2/3*mus_RF./mup_RF).*sigmay_RF.^3;
+MzFit_RF = asq_RF.*sigmay_RF.*Calpha_RF/3.*(1 - Calpha_RF.*abs(sigmay_RF)./(mup_RF.*Fz_RF).*(2-mus_RF./mup_RF) + (Calpha_RF.*sigmay_RF./(mup_RF.*Fz_RF)).^2.*(1-2/3*mus_RF./mup_RF) - (Calpha_RF.*abs(sigmay_RF)./(mup_RF.*Fz_RF)).^3.*(4/27 - 1/9*mus_RF./mup_RF));
+satInds = abs(alphafr) > 3*mup_RF.*Fz_RF./(Calpha_RF);
+FyFit_RF(satInds) = -sign(alphafr(satInds)).*mus_RF(satInds).*Fz_RF(satInds);
+MzFit_RF(satInds) = 0;
+
+
+if ~exist('fHand11','var') 
+    fHand11 = figure('Name','Force Fit','NumberTitle','off');
+else
+    figure(fHand11) 
+end
+subplot(211)
+cla reset
+plot(t,Fy_LF)
+%shadedTimeSeries(t,Fy_LF,Switches(:,1))
+hold on
+plot(t,FyFit_LF)
+axis tight
+legend('Data','Fit')
+subplot(212)
+cla reset
+plot(t,Fy_RF)
+%shadedTimeSeries(t,Fy_RF,Switches(:,1))
+hold on
+plot(t,FyFit_RF)
+axis tight
+ylabel('Lateral Force')
+xlabel('Time (s)')
+
+if ~exist('fHand12','var') 
+    fHand12 = figure('Name','Moment Fit','NumberTitle','off');
+else
+    figure(fHand12) 
+end
+subplot(211)
+cla reset
+plot(t,Mz_LF)
+%shadedTimeSeries(t,Mz_LF,Switches(:,1))
+hold on
+plot(t,MzFit_LF)
+axis tight
+legend('Data','Fit')
+subplot(212)
+cla reset
+plot(t,Mz_RF)
+%shadedTimeSeries(t,Mz_RF,Switches(:,1))
+hold on
+plot(t,MzFit_RF)
+axis tight
+ylabel('Aligning Moment')
+xlabel('Time (s)')
+
 
 % Link the x-axes of each of the time-based plots
 linkaxes(linkHands,'x')
