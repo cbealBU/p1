@@ -378,26 +378,26 @@ subplot(211)
 hold off
 plot(t(unsatInds_LF),mu_LF(unsatInds_LF),'.');% - Fz_LF(unsatInds_LF)*brush.muSlope,'.')
 hold on
-plot(t(satInds_LF),mu_LF(satInds_LF),'.');% - Fz_LF(satInds_LF)*brush.muSlope,'.')
+%plot(t(satInds_LF),mu_LF(satInds_LF),'.');% - Fz_LF(satInds_LF)*brush.muSlope,'.')
 %plot(t(unsatInds_LF),sigma_LF(unsatInds_LF)./Fz_LF(unsatInds_LF))
 plot(t(unsatInds_LF),mu_LF(unsatInds_LF)+conf90*sigma_LF(unsatInds_LF)./Fz_LF(unsatInds_LF))
 plot(t(unsatInds_LF),mu_LF(unsatInds_LF)-conf90*sigma_LF(unsatInds_LF)./Fz_LF(unsatInds_LF))
-ylabel('Left Friction Coefficient')
-legend('Unsaturated','Saturated')
+ylabel('Left Wheel')
+legend('Friction Estimate','Upper Bound','Lower Bound')
 ylim([0 min(1.1*max(mu_LF), 2.4)])
 linkHands = [linkHands; gca];
 subplot(212)
 hold off
 plot(t(unsatInds_RF),mu_RF(unsatInds_RF),'.');% - Fz_RF(unsatInds_RF)*brush.muSlope,'.')
 hold on
-plot(t(satInds_RF),mu_RF(satInds_RF),'.');% - Fz_RF(satInds_RF)*brush.muSlope,'.')
+%plot(t(satInds_RF),mu_RF(satInds_RF),'.');% - Fz_RF(satInds_RF)*brush.muSlope,'.')
 plot(t(unsatInds_RF),mu_RF(unsatInds_RF)+conf90*sigma_RF(unsatInds_RF)./Fz_RF(unsatInds_RF))
 plot(t(unsatInds_RF),mu_RF(unsatInds_RF)-conf90*sigma_RF(unsatInds_RF)./Fz_RF(unsatInds_RF))
 linkHands = [linkHands; gca];
 ylim([0 min(1.1*max(mu_RF), 2.4)])
 xlabel('Time (s)')
-ylabel('Right Friction Coefficient')
-legend('Unsaturated','Saturated')
+ylabel('Right Wheel')
+legend('Friction Estimate','Upper Bound','Lower Bound')
 
 if ~exist('fHand22','var')
     fHand22 = figure('Name','Friction Coeff vs. Lateral Accel','NumberTitle','off');
