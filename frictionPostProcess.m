@@ -4,8 +4,8 @@
 % Date: 7/25/18
 
 %clear all
-%close all
-%clear fHand*
+close all
+clear fHand*
 
 % Load in a file if it's not already loaded
 if(~exist('fname','var'))
@@ -25,7 +25,7 @@ end
 
 % estimated parameters
 param.Ca = 50000;
-param.hcg = 1.9;
+param.hcg = 0.41;
 param.kfr = 0.5;
 
 % load in the low-cost sensors
@@ -34,17 +34,17 @@ Mst_RF = -Load_Cells(:,2).*lc_RF; % negative since load cell sign depends on ten
 Ma_LF = mt_LF.*Fy_LF;  % load cell torque due to mechanical trail
 Ma_RF = mt_RF.*Fy_RF; % load cell torque due to mechanical trail
 
-deltaFz = SSest(:,4)*param.hcg*m/c*param.kfr;
+deltaFz = SSest(:,14)*param.hcg*param.m*param.b/(param.c*(param.a+param.b))*param.kfr;
 if ~exist('fHand30','var') 
     fHand30 = figure('Name','Wheel Load Estimation','NumberTitle','off');
 else
     figure(fHand30) 
 end
 subplot(211)
-plot(t,Fz_LF,t,3900 - deltaFz);
+plot(t,Fz_LF,t,3800 - deltaFz);
 linkHands = [linkHands; gca];
 subplot(212)
-plot(t,Fz_RF,t,3500 + deltaFz);
+plot(t,Fz_RF,t,3800 + deltaFz);
 linkHands = [linkHands; gca];
 legend('Data','\Delta Fz Fit')
 
@@ -65,6 +65,41 @@ linkHands = [linkHands; gca];
 legend('Data','Load Cell Fit')
 %ylim([-200 200])
 
+% reverse engineer the load cell moment arms
+
+if ~exist('fHand32','var') 
+    fHand32 = figure('Name','LC Arm Calculation','NumberTitle','off');
+else
+    figure(fHand32) 
+end
+subplot(211)
+plot(delta_LF*180/pi,(Mz_LF + Tj_LF)./Load_Cells(:,1),delta_LF*180/pi,lc_LF);
+ylim([-0.2 0.2])
+subplot(212)
+plot(delta_RF*180/pi,(Mz_RF + Tj_RF)./-Load_Cells(:,2),delta_RF*180/pi,lc_RF);
+ylim([-0.2 0.2])
+
+% Plot the components of the steering moments
+if ~exist('fHand33','var') 
+    fHand33 = figure('Name','Moment Components','NumberTitle','off');
+else
+    figure(fHand33) 
+end
+subplot(211)
+plot(delta_LF,Mz_LF,delta_LF,Mst_LF-Tj_LF,delta_LF,Tj_LF)
+legend('WFT','Fit'); 
+subplot(212)
+plot(delta_RF,Mz_RF,delta_RF,Mst_RF-Tj_RF,delta_RF,Tj_RF)
+
+% compare to a simple parallelogram model
+% l_pitt = 0.08;
+% l_steer = 0.08;
+% l_base = 0.38;
+% l_tierod = 0.38;
+% theta_gb = ((-20:20)+75)*pi/180';
+% theta_f = acos((l_tierod^2 + l_steer^2 - l_pitt^2 - l_base^2 + 2*l_pitt*l_base*cos(theta_gb))/(2*l_tierod*l_steer));
+% figure; 
+% plot(theta_gb*180/pi-75,cos(theta_f-pi/2)*l_steer);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %

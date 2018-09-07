@@ -127,8 +127,8 @@ c = 0.81;                   % half track width (m)
 
 % Unused steering geometry parameters.  These were used for the feedforward
 % steering controller.
-ka=12.5*pi/180;             % Kingpin inclination angle (rad)
-ca=7*pi/180;                % Castor angle (rad)
+ka= 12.5*pi/180;             % Kingpin inclination angle (rad)
+ca= 7*pi/180;                % Castor angle (rad)
 tm = rfl*sin(ca);           % mechanical trail (m)
 
 king=(tm+tp)*sin(ka);       % Kingpin steering torque constant (Nm)
