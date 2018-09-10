@@ -4,8 +4,8 @@
 % Date: 7/25/18
 
 %clear all
-close all
-clear fHand*
+%close all
+%clear fHand*
 
 % Load in a file if it's not already loaded
 if(~exist('fname','var'))
@@ -92,21 +92,36 @@ subplot(212)
 plot(delta_RF,Mz_RF,delta_RF,Mst_RF-Tj_RF,delta_RF,Tj_RF)
 
 % compare to a simple parallelogram model
-% l_pitt = 0.08;
-% l_steer = 0.08;
-% l_base = 0.38;
-% l_tierod = 0.38;
-% theta_gb = ((-20:20)+75)*pi/180';
-% theta_f = acos((l_tierod^2 + l_steer^2 - l_pitt^2 - l_base^2 + 2*l_pitt*l_base*cos(theta_gb))/(2*l_tierod*l_steer));
-% figure; 
-% plot(theta_gb*180/pi-75,cos(theta_f-pi/2)*l_steer);
-
+l_pitt = 0.06;
+l_steer = 0.12;
+l_base = 0.38;
+l_tierod = 0.38;
+%theta_f = acos((l_tierod^2 + l_steer^2 - l_pitt^2 - l_base^2 + 2*l_pitt*l_base*cos(theta_gb+pi/2))/(2*l_tierod*l_steer));
+for i = 1:length(t)
+    [outLengths,outAngles] = fourbar_analysis([l_pitt,l_tierod,-l_steer,l_base],[NaN NaN PostProc(i,1)+pi/2 pi],[5 6],[pi/2 0],0,[0 0],[0 0 0]);
+    theta_gb(i) = outAngles(2);
+    theta_tr(i) = outAngles(3);
+end
+figure(10); 
+plot(theta_gb*180/pi,sin(theta_f)*l_steer.*cos(PostProc(1:length(theta_gb),1)));
+hold on
+plot(delta_LF*180/pi,lc_LF)
+figure(11);
+cla;
+Nconfigs = 5;
+for i = round(linspace(1,length(theta_gb),Nconfigs))
+    xlegs = [cos(theta_gb(i)+pi/2)*l_pitt 0 l_base l_base+cos(PostProc(i,1)+pi/2)*l_steer];
+    ylegs = [sin(theta_gb(i)+pi/2)*l_pitt 0 0 sin(PostProc(i,1)+pi/2)*l_steer];
+    hold all
+    plot(xlegs([2 3 4 1]),ylegs([2 3 4 1]),'*-');
+end
+axis equal
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %   Model analysis section
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+return
 %% Calculate sensitivities of the estimator to the actual friction value
 brush_tire_params; % load the tire model parameters
 alphaModel = 0:0.7:20; alphaModel = alphaModel(:)*pi/180;
