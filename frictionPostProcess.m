@@ -3,7 +3,7 @@
 % Author: Craig Beal
 % Date: 7/25/18
 
-%clear all
+clear all
 close all
 clear fHand*
 
@@ -23,13 +23,13 @@ end
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% estimated parameters
+%% estimated parameters
 param.Ca = 50000;
 param.hcg = 0.41;
 param.kfr = 0.5;
 
 % load in the low-cost sensors
-Mst_LF = Load_Cells(:,1).*lc_LF;
+Mst_LF = Load_Cells(:,1).*lc_RF;
 Mst_RF = -Load_Cells(:,2).*lc_RF; % negative since load cell sign depends on tension/comp rather than left/right
 Ma_LF = mt_LF.*Fy_LF;  % load cell torque due to mechanical trail
 Ma_RF = mt_RF.*Fy_RF; % load cell torque due to mechanical trail
@@ -76,10 +76,14 @@ else
     clf;
 end
 subplot(211)
-plot(delta_LF*180/pi,(Mz_LF + Tj_LF)./Load_Cells(:,1),delta_LF*180/pi,lc_LF);
+LC_LF_test = (Mz_LF )./Load_Cells(:,1);
+inds = find(isnan(LC_LF_test));
+LC_LF_test(inds,1) = 0;
+LC_LF_test = filtfilt(ones(200,1),200,LC_LF_test);
+plot(delta_LF*180/pi,LC_LF_test,delta_LF*180/pi,lc_LF);
 ylim([-0.2 0.2])
 subplot(212)
-plot(delta_RF*180/pi,(Mz_RF + Tj_RF)./-Load_Cells(:,2),delta_RF*180/pi,lc_RF);
+plot(delta_RF*180/pi,(Mz_RF )./-Load_Cells(:,2),delta_RF*180/pi,lc_RF);
 ylim([-0.2 0.2])
 
 % Plot the components of the steering moments
@@ -90,20 +94,21 @@ else
 end
 subplot(211)
 plot(delta_LF,Mz_LF,delta_LF,Mst_LF-Tj_LF,delta_LF,Tj_LF)
-legend('WFT','Fit'); 
+legend('WFT','Fit','Jacking'); 
 subplot(212)
 plot(delta_RF,Mz_RF,delta_RF,Mst_RF-Tj_RF,delta_RF,Tj_RF)
 
-%% compare to a simple parallelogram model
+% compare to a simple parallelogram model
 l_pitt = 0.1491;
-l_steer = 0.12;
-l_base = 0.43;
-l_tierod = 0.4095;
-theta_steer = PostProc(1:500:length(t),2);
+l_steer = 0.149;
+l_base = 0.438;
+l_tierod = 0.411;
+theta_steer = PostProc(1:500:length(t),2) - 5*pi/180;
 theta_gb = zeros(size(theta_steer));
 theta_tr = zeros(size(theta_steer));
+theta_base = -3*pi/180;
 for i = 1:length(theta_steer)
-    [outLengths,outAngles] = fourbar_analysis([l_base,l_pitt,l_tierod,-l_steer],[0 NaN NaN theta_steer(i,1)+pi/2],[6 7],[pi/2 0],0,[0 0],[0 0 0]);
+    [outLengths,outAngles] = fourbar_analysis([l_base,l_pitt,l_tierod,-l_steer],[theta_base NaN NaN theta_steer(i,1)+pi/2],[6 7],[pi/2 0],0,[0 0],[0 0 0]);
     theta_gb(i) = outAngles(2);
     theta_tr(i) = outAngles(3);
     %pause();
@@ -117,9 +122,9 @@ plot(delta_LF*180/pi,lc_LF)
 
 % overplot on the load cell arm plot calculated from experimental data
 figure(fHand32)
-subplot(211)
-hold on
-plot(-theta_steer*180/pi,cos(theta_tr)*l_steer.*cos(theta_steer));
+% subplot(211)
+% hold on
+% plot(theta_steer*180/pi,cos(theta_tr)*l_steer.*cos(theta_steer));
 subplot(212)
 hold on
 plot(theta_steer*180/pi,cos(theta_tr)*l_steer.*cos(theta_steer));
@@ -129,8 +134,8 @@ figure(11);
 cla;
 Nconfigs = 5;
 for i = round(linspace(1,length(theta_gb),Nconfigs))
-    xlegs = [cos(theta_gb(i))*l_pitt 0 l_base l_base+cos(theta_steer(i)+pi/2)*l_steer];
-    ylegs = [sin(theta_gb(i))*l_pitt 0 0 sin(theta_steer(i)+pi/2)*l_steer];
+    xlegs = [cos(theta_gb(i))*l_pitt 0 l_base*cos(theta_base) l_base*cos(theta_base)+cos(theta_steer(i)+pi/2)*l_steer];
+    ylegs = [sin(theta_gb(i))*l_pitt 0 l_base*sin(theta_base) l_base*sin(theta_base)+sin(theta_steer(i)+pi/2)*l_steer];
     hold all
     plot(xlegs([2 3 4 1]),ylegs([2 3 4 1]),'*-');
 end
