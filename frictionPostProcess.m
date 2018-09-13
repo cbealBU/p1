@@ -4,8 +4,8 @@
 % Date: 7/25/18
 
 %clear all
-%close all
-%clear fHand*
+close all
+clear fHand*
 
 % Load in a file if it's not already loaded
 if(~exist('fname','var'))
@@ -38,7 +38,8 @@ deltaFz = SSest(:,14)*param.hcg*param.m*param.b/(param.c*(param.a+param.b))*para
 if ~exist('fHand30','var') 
     fHand30 = figure('Name','Wheel Load Estimation','NumberTitle','off');
 else
-    figure(fHand30) 
+    figure(fHand30)
+    clf;
 end
 subplot(211)
 plot(t,Fz_LF,t,3800 - deltaFz);
@@ -53,7 +54,8 @@ legend('Data','\Delta Fz Fit')
 if ~exist('fHand31','var') 
     fHand31 = figure('Name','Mz estimation','NumberTitle','off');
 else
-    figure(fHand31) 
+    figure(fHand31)
+    clf;
 end
 subplot(211)
 plot(t,Mz_LF,t,Mst_LF - Tj_LF)
@@ -71,6 +73,7 @@ if ~exist('fHand32','var')
     fHand32 = figure('Name','LC Arm Calculation','NumberTitle','off');
 else
     figure(fHand32) 
+    clf;
 end
 subplot(211)
 plot(delta_LF*180/pi,(Mz_LF + Tj_LF)./Load_Cells(:,1),delta_LF*180/pi,lc_LF);
@@ -91,27 +94,43 @@ legend('WFT','Fit');
 subplot(212)
 plot(delta_RF,Mz_RF,delta_RF,Mst_RF-Tj_RF,delta_RF,Tj_RF)
 
-% compare to a simple parallelogram model
-l_pitt = 0.06;
+%% compare to a simple parallelogram model
+l_pitt = 0.1491;
 l_steer = 0.12;
-l_base = 0.38;
-l_tierod = 0.38;
-%theta_f = acos((l_tierod^2 + l_steer^2 - l_pitt^2 - l_base^2 + 2*l_pitt*l_base*cos(theta_gb+pi/2))/(2*l_tierod*l_steer));
-for i = 1:length(t)
-    [outLengths,outAngles] = fourbar_analysis([l_pitt,l_tierod,-l_steer,l_base],[NaN NaN PostProc(i,1)+pi/2 pi],[5 6],[pi/2 0],0,[0 0],[0 0 0]);
+l_base = 0.43;
+l_tierod = 0.4095;
+theta_steer = PostProc(1:500:length(t),2);
+theta_gb = zeros(size(theta_steer));
+theta_tr = zeros(size(theta_steer));
+for i = 1:length(theta_steer)
+    [outLengths,outAngles] = fourbar_analysis([l_base,l_pitt,l_tierod,-l_steer],[0 NaN NaN theta_steer(i,1)+pi/2],[6 7],[pi/2 0],0,[0 0],[0 0 0]);
     theta_gb(i) = outAngles(2);
     theta_tr(i) = outAngles(3);
+    %pause();
 end
-figure(10); 
-plot(theta_gb*180/pi,sin(theta_f)*l_steer.*cos(PostProc(1:length(theta_gb),1)));
+
+figure(10);
+hold off
+plot(theta_steer*180/pi,cos(theta_tr)*l_steer.*cos(theta_steer));
 hold on
 plot(delta_LF*180/pi,lc_LF)
+
+% overplot on the load cell arm plot calculated from experimental data
+figure(fHand32)
+subplot(211)
+hold on
+plot(-theta_steer*180/pi,cos(theta_tr)*l_steer.*cos(theta_steer));
+subplot(212)
+hold on
+plot(theta_steer*180/pi,cos(theta_tr)*l_steer.*cos(theta_steer));
+
+% plot some of the configurations of the steering linkage found
 figure(11);
 cla;
 Nconfigs = 5;
 for i = round(linspace(1,length(theta_gb),Nconfigs))
-    xlegs = [cos(theta_gb(i)+pi/2)*l_pitt 0 l_base l_base+cos(PostProc(i,1)+pi/2)*l_steer];
-    ylegs = [sin(theta_gb(i)+pi/2)*l_pitt 0 0 sin(PostProc(i,1)+pi/2)*l_steer];
+    xlegs = [cos(theta_gb(i))*l_pitt 0 l_base l_base+cos(theta_steer(i)+pi/2)*l_steer];
+    ylegs = [sin(theta_gb(i))*l_pitt 0 0 sin(theta_steer(i)+pi/2)*l_steer];
     hold all
     plot(xlegs([2 3 4 1]),ylegs([2 3 4 1]),'*-');
 end

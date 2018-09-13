@@ -83,10 +83,10 @@ function [sglu] = p1_sglu(param);
     scrub_radius_r = zeros(size(motor_angle));
     sus_height_r = zeros(size(motor_angle));
 
-    for i = 1:length(motor_angle);
+    for i = 1:length(motor_angle)
         [sus_height_l(i), sglu.fl.mt(i), scrub_radius_l(i), camber_angle_l(i), sglu.fl.ja(i)] = susgeom(tk_LF,tc_LF,sc0,tm0,ca0,R,1,sglu.fl.sa(i));
         [sus_height_r(i), sglu.fr.mt(i), scrub_radius_r(i), camber_angle_r(i), sglu.fr.ja(i)] = susgeom(tk_RF,tc_RF,sc0,tm0,ca0,R,1,-sglu.fr.sa(i)); %negative sa becuase susgeom is for left wheels only...
-    end;
+    end
     sglu.fr.ja = -sglu.fr.ja; % this fixes the jacking arm since susgeom is for left wheels only
 
 
