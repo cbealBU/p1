@@ -28,8 +28,14 @@ param.Ca = 50000;
 param.hcg = 0.41;
 param.kfr = 0.5;
 
+%HACK! 
+if exist('LC_LF_kin','var')
+    lc_LF = interp1(theta_steer_LF,LC_LF_kin,delta_LF);
+    lc_RF = interp1(theta_steer_RF,LC_RF_kin,delta_RF);
+end
+
 % load in the low-cost sensors
-Mst_LF = Load_Cells(:,1).*lc_RF;
+Mst_LF = Load_Cells(:,1).*lc_LF;
 Mst_RF = -Load_Cells(:,2).*lc_RF; % negative since load cell sign depends on tension/comp rather than left/right
 Ma_LF = mt_LF.*Fy_LF;  % load cell torque due to mechanical trail
 Ma_RF = mt_RF.*Fy_RF; % load cell torque due to mechanical trail
@@ -73,13 +79,13 @@ if ~exist('fHand32','var')
     fHand32 = figure('Name','LC Arm Calculation','NumberTitle','off');
 else
     figure(fHand32) 
-    clf;
+    %clf;
 end
 subplot(211)
 LC_LF_test = (Mz_LF )./Load_Cells(:,1);
-inds = find(isnan(LC_LF_test));
-LC_LF_test(inds,1) = 0;
-LC_LF_test = filtfilt(ones(200,1),200,LC_LF_test);
+%inds = find(isnan(LC_LF_test));
+%LC_LF_test(inds,1) = 0;
+%LC_LF_test = filtfilt(ones(200,1),200,LC_LF_test);
 plot(delta_LF*180/pi,LC_LF_test,delta_LF*180/pi,lc_LF);
 ylim([-0.2 0.2])
 subplot(212)
@@ -98,44 +104,76 @@ legend('WFT','Fit','Jacking');
 subplot(212)
 plot(delta_RF,Mz_RF,delta_RF,Mst_RF-Tj_RF,delta_RF,Tj_RF)
 
-% compare to a simple parallelogram model
+%% compare to a simple parallelogram model
 l_pitt = 0.1491;
 l_steer = 0.149;
 l_base = 0.438;
 l_tierod = 0.411;
-theta_steer = PostProc(1:500:length(t),2) - 5*pi/180;
-theta_gb = zeros(size(theta_steer));
-theta_tr = zeros(size(theta_steer));
-theta_base = -3*pi/180;
-for i = 1:length(theta_steer)
-    [outLengths,outAngles] = fourbar_analysis([l_base,l_pitt,l_tierod,-l_steer],[theta_base NaN NaN theta_steer(i,1)+pi/2],[6 7],[pi/2 0],0,[0 0],[0 0 0]);
-    theta_gb(i) = outAngles(2);
-    theta_tr(i) = outAngles(3);
+theta_steer_LF = PostProc(1:500:length(t),1) + 5*pi/180; % LF
+theta_steer_RF = PostProc(1:500:length(t),2) - 5*pi/180; % RF
+theta_gb_LF = zeros(size(theta_steer_LF));
+theta_gb_RF = zeros(size(theta_steer_RF));
+theta_tr_LF = zeros(size(theta_steer_LF));
+theta_tr_RF = zeros(size(theta_steer_RF));
+theta_base_LF = 3*pi/180 + pi; % left wheel
+theta_base_RF = -3*pi/180; % right wheel
+for i = 1:length(theta_steer_LF)
+    [outLengths,outAngles] = fourbar_analysis([l_base,l_pitt,l_tierod,-l_steer],[theta_base_LF NaN NaN theta_steer_LF(i,1)+pi/2],[6 7],[pi/2 pi],0,[0 0],[0 0 0]);
+    theta_gb_LF(i) = outAngles(2);
+    theta_tr_LF(i) = outAngles(3);
     %pause();
 end
+for i = 1:length(theta_steer_RF)
+    [outLengths,outAngles] = fourbar_analysis([l_base,l_pitt,l_tierod,-l_steer],[theta_base_RF NaN NaN theta_steer_RF(i,1)+pi/2],[6 7],[pi/2 0],0,[0 0],[0 0 0]);
+    theta_gb_RF(i) = outAngles(2);
+    theta_tr_RF(i) = outAngles(3);
+    %pause();
+end
+% Calculate the LC arm-steering map
+LC_LF_kin = -cos(theta_tr_LF)*l_steer.*cos(theta_steer_LF);
+LC_RF_kin = cos(theta_tr_RF)*l_steer.*cos(theta_steer_RF);
+
+% clean up the LC-steering map
+[theta_steer_LF,IA,~] = unique(theta_steer_LF);
+theta_gb_LF = theta_gb_LF(IA);
+theta_tr_LF = theta_tr_LF(IA);
+LC_LF_kin = LC_LF_kin(IA);
+[theta_steer_RF,IA,~] = unique(theta_steer_RF);
+LC_RF_kin = LC_RF_kin(IA);
+theta_gb_RF = theta_gb_RF(IA);
+theta_tr_RF = theta_tr_RF(IA);
 
 figure(10);
 hold off
-plot(theta_steer*180/pi,cos(theta_tr)*l_steer.*cos(theta_steer));
+plot(theta_steer_LF*180/pi,LC_LF_kin,'.');
 hold on
+plot(theta_steer_RF*180/pi,LC_RF_kin,'.');
 plot(delta_LF*180/pi,lc_LF)
+plot(delta_RF*180/pi,lc_RF)
+legend('Left Kinematics','Right Kinematics','Left Map','Right Map')
 
 % overplot on the load cell arm plot calculated from experimental data
 figure(fHand32)
-% subplot(211)
-% hold on
-% plot(theta_steer*180/pi,cos(theta_tr)*l_steer.*cos(theta_steer));
+subplot(211)
+hold on
+plot(theta_steer_LF*180/pi,LC_LF_kin);
 subplot(212)
 hold on
-plot(theta_steer*180/pi,cos(theta_tr)*l_steer.*cos(theta_steer));
+plot(theta_steer_RF*180/pi,LC_RF_kin);
 
 % plot some of the configurations of the steering linkage found
 figure(11);
 cla;
 Nconfigs = 5;
-for i = round(linspace(1,length(theta_gb),Nconfigs))
-    xlegs = [cos(theta_gb(i))*l_pitt 0 l_base*cos(theta_base) l_base*cos(theta_base)+cos(theta_steer(i)+pi/2)*l_steer];
-    ylegs = [sin(theta_gb(i))*l_pitt 0 l_base*sin(theta_base) l_base*sin(theta_base)+sin(theta_steer(i)+pi/2)*l_steer];
+for i = round(linspace(1,length(theta_gb_LF),Nconfigs))
+    xlegs = -0.15 + [cos(theta_gb_LF(i))*l_pitt 0 l_base*cos(theta_base_LF) l_base*cos(theta_base_LF)+cos(theta_steer_LF(i)+pi/2)*l_steer];
+    ylegs = [sin(theta_gb_LF(i))*l_pitt 0 l_base*sin(theta_base_LF) l_base*sin(theta_base_LF)+sin(theta_steer_LF(i)+pi/2)*l_steer];
+    hold all
+    plot(xlegs([2 3 4 1]),ylegs([2 3 4 1]),'*-');
+end
+for i = round(linspace(1,length(theta_gb_RF),Nconfigs))
+    xlegs = 0.15 + [cos(theta_gb_RF(i))*l_pitt 0 l_base*cos(theta_base_RF) l_base*cos(theta_base_RF)+cos(theta_steer_RF(i)+pi/2)*l_steer];
+    ylegs = [sin(theta_gb_RF(i))*l_pitt 0 l_base*sin(theta_base_RF) l_base*sin(theta_base_RF)+sin(theta_steer_RF(i)+pi/2)*l_steer];
     hold all
     plot(xlegs([2 3 4 1]),ylegs([2 3 4 1]),'*-');
 end
