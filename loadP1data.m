@@ -66,7 +66,8 @@ end
 
 % Look up mechanical trail and calculate aligning moment from mechanical
 % trail
-sglu = p1_sglu(param);
+%sglu = p1_sglu(param);
+nissan_steer_lookup_data;
 tml = interp1(sglu.fl.sa,sglu.fl.mt,delta_LF);
 tmr = interp1(sglu.fr.sa,sglu.fr.mt,delta_RF);
 jal = interp1(sglu.fl.sa,sglu.fl.ja,delta_LF);

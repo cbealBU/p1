@@ -28,17 +28,35 @@ param.Ca = 50000;
 param.hcg = 0.41;
 param.kfr = 0.5;
 
-%HACK! 
-if exist('LC_LF_kin','var')
-    lc_LF = interp1(theta_steer_LF,LC_LF_kin,delta_LF);
-    lc_RF = interp1(theta_steer_RF,LC_RF_kin,delta_RF);
-end
+% Correct the load cell data
+sgn_delta_LF = [1; sign(filtfilt(ones(200,1),1,diff(delta_LF)))]; % find the sign of the steering rate
+sgn_delta_RF = [1; sign(filtfilt(ones(200,1),1,diff(delta_RF)))]; % find the sign of the steering rate
+sgn_delta_LF = -sign(Load_Cells(:,1));%.*sign(delta_LF);
+sgn_delta_RF = sign(Load_Cells(:,2));%.*sign(delta_RF);
+indsplus_LF = find(sgn_delta_LF >= 0); indsminus_LF = find(sgn_delta_LF < 0);
+indsplus_RF = find(sgn_delta_RF >= 0); indsminus_RF = find(sgn_delta_RF < 0);
+
+Ftr_LF(indsplus_LF) = Load_Cells(indsplus_LF,1) - polyval([4.51e3 -501 -754 -464],delta_LF(indsplus_LF));
+Ftr_LF(indsminus_LF) = Load_Cells(indsminus_LF,1) - polyval([3.49e3 188 -746 -257],delta_LF(indsminus_LF));
+Ftr_RF(indsplus_RF) = Load_Cells(indsplus_RF,2) - polyval([4.68e3 492 558 -165],delta_RF(indsplus_RF));
+Ftr_RF(indsminus_RF) = Load_Cells(indsminus_RF,2) - polyval([3.72e3 -527 650 -341],delta_RF(indsminus_RF));
+Ftr_LF = Load_Cells(:,1); %Ftr_LF(:);
+Ftr_RF = Load_Cells(:,2); %Ftr_RF(:);
+
+% HACK
+%if exist('LC_LF_kin','var')
+%    lc_LF_test = interp1(theta_steer_LF-15*pi/180,LC_LF_kin,delta_LF);
+%    lc_RF_test = interp1(theta_steer_RF+15*pi/180,LC_RF_kin,delta_RF);
+%else
+    lc_LF_test = -lc_LF;
+    lc_RF_test = lc_RF;
+%end
 
 % load in the low-cost sensors
-Mst_LF = Load_Cells(:,1).*lc_LF;
-Mst_RF = -Load_Cells(:,2).*lc_RF; % negative since load cell sign depends on tension/comp rather than left/right
-Ma_LF = mt_LF.*Fy_LF;  % load cell torque due to mechanical trail
-Ma_RF = mt_RF.*Fy_RF; % load cell torque due to mechanical trail
+Mst_LF = Ftr_LF.*lc_LF_test;
+Mst_RF = -Ftr_RF.*lc_RF_test; % negative since load cell sign depends on tension/comp rather than left/right
+Ma_LF = -mt_LF.*Fy_LF;  % load cell torque due to mechanical trail
+Ma_RF = -mt_RF.*Fy_RF; % load cell torque due to mechanical trail
 
 deltaFz = SSest(:,14)*param.hcg*param.m*param.b/(param.c*(param.a+param.b))*param.kfr;
 if ~exist('fHand30','var') 
@@ -48,10 +66,10 @@ else
     clf;
 end
 subplot(211)
-plot(t,Fz_LF,t,3800 - deltaFz);
+plot(t,Fz_LF,t,3800 - deltaFz + 55/2.2*9.81*Wheel_Forces(:,19));
 linkHands = [linkHands; gca];
 subplot(212)
-plot(t,Fz_RF,t,3800 + deltaFz);
+plot(t,Fz_RF,t,3500 + deltaFz + 55/2.2*9.81*Wheel_Forces(:,20));
 linkHands = [linkHands; gca];
 legend('Data','\Delta Fz Fit')
 
@@ -64,13 +82,16 @@ else
     clf;
 end
 subplot(211)
-plot(t,Mz_LF,t,Mst_LF - Tj_LF)
+plot(t,Mz_LF+Ma_LF+Tj_LF,t,Mst_LF)% - Tj_LF) %(if using polynomial LC corrections)
 linkHands = [linkHands; gca];
+legend('WFT Data','Load Cell Fit')
+ylabel('Steering Moment (Nm)');
 %ylim([-200 200])
 subplot(212)
-plot(t,Mz_RF,t,Mst_RF - Tj_RF)
+plot(t,Mz_RF+Ma_RF+Tj_RF,t,Mst_RF)% - Tj_RF) %(if using polynomial LC corrections)
 linkHands = [linkHands; gca];
-legend('Data','Load Cell Fit')
+ylabel('Steering Moment (Nm)');
+xlabel('Time (s)')
 %ylim([-200 200])
 
 % reverse engineer the load cell moment arms
@@ -82,14 +103,12 @@ else
     %clf;
 end
 subplot(211)
-LC_LF_test = (Mz_LF )./Load_Cells(:,1);
-%inds = find(isnan(LC_LF_test));
-%LC_LF_test(inds,1) = 0;
-%LC_LF_test = filtfilt(ones(200,1),200,LC_LF_test);
-plot(delta_LF*180/pi,LC_LF_test,delta_LF*180/pi,lc_LF);
+LC_LF_test = (Mz_LF + Ma_LF)./Ftr_LF;
+LC_RF_test = -(Mz_RF + Ma_LF)./Ftr_RF;
+plot(delta_LF*180/pi,LC_LF_test,delta_LF*180/pi,-lc_LF);
 ylim([-0.2 0.2])
 subplot(212)
-plot(delta_RF*180/pi,(Mz_RF )./-Load_Cells(:,2),delta_RF*180/pi,lc_RF);
+plot(-delta_RF*180/pi,LC_RF_test,-delta_RF*180/pi,lc_RF);
 ylim([-0.2 0.2])
 
 % Plot the components of the steering moments
@@ -99,92 +118,93 @@ else
     figure(fHand33) 
 end
 subplot(211)
-plot(delta_LF,Mz_LF,delta_LF,Mst_LF-Tj_LF,delta_LF,Tj_LF)
-legend('WFT','Fit','Jacking'); 
+%plot(delta_LF,Mz_LF,delta_LF,Mst_LF-Tj_LF,delta_LF,Tj_LF)
+plot(delta_LF,Mz_LF+Ma_LF+Tj_LF,delta_LF,Mst_LF,delta_LF,Ma_LF)
+legend('WFT','Fit','Mechanical Moment'); 
 subplot(212)
-plot(delta_RF,Mz_RF,delta_RF,Mst_RF-Tj_RF,delta_RF,Tj_RF)
+%plot(delta_RF,Mz_RF,delta_RF,Mst_RF-Tj_RF,delta_RF,Tj_RF)
+plot(delta_RF,Mz_RF+Ma_RF+Tj_RF,delta_RF,Mst_RF,delta_RF,Ma_RF)
 
 %% compare to a simple parallelogram model
-l_pitt = 0.1491;
-l_steer = 0.149;
-l_base = 0.438;
-l_tierod = 0.411;
-theta_steer_LF = PostProc(1:500:length(t),1) + 5*pi/180; % LF
-theta_steer_RF = PostProc(1:500:length(t),2) - 5*pi/180; % RF
-theta_gb_LF = zeros(size(theta_steer_LF));
-theta_gb_RF = zeros(size(theta_steer_RF));
-theta_tr_LF = zeros(size(theta_steer_LF));
-theta_tr_RF = zeros(size(theta_steer_RF));
-theta_base_LF = 3*pi/180 + pi; % left wheel
-theta_base_RF = -3*pi/180; % right wheel
-for i = 1:length(theta_steer_LF)
-    [outLengths,outAngles] = fourbar_analysis([l_base,l_pitt,l_tierod,-l_steer],[theta_base_LF NaN NaN theta_steer_LF(i,1)+pi/2],[6 7],[pi/2 pi],0,[0 0],[0 0 0]);
-    theta_gb_LF(i) = outAngles(2);
-    theta_tr_LF(i) = outAngles(3);
-    %pause();
-end
-for i = 1:length(theta_steer_RF)
-    [outLengths,outAngles] = fourbar_analysis([l_base,l_pitt,l_tierod,-l_steer],[theta_base_RF NaN NaN theta_steer_RF(i,1)+pi/2],[6 7],[pi/2 0],0,[0 0],[0 0 0]);
-    theta_gb_RF(i) = outAngles(2);
-    theta_tr_RF(i) = outAngles(3);
-    %pause();
-end
-% Calculate the LC arm-steering map
-LC_LF_kin = -cos(theta_tr_LF)*l_steer.*cos(theta_steer_LF);
-LC_RF_kin = cos(theta_tr_RF)*l_steer.*cos(theta_steer_RF);
-
-% clean up the LC-steering map
-[theta_steer_LF,IA,~] = unique(theta_steer_LF);
-theta_gb_LF = theta_gb_LF(IA);
-theta_tr_LF = theta_tr_LF(IA);
-LC_LF_kin = LC_LF_kin(IA);
-[theta_steer_RF,IA,~] = unique(theta_steer_RF);
-LC_RF_kin = LC_RF_kin(IA);
-theta_gb_RF = theta_gb_RF(IA);
-theta_tr_RF = theta_tr_RF(IA);
-
-figure(10);
-hold off
-plot(theta_steer_LF*180/pi,LC_LF_kin,'.');
-hold on
-plot(theta_steer_RF*180/pi,LC_RF_kin,'.');
-plot(delta_LF*180/pi,lc_LF)
-plot(delta_RF*180/pi,lc_RF)
-legend('Left Kinematics','Right Kinematics','Left Map','Right Map')
-
-% overplot on the load cell arm plot calculated from experimental data
-figure(fHand32)
-subplot(211)
-hold on
-plot(theta_steer_LF*180/pi,LC_LF_kin);
-subplot(212)
-hold on
-plot(theta_steer_RF*180/pi,LC_RF_kin);
-
-% plot some of the configurations of the steering linkage found
-figure(11);
-cla;
-Nconfigs = 5;
-for i = round(linspace(1,length(theta_gb_LF),Nconfigs))
-    xlegs = -0.15 + [cos(theta_gb_LF(i))*l_pitt 0 l_base*cos(theta_base_LF) l_base*cos(theta_base_LF)+cos(theta_steer_LF(i)+pi/2)*l_steer];
-    ylegs = [sin(theta_gb_LF(i))*l_pitt 0 l_base*sin(theta_base_LF) l_base*sin(theta_base_LF)+sin(theta_steer_LF(i)+pi/2)*l_steer];
-    hold all
-    plot(xlegs([2 3 4 1]),ylegs([2 3 4 1]),'*-');
-end
-for i = round(linspace(1,length(theta_gb_RF),Nconfigs))
-    xlegs = 0.15 + [cos(theta_gb_RF(i))*l_pitt 0 l_base*cos(theta_base_RF) l_base*cos(theta_base_RF)+cos(theta_steer_RF(i)+pi/2)*l_steer];
-    ylegs = [sin(theta_gb_RF(i))*l_pitt 0 l_base*sin(theta_base_RF) l_base*sin(theta_base_RF)+sin(theta_steer_RF(i)+pi/2)*l_steer];
-    hold all
-    plot(xlegs([2 3 4 1]),ylegs([2 3 4 1]),'*-');
-end
-axis equal
+% l_pitt = 0.1491;
+% l_steer = 0.1285;
+% l_base = 0.438;
+% l_tierod = 0.411;
+% theta_steer_LF = (linspace(-25,25))'*pi/180 + 15*pi/180; %PostProc(1:500:length(t),1) + 15*pi/180; % LF
+% theta_steer_RF = (linspace(-25,25))'*pi/180 - 15*pi/180; %PostProc(1:500:length(t),2) - 15*pi/180; % RF
+% theta_gb_LF = zeros(size(theta_steer_LF));
+% theta_gb_RF = zeros(size(theta_steer_RF));
+% theta_tr_LF = zeros(size(theta_steer_LF));
+% theta_tr_RF = zeros(size(theta_steer_RF));
+% theta_base_LF = +3*pi/180 + pi; % left wheel
+% theta_base_RF = -3*pi/180; % right wheel
+% for i = 1:length(theta_steer_LF)
+%     [outLengths,outAngles] = fourbar_analysis([l_base,l_pitt,l_tierod,-l_steer],[theta_base_LF NaN NaN theta_steer_LF(i,1)+pi/2],[6 7],[pi/2 pi],0,[0 0],[0 0 0]);
+%     theta_gb_LF(i) = outAngles(2);
+%     theta_tr_LF(i) = outAngles(3);
+%     %pause();
+% end
+% for i = 1:length(theta_steer_RF)
+%     [outLengths,outAngles] = fourbar_analysis([l_base,l_pitt,l_tierod,-l_steer],[theta_base_RF NaN NaN theta_steer_RF(i,1)+pi/2],[6 7],[pi/2 0],0,[0 0],[0 0 0]);
+%     theta_gb_RF(i) = outAngles(2);
+%     theta_tr_RF(i) = outAngles(3);
+%     %pause();
+% end
+% % Calculate the LC arm-steering map
+% LC_LF_kin = -cos(theta_tr_LF)*l_steer.*cos(theta_steer_LF);
+% LC_RF_kin = cos(theta_tr_RF)*l_steer.*cos(theta_steer_RF);
+% 
+% % clean up the LC-steering map
+% [theta_steer_LF,IA,~] = unique(theta_steer_LF);
+% theta_gb_LF = theta_gb_LF(IA);
+% theta_tr_LF = theta_tr_LF(IA);
+% LC_LF_kin = LC_LF_kin(IA);
+% [theta_steer_RF,IA,~] = unique(theta_steer_RF);
+% LC_RF_kin = LC_RF_kin(IA);
+% theta_gb_RF = theta_gb_RF(IA);
+% theta_tr_RF = theta_tr_RF(IA);
+% 
+% figure(10);
+% hold off
+% plot(theta_steer_LF*180/pi - 15,LC_LF_kin,'.');
+% hold on
+% plot(theta_steer_RF*180/pi + 15,LC_RF_kin,'.');
+% plot(delta_LF*180/pi,-lc_LF)
+% plot(delta_RF*180/pi,lc_RF)
+% legend('Left Kinematics','Right Kinematics','Left Map','Right Map')
+% 
+% % overplot on the load cell arm plot calculated from experimental data
+% figure(fHand32)
+% subplot(211)
+% hold on
+% plot(theta_steer_LF*180/pi - 15,LC_LF_kin);
+% subplot(212)
+% hold on
+% plot(theta_steer_RF*180/pi + 15,LC_RF_kin);
+% 
+% % plot some of the configurations of the steering linkage found
+% figure(11);
+% cla;
+% Nconfigs = 5;
+% for i = round(linspace(1,length(theta_gb_LF),Nconfigs))
+%     xlegs = -0.15 + [cos(theta_gb_LF(i))*l_pitt 0 l_base*cos(theta_base_LF) l_base*cos(theta_base_LF)+cos(theta_steer_LF(i)+pi/2)*l_steer];
+%     ylegs = [sin(theta_gb_LF(i))*l_pitt 0 l_base*sin(theta_base_LF) l_base*sin(theta_base_LF)+sin(theta_steer_LF(i)+pi/2)*l_steer];
+%     hold all
+%     plot(xlegs([2 3 4 1]),ylegs([2 3 4 1]),'*-');
+% end
+% for i = round(linspace(1,length(theta_gb_RF),Nconfigs))
+%     xlegs = 0.15 + [cos(theta_gb_RF(i))*l_pitt 0 l_base*cos(theta_base_RF) l_base*cos(theta_base_RF)+cos(theta_steer_RF(i)+pi/2)*l_steer];
+%     ylegs = [sin(theta_gb_RF(i))*l_pitt 0 l_base*sin(theta_base_RF) l_base*sin(theta_base_RF)+sin(theta_steer_RF(i)+pi/2)*l_steer];
+%     hold all
+%     plot(xlegs([2 3 4 1]),ylegs([2 3 4 1]),'*-');
+% end
+% axis equal
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %   Model analysis section
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-return
-%% Calculate sensitivities of the estimator to the actual friction value
+% Calculate sensitivities of the estimator to the actual friction value
 brush_tire_params; % load the tire model parameters
 alphaModel = 0:0.7:20; alphaModel = alphaModel(:)*pi/180;
 FzModel = (1600:200:6200)';
@@ -423,23 +443,28 @@ flag_RF = zeros(length(alphafr),1);
 myInterp = scatteredInterpolant(reshape(alphaGrid,j*k,1),reshape(FzGrid,j*k,1),reshape(unc,j*k,1));
 est_threshold = 1500;
 
+Mt_LF = Mz_LF - Ma_LF - Tj_LF;
+Mt_RF = Mz_RF - Ma_RF - Tj_RF;
+Ft_LF = 3800 - deltaFz;
+Ft_RF = 3800 + deltaFz;
+
 for ii = 1:length(alphafl)
-    sigma_LF(ii) = myInterp(abs(alphafl(ii)),abs(Fz_LF(ii)));
+    sigma_LF(ii) = myInterp(abs(alphafl(ii)),abs(Ft_LF(ii)));
     if ~isnan(sigma_LF(ii)) & est_threshold > sigma_LF(ii) % if the tire is reasonably sensitive at this point
         % compute the roots to find mu
-        pVal = (3*(Mz_LF(ii)-C1_LF(ii))*(-C3_LF(ii)) - C2_LF(ii)^2)/(3*(Mz_LF(ii)-C1_LF(ii))^2);
-        qVal = (2*C2_LF(ii)^3 - 9*(Mz_LF(ii) - C1_LF(ii))*C2_LF(ii)*(-C3_LF(ii)) + 27*(Mz_LF(ii) - C1_LF(ii))^2*C4_LF(ii))/(27*(Mz_LF(ii) - C1_LF(ii))^3);
+        pVal = (3*(Mt_LF(ii)-C1_LF(ii))*(-C3_LF(ii)) - C2_LF(ii)^2)/(3*(Mt_LF(ii)-C1_LF(ii))^2);
+        qVal = (2*C2_LF(ii)^3 - 9*(Mt_LF(ii) - C1_LF(ii))*C2_LF(ii)*(-C3_LF(ii)) + 27*(Mt_LF(ii) - C1_LF(ii))^2*C4_LF(ii))/(27*(Mt_LF(ii) - C1_LF(ii))^3);
         if pVal < 0
             t0 = -2*sign(qVal)*sqrt(-pVal/3)*cosh(1/3*acosh(-3*abs(qVal)/(2*pVal)*sqrt(-3/pVal)));
         else
             t0 = -2*sqrt(pVal/3)*sinh(1/3*asinh(-3*qVal/(2*pVal)*sqrt(3/pVal)));
         end
-        muFz_LF(ii) = t0 - C2_LF(ii)/(3*(Mz_LF(ii) - C1_LF(ii)));
-        mu_LF(ii) = (muFz_LF(ii) + Fz_LF(ii)^2*brush.muSlope)/Fz_LF(ii); %muFz_LF(ii)/Fz_LF(ii); %
+        muFz_LF(ii) = t0 - C2_LF(ii)/(3*(Mt_LF(ii) - C1_LF(ii)));
+        mu_LF(ii) = (muFz_LF(ii) + Ft_LF(ii)^2*brush.muSlope)/Ft_LF(ii); %muFz_LF(ii)/Ft_LF(ii); %
         flag_LF(ii) = 2;
-    elseif abs(alphafl(ii)) > 4*pi/180 & abs(Mz_LF(ii)) < 15 % if the tire is out of the linear region and the moment is approaching zero
-        muFz_LF(ii) = (abs(Fy_LF(ii)) + Fz_LF(ii)^2*brush.muSlope);%/brush.muRatio;
-        mu_LF(ii) = (abs(Fy_LF(ii)) + Fz_LF(ii)^2*brush.muSlope)/Fz_LF(ii);%/brush.muRatio;
+    elseif abs(alphafl(ii)) > 4*pi/180 & abs(Mt_LF(ii)) < 15 % if the tire is out of the linear region and the moment is approaching zero
+        muFz_LF(ii) = (abs(Fy_LF(ii)) + Ft_LF(ii)^2*brush.muSlope);%/brush.muRatio;
+        mu_LF(ii) = (abs(Fy_LF(ii)) + Ft_LF(ii)^2*brush.muSlope)/Ft_LF(ii);%/brush.muRatio;
         flag_LF(ii) = 1;
     else % can't estimate in these conditions
         muFz_LF(ii) = NaN; 
@@ -449,22 +474,22 @@ for ii = 1:length(alphafl)
 end
 
 for ii = 1:length(alphafr)
-    sigma_RF(ii) = myInterp(abs(alphafr(ii)),abs(Fz_RF(ii)));
+    sigma_RF(ii) = myInterp(abs(alphafr(ii)),abs(Ft_RF(ii)));
     if ~isnan(sigma_RF(ii)) & est_threshold > sigma_RF(ii) % if the tire is reasonably sensitive at this point
         % compute the roots to find mu
-        pVal = (3*(Mz_RF(ii)-C1_RF(ii))*(-C3_RF(ii)) - C2_RF(ii)^2)/(3*(Mz_RF(ii)-C1_RF(ii))^2);
-        qVal = (2*C2_RF(ii)^3 - 9*(Mz_RF(ii) - C1_RF(ii))*C2_RF(ii)*(-C3_RF(ii)) + 27*(Mz_RF(ii) - C1_RF(ii))^2*C4_RF(ii))/(27*(Mz_RF(ii) - C1_RF(ii))^3);
+        pVal = (3*(Mt_RF(ii)-C1_RF(ii))*(-C3_RF(ii)) - C2_RF(ii)^2)/(3*(Mt_RF(ii)-C1_RF(ii))^2);
+        qVal = (2*C2_RF(ii)^3 - 9*(Mt_RF(ii) - C1_RF(ii))*C2_RF(ii)*(-C3_RF(ii)) + 27*(Mt_RF(ii) - C1_RF(ii))^2*C4_RF(ii))/(27*(Mt_RF(ii) - C1_RF(ii))^3);
         if pVal < 0
             t0 = -2*sign(qVal)*sqrt(-pVal/3)*cosh(1/3*acosh(-3*abs(qVal)/(2*pVal)*sqrt(-3/pVal)));
         else
             t0 = -2*sqrt(pVal/3)*sinh(1/3*asinh(-3*qVal/(2*pVal)*sqrt(3/pVal)));
         end
-        muFz_RF(ii) = t0 - C2_RF(ii)/(3*(Mz_RF(ii) - C1_RF(ii)));
-        mu_RF(ii) = (muFz_RF(ii) + Fz_RF(ii)^2*brush.muSlope)/Fz_RF(ii); %muFz_RF(ii)/Fz_RF(ii); %
+        muFz_RF(ii) = t0 - C2_RF(ii)/(3*(Mt_RF(ii) - C1_RF(ii)));
+        mu_RF(ii) = (muFz_RF(ii) + Ft_RF(ii)^2*brush.muSlope)/Ft_RF(ii); %muFz_RF(ii)/Ft_RF(ii); %
         flag_RF(ii) = 2;
-    elseif abs(alphafr(ii)) > 4*pi/180  & abs(Mz_RF(ii)) < 15 % if the tire is out of the linear region and the moment is approaching zero
-        muFz_RF(ii) = (abs(Fy_RF(ii)) + Fz_RF(ii)^2*brush.muSlope);%/brush.muRatio;
-        mu_RF(ii) = (abs(Fy_RF(ii)) + Fz_RF(ii)^2*brush.muSlope)/Fz_RF(ii);%/brush.muRatio;
+    elseif abs(alphafr(ii)) > 4*pi/180  & abs(Mt_RF(ii)) < 15 % if the tire is out of the linear region and the moment is approaching zero
+        muFz_RF(ii) = (abs(Fy_RF(ii)) + Ft_RF(ii)^2*brush.muSlope);%/brush.muRatio;
+        mu_RF(ii) = (abs(Fy_RF(ii)) + Ft_RF(ii)^2*brush.muSlope)/Ft_RF(ii);%/brush.muRatio;
         flag_RF(ii) = 1;
     else % can't estimate in these conditions
         muFz_RF(ii) = NaN;
@@ -488,23 +513,23 @@ else
 end
 subplot(211)
 hold off
-plot(t(unsatInds_LF),mu_LF(unsatInds_LF),'.');% - Fz_LF(unsatInds_LF)*brush.muSlope,'.')
+plot(t(unsatInds_LF),mu_LF(unsatInds_LF),'.');% - Ft_LF(unsatInds_LF)*brush.muSlope,'.')
 hold on
-%plot(t(satInds_LF),mu_LF(satInds_LF),'.');% - Fz_LF(satInds_LF)*brush.muSlope,'.')
-%plot(t(unsatInds_LF),sigma_LF(unsatInds_LF)./Fz_LF(unsatInds_LF))
-plot(t(unsatInds_LF),mu_LF(unsatInds_LF)+conf90*sigma_LF(unsatInds_LF)./Fz_LF(unsatInds_LF))
-plot(t(unsatInds_LF),mu_LF(unsatInds_LF)-conf90*sigma_LF(unsatInds_LF)./Fz_LF(unsatInds_LF))
+%plot(t(satInds_LF),mu_LF(satInds_LF),'.');% - Ft_LF(satInds_LF)*brush.muSlope,'.')
+%plot(t(unsatInds_LF),sigma_LF(unsatInds_LF)./Ft_LF(unsatInds_LF))
+plot(t(unsatInds_LF),mu_LF(unsatInds_LF)+conf90*sigma_LF(unsatInds_LF)./Ft_LF(unsatInds_LF))
+plot(t(unsatInds_LF),mu_LF(unsatInds_LF)-conf90*sigma_LF(unsatInds_LF)./Ft_LF(unsatInds_LF))
 ylabel('Left Wheel')
 legend('Friction Estimate','Upper Bound','Lower Bound')
 ylim([0 min(1.1*max(mu_LF), 2.4)])
 linkHands = [linkHands; gca];
 subplot(212)
 hold off
-plot(t(unsatInds_RF),mu_RF(unsatInds_RF),'.');% - Fz_RF(unsatInds_RF)*brush.muSlope,'.')
+plot(t(unsatInds_RF),mu_RF(unsatInds_RF),'.');% - Ft_RF(unsatInds_RF)*brush.muSlope,'.')
 hold on
-%plot(t(satInds_RF),mu_RF(satInds_RF),'.');% - Fz_RF(satInds_RF)*brush.muSlope,'.')
-plot(t(unsatInds_RF),mu_RF(unsatInds_RF)+conf90*sigma_RF(unsatInds_RF)./Fz_RF(unsatInds_RF))
-plot(t(unsatInds_RF),mu_RF(unsatInds_RF)-conf90*sigma_RF(unsatInds_RF)./Fz_RF(unsatInds_RF))
+%plot(t(satInds_RF),mu_RF(satInds_RF),'.');% - Ft_RF(satInds_RF)*brush.muSlope,'.')
+plot(t(unsatInds_RF),mu_RF(unsatInds_RF)+conf90*sigma_RF(unsatInds_RF)./Ft_RF(unsatInds_RF))
+plot(t(unsatInds_RF),mu_RF(unsatInds_RF)-conf90*sigma_RF(unsatInds_RF)./Ft_RF(unsatInds_RF))
 linkHands = [linkHands; gca];
 ylim([0 min(1.1*max(mu_RF), 2.4)])
 xlabel('Time (s)')
@@ -520,10 +545,10 @@ end
 subplot(211)
 hold off
 %plot(SSest(unsatInds_LF,14)/9.81,mu_LF(unsatInds_LF),'.')
-plot(alphafl(unsatInds_LF)*180/pi,mu_LF(unsatInds_LF),'.');% - Fz_LF(unsatInds_LF)*brush.muSlope,'.')
+plot(alphafl(unsatInds_LF)*180/pi,mu_LF(unsatInds_LF),'.');% - Ft_LF(unsatInds_LF)*brush.muSlope,'.')
 hold on
 %plot(SSest(satInds_LF,14)/9.81,mu_LF(satInds_LF),'.')
-plot(alphafl(satInds_LF)*180/pi,mu_LF(satInds_LF),'.');% - Fz_LF(satInds_LF)*brush.muSlope,'.')
+plot(alphafl(satInds_LF)*180/pi,mu_LF(satInds_LF),'.');% - Ft_LF(satInds_LF)*brush.muSlope,'.')
 ylabel('Left Friction Coefficient')
 ylim([0 min(1.1*max(mu_LF), 2.4)])
 %xlim([-1 1])
@@ -534,10 +559,10 @@ legend('Unsaturated','Saturated','location','southeast')
 subplot(212)
 hold off
 %plot(SSest(unsatInds_RF,14)/9.81,mu_RF(unsatInds_RF),'.')
-plot(alphafr(unsatInds_RF)*180/pi,mu_RF(unsatInds_RF),'.');% - Fz_RF(unsatInds_RF)*brush.muSlope,'.')
+plot(alphafr(unsatInds_RF)*180/pi,mu_RF(unsatInds_RF),'.');% - Ft_RF(unsatInds_RF)*brush.muSlope,'.')
 hold on
 %plot(SSest(satInds_RF,14)/9.81,mu_RF(satInds_RF),'.')
-plot(alphafr(satInds_RF)*180/pi,mu_RF(satInds_RF),'.');% - Fz_RF(satInds_RF)*brush.muSlope,'.')
+plot(alphafr(satInds_RF)*180/pi,mu_RF(satInds_RF),'.');% - Ft_RF(satInds_RF)*brush.muSlope,'.')
 ylim([0 min(1.1*max(mu_RF), 2.4)])
 %xlim([-1 1])
 xRange = xlim;
