@@ -4696,333 +4696,218 @@ from roll</sigName>
 				<xPCName>p1/User Controllers/Steering Controller/Ackermann Correction</xPCName>
 			</SubSystem>
 			<SubSystem>
-				<Name>HAL-9000</Name>
-				<xPCName>p1/User Controllers/Steering Controller/HAL-9000</xPCName>
+				<Name>Enabled
+Subsystem</Name>
+				<xPCName>p1/User Controllers/Steering Controller/Enabled Subsystem</xPCName>
 				<SubSystem>
-					<Name>Chirp Signal</Name>
-					<xPCName>p1/User Controllers/Steering Controller/HAL-9000/Chirp Signal</xPCName>
+					<Name>Time-Limited Sine</Name>
+					<xPCName>p1/User Controllers/Steering Controller/Enabled Subsystem/Time-Limited Sine</xPCName>
 					<block>
-						<blkName>Gain</blkName>
-						<xpcblkName>User Controllers/Steering Controller/HAL-9000/Chirp Signal/Gain</xpcblkName>
-						<SLblockPath>p1/User Controllers/Steering Controller/HAL-9000/Chirp Signal/Gain</SLblockPath>
-						<isSrc>[0 1 1]</isSrc>
-						<parameter>
-							<paramName>Gain</paramName>
-							<dim>[1, 1]</dim>
-						</parameter>
-					</block>
-					<block>
-						<blkName>Saturation</blkName>
-						<xpcblkName>User Controllers/Steering Controller/HAL-9000/Chirp Signal/Saturation</xpcblkName>
-						<SLblockPath>p1/User Controllers/Steering Controller/HAL-9000/Chirp Signal/Saturation</SLblockPath>
-						<isSrc>[0 1 1]</isSrc>
-						<parameter>
-							<paramName>UpperLimit</paramName>
-							<dim>[1, 1]</dim>
-						</parameter>
-						<parameter>
-							<paramName>LowerLimit</paramName>
-							<dim>[1, 1]</dim>
-						</parameter>
-					</block>
-					<signal>
-						<sigName>Gain</sigName>
-						<xpcsigName>User Controllers/Steering Controller/HAL-9000/Chirp Signal/Gain</xpcsigName>
-						<sigWidth>1</sigWidth>
-						<sigDim>[1, 1]</sigDim>
-					</signal>
-				</SubSystem>
-				<SubSystem>
-					<Name>Double chirp</Name>
-					<xPCName>p1/User Controllers/Steering Controller/HAL-9000/Double chirp</xPCName>
-					<SubSystem>
-						<Name>Chirp One</Name>
-						<xPCName>p1/User Controllers/Steering Controller/HAL-9000/Double chirp/Chirp One</xPCName>
-						<block>
-							<blkName>Gain</blkName>
-							<xpcblkName>User Controllers/Steering Controller/HAL-9000/Double chirp/Chirp One/Gain</xpcblkName>
-							<SLblockPath>p1/User Controllers/Steering Controller/HAL-9000/Double chirp/Chirp One/Gain</SLblockPath>
-							<isSrc>[0 1 1]</isSrc>
-							<parameter>
-								<paramName>Gain</paramName>
-								<dim>[1, 1]</dim>
-							</parameter>
-						</block>
-						<block>
-							<blkName>Saturation</blkName>
-							<xpcblkName>User Controllers/Steering Controller/HAL-9000/Double chirp/Chirp One/Saturation</xpcblkName>
-							<SLblockPath>p1/User Controllers/Steering Controller/HAL-9000/Double chirp/Chirp One/Saturation</SLblockPath>
-							<isSrc>[0 1 1]</isSrc>
-							<parameter>
-								<paramName>UpperLimit</paramName>
-								<dim>[1, 1]</dim>
-							</parameter>
-							<parameter>
-								<paramName>LowerLimit</paramName>
-								<dim>[1, 1]</dim>
-							</parameter>
-						</block>
-						<signal>
-							<sigName>Gain</sigName>
-							<xpcsigName>User Controllers/Steering Controller/HAL-9000/Double chirp/Chirp One/Gain</xpcsigName>
-							<sigWidth>1</sigWidth>
-							<sigDim>[1, 1]</sigDim>
-						</signal>
-					</SubSystem>
-					<SubSystem>
-						<Name>Chirp Two</Name>
-						<xPCName>p1/User Controllers/Steering Controller/HAL-9000/Double chirp/Chirp Two</xPCName>
-						<block>
-							<blkName>Gain</blkName>
-							<xpcblkName>User Controllers/Steering Controller/HAL-9000/Double chirp/Chirp Two/Gain</xpcblkName>
-							<SLblockPath>p1/User Controllers/Steering Controller/HAL-9000/Double chirp/Chirp Two/Gain</SLblockPath>
-							<isSrc>[0 1 1]</isSrc>
-							<parameter>
-								<paramName>Gain</paramName>
-								<dim>[1, 1]</dim>
-							</parameter>
-						</block>
-						<block>
-							<blkName>Saturation</blkName>
-							<xpcblkName>User Controllers/Steering Controller/HAL-9000/Double chirp/Chirp Two/Saturation</xpcblkName>
-							<SLblockPath>p1/User Controllers/Steering Controller/HAL-9000/Double chirp/Chirp Two/Saturation</SLblockPath>
-							<isSrc>[0 1 1]</isSrc>
-							<parameter>
-								<paramName>UpperLimit</paramName>
-								<dim>[1, 1]</dim>
-							</parameter>
-							<parameter>
-								<paramName>LowerLimit</paramName>
-								<dim>[1, 1]</dim>
-							</parameter>
-						</block>
-						<signal>
-							<sigName>Gain</sigName>
-							<xpcsigName>User Controllers/Steering Controller/HAL-9000/Double chirp/Chirp Two/Gain</xpcsigName>
-							<sigWidth>1</sigWidth>
-							<sigDim>[1, 1]</sigDim>
-						</signal>
-					</SubSystem>
-					<block>
-						<blkName>Chirp One</blkName>
-						<xpcblkName>User Controllers/Steering Controller/HAL-9000/Double chirp/Chirp One</xpcblkName>
-						<SLblockPath>p1/User Controllers/Steering Controller/HAL-9000/Double chirp/Chirp One</SLblockPath>
-						<isSrc>[0 1 1]</isSrc>
-						<parameter>
-							<paramName>f1</paramName>
-							<dim>[1, 1]</dim>
-						</parameter>
-						<parameter>
-							<paramName>T</paramName>
-							<dim>[1, 1]</dim>
-						</parameter>
-						<parameter>
-							<paramName>f2</paramName>
-							<dim>[1, 1]</dim>
-						</parameter>
-					</block>
-					<block>
-						<blkName>Chirp Two</blkName>
-						<xpcblkName>User Controllers/Steering Controller/HAL-9000/Double chirp/Chirp Two</xpcblkName>
-						<SLblockPath>p1/User Controllers/Steering Controller/HAL-9000/Double chirp/Chirp Two</SLblockPath>
-						<isSrc>[0 1 1]</isSrc>
-						<parameter>
-							<paramName>f1</paramName>
-							<dim>[1, 1]</dim>
-						</parameter>
-						<parameter>
-							<paramName>T</paramName>
-							<dim>[1, 1]</dim>
-						</parameter>
-						<parameter>
-							<paramName>f2</paramName>
-							<dim>[1, 1]</dim>
-						</parameter>
-					</block>
-					<block>
-						<blkName>initialFreq</blkName>
-						<xpcblkName>User Controllers/Steering Controller/HAL-9000/Double chirp/initialFreq</xpcblkName>
-						<SLblockPath>p1/User Controllers/Steering Controller/HAL-9000/Double chirp/initialFreq</SLblockPath>
+						<blkName>Off</blkName>
+						<xpcblkName>User Controllers/Steering Controller/Enabled Subsystem/Time-Limited Sine/Off</xpcblkName>
+						<SLblockPath>p1/User Controllers/Steering Controller/Enabled Subsystem/Time-Limited Sine/Off</SLblockPath>
 						<isSrc>[1 0 1]</isSrc>
 						<parameter>
-							<paramName>Value</paramName>
+							<paramName>Before</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+						<parameter>
+							<paramName>After</paramName>
 							<dim>[1, 1]</dim>
 						</parameter>
 					</block>
 					<block>
-						<blkName>Switch</blkName>
-						<xpcblkName>User Controllers/Steering Controller/HAL-9000/Double chirp/Switch</xpcblkName>
-						<SLblockPath>p1/User Controllers/Steering Controller/HAL-9000/Double chirp/Switch</SLblockPath>
-						<isSrc>[0 3 1]</isSrc>
+						<blkName>On</blkName>
+						<xpcblkName>User Controllers/Steering Controller/Enabled Subsystem/Time-Limited Sine/On</xpcblkName>
+						<SLblockPath>p1/User Controllers/Steering Controller/Enabled Subsystem/Time-Limited Sine/On</SLblockPath>
+						<isSrc>[1 0 1]</isSrc>
 						<parameter>
-							<paramName>Threshold</paramName>
-							<dim>[1, 1]</dim>
-						</parameter>
-					</block>
-					<signal>
-						<sigName>Sum</sigName>
-						<xpcsigName>User Controllers/Steering Controller/HAL-9000/Double chirp/Sum</xpcsigName>
-						<sigWidth>1</sigWidth>
-						<sigDim>[1, 1]</sigDim>
-					</signal>
-				</SubSystem>
-				<SubSystem>
-					<Name>Double-step</Name>
-					<xPCName>p1/User Controllers/Steering Controller/HAL-9000/Double-step</xPCName>
-					<SubSystem>
-						<Name>Left Pulse</Name>
-						<xPCName>p1/User Controllers/Steering Controller/HAL-9000/Double-step/Left Pulse</xPCName>
-					</SubSystem>
-					<SubSystem>
-						<Name>Right Pulse</Name>
-						<xPCName>p1/User Controllers/Steering Controller/HAL-9000/Double-step/Right Pulse</xPCName>
-					</SubSystem>
-					<block>
-						<blkName>Left Pulse</blkName>
-						<xpcblkName>User Controllers/Steering Controller/HAL-9000/Double-step/Left Pulse</xpcblkName>
-						<SLblockPath>p1/User Controllers/Steering Controller/HAL-9000/Double-step/Left Pulse</SLblockPath>
-						<isSrc>[0 1 1]</isSrc>
-						<parameter>
-							<paramName>uplimit</paramName>
+							<paramName>Before</paramName>
 							<dim>[1, 1]</dim>
 						</parameter>
 						<parameter>
-							<paramName>lowlimit</paramName>
-							<dim>[1, 1]</dim>
-						</parameter>
-					</block>
-					<block>
-						<blkName>Right Pulse</blkName>
-						<xpcblkName>User Controllers/Steering Controller/HAL-9000/Double-step/Right Pulse</xpcblkName>
-						<SLblockPath>p1/User Controllers/Steering Controller/HAL-9000/Double-step/Right Pulse</SLblockPath>
-						<isSrc>[0 1 1]</isSrc>
-						<parameter>
-							<paramName>uplimit</paramName>
-							<dim>[1, 1]</dim>
-						</parameter>
-						<parameter>
-							<paramName>lowlimit</paramName>
+							<paramName>After</paramName>
 							<dim>[1, 1]</dim>
 						</parameter>
 					</block>
 				</SubSystem>
 				<SubSystem>
-					<Name>Latch</Name>
-					<xPCName>p1/User Controllers/Steering Controller/HAL-9000/Latch</xPCName>
+					<Name>Time-Limited Sine1</Name>
+					<xPCName>p1/User Controllers/Steering Controller/Enabled Subsystem/Time-Limited Sine1</xPCName>
 					<block>
-						<blkName>Out1</blkName>
-						<xpcblkName>User Controllers/Steering Controller/HAL-9000/Latch/Out1</xpcblkName>
-						<SLblockPath>p1/User Controllers/Steering Controller/HAL-9000/Latch/Out1</SLblockPath>
-						<isSrc>[0 1 0]</isSrc>
+						<blkName>Off</blkName>
+						<xpcblkName>User Controllers/Steering Controller/Enabled Subsystem/Time-Limited Sine1/Off</xpcblkName>
+						<SLblockPath>p1/User Controllers/Steering Controller/Enabled Subsystem/Time-Limited Sine1/Off</SLblockPath>
+						<isSrc>[1 0 1]</isSrc>
 						<parameter>
-							<paramName>InitialOutput</paramName>
+							<paramName>Before</paramName>
 							<dim>[1, 1]</dim>
 						</parameter>
-					</block>
-					<signal>
-						<sigName>In1</sigName>
-						<xpcsigName>User Controllers/Steering Controller/HAL-9000/Latch/In1</xpcsigName>
-						<sigWidth>1</sigWidth>
-						<sigDim>[1, 1]</sigDim>
-					</signal>
-				</SubSystem>
-				<SubSystem>
-					<Name>Ramp</Name>
-					<xPCName>p1/User Controllers/Steering Controller/HAL-9000/Ramp</xPCName>
-					<block>
-						<blkName>Slope</blkName>
-						<xpcblkName>User Controllers/Steering Controller/HAL-9000/Ramp/Slope</xpcblkName>
-						<SLblockPath>p1/User Controllers/Steering Controller/HAL-9000/Ramp/Slope</SLblockPath>
-						<isSrc>[0 1 1]</isSrc>
 						<parameter>
-							<paramName>Gain</paramName>
+							<paramName>After</paramName>
 							<dim>[1, 1]</dim>
 						</parameter>
 					</block>
 					<block>
-						<blkName>Saturation</blkName>
-						<xpcblkName>User Controllers/Steering Controller/HAL-9000/Ramp/Saturation</xpcblkName>
-						<SLblockPath>p1/User Controllers/Steering Controller/HAL-9000/Ramp/Saturation</SLblockPath>
-						<isSrc>[0 1 1]</isSrc>
+						<blkName>On</blkName>
+						<xpcblkName>User Controllers/Steering Controller/Enabled Subsystem/Time-Limited Sine1/On</xpcblkName>
+						<SLblockPath>p1/User Controllers/Steering Controller/Enabled Subsystem/Time-Limited Sine1/On</SLblockPath>
+						<isSrc>[1 0 1]</isSrc>
 						<parameter>
-							<paramName>UpperLimit</paramName>
+							<paramName>Before</paramName>
 							<dim>[1, 1]</dim>
 						</parameter>
 						<parameter>
-							<paramName>LowerLimit</paramName>
+							<paramName>After</paramName>
 							<dim>[1, 1]</dim>
 						</parameter>
 					</block>
 				</SubSystem>
 				<SubSystem>
-					<Name>Step</Name>
-					<xPCName>p1/User Controllers/Steering Controller/HAL-9000/Step</xPCName>
+					<Name>Time-Limited Sine2</Name>
+					<xPCName>p1/User Controllers/Steering Controller/Enabled Subsystem/Time-Limited Sine2</xPCName>
+					<block>
+						<blkName>Off</blkName>
+						<xpcblkName>User Controllers/Steering Controller/Enabled Subsystem/Time-Limited Sine2/Off</xpcblkName>
+						<SLblockPath>p1/User Controllers/Steering Controller/Enabled Subsystem/Time-Limited Sine2/Off</SLblockPath>
+						<isSrc>[1 0 1]</isSrc>
+						<parameter>
+							<paramName>Before</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+						<parameter>
+							<paramName>After</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+					</block>
+					<block>
+						<blkName>On</blkName>
+						<xpcblkName>User Controllers/Steering Controller/Enabled Subsystem/Time-Limited Sine2/On</xpcblkName>
+						<SLblockPath>p1/User Controllers/Steering Controller/Enabled Subsystem/Time-Limited Sine2/On</SLblockPath>
+						<isSrc>[1 0 1]</isSrc>
+						<parameter>
+							<paramName>Before</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+						<parameter>
+							<paramName>After</paramName>
+							<dim>[1, 1]</dim>
+						</parameter>
+					</block>
 				</SubSystem>
 				<block>
-					<blkName>Chirp Signal</blkName>
-					<xpcblkName>User Controllers/Steering Controller/HAL-9000/Chirp Signal</xpcblkName>
-					<SLblockPath>p1/User Controllers/Steering Controller/HAL-9000/Chirp Signal</SLblockPath>
+					<blkName>Steer Angle</blkName>
+					<xpcblkName>User Controllers/Steering Controller/Enabled Subsystem/Steer Angle</xpcblkName>
+					<SLblockPath>p1/User Controllers/Steering Controller/Enabled Subsystem/Steer Angle</SLblockPath>
+					<isSrc>[0 1 0]</isSrc>
+					<parameter>
+						<paramName>InitialOutput</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Time-Limited Sine</blkName>
+					<xpcblkName>User Controllers/Steering Controller/Enabled Subsystem/Time-Limited Sine</xpcblkName>
+					<SLblockPath>p1/User Controllers/Steering Controller/Enabled Subsystem/Time-Limited Sine</SLblockPath>
 					<isSrc>[0 1 1]</isSrc>
 					<parameter>
-						<paramName>f1</paramName>
+						<paramName>OnTime</paramName>
 						<dim>[1, 1]</dim>
 					</parameter>
 					<parameter>
-						<paramName>T</paramName>
+						<paramName>OffTime</paramName>
 						<dim>[1, 1]</dim>
 					</parameter>
 					<parameter>
-						<paramName>f2</paramName>
+						<paramName>Frequency</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+					<parameter>
+						<paramName>Amplitude</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Time-Limited Sine1</blkName>
+					<xpcblkName>User Controllers/Steering Controller/Enabled Subsystem/Time-Limited Sine1</xpcblkName>
+					<SLblockPath>p1/User Controllers/Steering Controller/Enabled Subsystem/Time-Limited Sine1</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>OnTime</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+					<parameter>
+						<paramName>OffTime</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+					<parameter>
+						<paramName>Frequency</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+					<parameter>
+						<paramName>Amplitude</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Time-Limited Sine2</blkName>
+					<xpcblkName>User Controllers/Steering Controller/Enabled Subsystem/Time-Limited Sine2</xpcblkName>
+					<SLblockPath>p1/User Controllers/Steering Controller/Enabled Subsystem/Time-Limited Sine2</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>OnTime</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+					<parameter>
+						<paramName>OffTime</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+					<parameter>
+						<paramName>Frequency</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+					<parameter>
+						<paramName>Amplitude</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<block>
+					<blkName>Steering Ratio2</blkName>
+					<xpcblkName>User Controllers/Steering Controller/Enabled Subsystem/Steering Ratio2</xpcblkName>
+					<SLblockPath>p1/User Controllers/Steering Controller/Enabled Subsystem/Steering Ratio2</SLblockPath>
+					<isSrc>[0 1 1]</isSrc>
+					<parameter>
+						<paramName>Gain</paramName>
 						<dim>[1, 1]</dim>
 					</parameter>
 				</block>
 				<signal>
-					<sigName>Clock</sigName>
-					<xpcsigName>User Controllers/Steering Controller/HAL-9000/Clock</xpcsigName>
-					<sigWidth>1</sigWidth>
-					<sigDim>[1, 1]</sigDim>
-				</signal>
-				<signal>
-					<sigName>Product</sigName>
-					<xpcsigName>User Controllers/Steering Controller/HAL-9000/Product</xpcsigName>
-					<sigWidth>1</sigWidth>
-					<sigDim>[1, 1]</sigDim>
-				</signal>
-				<signal>
-					<sigName>Product1</sigName>
-					<xpcsigName>User Controllers/Steering Controller/HAL-9000/Product1</xpcsigName>
-					<sigWidth>1</sigWidth>
-					<sigDim>[1, 1]</sigDim>
-				</signal>
-				<signal>
-					<sigName>Sum</sigName>
-					<xpcsigName>User Controllers/Steering Controller/HAL-9000/Sum</xpcsigName>
+					<sigName>Steering Ratio2</sigName>
+					<xpcsigName>User Controllers/Steering Controller/Enabled Subsystem/Steering Ratio2</xpcsigName>
 					<sigWidth>1</sigWidth>
 					<sigDim>[1, 1]</sigDim>
 				</signal>
 			</SubSystem>
-			<block>
-				<blkName>HAL-9000</blkName>
-				<xpcblkName>User Controllers/Steering Controller/HAL-9000</xpcblkName>
-				<SLblockPath>p1/User Controllers/Steering Controller/HAL-9000</SLblockPath>
-				<isSrc>[0 1 1]</isSrc>
-				<parameter>
-					<paramName>enabled</paramName>
-					<dim>[1, 1]</dim>
-				</parameter>
-				<parameter>
-					<paramName>maneuver</paramName>
-					<dim>[1, 1]</dim>
-				</parameter>
-				<parameter>
-					<paramName>amplitude</paramName>
-					<dim>[1, 1]</dim>
-				</parameter>
-				<parameter>
-					<paramName>delay</paramName>
-					<dim>[1, 1]</dim>
-				</parameter>
-			</block>
+			<SubSystem>
+				<Name>Latch1</Name>
+				<xPCName>p1/User Controllers/Steering Controller/Latch1</xPCName>
+				<block>
+					<blkName>Out1</blkName>
+					<xpcblkName>User Controllers/Steering Controller/Latch1/Out1</xpcblkName>
+					<SLblockPath>p1/User Controllers/Steering Controller/Latch1/Out1</SLblockPath>
+					<isSrc>[0 1 0]</isSrc>
+					<parameter>
+						<paramName>InitialOutput</paramName>
+						<dim>[1, 1]</dim>
+					</parameter>
+				</block>
+				<signal>
+					<sigName>In1</sigName>
+					<xpcsigName>User Controllers/Steering Controller/Latch1/In1</xpcsigName>
+					<sigWidth>1</sigWidth>
+					<sigDim>[1, 1]</sigDim>
+				</signal>
+			</SubSystem>
 			<block>
 				<blkName>Input Selector</blkName>
 				<xpcblkName>User Controllers/Steering Controller/Input Selector</xpcblkName>
@@ -5154,6 +5039,12 @@ Limit1</blkName>
 				</parameter>
 			</block>
 			<signal>
+				<sigName>Clock</sigName>
+				<xpcsigName>User Controllers/Steering Controller/Clock</xpcsigName>
+				<sigWidth>1</sigWidth>
+				<sigDim>[1, 1]</sigDim>
+			</signal>
+			<signal>
 				<sigName>D2R</sigName>
 				<xpcsigName>User Controllers/Steering Controller/D2R</xpcsigName>
 				<sigWidth>1</sigWidth>
@@ -5202,38 +5093,6 @@ Ratio1</sigName>
 			<isSrc>[1 0 1]</isSrc>
 			<parameter>
 				<paramName>Value</paramName>
-				<dim>[1, 1]</dim>
-			</parameter>
-		</block>
-		<block>
-			<blkName>Sine Wave</blkName>
-			<xpcblkName>User Controllers/Sine Wave</xpcblkName>
-			<SLblockPath>p1/User Controllers/Sine Wave</SLblockPath>
-			<isSrc>[1 0 1]</isSrc>
-			<parameter>
-				<paramName>Amplitude</paramName>
-				<dim>[1, 1]</dim>
-			</parameter>
-			<parameter>
-				<paramName>Bias</paramName>
-				<dim>[1, 1]</dim>
-			</parameter>
-			<parameter>
-				<paramName>Frequency</paramName>
-				<dim>[1, 1]</dim>
-			</parameter>
-			<parameter>
-				<paramName>Phase</paramName>
-				<dim>[1, 1]</dim>
-			</parameter>
-		</block>
-		<block>
-			<blkName>Switch</blkName>
-			<xpcblkName>User Controllers/Switch</xpcblkName>
-			<SLblockPath>p1/User Controllers/Switch</SLblockPath>
-			<isSrc>[0 3 1]</isSrc>
-			<parameter>
-				<paramName>Threshold</paramName>
 				<dim>[1, 1]</dim>
 			</parameter>
 		</block>
