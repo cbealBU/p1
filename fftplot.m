@@ -8,11 +8,11 @@ function [f,P] = fftplot(x,n,s)
 X = fft(x,n);
 P = sqrt(X.* conj(X))/n;
 f = s*(0:round(n/2))/n;
-P = P(1:length(f));
+P = 2*P(1:length(f));
 
 % Plot the magnitude versus frequency on a semilog plot, trimming off the
 % frequencies above the Nyquist frequency
-figure
+% figure
 semilogy(f,P,'k*-','markersize',6)
 ylabel('Frequency Content')
 xlabel('Frequency (Hz)')

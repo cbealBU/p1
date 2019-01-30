@@ -3,17 +3,30 @@
 % Date: 8/9/18
 
 
-% From 8/9/18 composite ramp steer and toe-in/toe-out tests
-brush.CaVal = 45700;
-brush.CaSinVal = 1.31;
-brush.CaTanVal = 3.15;
-brush.CaSlope = 6.14e-4;
-brush.muVal = 1.58;
-brush.muSlope = 3.53e-5;
-brush.muRatio = 0.91;
-brush.aVal = 0.14;
-brush.aSlope = 1.94e-4;
-brush.aExp = 0.438;
+% From 
+% From 7/18-19/18 composite ramp steer, const radius, and slalom
+brush.CaVal = 53275;
+brush.CaSinVal = 1.7;
+brush.CaTanVal = 3.744;
+brush.CaSlope = 1.482e-4;
+brush.muVal = 1.125;
+brush.muSlope = 2.05e-5;
+brush.muRatio = 0.985;
+brush.aVal = 0.149;
+brush.aSlope = 3.6e-4;
+brush.aExp = 0.457;
+
+
+%brush.CaVal = 45700;
+%brush.CaSinVal = 1.31;
+%brush.CaTanVal = 3.15;
+%brush.CaSlope = 6.14e-4;
+%brush.muVal = 1.58;
+%brush.muSlope = 3.53e-5;
+%brush.muRatio = 0.91;
+%brush.aVal = 0.14;
+%brush.aSlope = 1.94e-4;
+%brush.aExp = 0.438;
 
 %% From 8/9/18 composite ramp steer and toe-in/toe-out tests
 %brush.lf.CaVal = 52700;

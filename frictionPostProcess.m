@@ -9,7 +9,7 @@ clear fHand*
 
 % Load in a file if it's not already loaded
 if(~exist('fname','var'))
-    [fname, pathname] = uigetfile('*.mat','Choose data file to open');
+    [fname, pathname] = uigetfile('*.mat','Choose data file to open','~/Google Drive/Research/Experimental_Data/P1_Testing_2018-07-19/');
     load([pathname fname])
     loadP1data
 end
@@ -23,7 +23,7 @@ end
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%% estimated parameters
+% estimated parameters
 param.Ca = 50000;
 param.hcg = 0.41;
 param.kfr = 0.5;
@@ -43,18 +43,9 @@ Ftr_RF(indsminus_RF) = Load_Cells(indsminus_RF,2) - polyval([3.72e3 -527 650 -34
 Ftr_LF = Load_Cells(:,1); %Ftr_LF(:);
 Ftr_RF = Load_Cells(:,2); %Ftr_RF(:);
 
-% HACK
-%if exist('LC_LF_kin','var')
-%    lc_LF_test = interp1(theta_steer_LF-15*pi/180,LC_LF_kin,delta_LF);
-%    lc_RF_test = interp1(theta_steer_RF+15*pi/180,LC_RF_kin,delta_RF);
-%else
-    lc_LF_test = -lc_LF;
-    lc_RF_test = lc_RF;
-%end
-
 % load in the low-cost sensors
-Mst_LF = Ftr_LF.*lc_LF_test;
-Mst_RF = -Ftr_RF.*lc_RF_test; % negative since load cell sign depends on tension/comp rather than left/right
+Mst_LF = -Ftr_LF.*lc_LF;% + polyval([0.2898 9.385 35.64],-SSest(:,14));% negative since load cell sign depends on tension/comp rather than left/right
+Mst_RF = -Ftr_RF.*lc_RF;% + polyval([0.2898 9.385 35.64],-SSest(:,14)); 
 Ma_LF = -mt_LF.*Fy_LF;  % load cell torque due to mechanical trail
 Ma_RF = -mt_RF.*Fy_RF; % load cell torque due to mechanical trail
 
@@ -66,11 +57,14 @@ else
     clf;
 end
 subplot(211)
-plot(t,Fz_LF,t,3800 - deltaFz + 55/2.2*9.81*Wheel_Forces(:,19));
+plot(t,Fz_LF,t,4000 - deltaFz);% + 55/2.2*9.81*Wheel_Forces(:,19));
 linkHands = [linkHands; gca];
+ylabel('Fz (N)')
 subplot(212)
-plot(t,Fz_RF,t,3500 + deltaFz + 55/2.2*9.81*Wheel_Forces(:,20));
+plot(t,Fz_RF,t,3800 + deltaFz);% + 55/2.2*9.81*Wheel_Forces(:,20));
 linkHands = [linkHands; gca];
+xlabel('Time (s)')
+ylabel('Fz (N)')
 legend('Data','\Delta Fz Fit')
 
 % check agreement between the moments computed from load cells and the WFT
@@ -199,6 +193,8 @@ plot(delta_RF,Mz_RF+Ma_RF+Tj_RF,delta_RF,Mst_RF,delta_RF,Ma_RF)
 %     plot(xlegs([2 3 4 1]),ylegs([2 3 4 1]),'*-');
 % end
 % axis equal
+
+%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %   Model analysis section
@@ -243,7 +239,7 @@ dxdMz = simplify(diff(-2*sqrt(-p/3)*cosh(1/3*acosh(-3*abs(q)/(2*p)*sqrt(-3/p))),
 RMS_Mz_LF = 25; %10.6;
 RMS_Mz_RF = 25; %11.9;
 RMS_Alpha_LF = 0.0017;
-RMS_Alpha_RF =0.0017;
+RMS_Alpha_RF = 0.0017;
 RMS_Fz_LF = 151;
 RMS_Fz_RF = 151;
 
@@ -358,20 +354,21 @@ xlabel('Slip Angle (deg)')
 ylabel('Normal Load (N)')
 zlabel('dMz/dFp')
 
+%%
 if ~exist('fHand26','var') 
     fHand26 = figure('Name','Friction Uncertainty','NumberTitle','off');
 else
     figure(fHand26) 
 end
 hold off
-surf(alphaGrid*180/pi,FzGrid,unc)
-zlim([0 2000])
-caxis([200 2000])
+contour(alphaGrid*180/pi,FzGrid,unc,linspace(0,5000,50))
+%zlim([0 2000])
+%caxis([200 2000])
 xlabel('Slip Angle (deg)')
 ylabel('\muFz (N)')
 zlabel('\sigma F_p')
 colorbar
-
+%%
 if ~exist('fHand27','var') 
     fHand27 = figure('Name','Partial WRT \tan \alpha','NumberTitle','off');
 else
@@ -441,12 +438,12 @@ flag_RF = zeros(length(alphafr),1);
 
 [j,k] = size(alphaGrid);
 myInterp = scatteredInterpolant(reshape(alphaGrid,j*k,1),reshape(FzGrid,j*k,1),reshape(unc,j*k,1));
-est_threshold = 1500;
+est_threshold = 5000;
 
-Mt_LF = Mz_LF - Ma_LF - Tj_LF;
-Mt_RF = Mz_RF - Ma_RF - Tj_RF;
-Ft_LF = 3800 - deltaFz;
-Ft_RF = 3800 + deltaFz;
+Mt_LF = Mst_LF - Ma_LF - Tj_LF; %Mz_LF;
+Mt_RF = Mst_RF - Ma_RF - Tj_RF; %Mz_RF;
+Ft_LF = 4000 - deltaFz; %Fz_LF; %
+Ft_RF = 3800 + deltaFz; %Fz_RF; %
 
 for ii = 1:length(alphafl)
     sigma_LF(ii) = myInterp(abs(alphafl(ii)),abs(Ft_LF(ii)));
@@ -515,26 +512,37 @@ subplot(211)
 hold off
 plot(t(unsatInds_LF),mu_LF(unsatInds_LF),'.');% - Ft_LF(unsatInds_LF)*brush.muSlope,'.')
 hold on
-%plot(t(satInds_LF),mu_LF(satInds_LF),'.');% - Ft_LF(satInds_LF)*brush.muSlope,'.')
 %plot(t(unsatInds_LF),sigma_LF(unsatInds_LF)./Ft_LF(unsatInds_LF))
-plot(t(unsatInds_LF),mu_LF(unsatInds_LF)+conf90*sigma_LF(unsatInds_LF)./Ft_LF(unsatInds_LF))
-plot(t(unsatInds_LF),mu_LF(unsatInds_LF)-conf90*sigma_LF(unsatInds_LF)./Ft_LF(unsatInds_LF))
+plot(t,mu_LF+conf90*sigma_LF./Ft_LF)
+plot(t,mu_LF-conf90*sigma_LF./Ft_LF)
+%plot(t(unsatInds_LF),mu_LF(unsatInds_LF)+conf90*sigma_LF(unsatInds_LF)./Ft_LF(unsatInds_LF))
+%plot(t(unsatInds_LF),mu_LF(unsatInds_LF)-conf90*sigma_LF(unsatInds_LF)./Ft_LF(unsatInds_LF))
+plot(t(satInds_LF),mu_LF(satInds_LF),'k.');% - Ft_LF(satInds_LF)*brush.muSlope,'.')
 ylabel('Left Wheel')
-legend('Friction Estimate','Upper Bound','Lower Bound')
-ylim([0 min(1.1*max(mu_LF), 2.4)])
+legend('Friction Estimate','Upper Bound','Lower Bound','Location','southwest')
+%ylim([0 min(1.1*max(mu_LF), 2.4)])
+xlim([72.5 77])
+ylim([-0.05 1.6])
 linkHands = [linkHands; gca];
 subplot(212)
 hold off
 plot(t(unsatInds_RF),mu_RF(unsatInds_RF),'.');% - Ft_RF(unsatInds_RF)*brush.muSlope,'.')
 hold on
-%plot(t(satInds_RF),mu_RF(satInds_RF),'.');% - Ft_RF(satInds_RF)*brush.muSlope,'.')
 plot(t(unsatInds_RF),mu_RF(unsatInds_RF)+conf90*sigma_RF(unsatInds_RF)./Ft_RF(unsatInds_RF))
 plot(t(unsatInds_RF),mu_RF(unsatInds_RF)-conf90*sigma_RF(unsatInds_RF)./Ft_RF(unsatInds_RF))
+plot(t(satInds_RF),mu_RF(satInds_RF),'k.');% - Ft_RF(satInds_RF)*brush.muSlope,'.')
+plot(t(satInds_RF),mu_LF(satInds_RF)+conf90*sigma_RF(satInds_RF)./Ft_RF(satInds_RF))
 linkHands = [linkHands; gca];
-ylim([0 min(1.1*max(mu_RF), 2.4)])
-xlabel('Time (s)')
+%ylim([0 min(1.1*max(mu_RF), 2.4)])
+xlim([72.5 77])
+ylim([-0.05 1.6])
 ylabel('Right Wheel')
-legend('Friction Estimate','Upper Bound','Lower Bound')
+legend('Friction Estimate','Upper Bound','Lower Bound','Location','southwest')
+% subplot(313)
+% plot(t,SSest(:,14)/9.81)
+% linkHands = [linkHands; gca];
+xlabel('Time (s)')
+% ylabel('Lateral Accel (g)')
 
 if ~exist('fHand22','var')
     fHand22 = figure('Name','Friction Coeff vs. Lateral Accel','NumberTitle','off');
@@ -573,3 +581,7 @@ ylabel('Right Friction Coefficient')
 legend('Unsaturated','Saturated','location','southeast')
 
 linkaxes(linkHands,'x')
+
+return
+%% For saving new data files with extra variables
+save('friction2_2018-08-16_ah.mat','t','y','info','DataDescription','mu_LF','mu_RF','sigma_LF','sigma_RF');
