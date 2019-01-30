@@ -445,6 +445,11 @@ Mt_RF = Mst_RF - Ma_RF - Tj_RF; %Mz_RF;
 Ft_LF = 4000 - deltaFz; %Fz_LF; %
 Ft_RF = 3800 + deltaFz; %Fz_RF; %
 
+Mt_LF = Mz_LF - Ma_LF - Tj_LF;
+Mt_RF = Mz_RF - Ma_RF - Tj_RF;
+Ft_LF = 3800 - deltaFz;
+Ft_RF = 3800 + deltaFz;
+
 for ii = 1:length(alphafl)
     sigma_LF(ii) = myInterp(abs(alphafl(ii)),abs(Ft_LF(ii)));
     if ~isnan(sigma_LF(ii)) & est_threshold > sigma_LF(ii) % if the tire is reasonably sensitive at this point
