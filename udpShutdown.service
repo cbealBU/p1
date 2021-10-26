@@ -1,0 +1,9 @@
+[Unit]
+Description=Stop default SPI communication and recieve shutdown command from UDP
+After=networking.service
+
+[Service]
+ExecStart=python /usr/local/udpShutdown.py
+
+[Install]
+WantedBy=multi-user.target
