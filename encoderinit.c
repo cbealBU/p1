@@ -213,8 +213,8 @@ static void mdlUpdate(SimStruct *S, int_T tid)
 			{
                 // CEB: I think the first line here is the correct one. Not sure
                 // why the second one was added and the first commented out.
-				//x[1]=2*PI*(round((x[5]+x[3])/(2*PI))-round(x[3]/(2*PI)));
-				x[1]=2*PI*round(x[5]/(2*PI));
+				x[1]=2*PI*(round((x[5]+x[3])/(2*PI))-round(x[3]/(2*PI)));
+				//x[1]=2*PI*round(x[5]/(2*PI));
 				x[0]=FINALCAL;      
 			}
 			else
