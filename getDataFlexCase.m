@@ -13,14 +13,26 @@ r = raspberrypi('FlexCase01.local','pi','FazK75niXS');
 
 disp('Retrieving data from Raspberry Pi 4...');
 
+% Get user input to determine the name of the files being retrieved
+% Useful: y.mat can be made into y*.mat to include all filenames
+% starting with y and ending with .mat in order to retrieve and load
+% multiple files under one main name with numbered iterations
+% e.g.: giving y*.mat will save y1.mat, y2.mat, y3.mat, etc.
+if ~exist('masterFileName','var')
+    masterFileName = input('Please enter the name of the file you are retreiving. \nIf you want to retrieve multiple files under the same base name, use *. \ne.g.: y*.mat will return all names such as y1.mat, yApple.mat, etc. \nEnter file name: ','s');
+    while isempty(masterFileName)
+        masterFileName = input('Please enter the name of the file you are retreiving. \nIf you want to retrieve multiple files under the same base name, use *. \ne.g.: y*.mat will return all names such as y1.mat, yApple.mat, etc. \nEnter file name: ','s');
+    end
+end
+
 % Retrieving files under y.mat, can make y*.mat to include all filenames
 % starting with y and ending with .mat in order to retrieve and load
 % multiple files
-getFile(r,'p1_MPU_1*.mat'); % Change to filename you are looking for
+getFile(r,masterFileName); % Change to filename you are looking for
 
 % FileDataStore() gives option to choose where to read from, so use that in
 % later implementation to give flexibility for user
-fds = fileDatastore('p1_MPU_1*.mat','ReadFcn',@importdata);
+fds = fileDatastore(masterFileName,'ReadFcn',@importdata);
 fullFileNames = fds.Files;
 for k = 1:length(fullFileNames)
     fprintf('Now reading file %s\n',fullFileNames{k});
@@ -34,11 +46,13 @@ if isempty(responseStr)
     responseStr = 'Yes';
 end
 if strcmp(responseStr,'Yes')
-    Raspberrypi_MAT_stitcher(dir('p1_MPU_1*.mat'));
+    Raspberrypi_MAT_stitcher(dir(masterFileName));
+    newFileString = ['p1_MPU_' datestr(now,'yyyy-mm-dd_HH-MM-SS') '.mat'];
+    movefile('p1_MPU_3__stitched.mat',newFileString);
 end
 
-clearvars
-load p1_MPU_1__stitched
+clearvars -except newFileString
+load(newFileString)
 %% Define DataDescriptionUser
 % Chooses one of the many 'Profiles' such that multiple users have ease of access
 % to connect matlab to their simulink blocks. Should be altered for new simulink
