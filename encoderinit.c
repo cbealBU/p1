@@ -9,6 +9,10 @@
  * This file implements an s-function for use with Simulink.  
  *
  * This file is based (very loosely) on $MATLAB/simulink/src/sfuntmpl_basic.c
+ * 
+ * Code revised by C. Beal on 10.26.2021 for more thorough commenting and
+ * clarity of the code.
+ *
  */
 
 #define S_FUNCTION_NAME  encoderinit
@@ -19,7 +23,6 @@
 
 #define round(x) (floor((x)+.5))
 
-#define NUMOFPARAMS 3  // (see below)
 #define NUMOFSTATES	6
 // x[0] = FSM state: {firstav|roughcal|secondav|finalcal}
 // x[1] = running average
@@ -27,13 +30,14 @@
 // x[3] = starting position of the second calibration
 // x[4] = unwrap count at end of first calibration
 // x[5] = second running average
-#define NUMOFINPUTS 3 // (see below)
+#define NUMOFPARAMS 3   // (see below)
+#define NUMOFINPUTS 3   // (see below)
 #define NUMOFOUTPUTS 1  // Calibrated encoder output
 
-// Parameter defines & descriptions
+// Parameter defines & descriptions (from block mask)
 #define TS				0 // Sample time
 #define FIRST_CAL_TIME	1 // First calibration averaging time
-#define SECOND_CAL_TIME	2// Second calibration averaging time
+#define SECOND_CAL_TIME	2 // Second calibration averaging time
 
 // Input defines & descriptions
 #define UNWRAPPED   0 // Unwrapped encoder signal
@@ -106,60 +110,82 @@ static void mdlInitializeSampleTimes(SimStruct *S)
 
 #define MDL_INITIALIZE_CONDITIONS
 #ifdef MDL_INITIALIZE_CONDITIONS
-/* Function: mdlInitializeConditions ========================================= */
+/* Function: mdlInitializeConditions =================================== */
+// This function runs once at the start of the model run.
 static void mdlInitializeConditions(SimStruct *S)
 {
     real_T *x=ssGetRealDiscStates(S);
 	int i;
 	
-    x[0]=FIRSTAV;  // We'll start out doing the first averaging.
+    x[0]=FIRSTAV;  // Set the FSM state to first averaging (state 0).
 	for(i=1;i<NUMOFSTATES;i++)
-		x[i]=0;  // Everything else can just be zero.
+		x[i]=0;  // Initialize all states (averages and counts) to zero
 }
 #endif /* MDL_INITIALIZE_CONDITIONS */
 
 
-/* Function: mdlOutputs ======================================================= */
+/* Function: mdlOutputs ================================================ */
+// This function gets run once each time step, after mdlUpdate runs.
 static void mdlOutputs(SimStruct *S, int_T tid)
 {
+    // The pointer 'u' is set to the input port address
     const real_T *u=*ssGetInputPortRealSignalPtrs(S,0);
+    // The pointer 'out' is set to the output port address
     real_T *out=ssGetOutputPortRealSignal(S,0);
+    // The pointer 'x' is set to the start address of the state vector
     const real_T *x=ssGetRealDiscStates(S);
 	
 	// Offset the unwrapped encoder value by whatever calibration we have
-	// available.  The latest and greatest calibration is always in x[1].
+	// available. The latest and greatest calibration is always in x[1].
 	*out=u[0]+x[1];
 }
 
 #define MDL_UPDATE 
 #ifdef MDL_UPDATE
-/* Function: mdlUpdate ====================================================== */
+/* Function: mdlUpdate ================================================= */
 static void mdlUpdate(SimStruct *S, int_T tid)
 {
+    // Set pointers to each of the s-function parameters
 	const real_T Ts=*mxGetPr(ssGetSFcnParam(S,TS));
 	const real_T firstCalTime=*mxGetPr(ssGetSFcnParam(S,FIRST_CAL_TIME));
 	const real_T secondCalTime=*mxGetPr(ssGetSFcnParam(S,SECOND_CAL_TIME));
+    // Set a pointer to each of the input signals
 	const real_T unwrapped=**ssGetInputPortRealSignalPtrs(S,UNWRAPPED);
 	const real_T raw=**ssGetInputPortRealSignalPtrs(S,RAW);
 	const real_T pot=**ssGetInputPortRealSignalPtrs(S,POT);
+    // Get the value of the simulation time
 	const time_T time=ssGetT(S);
+    // Set a pointer to the start of the state vector
 	real_T *x=ssGetRealDiscStates(S);
+    // Define a variable for the handwheel steering angle
 	real_T delta;
 	
+    // Use a switch case to determine the current state of the FSM
 	switch((int)x[0])
 	{
+        // CODE FOR the FIRSTAV state
 		case FIRSTAV:
 			// When the calibration period elapses switch to the ROUGHCAL state.
 			// Otherwise, continue averaging the difference between
 			// the potentiometer reading and the encoder reading.
 			if(time>=firstCalTime)   
 			{
-				x[0]=ROUGHCAL;      
-				x[4]=raw-unwrapped;	// Record the current unwrap count.
+                // Records the current unwrap count for comparison in the ROUGHCAL state
+				x[4]=raw-unwrapped;
+                // Causes the FSM to advance to the ROUGHCAL state on the next cycle
+				x[0]=ROUGHCAL;
 			}
 			else  
+            {
+                // Update the running average at each time step
 				x[1]+=(pot-unwrapped)*Ts/firstCalTime;
-                // CEB: this isn't accurate until the end of the time window
+                // CEB: this isn't accurate until the end of the first averaging time window. 
+                // Seems like it would be possible to keep the sum separate and divide by
+                // the number of steps, or adjust for it each time
+                // i.e. x[1] = x[1]*(time-Ts)/Ts + (pot-unwrapped)*(Ts/time);
+                // The first term multiplies by the previous number of time steps (un-averages)
+                // and the second term divides by the current number of time steps (re-averages)
+            }
 			break;
 		case ROUGHCAL:
 			// A rough calibration has been completed.  Now we wait until we
@@ -169,9 +195,10 @@ static void mdlUpdate(SimStruct *S, int_T tid)
 			// averaging cycle.
 			if(fabs(raw-unwrapped-x[4])>JUMPTHRESH)
 			{
-				x[0]=SECONDAV;
 				x[2]=time;  // Record the start time.
 				x[3]=unwrapped;  // Record the start position.
+                // Causes the FSM to advance to the ROUGHCAL state on the next cycle
+				x[0]=SECONDAV;
 			}
 			break;
 		case SECONDAV:
@@ -184,6 +211,8 @@ static void mdlUpdate(SimStruct *S, int_T tid)
 			// switch to the FINALCAL state.
 			if((time-x[2])>secondCalTime)   
 			{
+                // CEB: I think the first line here is the correct one. Not sure
+                // why the second one was added and the first commented out.
 				//x[1]=2*PI*(round((x[5]+x[3])/(2*PI))-round(x[3]/(2*PI)));
 				x[1]=2*PI*round(x[5]/(2*PI));
 				x[0]=FINALCAL;      
@@ -197,20 +226,6 @@ static void mdlUpdate(SimStruct *S, int_T tid)
 		default:;
 	}
 }
-/*
-	if((in>0)&&(x[0]==READY)) // If the trigger goes high and
-	{                        // we're not already running or disabled,
-		x[0]=RUNNING; // start the pulse,
-		x[1]=time;    // and record the start time.
-	}
-	
-	if((time>x[1]+pulseDuration)&&(x[0]==RUNNING)) // If the timer has expired,
- if(resettable&&(in<=0))  // reset to the ready state, if we're resettable,
- x[0]=READY;
- else			// or reset to the disabled state if we're not resettable.
- x[0]=DISABLED;
-} */
-
 #endif /* MDL_UPDATE */
 
 #undef MDL_DERIVATIVES  /* This is a discrete-time filter. */
