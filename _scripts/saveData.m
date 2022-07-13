@@ -97,9 +97,9 @@ sanity;
 
 % Now save the file...
 if exist('DataDescriptionUser','var')
-    save(['C:\Users\gjh014\gjhSummer2022Research\data\' info.date '\' fname],'y','info','data','DataDescriptionUser');
+    save(['C:\Users\gjh014\gjhSummer2022Research\data\' info.date '\' fname],'info','data','time','DataDescriptionUser');
 else
-    save(['C:\Users\gjh014\gjhSummer2022Research\data\' info.date '\' fname],'y','info','data');
+    save(['C:\Users\gjh014\gjhSummer2022Research\data\' info.date '\' fname],'info','data','time');
 end
 
 % Summarize things

@@ -1,81 +1,81 @@
 % Adding descriptions to data file
-
 data = struct([]);
 
-%% Only for testing with RP4
-if ~exist('y','var')
-    error("Variable 'y' does not exist")
-end
-
-% t = y(1,:);
-% 
-% ii=1;
-% data(ii).name='01 Gyroscope';
-% data(ii).y=y(2:4,:);
-% data(ii).size=3;
-% data(ii).units={'dps','dps','dps'};
-% data(ii).desc='Contains in order: Roll rate(1), pitch rate(2), yaw rate(3).';
-% 
-% ii=2;
-% data(ii).name='02 Accelerometer';
-% data(ii).y=y(5:7,:);
-% data(ii).size=3;
-% data(ii).units={'g','g','g'};
-% data(ii).desc='Contains in order: ax(1), ay(2), az(3).';
-% 
-% ii=3;
-% data(ii).name='03 Atmosphere';
-% data(ii).y=y(8:10,:);
-% data(ii).size=3;
-% data(ii).units={'hPa','deg C','%'};
-% data(ii).desc='Contains in order: pressure, temperature, humidity.';
+time = rt_out;
 
 %% For use with FlexCase and P1 data
 ii = 1;
 data(ii).name = '01 Control Panel';
-data(ii).y = rt_ControlPanel;
+data(ii).val.ControlPanel = rt_ControlPanel;
 data(ii).size = length(rt_ControlPanel(1,:));
 data(ii).units = {'rad' 'rad' 'amps' 'amps' 'volts' 'volts' 'rad' 'rad' 'ticks' 'ticks' 'volts' 'volts'};
 data(ii).desc = 'Contains in order: ';
 
 ii = 2;
 data(ii).name = '02 Driver Input';
-data(ii).y = rt_DriverInput;
+data(ii).val.DriverInput = rt_DriverInput;
 data(ii).size = length(rt_DriverInput(1,:));
 data(ii).units = {};
 data(ii).desc = 'Contains in oder: ';
 
 ii = 3;
 data(ii).name = '03 Ignition';
-data(ii).y = rt_Ignition;
+data(ii).val.Ignition = rt_Ignition;
 data(ii).size = length(rt_Ignition(1,:));
 data(ii).units = {};
 data(ii).desc = 'Contains in oder: ';
 
 ii = 4;
 data(ii).name = '04 IMU';
-data(ii).y = rt_IMU;
-data(ii).size = length(rt_IMU(1,:));
+data(ii).val.IMU = rt_IMU;
+data(ii).val.IMUaX = rt_IMUaX;
+data(ii).val.IMUaY = rt_IMUaY;
+data(ii).val.IMUaZ = rt_IMUaZ;
+data(ii).val.IMUgX = rt_IMUgX;
+data(ii).val.IMUgY = rt_IMUgY;
+data(ii).val.IMUgZ = rt_IMUgZ;
+data(ii).size = sum(length(rt_IMU(1,:)),length(rt_IMUaX(1,:)),length(rt_IMUaY(1,:)),length(rt_IMUaZ(1,:)),length(rt_IMUgX(1,:)),length(rt_IMUgY(1,:)),length(rt_IMUgZ(1,:)));
 data(ii).units = {};
-data(ii).desc = 'Contains in oder: ';
+data(ii).desc = 'Contains in order: ';
 
 ii = 5;
-data(ii).name = '05 ';
-data(ii).y = rt_DriverInput;
-data(ii).size = length(rt_DriverInput(1,:));
+data(ii).name = '05 Motor';
+data(ii).val.MotorLeft = rt_MotorLeft;
+data(ii).val.MotorLeftCurrent = rt_MotorLeftCurrent;
+data(ii).val.MotorLeftSpeed = rt_MotorLeftSpeed;
+data(ii).val.MotorLeftTorque = rt_MotorLeftTorque;
+data(ii).val.MotorLeftVoltage = rt_MotorLeftVoltage;
+data(ii).val.MotorRight = rt_MotorRight;
+data(ii).val.MotorRightCurrent = rt_MotorRightCurrent;
+data(ii).val.MotorRightSpeed = rt_MotorRightSpeed;
+data(ii).val.MotorRightTorque = rt_MotorRightTorque;
+data(ii).val.MotorRightVoltage = rt_MotorRightVoltage;
+data(ii).size = sum(length(rt_MotorLeft(1,:)),length(rt_MotorLeftCurrent(1,:)),length(rt_MotorLeftSpeed(1,:)),...
+    length(rt_MotorLeftTorque(1,:)),length(rt_MotorLeftVoltage(1,:)),length(rt_MotorRight(1,:)),...
+    length(rt_MotorRightCurrent(1,:)),length(rt_MotorRightSpeed(1,:)),length(rt_MotorRightTorque(1,:)),...
+    length(rt_MotorRightVoltage(1,:)));
 data(ii).units = {};
 data(ii).desc = 'Contains in oder: ';
 
+ii = 6;
+data(ii).name = '06 Steering';
+data(ii).val.SteeringLeft = rt_SteeringLeft;
+data(ii).val.SteeringRight = rt_SteeringRight;
+data(ii).size = sum(length(rt_SteeringLeft(1,:)),length(rt_SteeringRight(1,:)));
+data(ii).units = {};
+data(ii).desc = 'Contains in order: ';
+
+ii = 7;
+data(ii).name = '07 Wheel Forces';
+data(ii).val.WheelForceLeft = rt_WheelForceLeft;
+data(ii).val.WheelForceRight = rt_WheelForceRight;
+data(ii).size = sum(length(rt_WheelForceLeft(1,:)),length(rt_WheelForceRight(1,:)));
+data(ii).units = {};
+data(ii).desc = 'Contains in order: ';
 
 
 
-
-
-
-
-
-
-% 
+%% Only for testing with RP4
 % data(ii).name = '01 Steering';
 % data(ii).y = y(2:13,:);
 % data(ii).size = 12;
