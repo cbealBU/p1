@@ -7,22 +7,16 @@
 %% Important Checks
 
 % First check for variable & DataDescription
-if(~exist('y','var'))
-    error("Variable 'y' does not exist.");
-end
 if(~exist('data','var'))
     error("Variable 'data' does not exist.");
 end
+if(~exist('time','var'))
+    error("Variable 'time' does not exist.");
+end
 
 % A quick check to catch an obvious inconsistency...
-if (exist('DataDescriptionUser','var'))
-    if ( sum([data.size])+sum([DataDescriptionUser.size]))~=size(y,1) % CHANGE this since time vector might not be included in data
-        error('Data dimensions are not consistent with data description.');
-    end
-else
-    if sum([data.size]) ~= size(y(2:end,1)) % CHANGE this since time vector might not be included in data
-        error('Data dimensions are not consistent with data description.');
-    end
+if sum([data.size]) ~= size(rt_spiBytesIn(1,:)) % CHANGE this since time vector might not be included in data
+    error('Data dimensions are not consistent with spiBytesIn variable.');
 end
 
 % Ok, now use extractdata to convert y into something more useful.
@@ -30,6 +24,8 @@ end
 % INS=extractData(y,data,'02 INS',0);
 
 %% Basic data checks
+% Checking to see that data is reasonably large given how much data is
+% being taken
 if(y(1,1)~=0)
     disp('WARNING: Non-zero start time. Data may have wrapped.');
     if(numel(y)<1000000)
@@ -37,17 +33,23 @@ if(y(1,1)~=0)
     end
 end
 
+% Checking data to see if data is being recorded (either data is all 0s or
+% all 255 or some other max value)
+% MAKE DATA CHECK FOR
+badDataList = [];
 for i=1:length(data)
-    for k=1:length(data(i).y(:,1))
-        if all(data(i).y(k,:)==0)
-            fprintf('WARNING: The following data is all zero values. Data collection might not have occurred.\n %s\n',data(i).name)
+    fn = fieldnames(data(i).val);
+    for k=1:length(fn)
+        if (all(data(i).(fn{k})==0) || all(data(i).(fn{k}) == 255) || range(data(i).(fn{k})) == 0)
+            badDataList(end+1) = fn(k);
         end
     end
 end
-
+fprintf('WARNING: The following data is all constant values. Data collection might not have occurred.\n %s\n',badDataList)
+clear badDataList i k
 % End of basic checks
 
-%% Check the GPS data.
+%% Check the GPS data. Any other data specific checks as well
 % Creating data to be checked via GPS & INS data NEED TO CHANGE COLUMNS
 % THAT DATA IS SELECTED FROM SINCE y.mat IS INVERTED
 % AttitudeInvalid=round(100*size(find(GPS(:,15)~=4))/size(t));
@@ -96,5 +98,4 @@ disp('Sanity check complete')
 clear GPS INS i
 clear BeelineHeadingInvalid BeelineVelocityInvalid GPSVelocityInvalid ... 
 	 RollAyCov PPSSignal DirectionHeading SlipAngle ReverseSlipAngle
-     
      

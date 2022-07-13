@@ -1,7 +1,7 @@
 % Adding descriptions to data file
 data = struct([]);
 
-time = rt_out;
+time = rt_tout; % time vector in steps of 1/100ths of a second
 
 %% For use with FlexCase and P1 data
 ii = 1;
@@ -34,7 +34,7 @@ data(ii).val.IMUaZ = rt_IMUaZ;
 data(ii).val.IMUgX = rt_IMUgX;
 data(ii).val.IMUgY = rt_IMUgY;
 data(ii).val.IMUgZ = rt_IMUgZ;
-data(ii).size = sum(length(rt_IMU(1,:)),length(rt_IMUaX(1,:)),length(rt_IMUaY(1,:)),length(rt_IMUaZ(1,:)),length(rt_IMUgX(1,:)),length(rt_IMUgY(1,:)),length(rt_IMUgZ(1,:)));
+data(ii).size = length(rt_IMU(1,:))+length(rt_IMUaX(1,:))+length(rt_IMUaY(1,:))+length(rt_IMUaZ(1,:))+length(rt_IMUgX(1,:))+length(rt_IMUgY(1,:))+length(rt_IMUgZ(1,:));
 data(ii).units = {};
 data(ii).desc = 'Contains in order: ';
 
@@ -50,10 +50,10 @@ data(ii).val.MotorRightCurrent = rt_MotorRightCurrent;
 data(ii).val.MotorRightSpeed = rt_MotorRightSpeed;
 data(ii).val.MotorRightTorque = rt_MotorRightTorque;
 data(ii).val.MotorRightVoltage = rt_MotorRightVoltage;
-data(ii).size = sum(length(rt_MotorLeft(1,:)),length(rt_MotorLeftCurrent(1,:)),length(rt_MotorLeftSpeed(1,:)),...
-    length(rt_MotorLeftTorque(1,:)),length(rt_MotorLeftVoltage(1,:)),length(rt_MotorRight(1,:)),...
-    length(rt_MotorRightCurrent(1,:)),length(rt_MotorRightSpeed(1,:)),length(rt_MotorRightTorque(1,:)),...
-    length(rt_MotorRightVoltage(1,:)));
+data(ii).size = length(rt_MotorLeft(1,:))+length(rt_MotorLeftCurrent(1,:))+length(rt_MotorLeftSpeed(1,:))+...
+    length(rt_MotorLeftTorque(1,:))+length(rt_MotorLeftVoltage(1,:))+length(rt_MotorRight(1,:))+...
+    length(rt_MotorRightCurrent(1,:))+length(rt_MotorRightSpeed(1,:))+length(rt_MotorRightTorque(1,:))+...
+    length(rt_MotorRightVoltage(1,:));
 data(ii).units = {};
 data(ii).desc = 'Contains in oder: ';
 
@@ -61,7 +61,7 @@ ii = 6;
 data(ii).name = '06 Steering';
 data(ii).val.SteeringLeft = rt_SteeringLeft;
 data(ii).val.SteeringRight = rt_SteeringRight;
-data(ii).size = sum(length(rt_SteeringLeft(1,:)),length(rt_SteeringRight(1,:)));
+data(ii).size = length(rt_SteeringLeft(1,:))+length(rt_SteeringRight(1,:));
 data(ii).units = {};
 data(ii).desc = 'Contains in order: ';
 
@@ -69,10 +69,9 @@ ii = 7;
 data(ii).name = '07 Wheel Forces';
 data(ii).val.WheelForceLeft = rt_WheelForceLeft;
 data(ii).val.WheelForceRight = rt_WheelForceRight;
-data(ii).size = sum(length(rt_WheelForceLeft(1,:)),length(rt_WheelForceRight(1,:)));
+data(ii).size = length(rt_WheelForceLeft(1,:))+length(rt_WheelForceRight(1,:));
 data(ii).units = {};
 data(ii).desc = 'Contains in order: ';
-
 
 
 %% Only for testing with RP4

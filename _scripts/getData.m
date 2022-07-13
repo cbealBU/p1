@@ -10,8 +10,11 @@
 % Enter the raspberrypi address, username, and password to the following
 % function
 r = raspberrypi('FlexCase01.local','pi','FazK75niXS');
-% r.stopModel(''); % Put in quotations the model name that's running on the
-% flexcase
+
+% First check for the existence of raspberry pi object.
+if(~exist('r','var'))
+    error('Unable to create object "r".  Unable to control flexcase target.');
+end
 
 disp('Retrieving data from Raspberry Pi 4...');
 

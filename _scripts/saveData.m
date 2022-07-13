@@ -10,18 +10,11 @@
 % Author: Graham Heckert, Summer 2022 Research Project
 % Using previous work from cgadda, Shad Laws
 
-%% Create raspberry pi object to interact with
-r = raspberrypi('169.254.241.175','pi','raspberry');
-
-% First check for the existence of raspberry pi object.
-if(~exist('r','var'))
-    error('Unable to create object "r".  Unable to control flexcase target.');
-end
 
 %% Grabbing data
 
 % Stop the model (if not already stopped) and retrieve the data...
-getData;
+% getData;
 
 % Setting up description file
 dataDesc;
@@ -29,8 +22,9 @@ dataDesc;
 % Build the info structure...
 info.date=datestr(now,29);
 info.time=erase(datestr(now,15),":");
-info.modelname=input('Please enter the simulink model name: ','s'); % Used getRunOnBoot(r); FIX THIS. Only checks for things 'added' to run on boot, not built onto rp4 
-info.userblockname=UserBlockName;
+info.modelname=input('Please enter the simulink model name without including the file extension: ','s'); % Used getRunOnBoot(r); FIX THIS. Only checks for things 'added' to run on boot, not built onto rp4 
+% Check with Beal if necessary
+% info.userblockname=UserBlockName;
 
 % Ok, we want to get some info, but we need the model files to be loaded into
 % memory for this to work.  So first we see if they're already available.
@@ -110,3 +104,6 @@ disp(['Driver: ' info.driver]);
 fprintf('Data dimensions: %d signals at %d data points\n',size(y,2),size(y,1));
 % disp(['Max TET: ' num2str(max(TET)) ' with Ts= ' num2str(Ts)]);            
 disp(['Data successfully saved to file: ' fname '.mat']);
+
+% Clean up workspace
+clear letters fname des description dirlist
