@@ -36,10 +36,6 @@ else
 	info.modelversion=get_param(info.modelname,'ModelVersion');
 end
 
-% FIND WAYS TO PUSH THIS INFO TO GIT (.git uses !git ----- style commands
-% to access its commands in matlab)
-
-
 % Building info structure from user input
 info.driver=lower(deblank(input('Driver: ','s')));
 info.testloc=lower(deblank(input('Test Location: ','s')));
@@ -101,7 +97,7 @@ disp(['Model name: ' info.modelname]);
 disp(['Version: ' info.modelversion]);
 disp(['Time & Date: ' info.date ' ' info.time]);
 disp(['Driver: ' info.driver]);
-fprintf('Data dimensions: %d signals at %d data points\n',size(y,2),size(y,1));
+fprintf('Data dimensions: %d signals at %d data points\n',size(rt_spiBytesIn,2),size(rt_spiBytesIn,1));
 % disp(['Max TET: ' num2str(max(TET)) ' with Ts= ' num2str(Ts)]);            
 disp(['Data successfully saved to file: ' fname '.mat']);
 

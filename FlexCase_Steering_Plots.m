@@ -1,6 +1,6 @@
 % Plot the driver inputs
 figure(1)
-accel_pedal = 12*3.3/4096*double(bitor(bitshift(int16(rt_DriverInput(:,3)),8),int16(rt_DriverInput(:,2)))); 
+accel_pedal = 12*3.3/4096*double(bitor(bitshift(uint16(rt_DriverInput(:,3)),8),uint16(rt_DriverInput(:,2)))); 
 plot(rt_tout,accel_pedal)
 ylim([0 5])
 ylabel('Accelerator Pedal Voltage')

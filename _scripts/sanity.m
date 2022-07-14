@@ -26,7 +26,7 @@ end
 %% Basic data checks
 % Checking to see that data is reasonably large given how much data is
 % being taken
-if(y(1,1)~=0)
+if(time(1)~=0)
     disp('WARNING: Non-zero start time. Data may have wrapped.');
     if(numel(y)<1000000)
         disp('WARNING: Total data collected less than 8MB.');
@@ -40,13 +40,17 @@ badDataList = [];
 for i=1:length(data)
     fn = fieldnames(data(i).val);
     for k=1:length(fn)
-        if (all(data(i).(fn{k})==0) || all(data(i).(fn{k}) == 255) || range(data(i).(fn{k})) == 0)
-            badDataList(end+1) = fn(k);
+        for j=1:length(data(i).val.(fn{k})(1,:))
+            if (all(data(i).val.(fn{k})(:,j)==0)) || (all(data(i).val.(fn{k})(:,j) == 255)) || (range(data(i).val.(fn{k})(:,j)) == 0)
+                badDataList(end+1) = fn(k);
+            end
         end
     end
 end
-fprintf('WARNING: The following data is all constant values. Data collection might not have occurred.\n %s\n',badDataList)
-clear badDataList i k
+if ~isempty(badDataList)
+    fprintf('WARNING: The following data is all constant values. Data collection might not have occurred.\n %s\n',badDataList)
+end
+clear badDataList i k j fn
 % End of basic checks
 
 %% Check the GPS data. Any other data specific checks as well
