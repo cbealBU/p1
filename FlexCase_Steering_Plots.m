@@ -7,7 +7,7 @@ ylabel('Accelerator Pedal Voltage')
 xlabel('Time (s)')
 
 figure(2)
-steering_pot = 12*3.3/4096*double(bitor(bitshift(int16(rt_DriverInput(:,5)),8),int16(rt_DriverInput(:,4))));
+steering_pot = 12*3.3/4096*double(bitor(bitshift(uint16(rt_DriverInput(:,5)),8),uint16(rt_DriverInput(:,4))));
 steering_angle_pot = -5.24*(steering_pot - 1.08);
 plot(rt_tout,steering_angle_pot*180/pi)
 ylim([-200 200])
