@@ -48,7 +48,7 @@ end
 if strcmp(responseStr,'Yes')
     Raspberrypi_MAT_stitcher(dir(masterFileName));
     newFileString = ['p1_MPU_' datestr(now,'yyyy-mm-dd_HH-MM-SS') '.mat'];
-    movefile('p1_MPU_3__stitched.mat',newFileString);
+    movefile('p1_MPU_*__stitched.mat',newFileString);
 end
 
 clearvars -except newFileString
