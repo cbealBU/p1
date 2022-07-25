@@ -1,37 +1,71 @@
 function newDoub = uint8todouble(sign,varargin)
-% Takes a set number of bytes (2,4, or 8) , up to a uint64 value, as 
+% Takes a set number of bytes (2,4, or 8), up to a uint64 value, as 
 % needed to turn data from uint8 to double
 
-% Error out if only 1 input argument since need at least 2 to run
-if nargin == 1
-    error('Need to have more than 1 bit-based input for function to run')
+% Setting up var with our num of vararg's since nargin counts all arg's in
+n = length(varargin);
+% Error out the function if not given the proper number of inputs
+if n ~= 2 && n ~= 4 && n ~= 8
+    error('Cannot accept this number of information inputs. This function requires 2, 4, or 8 bytes of information after declaring the sign.')
 end
 
 % Setting up temporary holding place for values once they've been converted
 % to uint16's and bit shifted according to the position
-convNums = zeros(nargin,1);
+convNums = uint64(zeros(length(varargin{1}),n));
+
 % Converts values to uint64 storage then shifts according to position
-for k = 1:nargin
-    convNums(k) = bitshift(uint64(varargin{k}),(8*(k-1)));
+for k = 1:n
+    convNums(:,k) = bitshift(uint64(varargin{k}),(8*(k-1)));
 end
 
+% TROUBLESHOOTING
+% disp(convNums)
+
 % Does big bitor function over all bit inputs
-bitMess = uint64(0);
-for j = 1:nargin
-    bitMess = bitor(bitMess,convNums(j));
+bitMess = uint64(zeros(length(varargin{1}),n));
+for j = 1:n
+    bitMess(:,j) = bitor(bitMess(:,j),convNums(:,j));
 end
+
+% TROUBLESHOOTING
+% disp(bitMess)
 
 % Check how to convert uint64 to int32, not specifically, just if it
 % happens to be a 4 byte number and it IS signed. Can it be done just
 % through int32(X) or does if have to be adjusted first using some
 % functions and nargin?
 
-% sign==1 indicates variable is pos, sign==0 indicates neg
+% Now start converting the bitMess into a double requires knowing if its a
+% signed or unsigned integer first
+
+% sign==1 indicates variable is signed, sign==0 indicates unsigned
 if sign == 1
-    newDoub = double(bitMess);
+    % Then need to also check the size of the actual message in bytes being sent
+    % since the last bit is the signed bit. That means checking the size of
+    % the message and reducing it's package size to only be as big as the
+    % original input message (Eg: If original varargin was 2 bytes in, then
+    % reduce to uint16 or int16 message; if varargin was 4 bytes, then
+    % uint32 or int32, etc.
+    if n == 2
+        signCheckedMess = int16(bitMess);
+    elseif n == 4
+        signCheckedMess = int32(bitMess);
+    elseif n == 8
+        signCheckedMess = int64(bitMess);
+    end
 elseif sign == 0
-    newDoub = -double(bitMess);
+    if n == 2
+        signCheckedMess = uint16(bitMess);
+    elseif n == 4
+        signCheckedMess = int32(bitMess);
+    elseif n == 8
+        signCheckedMess = int64(bitMess);
+    end
+else
+    error('Unrecognized sign input. Give first input as either 1 to indicate signed value or 0 to indicate unsigned value')
 end
+
+newDoub = double(signCheckedMess);
 
 end
 

@@ -23,9 +23,6 @@ for k = 1:length(rt_tout)-1
     calcWheelSpeed(k+1) = calcWheelSpeed(k) + accel(k+1)*(rt_tout(k+1)-rt_tout(k)); % 
 end
 
-
-
-
 % Plots
 % Plot torque vs time
 figure(1)

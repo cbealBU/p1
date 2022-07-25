@@ -11,7 +11,7 @@ steering_pot = 12*3.3/4096*double(bitor(bitshift(uint16(rt_DriverInput(:,5)),8),
 steering_angle_pot = -5.24*(steering_pot - 1.08);
 plot(rt_tout,steering_angle_pot*180/pi)
 ylim([-200 200])
-ylabel('Accelerator Pedal Voltage')
+ylabel('Steering Angle (deg)')
 xlabel('Time (s)')
 
 figure(3)
@@ -27,6 +27,7 @@ for dataInd = 1:length(unwrapped_encoder)-1
         unwrapped_encoder(dataInd+1:end) = (2^16-1) + unwrapped_encoder(dataInd+1:end);
     end 
 end
+
 plot(rt_tout,steering_encoder,rt_tout,unwrapped_encoder)
 ylim([-200000 200000])
 legend('Raw Signal','Unwrapped')
