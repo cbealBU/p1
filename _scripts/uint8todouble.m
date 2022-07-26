@@ -18,22 +18,13 @@ for k = 1:n
     convNums(:,k) = bitshift(uint64(varargin{k}),(8*(k-1)));
 end
 
-% TROUBLESHOOTING
-% disp(convNums)
-
-% Does big bitor function over all bit inputs
-bitMess = uint64(zeros(length(varargin{1}),n));
+% Does big bitor function over all bit inputs by bitor'ing each convNums
+% column of data against the single bitMess column which originally is
+% setup as a uint64 column of zeros
+bitMess = uint64(zeros(length(varargin{1}),1));
 for j = 1:n
-    bitMess(:,j) = bitor(bitMess(:,j),convNums(:,j));
+    bitMess(:,1) = bitor(bitMess(:,1),convNums(:,j));
 end
-
-% TROUBLESHOOTING
-% disp(bitMess)
-
-% Check how to convert uint64 to int32, not specifically, just if it
-% happens to be a 4 byte number and it IS signed. Can it be done just
-% through int32(X) or does if have to be adjusted first using some
-% functions and nargin?
 
 % Now start converting the bitMess into a double requires knowing if its a
 % signed or unsigned integer first
