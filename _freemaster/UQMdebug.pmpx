@@ -63,11 +63,11 @@
 			<member name="item21" type="CObject_ptr">ObjId0084</member>
 		</object>
 		<object name="ObjId0004" type="CVariable">
-			<member name="name" type="string">p1_MCU_B.output_chart_state</member>
+			<member name="name" type="string">Motor Chart State Left</member>
 			<member name="unit" type="string">unit</member>
 			<member name="period" type="sint32">100</member>
-			<member name="address" type="string">p1_MCU_B.output_chart_state</member>
-			<member name="last_addr" type="uint32">0x20001230</member>
+			<member name="address" type="string">p1_MCU_B.output_chart_state_m</member>
+			<member name="last_addr" type="uint32">0x200019F7</member>
 			<member name="byte_size" type="sint32">1</member>
 			<member name="description" type="string"/>
 			<member name="comment" type="string"/>
@@ -112,12 +112,12 @@
 			<member name="modif_last_addr" type="uint32">0x0</member>
 		</object>
 		<object name="ObjId0005" type="CVariable">
-			<member name="name" type="string">p1_MCU_B.output_universal_cmd</member>
+			<member name="name" type="string">Motor Chart State Right</member>
 			<member name="unit" type="string">unit</member>
 			<member name="period" type="sint32">100</member>
-			<member name="address" type="string">p1_MCU_B.output_universal_cmd</member>
-			<member name="last_addr" type="uint32">0x200016D9</member>
-			<member name="byte_size" type="sint32">8</member>
+			<member name="address" type="string">p1_MCU_B.output_chart_state_o</member>
+			<member name="last_addr" type="uint32">0x200019EE</member>
+			<member name="byte_size" type="sint32">1</member>
 			<member name="description" type="string"/>
 			<member name="comment" type="string"/>
 			<member name="virtual" type="sint32">0</member>
@@ -132,7 +132,7 @@
 			<member name="enum_default_val" type="string">unknown</member>
 			<member name="enum_num_with_default" type="sint32">1</member>
 			<member name="enum" type="string"/>
-			<member name="show_as" type="sint32">1</member>
+			<member name="show_as" type="sint32">4</member>
 			<member name="show_val" type="sint32">1</member>
 			<member name="show_max" type="sint32">0</member>
 			<member name="show_min" type="sint32">0</member>
@@ -165,7 +165,7 @@
 			<member name="unit" type="string">unit</member>
 			<member name="period" type="sint32">100</member>
 			<member name="address" type="string">p1_MCU_B.FCAN_Transfer_Status3</member>
-			<member name="last_addr" type="uint32">0x200016F9</member>
+			<member name="last_addr" type="uint32">0x20001A0F</member>
 			<member name="byte_size" type="sint32">1</member>
 			<member name="description" type="string"/>
 			<member name="comment" type="string"/>
@@ -214,7 +214,7 @@
 			<member name="unit" type="string">unit</member>
 			<member name="period" type="sint32">100</member>
 			<member name="address" type="string">p1_MCU_B.FCAN_Isr_o6</member>
-			<member name="last_addr" type="uint32">0x200012F2</member>
+			<member name="last_addr" type="uint32">0x200015D2</member>
 			<member name="byte_size" type="sint32">2</member>
 			<member name="description" type="string"/>
 			<member name="comment" type="string"/>
@@ -263,7 +263,7 @@
 			<member name="unit" type="string">unit</member>
 			<member name="period" type="sint32">100</member>
 			<member name="address" type="string">p1_MCU_B.FCAN_Isr_o4</member>
-			<member name="last_addr" type="uint32">0x200015B9</member>
+			<member name="last_addr" type="uint32">0x200018DB</member>
 			<member name="byte_size" type="sint32">8</member>
 			<member name="description" type="string"/>
 			<member name="comment" type="string"/>
@@ -312,7 +312,7 @@
 			<member name="unit" type="string">unit</member>
 			<member name="period" type="sint32">100</member>
 			<member name="address" type="string">p1_MCU_B.FCAN_Isr_o3</member>
-			<member name="last_addr" type="uint32">0x200012A4</member>
+			<member name="last_addr" type="uint32">0x2000157C</member>
 			<member name="byte_size" type="sint32">4</member>
 			<member name="description" type="string"/>
 			<member name="comment" type="string"/>
@@ -361,7 +361,7 @@
 			<member name="unit" type="string">unit</member>
 			<member name="period" type="sint32">1000</member>
 			<member name="address" type="string">p1_MCU_B.MotorLVoltage</member>
-			<member name="last_addr" type="uint32">0x200011F8</member>
+			<member name="last_addr" type="uint32">0x200014C8</member>
 			<member name="byte_size" type="sint32">8</member>
 			<member name="description" type="string"/>
 			<member name="comment" type="string"/>
@@ -410,7 +410,7 @@
 			<member name="unit" type="string">unit</member>
 			<member name="period" type="sint32">1000</member>
 			<member name="address" type="string">p1_MCU_B.MotorLTorque</member>
-			<member name="last_addr" type="uint32">0x200011E0</member>
+			<member name="last_addr" type="uint32">0x200014B0</member>
 			<member name="byte_size" type="sint32">8</member>
 			<member name="description" type="string"/>
 			<member name="comment" type="string"/>
@@ -459,7 +459,7 @@
 			<member name="unit" type="string">unit</member>
 			<member name="period" type="sint32">1000</member>
 			<member name="address" type="string">p1_MCU_B.MotorLCurrent</member>
-			<member name="last_addr" type="uint32">0x20001210</member>
+			<member name="last_addr" type="uint32">0x200014E0</member>
 			<member name="byte_size" type="sint32">8</member>
 			<member name="description" type="string"/>
 			<member name="comment" type="string"/>
@@ -508,7 +508,7 @@
 			<member name="unit" type="string">unit</member>
 			<member name="period" type="sint32">1000</member>
 			<member name="address" type="string">p1_MCU_B.MotorLSpeed</member>
-			<member name="last_addr" type="uint32">0x200011C8</member>
+			<member name="last_addr" type="uint32">0x20001498</member>
 			<member name="byte_size" type="sint32">8</member>
 			<member name="description" type="string"/>
 			<member name="comment" type="string"/>
@@ -557,7 +557,7 @@
 			<member name="unit" type="string">unit</member>
 			<member name="period" type="sint32">1000</member>
 			<member name="address" type="string">p1_MCU_B.output_chart_state_n</member>
-			<member name="last_addr" type="uint32">0x20001439</member>
+			<member name="last_addr" type="uint32">0x20001520</member>
 			<member name="byte_size" type="sint32">1</member>
 			<member name="description" type="string"/>
 			<member name="comment" type="string"/>
@@ -606,7 +606,7 @@
 			<member name="unit" type="string">unit</member>
 			<member name="period" type="sint32">1000</member>
 			<member name="address" type="string">p1_MCU_B.TorqueRequest</member>
-			<member name="last_addr" type="uint32">0x20001128</member>
+			<member name="last_addr" type="uint32">0x200013E8</member>
 			<member name="byte_size" type="sint32">8</member>
 			<member name="description" type="string"/>
 			<member name="comment" type="string"/>
@@ -655,7 +655,7 @@
 			<member name="unit" type="string">unit</member>
 			<member name="period" type="sint32">1000</member>
 			<member name="address" type="string">p1_MCU_B.WheelCircumference1</member>
-			<member name="last_addr" type="uint32">0x20001138</member>
+			<member name="last_addr" type="uint32">0x200013F8</member>
 			<member name="byte_size" type="sint32">8</member>
 			<member name="description" type="string"/>
 			<member name="comment" type="string"/>
@@ -704,7 +704,7 @@
 			<member name="unit" type="string">unit</member>
 			<member name="period" type="sint32">1000</member>
 			<member name="address" type="string">p1_MCU_B.ForwardSwitch</member>
-			<member name="last_addr" type="uint32">0x200016EE</member>
+			<member name="last_addr" type="uint32">0x20001A04</member>
 			<member name="byte_size" type="sint32">1</member>
 			<member name="description" type="string"/>
 			<member name="comment" type="string"/>
@@ -753,7 +753,7 @@
 			<member name="unit" type="string">unit</member>
 			<member name="period" type="sint32">1000</member>
 			<member name="address" type="string">p1_MCU_B.ReverseSwitch</member>
-			<member name="last_addr" type="uint32">0x200016F0</member>
+			<member name="last_addr" type="uint32">0x20001A06</member>
 			<member name="byte_size" type="sint32">1</member>
 			<member name="description" type="string"/>
 			<member name="comment" type="string"/>
@@ -851,7 +851,7 @@
 			<member name="unit" type="string">unit</member>
 			<member name="period" type="sint32">100</member>
 			<member name="address" type="string">p1_MCU_B.output_fault_lamp</member>
-			<member name="last_addr" type="uint32">0x20001240</member>
+			<member name="last_addr" type="uint32">0x20001510</member>
 			<member name="byte_size" type="sint32">1</member>
 			<member name="description" type="string"/>
 			<member name="comment" type="string"/>
@@ -900,7 +900,7 @@
 			<member name="unit" type="string">unit</member>
 			<member name="period" type="sint32">1000</member>
 			<member name="address" type="string">p1_MCU_B.DataPacket</member>
-			<member name="last_addr" type="uint32">0x200015C5</member>
+			<member name="last_addr" type="uint32">0x200018E7</member>
 			<member name="byte_size" type="sint32">8</member>
 			<member name="description" type="string"/>
 			<member name="comment" type="string"/>
