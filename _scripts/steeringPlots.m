@@ -116,7 +116,7 @@ ylabel('Nm')
 
 % Position Actual Value
 subplot(2,4,6)
-posActalValRight = uint8todouble(1,rt_SteeringRight(:,16),rt_SteeringRight(:,17),rt_SteeringRight(:,18),rt_SteeringRight(:,19));
+posActualValRight = uint8todouble(1,rt_SteeringRight(:,16),rt_SteeringRight(:,17),rt_SteeringRight(:,18),rt_SteeringRight(:,19));
 plot(rt_tout,posActualValRight)
 title('Position Actual Value')
 xlabel('Time (s)')
