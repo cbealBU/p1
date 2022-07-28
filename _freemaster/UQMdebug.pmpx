@@ -67,7 +67,7 @@
 			<member name="unit" type="string">unit</member>
 			<member name="period" type="sint32">100</member>
 			<member name="address" type="string">p1_MCU_B.output_chart_state_m</member>
-			<member name="last_addr" type="uint32">0x200019F7</member>
+			<member name="last_addr" type="uint32">0x200019FF</member>
 			<member name="byte_size" type="sint32">1</member>
 			<member name="description" type="string"/>
 			<member name="comment" type="string"/>
@@ -116,7 +116,7 @@
 			<member name="unit" type="string">unit</member>
 			<member name="period" type="sint32">100</member>
 			<member name="address" type="string">p1_MCU_B.output_chart_state_o</member>
-			<member name="last_addr" type="uint32">0x200019EE</member>
+			<member name="last_addr" type="uint32">0x200019F6</member>
 			<member name="byte_size" type="sint32">1</member>
 			<member name="description" type="string"/>
 			<member name="comment" type="string"/>
@@ -132,12 +132,12 @@
 			<member name="enum_default_val" type="string">unknown</member>
 			<member name="enum_num_with_default" type="sint32">1</member>
 			<member name="enum" type="string"/>
-			<member name="show_as" type="sint32">4</member>
+			<member name="show_as" type="sint32">0</member>
 			<member name="show_val" type="sint32">1</member>
 			<member name="show_max" type="sint32">0</member>
 			<member name="show_min" type="sint32">0</member>
-			<member name="show_num_fixed_digs" type="sint32">16</member>
-			<member name="show_num_lzero_fill" type="sint32">1</member>
+			<member name="show_num_fixed_digs" type="sint32">0</member>
+			<member name="show_num_lzero_fill" type="sint32">0</member>
 			<member name="show_num_afp_digs" type="sint32">2147483647</member>
 			<member name="show_num_exp" type="sint32">0</member>
 			<member name="show_ascii_zterm" type="sint32">0</member>
@@ -161,18 +161,18 @@
 			<member name="modif_last_addr" type="uint32">0x0</member>
 		</object>
 		<object name="ObjId0006" type="CVariable">
-			<member name="name" type="string">p1_MCU_B.FCAN_Transfer_Status3</member>
+			<member name="name" type="string">p1_MCU_B.output_fault_lamp_nq</member>
 			<member name="unit" type="string">unit</member>
 			<member name="period" type="sint32">100</member>
-			<member name="address" type="string">p1_MCU_B.FCAN_Transfer_Status3</member>
-			<member name="last_addr" type="uint32">0x20001A0F</member>
-			<member name="byte_size" type="sint32">1</member>
+			<member name="address" type="string">p1_MCU_B.output_fault_lamp_nq</member>
+			<member name="last_addr" type="uint32">0x20001540</member>
+			<member name="byte_size" type="sint32">8</member>
 			<member name="description" type="string"/>
 			<member name="comment" type="string"/>
 			<member name="virtual" type="sint32">0</member>
 			<member name="virtual_default" type="string">0</member>
-			<member name="treat_as" type="sint32">0</member>
-			<member name="type_fmt" type="string">Fixed point number</member>
+			<member name="treat_as" type="sint32">2</member>
+			<member name="type_fmt" type="string">IEEE floating point</member>
 			<member name="bit_shift" type="sint32">0</member>
 			<member name="bit_mask" type="string">no mask (-1)</member>
 			<member name="value_trf" type="CObject_ptr">NULL</member>
@@ -181,7 +181,7 @@
 			<member name="enum_default_val" type="string">unknown</member>
 			<member name="enum_num_with_default" type="sint32">1</member>
 			<member name="enum" type="string"/>
-			<member name="show_as" type="sint32">0</member>
+			<member name="show_as" type="sint32">4</member>
 			<member name="show_val" type="sint32">1</member>
 			<member name="show_max" type="sint32">0</member>
 			<member name="show_min" type="sint32">0</member>
@@ -210,18 +210,18 @@
 			<member name="modif_last_addr" type="uint32">0x0</member>
 		</object>
 		<object name="ObjId0007" type="CVariable">
-			<member name="name" type="string">p1_MCU_B.FCAN_Isr_o6</member>
+			<member name="name" type="string">p1_MCU_B.output_fault_lamp_f</member>
 			<member name="unit" type="string">unit</member>
 			<member name="period" type="sint32">100</member>
-			<member name="address" type="string">p1_MCU_B.FCAN_Isr_o6</member>
-			<member name="last_addr" type="uint32">0x200015D2</member>
-			<member name="byte_size" type="sint32">2</member>
+			<member name="address" type="string">p1_MCU_B.output_fault_lamp_f</member>
+			<member name="last_addr" type="uint32">0x20001538</member>
+			<member name="byte_size" type="sint32">8</member>
 			<member name="description" type="string"/>
 			<member name="comment" type="string"/>
 			<member name="virtual" type="sint32">0</member>
 			<member name="virtual_default" type="string">0</member>
-			<member name="treat_as" type="sint32">0</member>
-			<member name="type_fmt" type="string">Fixed point number</member>
+			<member name="treat_as" type="sint32">2</member>
+			<member name="type_fmt" type="string">IEEE floating point</member>
 			<member name="bit_shift" type="sint32">0</member>
 			<member name="bit_mask" type="string">no mask (-1)</member>
 			<member name="value_trf" type="CObject_ptr">NULL</member>
@@ -259,12 +259,12 @@
 			<member name="modif_last_addr" type="uint32">0x0</member>
 		</object>
 		<object name="ObjId0008" type="CVariable">
-			<member name="name" type="string">p1_MCU_B.FCAN_Isr_o4</member>
+			<member name="name" type="string">p1_MCU_DW.is_Fault_Lamp_Control_j</member>
 			<member name="unit" type="string">unit</member>
 			<member name="period" type="sint32">100</member>
-			<member name="address" type="string">p1_MCU_B.FCAN_Isr_o4</member>
-			<member name="last_addr" type="uint32">0x200018DB</member>
-			<member name="byte_size" type="sint32">8</member>
+			<member name="address" type="string">p1_MCU_DW.is_Fault_Lamp_Control_j</member>
+			<member name="last_addr" type="uint32">0x20001034</member>
+			<member name="byte_size" type="sint32">1</member>
 			<member name="description" type="string"/>
 			<member name="comment" type="string"/>
 			<member name="virtual" type="sint32">0</member>
@@ -279,12 +279,12 @@
 			<member name="enum_default_val" type="string">unknown</member>
 			<member name="enum_num_with_default" type="sint32">1</member>
 			<member name="enum" type="string"/>
-			<member name="show_as" type="sint32">1</member>
+			<member name="show_as" type="sint32">0</member>
 			<member name="show_val" type="sint32">1</member>
 			<member name="show_max" type="sint32">0</member>
 			<member name="show_min" type="sint32">0</member>
-			<member name="show_num_fixed_digs" type="sint32">16</member>
-			<member name="show_num_lzero_fill" type="sint32">1</member>
+			<member name="show_num_fixed_digs" type="sint32">0</member>
+			<member name="show_num_lzero_fill" type="sint32">0</member>
 			<member name="show_num_afp_digs" type="sint32">2147483647</member>
 			<member name="show_num_exp" type="sint32">0</member>
 			<member name="show_ascii_zterm" type="sint32">0</member>
@@ -308,12 +308,12 @@
 			<member name="modif_last_addr" type="uint32">0x0</member>
 		</object>
 		<object name="ObjId0009" type="CVariable">
-			<member name="name" type="string">p1_MCU_B.FCAN_Isr_o3</member>
+			<member name="name" type="string">p1_MCU_DW.is_Fault_Lamp_Control_g</member>
 			<member name="unit" type="string">unit</member>
 			<member name="period" type="sint32">100</member>
-			<member name="address" type="string">p1_MCU_B.FCAN_Isr_o3</member>
-			<member name="last_addr" type="uint32">0x2000157C</member>
-			<member name="byte_size" type="sint32">4</member>
+			<member name="address" type="string">p1_MCU_DW.is_Fault_Lamp_Control_g</member>
+			<member name="last_addr" type="uint32">0x20001027</member>
+			<member name="byte_size" type="sint32">1</member>
 			<member name="description" type="string"/>
 			<member name="comment" type="string"/>
 			<member name="virtual" type="sint32">0</member>
@@ -328,7 +328,7 @@
 			<member name="enum_default_val" type="string">unknown</member>
 			<member name="enum_num_with_default" type="sint32">1</member>
 			<member name="enum" type="string"/>
-			<member name="show_as" type="sint32">1</member>
+			<member name="show_as" type="sint32">0</member>
 			<member name="show_val" type="sint32">1</member>
 			<member name="show_max" type="sint32">0</member>
 			<member name="show_min" type="sint32">0</member>
@@ -704,7 +704,7 @@
 			<member name="unit" type="string">unit</member>
 			<member name="period" type="sint32">1000</member>
 			<member name="address" type="string">p1_MCU_B.ForwardSwitch</member>
-			<member name="last_addr" type="uint32">0x20001A04</member>
+			<member name="last_addr" type="uint32">0x20001A0C</member>
 			<member name="byte_size" type="sint32">1</member>
 			<member name="description" type="string"/>
 			<member name="comment" type="string"/>
@@ -753,7 +753,7 @@
 			<member name="unit" type="string">unit</member>
 			<member name="period" type="sint32">1000</member>
 			<member name="address" type="string">p1_MCU_B.ReverseSwitch</member>
-			<member name="last_addr" type="uint32">0x20001A06</member>
+			<member name="last_addr" type="uint32">0x20001A0E</member>
 			<member name="byte_size" type="sint32">1</member>
 			<member name="description" type="string"/>
 			<member name="comment" type="string"/>
@@ -900,7 +900,7 @@
 			<member name="unit" type="string">unit</member>
 			<member name="period" type="sint32">1000</member>
 			<member name="address" type="string">p1_MCU_B.DataPacket</member>
-			<member name="last_addr" type="uint32">0x200018E7</member>
+			<member name="last_addr" type="uint32">0x200018EF</member>
 			<member name="byte_size" type="sint32">8</member>
 			<member name="description" type="string"/>
 			<member name="comment" type="string"/>
