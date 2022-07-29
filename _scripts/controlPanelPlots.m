@@ -10,6 +10,7 @@ xlabel('Time (s)')
 title('Key Switch')
 yticks([0 1])
 yticklabels({'Off' 'On'})
+ylim([-0.1 1.1])
 
 % Switch HV Enable
 subplot(5,3,2)
@@ -19,6 +20,7 @@ xlabel('Time (s)')
 title('HV Enable')
 yticks([0 1])
 yticklabels({'Off' 'On'})
+ylim([-0.1 1.1])
 
 % Switch DC/DC On
 subplot(5,3,3)
@@ -28,6 +30,7 @@ xlabel('Time (s)')
 title('DC/DC On')
 yticks([0 1])
 yticklabels({'Off' 'On'})
+ylim([-0.1 1.1])
 
 % Switch Utility 1
 subplot(5,3,4)
@@ -37,6 +40,7 @@ xlabel('Time (s)')
 title('Utility 1')
 yticks([0 1])
 yticklabels({'Off' 'On'})
+ylim([-0.1 1.1])
 
 % Switch Utility 2
 subplot(5,3,5)
@@ -46,6 +50,7 @@ xlabel('Time (s)')
 title('Utility 2')
 yticks([0 1])
 yticklabels({'Off' 'On'})
+ylim([-0.1 1.1])
 
 % Switch Utility 3
 subplot(5,3,6)
@@ -55,6 +60,7 @@ xlabel('Time (s)')
 title('Utility 3')
 yticks([0 1])
 yticklabels({'Off' 'On'})
+ylim([-0.1 1.1])
 
 % Switch Cruise Set
 subplot(5,3,7)
@@ -64,6 +70,7 @@ xlabel('Time (s)')
 title('Cruise Set')
 yticks([0 1])
 yticklabels({'Off' 'On'})
+ylim([-0.1 1.1])
 
 % Switch Cruise Enable
 subplot(5,3,8)
@@ -73,6 +80,7 @@ xlabel('Time (s)')
 title('Cruise Enable')
 yticks([0 1])
 yticklabels({'Off' 'On'})
+ylim([-0.1 1.1])
 
 % Lamp FNR (F)
 subplot(5,3,9)
@@ -82,6 +90,7 @@ xlabel('Time (s)')
 title('Lamp FNR (F)')
 yticks([0 1])
 yticklabels({'Off' 'On'})
+ylim([-0.1 1.1])
 
 % Lamp FNR (R)
 subplot(5,3,10)
@@ -91,6 +100,7 @@ xlabel('Time (s)')
 title('Lamp FNR (R)')
 yticks([0 1])
 yticklabels({'Off' 'On'})
+ylim([-0.1 1.1])
 
 % Lamp GPS OK
 subplot(5,3,11)
@@ -100,6 +110,7 @@ xlabel('Time (s)')
 title('Lamp GPS OK')
 yticks([0 1])
 yticklabels({'Off' 'On'})
+ylim([-0.1 1.1])
 
 % Lamp WFT OK
 subplot(5,3,12)
@@ -109,6 +120,7 @@ xlabel('Time (s)')
 title('Lamp WFT OK')
 yticks([0 1])
 yticklabels({'Off' 'On'})
+ylim([-0.1 1.1])
 
 % Lamp Drive Fault
 subplot(5,3,13)
@@ -118,6 +130,7 @@ xlabel('Time (s)')
 title('Lamp Drive Fault')
 yticks([0 1])
 yticklabels({'Off' 'On'})
+ylim([-0.1 1.1])
 
 % Lamp Steer Fault
 subplot(5,3,14)
@@ -127,6 +140,7 @@ xlabel('Time (s)')
 title('Lamp Steer Fault')
 yticks([0 1])
 yticklabels({'Off' 'On'})
+ylim([-0.1 1.1])
 
 % Lamp DC/DC OK
 subplot(5,3,15)
@@ -136,3 +150,4 @@ xlabel('Time (s)')
 title('Lamp DC/DC OK')
 yticks([0 1])
 yticklabels({'Off' 'On'})
+ylim([-0.1 1.1])

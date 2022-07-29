@@ -2,52 +2,39 @@
 
 figure('Name','Driver Input','NumberTitle','off')
 
-% Brake Switch A
-subplot(6,2,1)
+% Brake Switches
+subplot(4,2,1)
 brakeSwitchA = bitUnpack(rt_DriverInput,1,1);
-plot(rt_tout,brakeSwitchA)
-xlabel('Time (s)')
-title('Brake Switch A')
-yticks([0 1])
-yticklabels({'Off' 'On'})
-
-% Brake Switch B
-subplot(6,2,3)
 brakeSwitchB = bitUnpack(rt_DriverInput,1,2);
-plot(rt_tout,brakeSwitchA)
+plot(rt_tout,[brakeSwitchA brakeSwitchB])
 xlabel('Time (s)')
-title('Brake Switch B')
+title('Brake Switches')
+legend('Primary','Secondary')
 yticks([0 1])
 yticklabels({'Off' 'On'})
+ylim([-0.1 1.1])
 
 % Switch FNR (F)
-subplot(6,2,2)
+subplot(4,2,3)
 switchFNRF = bitUnpack(rt_DriverInput,1,3);
-plot(rt_tout,switchFNRF)
+switchFNRR = -1*bitUnpack(rt_DriverInput,1,4);
+plot(rt_tout,switchFNRF+switchFNRR)
 xlabel('Time (s)')
-title('Switch FNR (F)')
-yticks([0 1])
-yticklabels({'Off' 'On'})
-
-% Switch FNR (R)
-subplot(6,2,4)
-switchFNRR = bitUnpack(rt_DriverInput,1,4);
-plot(rt_tout,switchFNRR)
-xlabel('Time (s)')
-title('Switch FNR (R)')
-yticks([0 1])
-yticklabels({'Off' 'On'})
+title('Switch FNR')
+yticks([-1 0 1])
+yticklabels({'REV' 'N' 'FWD'})
+ylim([-1.1 1.1])
 
 % Accelerator Potentiometer
-subplot(3,2,3)
+subplot(2,2,2)
 accel_pedal = 12*3.3/4096*uint8todouble(0,rt_DriverInput(:,2),rt_DriverInput(:,3)); 
 plot(rt_tout,accel_pedal)
 ylim([0 5])
 ylabel('Accelerator Pedal Voltage (V)')
 xlabel('Time (s)')
 
-% Handwheel Potentiometer
-subplot(3,2,4)
+% Handwheel Angle Potentiometer
+subplot(2,2,3)
 steering_pot = 12*3.3/4096*uint8todouble(0,rt_DriverInput(:,4),rt_DriverInput(:,5));
 steering_angle_pot = -5.24*(steering_pot - 1.08);
 plot(rt_tout,steering_angle_pot*180/pi)
@@ -56,7 +43,7 @@ ylabel('Steering Angle (deg)')
 xlabel('Time (s)')
 
 % Handwheel Encoder
-subplot(3,2,5)
+subplot(2,2,4)
 steering_encoder = uint8todouble(1,rt_DriverInput(:,6),rt_DriverInput(:,7),rt_DriverInput(:,8),rt_DriverInput(:,9));
 % Unwrap the signal
 unwrapped_encoder = steering_encoder;
