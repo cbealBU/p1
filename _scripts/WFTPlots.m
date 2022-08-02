@@ -104,3 +104,7 @@ xlabel('Time (s)')
 ylabel('Acceleration (g)')
 legend('X-direction','Z-Direction')
 
+% Clean up
+clear sglfxForce sglfyForce sglfzForce sglfxMoment sglfyMoment sglfzMoment ...
+    sglfVel sglfPos sglfAccelX sglfAccelZ sgrfyForce sgrfzForce sgrfxMoment ...
+    sgrfyMoment sgrfzMoment sgrfVel sgrfPos sgrfAccelX sgrfAccelZ

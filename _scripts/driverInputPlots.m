@@ -60,3 +60,7 @@ ylim([-200000 200000])
 legend('Raw Signal','Unwrapped')
 ylabel('Handwheel Position (counts)')
 xlabel('Time (s)')
+
+% Clean up
+clear brakeSwitchA brakeSwitchB switchFNRF switchFNRR accel_pedal steering_pot ...
+    steering_angle_pot steering_encoder unwrapped_encoder
