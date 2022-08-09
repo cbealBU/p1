@@ -27,7 +27,7 @@ ylim([-1.1 1.1])
 
 % Accelerator Potentiometer
 subplot(2,2,2)
-accel_pedal = 12*3.3/4096*uint8todouble(0,rt_DriverInput(:,2),rt_DriverInput(:,3)); 
+accel_pedal = 12*3.3/4096*uint8todouble(0,0,rt_DriverInput(:,2),rt_DriverInput(:,3)); 
 plot(rt_tout,accel_pedal)
 ylim([0 5])
 ylabel('Accelerator Pedal Voltage (V)')
@@ -35,7 +35,7 @@ xlabel('Time (s)')
 
 % Handwheel Angle Potentiometer
 subplot(2,2,3)
-steering_pot = 12*3.3/4096*uint8todouble(0,rt_DriverInput(:,4),rt_DriverInput(:,5));
+steering_pot = 12*3.3/4096*uint8todouble(0,0,rt_DriverInput(:,4),rt_DriverInput(:,5));
 steering_angle_pot = -5.24*(steering_pot - 1.08);
 plot(rt_tout,steering_angle_pot*180/pi)
 ylim([-200 200])
@@ -44,7 +44,7 @@ xlabel('Time (s)')
 
 % Handwheel Encoder
 subplot(2,2,4)
-steering_encoder = uint8todouble(1,rt_DriverInput(:,6),rt_DriverInput(:,7),rt_DriverInput(:,8),rt_DriverInput(:,9));
+steering_encoder = uint8todouble(1,0,rt_DriverInput(:,6),rt_DriverInput(:,7),rt_DriverInput(:,8),rt_DriverInput(:,9));
 % Unwrap the signal
 unwrapped_encoder = steering_encoder;
 for dataInd = 1:length(unwrapped_encoder)-1
@@ -60,6 +60,9 @@ ylim([-200000 200000])
 legend('Raw Signal','Unwrapped')
 ylabel('Handwheel Position (counts)')
 xlabel('Time (s)')
+
+% Now plot the processed handwheel signals
+
 
 % Clean up
 clear brakeSwitchA brakeSwitchB switchFNRF switchFNRR accel_pedal steering_pot ...

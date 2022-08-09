@@ -4,13 +4,17 @@
 
 % Author: Graham Heckert, Summer 2022 Research Project
 % Using previous work from cgadda, Shad Laws
+
+
+%% Setup up object to communicate with raspberry pi
+p1Pi = raspberrypi('FlexCase01.local','pi','FazK75niXS');
+
+%% Run the model
+p1Pi.runModel('p1_MPU')
+
 %% Pull data to host computer
 
-% Setup up object to communicate with raspberry pi
-r = raspberrypi('FlexCase01.local','pi','FazK75niXS');
-%r.stopModel(''); % Put in quotations the model name that's running on the
-% flexcase
-
+p1Pi.stopModel('p1_MPU'); % Put in quotations the model name that's running on the flexcase
 disp('Retrieving data from Raspberry Pi 4...');
 
 % Get user input to determine the name of the files being retrieved
@@ -28,7 +32,7 @@ end
 % Retrieving files under y.mat, can make y*.mat to include all filenames
 % starting with y and ending with .mat in order to retrieve and load
 % multiple files
-getFile(r,masterFileName); % Change to filename you are looking for
+getFile(p1Pi,masterFileName); % Change to filename you are looking for
 
 % FileDataStore() gives option to choose where to read from, so use that in
 % later implementation to give flexibility for user
@@ -47,8 +51,10 @@ if isempty(responseStr)
 end
 if strcmp(responseStr,'Yes')
     Raspberrypi_MAT_stitcher(dir(masterFileName));
+    temp = strsplit(masterFileName,'*');
+    oldFileString = [temp{1} '__stitched.mat'];
     newFileString = ['p1_MPU_' datestr(now,'yyyy-mm-dd_HH-MM-SS') '.mat'];
-    movefile('p1_MPU_*__stitched.mat',newFileString);
+    movefile(oldFileString,newFileString);
 end
 
 clearvars -except newFileString
