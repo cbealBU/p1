@@ -138,3 +138,7 @@ title('Torque Actual Value')
 xlabel('Time (s)')
 ylabel('Counts/sec')
 
+% Clean up
+clear statusWordLeft posTargetValLeft velFeedLeft currentFeedLeft posActualValLeft actualVelLeft torqueActualValLeft ...
+    statusWordRight posTargetValRight velFeedLeft currentFeedLeft posActualValLeft actualVelLeft torqueActualValRight
+

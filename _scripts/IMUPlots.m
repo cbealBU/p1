@@ -51,3 +51,6 @@ plot(rt_tout,accelZ)
 title('Rotation Rate Z (Yaw)')
 xlabel('Time (s)')
 ylabel('% Full Scale')
+
+% Clean up
+clear accelX rotRateX accelY rotRateY accelZ rotRatez

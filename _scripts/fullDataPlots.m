@@ -12,10 +12,8 @@ end
 plotsToDisp = input(['Enter the number corresponding to the plot you want to display.\nSeparate multiple plot inputs by a comma.\n' ...
     '1: Control Panels\n2: Driver Input\n3: Steering\n4: Motor\n5: IMU\n6: Wheel Force Transducers\n7: GPS\n'],'s');
 
-% controlPanelStatus = false; driverInputStatus = false; steeringStatus = false; 
-% motorStatus = false; IMUStatus = false; WFTStatus = false; GPSStatus = false;
-
-c = strsplit(plotsToDisp,',');
+cleanedInput = erase(plotsToDisp," ");
+c = strsplit(cleanedInput,',');
 
 if isempty(plotsToDisp)
     controlPanelPlots;
@@ -46,3 +44,6 @@ else
         end  
     end
 end
+
+% Clean up
+clear query plotsToDisp cleanedInput c
