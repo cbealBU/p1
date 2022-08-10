@@ -62,6 +62,7 @@ ylabel('Handwheel Position (counts)')
 xlabel('Time (s)')
 
 % Now plot the processed handwheel signals
+handwheel_primary = uint8todouble(0,1,rt_DriverInput(:,6),rt_DriverInput(:,7),rt_DriverInput(:,8),rt_DriverInput(:,9));
 
 
 % Clean up

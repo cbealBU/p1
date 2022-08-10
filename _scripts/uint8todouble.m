@@ -10,7 +10,7 @@ if n ~= 2 && n ~= 4 && n ~= 8
 end
 
 % Setting up temporary holding place for values once they've been converted
-% to uint16's and bit shifted according to the position
+% to uint64's and bit shifted according to the position
 convNums = uint64(zeros(length(varargin{1}),n));
 
 % Converts values to uint64 storage then shifts according to position
@@ -32,9 +32,9 @@ end
 % sign==1 indicates variable is signed, sign==0 indicates unsigned
 if floatFlag == 1
     if n == 4
-        single(bitMess);
+        signCheckedMess = typecast(bitMess,'single');
     elseif n == 8
-        double(bitMess);
+        signCheckedMess = typecast(bitMess,'double');
     else
         error('Float flag indicates a floating point number but an improper number of bytes were supplied');
     end
@@ -47,26 +47,26 @@ else
         % reduce to uint16 or int16 message; if varargin was 4 bytes, then
         % uint32 or int32, etc.
         if n == 2
-            signCheckedMess = int16(bitMess);
+            signCheckedMess = typecast(bitMess,'int16');
         elseif n == 4
-            signCheckedMess = int32(bitMess);
+            signCheckedMess = typecast(bitMess,'int32');
         elseif n == 8
-            signCheckedMess = int64(bitMess);
+            signCheckedMess = typecast(bitMess,'int64');
         end
     elseif signFlag == 0
         if n == 2
-            signCheckedMess = uint16(bitMess);
+            signCheckedMess = typecast(bitMess,'uint16');
         elseif n == 4
-            signCheckedMess = int32(bitMess);
+            signCheckedMess = typecast(bitMess,'uint32');
         elseif n == 8
-            signCheckedMess = int64(bitMess);
+            signCheckedMess = typecast(bitMess,'uint64');
         end
     else
         error('Unrecognized sign input. Give first input as either 1 to indicate signed value or 0 to indicate unsigned value')
     end
 end
 
-newDoub = double(signCheckedMess);
+newDoub = double(signCheckedMess(1));
 
 end
 
