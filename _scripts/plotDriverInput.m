@@ -3,7 +3,7 @@
 figure('Name','Driver Input','NumberTitle','off')
 
 % Brake Switches
-subplot(4,2,1)
+subplot(6,2,1)
 brakeSwitchA = bitUnpack(rt_DriverInput,1,1);
 brakeSwitchB = bitUnpack(rt_DriverInput,1,2);
 plot(rt_tout,[brakeSwitchA brakeSwitchB])
@@ -15,7 +15,7 @@ yticklabels({'Off' 'On'})
 ylim([-0.1 1.1])
 
 % Switch FNR (F)
-subplot(4,2,3)
+subplot(6,2,3)
 switchFNRF = bitUnpack(rt_DriverInput,1,3);
 switchFNRR = -1*bitUnpack(rt_DriverInput,1,4);
 plot(rt_tout,switchFNRF+switchFNRR)
@@ -26,7 +26,7 @@ yticklabels({'REV' 'N' 'FWD'})
 ylim([-1.1 1.1])
 
 % Accelerator Potentiometer
-subplot(2,2,2)
+subplot(3,2,2)
 accel_pedal = 12*3.3/4096*uint8todouble(0,0,rt_DriverInput(:,2),rt_DriverInput(:,3)); 
 plot(rt_tout,accel_pedal)
 ylim([0 5])
@@ -34,7 +34,7 @@ ylabel('Accelerator Pedal Voltage (V)')
 xlabel('Time (s)')
 
 % Handwheel Angle Potentiometer
-subplot(2,2,3)
+subplot(3,2,3)
 steering_pot = 12*3.3/4096*uint8todouble(0,0,rt_DriverInput(:,4),rt_DriverInput(:,5));
 steering_angle_pot = -5.24*(steering_pot - 1.08);
 plot(rt_tout,steering_angle_pot*180/pi)
@@ -43,7 +43,7 @@ ylabel('Steering Angle (deg)')
 xlabel('Time (s)')
 
 % Handwheel Encoder
-subplot(2,2,4)
+subplot(3,2,4)
 steering_encoder = uint8todouble(1,0,rt_DriverInput(:,6),rt_DriverInput(:,7),rt_DriverInput(:,8),rt_DriverInput(:,9));
 % Unwrap the signal
 unwrapped_encoder = steering_encoder;
@@ -62,9 +62,12 @@ ylabel('Handwheel Position (counts)')
 xlabel('Time (s)')
 
 % Now plot the processed handwheel signals
-handwheel_primary = uint8todouble(0,1,rt_DriverInput(:,6),rt_DriverInput(:,7),rt_DriverInput(:,8),rt_DriverInput(:,9));
-
-
-% Clean up
-clear brakeSwitchA brakeSwitchB switchFNRF switchFNRR accel_pedal steering_pot ...
-    steering_angle_pot steering_encoder unwrapped_encoder
+handwheel_primary = uint8todouble(0,1,rt_DriverInput(:,10),rt_DriverInput(:,11),rt_DriverInput(:,12),rt_DriverInput(:,13));
+handwheel_secondary = uint8todouble(0,1,rt_DriverInput(:,14),rt_DriverInput(:,15),rt_DriverInput(:,16),rt_DriverInput(:,17));
+latch_time = uint8todouble(0,1,rt_DriverInput(:,18),rt_DriverInput(:,19),rt_DriverInput(:,20),rt_DriverInput(:,21));
+subplot(3,2,5)
+plot(rt_tout,handwheel_primary,rt_tout,handwheel_secondary);
+ylim([-2*pi 2*pi])
+legend('Primary','Secondary')
+ylabel('Processed Handwheel Position (radians)')
+xlabel('Time (s)')

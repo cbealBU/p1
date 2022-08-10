@@ -33,6 +33,7 @@ end
 if floatFlag == 1
     if n == 4
         signCheckedMess = typecast(bitMess,'single');
+        signCheckedMess = signCheckedMess(1:2:end);
     elseif n == 8
         signCheckedMess = typecast(bitMess,'double');
     else
@@ -48,16 +49,20 @@ else
         % uint32 or int32, etc.
         if n == 2
             signCheckedMess = typecast(bitMess,'int16');
+            signCheckedMess = signCheckedMess(1:4:end);
         elseif n == 4
             signCheckedMess = typecast(bitMess,'int32');
+            signCheckedMess = signCheckedMess(1:2:end);
         elseif n == 8
             signCheckedMess = typecast(bitMess,'int64');
         end
     elseif signFlag == 0
         if n == 2
             signCheckedMess = typecast(bitMess,'uint16');
+            signCheckedMess = signCheckedMess(1:4:end);
         elseif n == 4
             signCheckedMess = typecast(bitMess,'uint32');
+            signCheckedMess = signCheckedMess(1:2:end);
         elseif n == 8
             signCheckedMess = typecast(bitMess,'uint64');
         end
@@ -66,7 +71,7 @@ else
     end
 end
 
-newDoub = double(signCheckedMess(1));
+newDoub = double(signCheckedMess(:,1));
 
 end
 

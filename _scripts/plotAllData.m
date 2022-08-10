@@ -16,29 +16,29 @@ cleanedInput = erase(plotsToDisp," ");
 c = strsplit(cleanedInput,',');
 
 if isempty(plotsToDisp)
-    controlPanelPlots;
-    driverInputPlots;
-    steeringPlots;
-    motorPlots
-    IMUPlots;
-    WFTPlots;
-    GPSPlots;
+    plotControlPanel;
+    plotDriverInput;
+    plotSteering;
+    plotMotors
+    plotIMU;
+    plotWFTs;
+    plotGPS;
 else
     for k = 1:length(c)
         if c{k} == '1'
-            controlPanelPlots;
+            plotControlPanel;
         elseif c{k} == '2'
-            driverInputPlots;
+            plotDriverInput;
         elseif c{k} == '3'
-            steeringPlots;
+            plotSteering;
         elseif c{k} == '4'
-            motorPlots;
+            plotMotors;
         elseif c{k} == '5'
-            IMUPlots;
+            plotIMU;
         elseif c{k} == '6'
-            WFTPlots;
+            plotWFTs;
         elseif c{k} == '7'
-            GPSPlots;
+            plotGPS;
         else
             disp(['NOTE: The number ' c{k} ' does not correspond to any value on the list.'])
         end  
