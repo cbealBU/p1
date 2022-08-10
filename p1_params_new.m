@@ -11,7 +11,19 @@
 Ts = 0.01;
 
 % Total number of bytes to be transferred between MCU and MPU per time step
-spiBytes = 191;
+flexCaseBytes = 1;
+controlPanelBytes = 3;
+driverInputBytes = 21;
+steeringBytes = 27;
+motorBytes = 44;
+imuBytes = 12;
+wftBytes = 20;
+gpsBytes = 124;
+mcu2mpuBytes = flexCaseBytes + controlPanelBytes + driverInputBytes + 2*steeringBytes + 2*motorBytes + imuBytes;
+mpu2mcuBytes = 2*wftBytes + gpsBytes;
+spiBytes = mcu2mpuBytes;
+paddingBytes = mcu2mpuBytes-mpu2mcuBytes;
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                                       %
