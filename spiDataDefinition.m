@@ -4,7 +4,7 @@
 p1data.flexCaseBytes = 1;           % FlexCase info (ignition state, etc.)
 p1data.controlPanelBytes = 3;       % Switch and indicator states
 p1data.driverInputBytes = 21;       % Accelerator, brake, handwheel
-p1data.steeringBytes = 27;          % Roadwheel steering commands/states
+p1data.steeringBytes = 25;          % Roadwheel steering commands/states
 p1data.drivetrainBytes = 44;        % Drivetrain commands/states
 p1data.imuBytes = 12;               % Inertial measurement data
 p1data.wftBytes = 20;               % Wheel force transducer data

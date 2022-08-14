@@ -45,20 +45,22 @@ end
 
 % Give option to run matlab stitcher, though technically test RP4 doesn't
 % need files stitched
-responseStr = input("Run file stitcher? (Yes or No): ",'s');
+responseStr = lower(input("Run file stitcher? (Yes or No): ",'s'));
 if isempty(responseStr)
-    responseStr = 'Yes';
+    responseStr = 'yes';
 end
-if strcmp(responseStr,'Yes')
+if strcmp(responseStr,'yes')
     Raspberrypi_MAT_stitcher(dir(masterFileName));
+    disp('Stitched files, renaming output file')
     temp = strsplit(masterFileName,'*');
     oldFileString = [temp{1} '__stitched.mat'];
-    newFileString = ['p1_MPU_' datestr(now,'yyyy-mm-dd_HH-MM-SS') '.mat'];
+    newFileString = ['_p1data/p1_MPU_' datestr(now,'yyyy-mm-dd_HH-MM-SS') '.mat'];
     movefile(oldFileString,newFileString);
+    clearvars -except newFileString
+    load(newFileString)
+    disp('Final stitched file reloaded into the workspace')
 end
 
-clearvars -except newFileString
-load(newFileString)
 %% Define DataDescriptionUser
 % Chooses one of the many 'Profiles' such that multiple users have ease of access
 % to connect matlab to their simulink blocks. Should be altered for new simulink
