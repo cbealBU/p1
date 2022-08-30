@@ -14,7 +14,7 @@
 %% Grabbing data
 
 % Stop the model (if not already stopped) and retrieve the data...
-% getData;
+getData;
 
 % Setting up description file
 dataDesc;
