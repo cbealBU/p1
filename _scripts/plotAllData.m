@@ -11,6 +11,7 @@ query = input('Enter P1 file name with .mat extension or leave empty to use most
 if ~isempty(query)
     load(query)
 else
+    disp('Using most recently saved file...');
     filePath = 'C:\Users\gjh014\gjhSummer2022Research\data\';
     %Get the directory contents
     dirc = dir(filePath);
