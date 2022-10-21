@@ -7,7 +7,10 @@
 if ~exist('handleSteerLeftFig','var')
     handleSteerLeftFig = figure('Name','Steering (Left)','NumberTitle','off')
 else
-    figure(handleSteerLeftFig)
+    %figure(handleSteerLeftFig)
+    % Graham: I get a bug whenever running this a second time whenever
+    % handleSteerLeftFig is already established. "Argument must be a Figure
+    % object or a positive integer.
 end
 
 % Operational State (Flexcase)
@@ -40,7 +43,6 @@ plot(rt_tout,[posTargetValLeft posActualValLeft],'.')
 ylim([-20000 20000])
 title('Position Values')
 legend('Target','Actual')
-xlabel('Time (s)')
 ylabel('Counts')
 
 % Velocity
@@ -51,7 +53,6 @@ plot(rt_tout,[velFeedFLeft actualVelLeft],'.')
 ylim([-20000 20000])
 title('Velocity Values')
 legend('Target','Actual')
-xlabel('Time (s)')
 ylabel('Counts/sec')
 
 % Torque
@@ -105,7 +106,6 @@ plot(rt_tout,[posTargetValRight posActualValRight],'.')
 ylim([-20000 20000])
 title('Position Values')
 legend('Target','Actual')
-xlabel('Time (s)')
 ylabel('Counts')
 
 % Velocity Feedforward
@@ -116,7 +116,6 @@ plot(rt_tout,[velFeedFRight actualVelRight],'.')
 ylim([-20000 20000])
 legend('Target','Actual')
 title('Velocity Values')
-xlabel('Time (s)')
 ylabel('Counts/sec')
 
 % Torque
