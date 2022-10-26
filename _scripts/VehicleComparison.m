@@ -92,10 +92,9 @@ for k = 1:length(t)-1
     state.Ux(k+1) = state.Ux(k) + Uxdot(k+1)*dt;
     state.Uy(k+1) = state.Uy(k) + Uydot(k+1)*dt;
     state.r(k+1) = state.r(k) + rdot(k+1)*dt;
-end
+end 
 
 clear alpha beta dt endT ff Fy k rdot rr rss size Uydot Uyss wheel netTau
-clear 
 
 figure
 subplot(3,1,1)
