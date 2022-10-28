@@ -7,27 +7,27 @@
 
 % Universal Command
 % LEFT
-opStateMotorL = uint8todouble(0,0,rt_MotorLeft(:,1),rt_MotorLeft(:,2));
-reqMotorTorqueL = (0.1*uint8todouble(0,0,rt_MotorLeft(:,3),rt_MotorLeft(:,4))) - 3212.8;
-limMotorSpeedFL = (0.5*uint8todouble(0,0,rt_MotorLeft(:,5),rt_MotorLeft(:,6))) - 16064;
-limMotorSpeedRL = (0.5*uint8todouble(0,0,rt_MotorLeft(:,7),rt_MotorLeft(:,8))) - 16064;
+opStateMotorL = uint8todouble(0,0,rt_DrivetrainLeft(:,1),rt_DrivetrainLeft(:,2));
+reqMotorTorqueL = (0.1*uint8todouble(0,0,rt_DrivetrainLeft(:,3),rt_DrivetrainLeft(:,4))) - 3212.8;
+limMotorSpeedFL = (0.5*uint8todouble(0,0,rt_DrivetrainLeft(:,5),rt_DrivetrainLeft(:,6))) - 16064;
+limMotorSpeedRL = (0.5*uint8todouble(0,0,rt_DrivetrainLeft(:,7),rt_DrivetrainLeft(:,8))) - 16064;
 % Right
-opStateMotorR = uint8todouble(0,0,rt_MotorRight(:,1),rt_MotorRight(:,2));
-reqMotorTorqueR = (0.1*uint8todouble(0,0,rt_MotorLeft(:,3),rt_MotorLeft(:,4))) - 3212.8;
-limMotorSpeedFR = (0.5*uint8todouble(0,0,rt_MotorRight(:,5),rt_MotorRight(:,6))) - 16064;
-limMotorSpeedRR = (0.5*uint8todouble(0,0,rt_MotorLeft(:,7),rt_MotorLeft(:,8))) - 16064;
+opStateMotorR = uint8todouble(0,0,rt_DrivetrainRight(:,1),rt_DrivetrainRight(:,2));
+reqMotorTorqueR = (0.1*uint8todouble(0,0,rt_DrivetrainLeft(:,3),rt_DrivetrainLeft(:,4))) - 3212.8;
+limMotorSpeedFR = (0.5*uint8todouble(0,0,rt_DrivetrainRight(:,5),rt_DrivetrainRight(:,6))) - 16064;
+limMotorSpeedRR = (0.5*uint8todouble(0,0,rt_DrivetrainLeft(:,7),rt_DrivetrainLeft(:,8))) - 16064;
 
 % Accurate feedback message
 % LEFT
-trueMotorTorqueL = (0.1*uint8todouble(0,0,rt_MotorLeft(:,11),rt_MotorLeft(:,12))) - 3212.8;
-trueMotorVoltageL = (0.1*uint8todouble(0,0,rt_MotorLeft(:,13),rt_MotorLeft(:,14))) - 3212.8;
-trueMotorCurrentL = (0.1*uint8todouble(0,0,rt_MotorLeft(:,15),rt_MotorLeft(:,16))) - 3212.8;
-trueMotorSpeedL = (0.5*uint8todouble(0,0,rt_MotorLeft(:,17),rt_MotorLeft(:,18))) - 16064;
+trueMotorTorqueL = (0.1*uint8todouble(0,0,rt_DrivetrainLeft(:,11),rt_DrivetrainLeft(:,12))) - 3212.8;
+trueMotorVoltageL = (0.1*uint8todouble(0,0,rt_DrivetrainLeft(:,13),rt_DrivetrainLeft(:,14))) - 3212.8;
+trueMotorCurrentL = (0.1*uint8todouble(0,0,rt_DrivetrainLeft(:,15),rt_DrivetrainLeft(:,16))) - 3212.8;
+trueMotorSpeedL = (0.5*uint8todouble(0,0,rt_DrivetrainLeft(:,17),rt_DrivetrainLeft(:,18))) - 16064;
 % RIGHT
-trueMotorTorqueR = (0.1*uint8todouble(0,0,rt_MotorRight(:,11),rt_MotorRight(:,12))) - 3212.8;
-trueMotorVoltageR = (0.1*uint8todouble(0,0,rt_MotorRight(:,13),rt_MotorRight(:,14))) - 3212.8;
-trueMotorCurrentR = (0.1*uint8todouble(0,0,rt_MotorRight(:,15),rt_MotorRight(:,16))) - 3212.8;
-trueMotorSpeedR = (0.5*uint8todouble(0,0,rt_MotorRight(:,17),rt_MotorRight(:,18))) - 16064;
+trueMotorTorqueR = (0.1*uint8todouble(0,0,rt_DrivetrainRight(:,11),rt_DrivetrainRight(:,12))) - 3212.8;
+trueMotorVoltageR = (0.1*uint8todouble(0,0,rt_DrivetrainRight(:,13),rt_DrivetrainRight(:,14))) - 3212.8;
+trueMotorCurrentR = (0.1*uint8todouble(0,0,rt_DrivetrainRight(:,15),rt_DrivetrainRight(:,16))) - 3212.8;
+trueMotorSpeedR = (0.5*uint8todouble(0,0,rt_DrivetrainRight(:,17),rt_DrivetrainRight(:,18))) - 16064;
 
 
 %% Plots
