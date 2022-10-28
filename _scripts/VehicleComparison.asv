@@ -66,9 +66,7 @@ driver.delta = mean([posTargetValLeft posTargetValRight],2)*(0.785398/(2e4));
 
 for k = 1:length(t)-1
     % Acceleration calculation using known torque values
-    netTau = mean([rt_MotorRightTorque(k+1) rt_MotorLeftTorque(k+1)]);
-    % Perhaps develop way to measure braking, though kind of difficult to
-    % do
+    netTau = mean([rt_MotorRightTorque(k+1) rt_MotorLeftTorque(k+1)]);% - BrakingTorques
     
     % Calculate the slip angles, done for front and back wheels of
     % bicycle model
