@@ -27,6 +27,9 @@ p1params.input.TmaxRev = 1606;         % motor torque desired at max accelerator
 p1params.input.TminRev = -320;         % regen torque desired at min accelerator travel in reverse (in Nm)
 p1params.input.Tmax = 3212;            % maximum spec motor torque (in Nm) not to be exceeded
 p1params.input.Tmin = -3212;           % maximum spec regen torque (in Nm) not to be exceeded
+p1params.input.handwheelMidpoint = 222; % Midpoint of the handwheel potentiometer (cts)
+p1params.input.handwheelScaling = 250; % scale factor for handwheel potentiometer (rev/ct)
+p1params.input.handwheelOffset = 0; % scale factor for handwheel potentiometer (rev/ct)
 
 % Drivetrain control parameters
 p1params.drivetrain.left.CANTimeOut = 1.2; % CAN time out threshold (in s)
@@ -50,6 +53,43 @@ p1params.drivetrain.right.minTorqueStartDrive = -25; % minimum torque in regen a
 p1params.drivetrain.right.maxTorqueStartDrive = 10; % minimum torque in regen allowed to start an active drive mode (Nm)
 p1params.drivetrain.right.minTorqueFullDrive = -25; % minimum torque in regen allowed to start an active drive mode (Nm)
 p1params.drivetrain.right.maxTorqueFullDrive = 50; % minimum torque in regen allowed to start an active drive mode (Nm)
+
+% Steering control parameters
+p1params.steering.left.CANTimeOut = 0.2; % CAN time out threshold (in s)
+p1params.steering.left.startupTimeOut = 30; % Time to wait for proper startup before faulting (s)
+p1params.steering.left.initNumPotReadings = 50; % Number of potentiometer readings to average for startup position (#)
+p1params.steering.left.maxPotSTD = 500; % Maximum standard deviation of potentiometer readings (mV)
+p1params.steering.left.minPotAvgVal = 200; % Minimum average potentiometer value (mV)
+p1params.steering.left.maxPotAvgVal = 4800; % Maximum average potentiometer value (mV)
+p1params.steering.left.potEncSlope = -106.203; % Slope of potentiometer to encoder calibration curve (cts/mV)
+p1params.steering.left.potEncInt = 172261; % Intercept of potentiometer to encoder calibration curve (cts)
+p1params.steering.left.finalOffsetLowThresh = -6000;
+p1params.steering.left.finalOffsetHighThresh = 24000;
+p1params.steering.left.hallWidthLowThresh = 1000;
+p1params.steering.left.hallWidthHighThresh = 7000;
+p1params.steering.left.homeOffsetLowThresh = -8000;
+p1params.steering.left.homeOffsetHighThresh = 8000;
+p1params.steering.left.intOffsetThresh = 3;
+p1params.steering.left.alignmentSlewRate = 50; %
+p1params.steering.left.finalOffsetAlignment = -22917;
+
+p1params.steering.right.CANTimeOut = 0.2; % CAN time out threshold (in s)
+p1params.steering.right.startupTimeOut = 30; % Time to wait for proper startup before faulting (s)
+p1params.steering.right.initNumPotReadings = 50; % Number of potentiometer readings to average for startup position (#)
+p1params.steering.right.maxPotSTD = 500; % Maximum standard deviation of potentiometer readings (mV)
+p1params.steering.right.minPotAvgVal = 200; % Minimum average potentiometer value (mV)
+p1params.steering.right.maxPotAvgVal = 4800; % Maximum average potentiometer value (mV)
+p1params.steering.right.potEncSlope = 130.6; % Slope of potentiometer to encoder calibration curve (cts/mV)
+p1params.steering.right.potEncInt = -157771; % Intercept of potentiometer to encoder calibration curve (cts)
+p1params.steering.right.finalOffsetLowThresh = -10000;
+p1params.steering.right.finalOffsetHighThresh = 6000;
+p1params.steering.right.hallWidthLowThresh = 1000;
+p1params.steering.right.hallWidthHighThresh = 7000;
+p1params.steering.right.homeOffsetLowThresh = -8000;
+p1params.steering.right.homeOffsetHighThresh = 8000;
+p1params.steering.right.intOffsetThresh = 3;
+p1params.steering.right.alignmentSlewRate = 50; %
+p1params.steering.right.finalOffsetAlignment = 3407;
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
