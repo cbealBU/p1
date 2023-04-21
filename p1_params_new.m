@@ -17,13 +17,17 @@ Ts = 0.01;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Accelerator pedal mapping (pedal volts to motor torque)
-p1params.input.VmaxAccel = 4.2;    % maximum voltage measured from accelerator potentiometer
-p1params.input.VmidAccel = 3.7;    % design voltage at the transition from regen to drive
-p1params.input.VminAccel = 1.1;    % minimum voltage measured from accelerator potentiometer
-p1params.input.TmaxAccel = 3212;       % motor torque desired at max accelerator travel (in Nm)
-p1params.input.TminAccel = -640;       % regen torque desired at min accelerator travel (negative, in Nm)
+p1params.input.VhighGuard =4.6;    % guard voltage to protect against a short
+p1params.input.VlowGuard = 0.4;     % guard voltage to protect against an open circuit
+p1params.input.VmaxAccel = 4.0;    % high saturation voltage for accelerator potentiometer
+p1params.input.VmidAccel = 3.6;    % design voltage at the transition from regen to drive
+p1params.input.VminAccel = 1.6;    % low saturation voltage measured from accelerator potentiometer
+p1params.input.Vdeadband = 0.4;
+p1params.input.VAccelWc = 4;       % Accelerator pedal filter cut off frequency (in Hz)
+p1params.input.TmaxAccel = 350;       % motor torque desired at max accelerator travel (in Nm)
+p1params.input.TminAccel = -20;       % regen torque desired at min accelerator travel (negative, in Nm)
 p1params.input.TregenBrake = -1000;    % regen torque desired on brake pedal press (negative, in Nm)
-p1params.input.TmaxRev = 1606;         % motor torque desired at max accelerator travel in reverse (in Nm)
+p1params.input.TmaxRev = 100;         % motor torque desired at max accelerator travel in reverse (in Nm)
 p1params.input.TminRev = -320;         % regen torque desired at min accelerator travel in reverse (in Nm)
 p1params.input.Tmax = 3212;            % maximum spec motor torque (in Nm) not to be exceeded
 p1params.input.Tmin = -3212;           % maximum spec regen torque (in Nm) not to be exceeded
@@ -34,18 +38,18 @@ p1params.input.handwheelOffset = 0; % scale factor for handwheel potentiometer (
 % Drivetrain control parameters
 p1params.drivetrain.left.CANTimeOut = 1.2; % CAN time out threshold (in s)
 p1params.drivetrain.left.zeroSpeedThresh = 2; % threshold for considering the vehicle to be moving slowly (m/s)
-p1params.drivetrain.left.velLimREV = 900; % maximum motor speed in reverse (RPM)
+p1params.drivetrain.left.velLimREV = -900; % maximum motor speed in reverse (RPM)
 p1params.drivetrain.left.velLimFWD = 5400; % maximum motor speed going forward (RPM)
 p1params.drivetrain.left.torqueLimLow = -350; % maximum motor torque in regen (Nm)
 p1params.drivetrain.left.torqueLimHigh = 350; % maximum motor torque in drive (Nm)
-p1params.drivetrain.left.minTorqueStartDrive = -25; % minimum torque in regen allowed to start an active drive mode (Nm)
-p1params.drivetrain.left.maxTorqueStartDrive = 10; % minimum torque in regen allowed to start an active drive mode (Nm)
-p1params.drivetrain.left.minTorqueFullDrive = -25; % minimum torque in regen allowed to start an active drive mode (Nm)
-p1params.drivetrain.left.maxTorqueFullDrive = 50; % minimum torque in regen allowed to start an active drive mode (Nm)
+p1params.drivetrain.left.minTorqueStartDrive = -120; % minimum torque in regen allowed to start limp home drive mode (Nm)
+p1params.drivetrain.left.maxTorqueStartDrive = 10; % minimum torque in motoring allowed to start limp home drive mode (Nm)
+p1params.drivetrain.left.minTorqueFullDrive = -120; % minimum torque in regen allowed to start full drive mode (Nm)
+p1params.drivetrain.left.maxTorqueFullDrive = 50; % minimum torque in motoring allowed to start full drive mode (Nm)
 
 p1params.drivetrain.right.CANTimeOut = 1.2; % CAN time out threshold (in s)
 p1params.drivetrain.right.zeroSpeedThresh = 2; % threshold for considering the vehicle to be moving slowly (m/s)
-p1params.drivetrain.right.velLimREV = 900; % maximum motor speed in reverse (RPM)
+p1params.drivetrain.right.velLimREV = -900; % maximum motor speed in reverse (RPM)
 p1params.drivetrain.right.velLimFWD = 5400; % maximum motor speed going forward (RPM)
 p1params.drivetrain.right.torqueLimLow = -350; % maximum motor torque in regen (Nm)
 p1params.drivetrain.right.torqueLimHigh = 350; % maximum motor torque in drive (Nm)

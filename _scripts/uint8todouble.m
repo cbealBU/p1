@@ -5,7 +5,7 @@ function newDoub = uint8todouble(signFlag,floatFlag,varargin)
 % Setting up var with our num of vararg's since nargin counts all arg's in
 n = length(varargin);
 % Error out the function if not given the proper number of inputs
-if n ~= 2 && n ~= 4 && n ~= 8
+if n~= 1 && n ~= 2 && n ~= 4 && n ~= 8
     error('Cannot accept this number of information inputs. This function requires 2, 4, or 8 bytes of information after declaring the sign.')
 end
 

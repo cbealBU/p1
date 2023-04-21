@@ -30,7 +30,8 @@ subplot(3,2,2)
 accel_pedal = 12*3.3/4096*uint8todouble(0,0,rt_DriverInput(:,2),rt_DriverInput(:,3)); 
 plot(rt_tout,accel_pedal)
 ylim([0 5])
-ylabel('Accelerator Pedal Voltage (V)')
+title('Accelerator')
+ylabel('Pedal Voltage (V)')
 xlabel('Time (s)')
 
 % Handwheel Angle Potentiometer
@@ -39,8 +40,9 @@ steering_pot = uint8todouble(0,0,rt_DriverInput(:,4),rt_DriverInput(:,5));
 steering_angle_pot = (steering_pot-208)/246*pi/2*60/18;
 plot(rt_tout,steering_angle_pot*180/pi)
 ylim([-270 270])
-ylabel('Steering Angle (deg)')
+ylabel('Meas. Pos. (deg)')
 xlabel('Time (s)')
+title('Handwheel Pot')
 
 % Handwheel Encoder
 subplot(3,2,4)
@@ -58,11 +60,12 @@ end
 plot(rt_tout,steering_encoder,rt_tout,unwrapped_encoder)
 ylim([-200000 200000])
 legend('Raw Signal','Unwrapped')
-ylabel('Handwheel Position (counts)')
+ylabel('Meas. Position (counts)')
 xlabel('Time (s)')
+title('Handwheel Encoder')
 
 % Now plot the processed handwheel signals
-figure(7)
+subplot(313)
 handwheel_primary = uint8todouble(0,1,rt_DriverInput(:,10),rt_DriverInput(:,11),rt_DriverInput(:,12),rt_DriverInput(:,13));
 handwheel_secondary = uint8todouble(0,1,rt_DriverInput(:,14),rt_DriverInput(:,15),rt_DriverInput(:,16),rt_DriverInput(:,17));
 latch_time = uint8todouble(0,1,rt_DriverInput(:,18),rt_DriverInput(:,19),rt_DriverInput(:,20),rt_DriverInput(:,21));
@@ -70,5 +73,5 @@ latch_time = uint8todouble(0,1,rt_DriverInput(:,18),rt_DriverInput(:,19),rt_Driv
 plot(rt_tout,handwheel_primary*180/pi,rt_tout,handwheel_secondary*180/pi);
 ylim([-270 270])
 legend('Primary','Secondary')
-ylabel('Processed Handwheel Position (deg)')
+ylabel('Meas. Pos. (deg)')
 xlabel('Time (s)')

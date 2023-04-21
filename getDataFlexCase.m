@@ -7,14 +7,14 @@
 
 
 %% Setup up object to communicate with raspberry pi
-p1Pi = raspberrypi('FlexCase01.local','pi','FazK75niXS');
+p1Pi = raspberrypi('FlexCase03.local','pi','FazK75niXS');
 
 %% Run the model
 p1Pi.runModel('p1_MPU')
 
 %% Pull data to host computer
 
-p1Pi.stopModel('p1_MPU'); % Put in quotations the model name that's running on the flexcase
+%p1Pi.stopModel('p1_MPU'); % Put in quotations the model name that's running on the flexcase
 disp('Retrieving data from Raspberry Pi 4...');
 
 % Get user input to determine the name of the files being retrieved
@@ -55,9 +55,9 @@ if strcmp(responseStr,'yes')
     temp = strsplit(masterFileName,'*');
     oldFileString = [temp{1} '__stitched.mat'];
     newFileString = ['_p1data/p1_MPU_' datestr(now,'yyyy-mm-dd_HH-MM-SS') '.mat'];
-    movefile(oldFileString,newFileString);
-    clearvars -except newFileString
-    load(newFileString)
+    %movefile(oldFileString,newFileString);
+    clear rt_* masterFileName
+    load(oldFileString) %load(newFileString)
     disp('Final stitched file reloaded into the workspace')
 end
 
