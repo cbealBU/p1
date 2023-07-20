@@ -95,6 +95,31 @@ p1params.steering.right.intOffsetThresh = 3;
 p1params.steering.right.alignmentSlewRate = 50; %
 p1params.steering.right.finalOffsetAlignment = 3407;
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                       %
+%      DATA ACQUISITION/COMMUNICATION PARAMETERS        %
+%                                                       %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+p1params.wft.left.FxScale = 1.220703125;
+p1params.wft.left.FyScale = 0.6103515625;
+p1params.wft.left.FzScale = 1.220703125;
+p1params.wft.left.MxScale = 0.18310546875;
+p1params.wft.left.MyScale = 0.18310546875;
+p1params.wft.left.MzScale = 0.18310546875;
+p1params.wft.left.VelScale = 0.06103515625;
+p1params.wft.left.PosScale = 0.010986328125;
+p1params.wft.left.AxScale = 0.0030517578125;
+p1params.wft.left.AyScale = 0.0030517578125;
+p1params.wft.right.FxScale = 1.220703125;
+p1params.wft.right.FyScale = 0.6103515625;
+p1params.wft.right.FzScale = 1.220703125;
+p1params.wft.right.MxScale = 0.18310546875;
+p1params.wft.right.MyScale = 0.18310546875;
+p1params.wft.right.MzScale = 0.18310546875;
+p1params.wft.right.VelScale = 0.06103515625;
+p1params.wft.right.PosScale = 0.010986328125;
+p1params.wft.right.AxScale = 0.0030517578125;
+p1params.wft.right.AyScale = 0.0030517578125;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                                       %

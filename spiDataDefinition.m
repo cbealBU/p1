@@ -13,8 +13,8 @@ p1data.gpsBytes = 128;              % GPS packet bytes
 % Determine the number of bytes being transmitted in each direction
 mcu2mpuBytes = p1data.flexCaseBytes + p1data.controlPanelBytes + ...
     p1data.driverInputBytes + 2*p1data.steeringBytes + ...
-    2*p1data.drivetrainBytes + 2*p1data.wftBytes;
-mpu2mcuBytes = p1data.imuBytes + p1data.gpsBytes;
+    2*p1data.drivetrainBytes + p1data.imuBytes + 2*p1data.wftBytes;
+mpu2mcuBytes = p1data.gpsBytes;
 
 % Determine the number of bytes transmitted over SPI each cycle, assuming
 % that the MCU->MPU message will have more data than the MPU->MCU message
