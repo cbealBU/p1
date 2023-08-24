@@ -9,12 +9,13 @@ p1data.drivetrainBytes = 44;        % Drivetrain commands/states
 p1data.imuBytes = 12;               % Inertial measurement data
 p1data.wftBytes = 20;               % Wheel force transducer data
 p1data.gpsBytes = 128;              % GPS packet bytes
+p1data.mpuBytes = 21;               % MPU I/O bytes
 
 % Determine the number of bytes being transmitted in each direction
 mcu2mpuBytes = p1data.flexCaseBytes + p1data.controlPanelBytes + ...
     p1data.driverInputBytes + 2*p1data.steeringBytes + ...
     2*p1data.drivetrainBytes + p1data.imuBytes + 2*p1data.wftBytes;
-mpu2mcuBytes = p1data.gpsBytes;
+mpu2mcuBytes = p1data.gpsBytes + p1data.mpuBytes;
 
 % Determine the number of bytes transmitted over SPI each cycle, assuming
 % that the MCU->MPU message will have more data than the MPU->MCU message
