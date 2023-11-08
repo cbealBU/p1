@@ -1,122 +1,112 @@
-% This script pulls data off the flexcase collected by the car's sensors 
-% to do basic things like check the validity of
-% the data and give some graphics to the user to show it makes sense.
+% This script pulls data off of a Flexcase, merges the component log files,
+% and creates a single mat file in a data subdirectory
 
-% Author: Graham Heckert, Summer 2022 Research Project
-% Using previous work from cgadda, Shad Laws
+% Author: Craig Beal
+% Using previous work from Graham Heckert, Chris Gadda, Shad Laws
 
 
-%% Setup up object to communicate with raspberry pi
-p1Pi = raspberrypi('FlexCase03.local','pi','FazK75niXS');
+% Setup up object to communicate with raspberry pi
+flexCase = raspberrypi('FlexCase01.local','pi','FazK75niXS');
 
-%% Run the model
-p1Pi.runModel('p1_MPU')
+% Pull data to host computer
+clc
+disp('Retrieving data from FlexCase...');
+disp('Data files are available from the following models/runs: ');
+% Grab the list of data files (just the first one in any sequence)
+datafilelist = splitlines(system(flexCase,'ls *_1.mat'));
 
-%% Pull data to host computer
-
-%p1Pi.stopModel('p1_MPU'); % Put in quotations the model name that's running on the flexcase
-disp('Retrieving data from Raspberry Pi 4...');
-
-% Get user input to determine the name of the files being retrieved
-% Useful: y.mat can be made into y*.mat to include all filenames
-% starting with y and ending with .mat in order to retrieve and load
-% multiple files under one main name with numbered iterations
-% e.g.: giving y*.mat will save y1.mat, y2.mat, y3.mat, etc.
-if ~exist('masterFileName','var')
-    masterFileName = input('Please enter the name of the file you are retreiving. \nIf you want to retrieve multiple files under the same base name, use *. \ne.g.: y*.mat will return all names such as y1.mat, yApple.mat, etc. \nEnter file name: ','s');
-    while isempty(masterFileName)
-        masterFileName = input('Please enter the name of the file you are retreiving. \nIf you want to retrieve multiple files under the same base name, use *. \ne.g.: y*.mat will return all names such as y1.mat, yApple.mat, etc. \nEnter file name: ','s');
+% Create a pattern to match the end of the file name to strip it off
+stripPattern = "_" + digitsPattern + ".mat";
+% Loop through all of the available data files
+for listCount = 1:length(datafilelist)
+    % Check for empty file names (usually at the very end due to the system
+    % command)
+    if isempty(datafilelist{listCount})
+        datafilelist(listCount) = [];
+        % If the data file is not empty, strip off the end of it and show the
+        % root name and run number to the user
+    else
+        printString = extractBefore(datafilelist{listCount},stripPattern);
+        fprintf(1,'%d) %s\n',listCount,printString)
     end
 end
+% Now request the run the user would like to import from the list just
+% displayed
+fileNum = 0;
+while fileNum < 1 || fileNum > length(datafilelist)
+    fileNum = input('Type the number of the model/run to retrieve: ');
+end
+retrieveFileBase = convertStringsToChars(extractBefore(datafilelist{fileNum},stripPattern));
+retrieveFileName = convertStringsToChars(extractBefore(datafilelist{fileNum},stripPattern) + "_*.mat");
 
-% Retrieving files under y.mat, can make y*.mat to include all filenames
-% starting with y and ending with .mat in order to retrieve and load
-% multiple files
-getFile(p1Pi,masterFileName); % Change to filename you are looking for
+% Clean up
+clear datafilelist fileNum listCount printString stripPattern
+
+% Also request from the user whether or not to delete the file when
+% imported
+deleteFlag = lower(input('Delete the file from the Flexcase after importing (Yes/[No])? ','s'));
+if isempty(deleteFlag)
+    deleteFlag = 'no';
+end
+getFile(flexCase,retrieveFileName); % Change to filename you are looking for
 
 % FileDataStore() gives option to choose where to read from, so use that in
 % later implementation to give flexibility for user
-fds = fileDatastore(masterFileName,'ReadFcn',@importdata);
+fds = fileDatastore(retrieveFileName,'ReadFcn',@importdata);
 fullFileNames = fds.Files;
+% sortedFileNames = {};
 for k = 1:length(fullFileNames)
-    fprintf('Now reading file %s\n',fullFileNames{k});
-    load(fullFileNames{k});
+     fprintf('Now reading file %s\n',fullFileNames{k});
 end
+clear k
 
-% Give option to run matlab stitcher, though technically test RP4 doesn't
-% need files stitched
-responseStr = lower(input("Run file stitcher? (Yes or No): ",'s'));
-if isempty(responseStr)
-    responseStr = 'yes';
-end
-if strcmp(responseStr,'yes')
-    Raspberrypi_MAT_stitcher(dir(masterFileName));
-    disp('Stitched files, renaming output file')
-    temp = strsplit(masterFileName,'*');
-    oldFileString = [temp{1} '__stitched.mat'];
-    newFileString = ['_p1data/p1_MPU_' datestr(now,'yyyy-mm-dd_HH-MM-SS') '.mat'];
-    %movefile(oldFileString,newFileString);
-    clear rt_* masterFileName
-    load(oldFileString) %load(newFileString)
-    disp('Final stitched file reloaded into the workspace')
-end
-
-%% Define DataDescriptionUser
-% Chooses one of the many 'Profiles' such that multiple users have ease of access
-% to connect matlab to their simulink blocks. Should be altered for new simulink
-% files. Ex: 'p1/User Controllers/ControllerP1Racing' indicates the
-% simulink file name/subsystem1/subsystem2
-if sum(strcmp(find_system(bdroot),'p1/User Controllers/ControllerP1Racing'))+sum(strcmp(find_system(bdroot),'p1/User Controllers/ControllerP1RacingSlipCircle'))
-    DataDescriptionUser=datadescRacing;
-    UserBlockName='ControllerP1Racing';
-elseif sum(strcmp(find_system(bdroot),'p1/User Controllers/Sliding Surface Control Subsystem'))
-    DataDescriptionUser=datadescSSC;
-    UserBlockName='SSC';
-elseif sum(strcmp(find_system(bdroot),'p1/User Controllers/MPC CAN Connection'))
-    DataDescriptionUser=datadescMPCEnv;
-    UserBlockName='MPC_Envelope';
-elseif sum(strcmp(find_system(bdroot),'p1/User Controllers/EnvEnv Connection'))
-    DataDescriptionUser=datadescEnvEnv;
-    UserBlockName='EnvEnv Connection';
-elseif sum(strcmp(find_system(bdroot),'p1/User Controllers/Envelope control with Differential drive'))
-    DataDescriptionUser=datadescTCS;
-    UserBlockName='TCS';
-elseif sum(strcmp(find_system(bdroot),'p1/User Controllers/MPCACC'))
-    DataDescriptionUser=datadescMPCACC;
-    UserBlockName='MPCACC';
-elseif sum(strcmp(find_system(bdroot),'p1/User Controllers/LQACC'))
-    DataDescriptionUser=datadescLQACC;
-    UserBlockName='LQACC';
-elseif sum(strcmp(find_system(bdroot),'p1/User Controllers/Drift and Speed Controller'))
-    DataDescriptionUser=datadescDriftSpeedController;
-    UserBlockName='Drift and Speed Controller';
-elseif sum(strcmp(find_system(bdroot),'p1/User Controllers/Driftkeeping'))
-    DataDescriptionUser=datadescDriftkeeping;
-    UserBlockName='Driftkeeping';
-elseif sum(strcmp(find_system(bdroot),'p1/User Controllers/Simplified Drift Control'))
-    DataDescriptionUser=datadescDriftControllerSDSC;
-    UserBlockName='Simplified Drift Control';
-elseif sum(strcmp(find_system(bdroot),'p1/User Controllers/Lanekeeping'))
-    DataDescriptionUser=datadescLK;
-    UserBlockName='Lanekeepingl';
-elseif sum(strcmp(find_system(bdroot),'p1/User Controllers/SSC Drift Controller'))
-    DataDescriptionUser=datadescDriftControllerSSC;
-    UserBlockName='SSC Drift Controller';
-elseif sum(strcmp(find_system(bdroot),'p1/User Controllers/TTS Steering Control'))
-    DataDescriptionUser=datadescTTSsteering;
-    UserBlockName='TTS Steering';    
-elseif sum(strcmp(find_system(bdroot),'p1/User Controllers/PSU Sim'))
-    DataDescriptionUser=datadescPSU;
-    UserBlockName='PSU Sim';
+if length(fds.Files) > 1
+    % Give option to run matlab stitcher
+    stitchFlag = lower(input("Run file stitcher? ([Yes]/No): ",'s'));
+    if isempty(stitchFlag)
+        stitchFlag = 'yes';
+    end
+    if strcmp(stitchFlag,'yes')
+        fprintf(1,'Stitching files... ');
+        Raspberrypi_MAT_stitcher(dir([retrieveFileBase '*']));
+        fprintf(1,' complete.\n')
+    end
+    oldFileString = [retrieveFileBase '__stitched.mat'];
+    newFileString = ['./data/' retrieveFileBase '_' datestr(now,'yyyy-mm-dd_HH-MM-SS') '.mat'];
+    if ~exist('./data','dir')
+        mkdir('data');
+    end
 else
-   UserBlockName='none';
+    stitchFlag = 'no';
+    oldFileString = [retrieveFileBase '_1.mat'];
 end
 
-%% Set up data descriptions
-dataDesc;
+if strcmp(stitchFlag,'no') && length(fds.Files) > 1
+    disp('Files not stitched, leaving them in current directory. No data loaded.');
+else
+    newFileString = ['./data/' retrieveFileBase '_' datestr(now,'yyyy-mm-dd_HH-MM-SS') '.mat'];
+    movefile(oldFileString,newFileString);
+    fprintf(1,'Files stitched (or was only a single file) and moved to the data subdirectory as %s.\n',...
+        [retrieveFileBase '_' datestr(now,'yyyy-mm-dd_HH-MM-SS') '.mat'])
 
-%% Run sanity check
-sanity;
+    clear rt_* rmCmd
+    load(newFileString)
+    
+    % Do an error check on the stitching function
+    if any(diff(rt_tout) <= 0)
+        warning('Time vector is not continuously increasing. Data collection or stitching may have encountered errors.')
+    end
+    
+    disp('Final data file reloaded into the workspace.')
+    clear newFileString
+    delete(retrieveFileBase + "*.mat")
 
-%% Clean up
-clear fds fullFileNames k i
+end
+
+if strcmp(deleteFlag,'yes')
+    rmCmd = ['rm -r ' retrieveFileBase '*.mat'];
+    system(flexCase,rmCmd);
+    clear rmCmd
+end
+clear oldFileString retrieveFileBase retrieveFileName
+clear stitchFlag deleteFlag fds fullFileNames
