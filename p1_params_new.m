@@ -17,13 +17,13 @@ Ts = 0.01;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Accelerator pedal mapping (pedal volts to motor torque)
-p1params.input.VhighGuard =4.6;    % guard voltage to protect against a short
+p1params.input.VhighGuard =4.7;    % guard voltage to protect against a short
 p1params.input.VlowGuard = 0.4;     % guard voltage to protect against an open circuit
 p1params.input.VmaxAccel = 4.0;    % high saturation voltage for accelerator potentiometer
 p1params.input.VmidAccel = 3.6;    % design voltage at the transition from regen to drive
 p1params.input.VminAccel = 1.6;    % low saturation voltage measured from accelerator potentiometer
 p1params.input.Vdeadband = 0.4;
-p1params.input.VAccelWc = 4;       % Accelerator pedal filter cut off frequency (in Hz)
+p1params.input.VAccelWc = 4;        % Accelerator pedal filter cut off frequency (in Hz)
 p1params.input.TmaxAccel = 350;       % motor torque desired at max accelerator travel (in Nm)
 p1params.input.TminAccel = -20;       % regen torque desired at min accelerator travel (negative, in Nm)
 p1params.input.TregenBrake = -1000;    % regen torque desired on brake pedal press (negative, in Nm)
@@ -65,8 +65,8 @@ p1params.steering.left.initNumPotReadings = 50; % Number of potentiometer readin
 p1params.steering.left.maxPotSTD = 500; % Maximum standard deviation of potentiometer readings (mV)
 p1params.steering.left.minPotAvgVal = 200; % Minimum average potentiometer value (mV)
 p1params.steering.left.maxPotAvgVal = 4800; % Maximum average potentiometer value (mV)
-p1params.steering.left.potEncSlope = -73.52; % Slope of potentiometer to encoder calibration curve (cts/mV)
-p1params.steering.left.potEncInt = 186400; % Intercept of potentiometer to encoder calibration curve (cts)
+p1params.steering.left.potEncSlope = -73.299; % Slope of potentiometer to encoder calibration curve (cts/mV)
+p1params.steering.left.potEncInt = 212718; % Intercept of potentiometer to encoder calibration curve (cts)
 p1params.steering.left.finalOffsetLowThresh = -6000;
 p1params.steering.left.finalOffsetHighThresh = 24000;
 p1params.steering.left.hallWidthLowThresh = 1000;
