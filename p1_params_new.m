@@ -23,7 +23,6 @@ p1params.input.VmaxAccel = 4.0;    % high saturation voltage for accelerator pot
 p1params.input.VmidAccel = 3.6;    % design voltage at the transition from regen to drive
 p1params.input.VminAccel = 1.6;    % low saturation voltage measured from accelerator potentiometer
 p1params.input.Vdeadband = 0.4;
-p1params.input.VAccelWc = 4;        % Accelerator pedal filter cut off frequency (in Hz)
 p1params.input.TmaxAccel = 350;       % motor torque desired at max accelerator travel (in Nm)
 p1params.input.TminAccel = -20;       % regen torque desired at min accelerator travel (negative, in Nm)
 p1params.input.TregenBrake = -1000;    % regen torque desired on brake pedal press (negative, in Nm)
@@ -35,9 +34,30 @@ p1params.input.handwheelMidpoint = 222; % Midpoint of the handwheel potentiomete
 p1params.input.handwheelScaling = 250; % scale factor for handwheel potentiometer (rev/ct)
 p1params.input.handwheelOffset = 0; % scale factor for handwheel potentiometer (rev/ct)
 
+p1params.input.VAccelFc = 1;        % Accelerator pedal filter cut off frequency (in Hz)
+% The following two lines are the result of using the MATLAB butterworth and IIR filter
+% design tools with the cutoff above:
+% N = 6 (for a 6th order Butterworth)
+% wc = p1params.input.VAccelFc*(2*Ts); (set up the normalized filter frequency)
+% [b,a] = butter(N,wc); (design using the specified normalized cutoff frequency)
+p1params.input.VAccelFiltNum = [8.5316e-10
+    5.119e-09
+   1.2797e-08
+   1.7063e-08
+   1.2797e-08
+    5.119e-09
+   8.5316e-10]';
+p1params.input.VAccelFiltDen = [      1
+      -5.7572
+       13.816
+      -17.687
+       12.742
+      -4.8969
+      0.78442]';
+
 % Drivetrain control parameters
 p1params.drivetrain.left.CANTimeOut = 1.2; % CAN time out threshold (in s)
-p1params.drivetrain.left.zeroSpeedThresh = 2; % threshold for considering the vehicle to be moving slowly (m/s)
+p1params.drivetrain.left.zeroSpeedThresh = 4; % threshold for considering the vehicle to be moving slowly (m/s)
 p1params.drivetrain.left.velLimREV = -900; % maximum motor speed in reverse (RPM)
 p1params.drivetrain.left.velLimFWD = 5400; % maximum motor speed going forward (RPM)
 p1params.drivetrain.left.torqueLimLow = -350; % maximum motor torque in regen (Nm)

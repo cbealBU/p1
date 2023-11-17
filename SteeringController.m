@@ -22,7 +22,7 @@ Kd = 800;               % derivative feedback gain
 
 % Misc.
 wc = 10;                % low-pass filter cutoff frequency (Hz)
-sr = 10;                % steering ratio
+sr = 7.5;                % steering ratio
 ack = 1;                % percentage Ackermann steering
                         %  1 = full Ackermann steering,
                         %  0 = parallel steering,
@@ -39,7 +39,7 @@ Igain_r = 1/0.6*1/160*1/0.85*7.843;   % Current gain on right controller
 Imax_l = 20;            % Maximum current command (Amps)
 Imax_r = 20;            % Maximum current command (Amps)
 
-steering_limit = 23;    % Maximum effective roadwheel angle. (deg)
+steering_limit = 35;    % Maximum effective roadwheel angle. (deg)
 
 % Here's where we create the derivative/low-pass filter
 % This is just a single-pole low-pass filter in combination with a derivative.
