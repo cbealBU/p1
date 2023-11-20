@@ -17,7 +17,7 @@ Ts = 0.01;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Accelerator pedal mapping (pedal volts to motor torque)
-p1params.input.VhighGuard =4.7;    % guard voltage to protect against a short
+p1params.input.VhighGuard =4.8;    % guard voltage to protect against a short
 p1params.input.VlowGuard = 0.4;     % guard voltage to protect against an open circuit
 p1params.input.VmaxAccel = 4.0;    % high saturation voltage for accelerator potentiometer
 p1params.input.VmidAccel = 3.6;    % design voltage at the transition from regen to drive
