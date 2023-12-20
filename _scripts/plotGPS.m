@@ -1,6 +1,6 @@
 % GPS plots only
 
-inds = find(rt_GPS(:,4) >= 4);
+inds = find(rt_GPS(:,4) >= 2);
 
 GPS_ToW = rt_GPS(inds,1);
 GPS_Week = rt_GPS(inds,2);
@@ -36,7 +36,7 @@ title('Attitude Status')
 legend('Yaw','Pitch','Roll','location','best')
 
 subplot(1,2,2)
-geoplot(GPS_Lat,GPS_Long)
+geoplot(GPS_Lat,GPS_Long,'k','linewidth',2)
 geobasemap satellite
 grid on
 title('Location')
