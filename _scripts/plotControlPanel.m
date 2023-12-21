@@ -1,11 +1,16 @@
 % Control Panel plots only
 
-figure('Name','Control Panel','NumberTitle','off')
+% This addresses the left steering figure, if it exists. If not, it
+% creates a new one.
+if ~exist('handleControlsFig','var')
+    handleControlsFig = figure('Name','Control Panel','NumberTitle','off');
+else
+    figure(handleControlsFig)
+end
 
 % Switch Key Switch
 subplot(5,3,1)
-switchKeySwitch = bitUnpack(rt_ControlPanel,1,1);
-plot(rt_tout,switchKeySwitch)
+plot(rt_tout,Controls.switch.KeySwitch)
 xlabel('Time (s)')
 title('Key Switch')
 yticks([0 1])
@@ -14,8 +19,7 @@ ylim([-0.1 1.1])
 
 % Switch HV Enable
 subplot(5,3,2)
-switchHVEnable = bitUnpack(rt_ControlPanel,1,2);
-plot(rt_tout,switchHVEnable)
+plot(rt_tout,Controls.switch.HVEnable)
 xlabel('Time (s)')
 title('HV Enable')
 yticks([0 1])
@@ -24,8 +28,7 @@ ylim([-0.1 1.1])
 
 % Switch DC/DC On
 subplot(5,3,3)
-switchDCDCOn = bitUnpack(rt_ControlPanel,1,3);
-plot(rt_tout,switchDCDCOn)
+plot(rt_tout,Controls.switch.DCDCOn)
 xlabel('Time (s)')
 title('DC/DC On')
 yticks([0 1])
@@ -34,8 +37,7 @@ ylim([-0.1 1.1])
 
 % Switch Utility 1
 subplot(5,3,4)
-switchUtility1 = bitUnpack(rt_ControlPanel,1,4);
-plot(rt_tout,switchUtility1)
+plot(rt_tout,Controls.switch.Utility1)
 xlabel('Time (s)')
 title('Utility 1')
 yticks([0 1])
@@ -44,8 +46,7 @@ ylim([-0.1 1.1])
 
 % Switch Utility 2
 subplot(5,3,5)
-switchUtility2 = bitUnpack(rt_ControlPanel,1,5);
-plot(rt_tout,switchUtility2)
+plot(rt_tout,Controls.switch.Utility2)
 xlabel('Time (s)')
 title('Utility 2')
 yticks([0 1])
@@ -54,8 +55,7 @@ ylim([-0.1 1.1])
 
 % Switch Utility 3
 subplot(5,3,6)
-switchUtility3 = bitUnpack(rt_ControlPanel,1,6);
-plot(rt_tout,switchUtility3)
+plot(rt_tout,Controls.switch.Utility3)
 xlabel('Time (s)')
 title('Utility 3')
 yticks([0 1])
@@ -64,8 +64,7 @@ ylim([-0.1 1.1])
 
 % Switch Cruise Set
 subplot(5,3,7)
-switchCruiseSet = bitUnpack(rt_ControlPanel,1,7);
-plot(rt_tout,switchCruiseSet)
+plot(rt_tout,Controls.switch.CruiseSet)
 xlabel('Time (s)')
 title('Cruise Set')
 yticks([0 1])
@@ -74,8 +73,7 @@ ylim([-0.1 1.1])
 
 % Switch Cruise Enable
 subplot(5,3,8)
-switchCruiseEnable = bitUnpack(rt_ControlPanel,1,8);
-plot(rt_tout,switchCruiseEnable)
+plot(rt_tout,Controls.switch.CruiseEnable)
 xlabel('Time (s)')
 title('Cruise Enable')
 yticks([0 1])
@@ -84,8 +82,7 @@ ylim([-0.1 1.1])
 
 % Lamp FNR (F)
 subplot(5,3,9)
-lampFNRF = bitUnpack(rt_ControlPanel,2,1);
-plot(rt_tout,lampFNRF)
+plot(rt_tout,Controls.lamp.FNRF)
 xlabel('Time (s)')
 title('Lamp FNR (F)')
 yticks([0 1])
@@ -94,8 +91,7 @@ ylim([-0.1 1.1])
 
 % Lamp FNR (R)
 subplot(5,3,10)
-lampFNRR = bitUnpack(rt_ControlPanel,2,2);
-plot(rt_tout,lampFNRR)
+plot(rt_tout,Controls.lamp.FNRR)
 xlabel('Time (s)')
 title('Lamp FNR (R)')
 yticks([0 1])
@@ -104,8 +100,7 @@ ylim([-0.1 1.1])
 
 % Lamp GPS OK
 subplot(5,3,11)
-lampGPSOK = bitUnpack(rt_ControlPanel,2,3);
-plot(rt_tout,lampGPSOK)
+plot(rt_tout,Controls.lamp.GPSOK)
 xlabel('Time (s)')
 title('Lamp GPS OK')
 yticks([0 1])
@@ -114,8 +109,7 @@ ylim([-0.1 1.1])
 
 % Lamp WFT OK
 subplot(5,3,12)
-lampWFTOK = bitUnpack(rt_ControlPanel,2,4);
-plot(rt_tout,lampWFTOK)
+plot(rt_tout,Controls.lamp.WFTOK)
 xlabel('Time (s)')
 title('Lamp WFT OK')
 yticks([0 1])
@@ -124,8 +118,7 @@ ylim([-0.1 1.1])
 
 % Lamp Drive Fault
 subplot(5,3,13)
-lampDriveFault = bitUnpack(rt_ControlPanel,2,5);
-plot(rt_tout,lampDriveFault)
+plot(rt_tout,Controls.lamp.DriveFault)
 xlabel('Time (s)')
 title('Lamp Drive Fault')
 yticks([0 1])
@@ -134,8 +127,7 @@ ylim([-0.1 1.1])
 
 % Lamp Steer Fault
 subplot(5,3,14)
-lampSteerFault = bitUnpack(rt_ControlPanel,2,6);
-plot(rt_tout,lampSteerFault)
+plot(rt_tout,Controls.lamp.SteerFault)
 xlabel('Time (s)')
 title('Lamp Steer Fault')
 yticks([0 1])
@@ -144,8 +136,7 @@ ylim([-0.1 1.1])
 
 % Lamp DC/DC OK
 subplot(5,3,15)
-lampDCDCOK = bitUnpack(rt_ControlPanel,2,7);
-plot(rt_tout,lampDCDCOK)
+plot(rt_tout,Controls.lamp.DCDCOK)
 xlabel('Time (s)')
 title('Lamp DC/DC OK')
 yticks([0 1])
