@@ -1,9 +1,15 @@
 % IMU plots only
 
 %% IMU
+% This addresses the left steering figure, if it exists. If not, it
+% creates a new one.
+if ~exist('handleIMUFig','var')
+    handleIMUFig = figure('Name','IMU','NumberTitle','off');
+else
+    figure(handleIMUFig)
+end
 
-figure('Name','IMU','NumberTitle','off')
-
+% Some constants useful for converting the raw CAN message data
 IMUraw2degpersec = 500/32768;
 ACCraw2mpersec = 2*9.81/32768;
 
@@ -54,7 +60,7 @@ plot(rt_tout,accelZ)
 title('Acceleration Z (Heave)')
 xlabel('Time (s)')
 ylabel('m/s')
-%ylim([-20 20])
+ylim([-12 -7])
 grid on
 
 % Rotation Rate Z (Yaw)

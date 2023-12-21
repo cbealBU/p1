@@ -31,8 +31,14 @@ trueMotorSpeedR = (0.5*uint8todouble(0,0,rt_DrivetrainRight(:,17),rt_DrivetrainR
 
 
 %% Plots
+% This addresses the motor feedback figure, if it exists. If not, it
+% creates a new one.
+if ~exist('handleDriveMotorFig','var')
+    handleDriveMotorFig = figure('Name','Drive Motors','NumberTitle','off');
+else
+    figure(handleDriveMotorFig);
+end
 
-figure('Name','Motor','NumberTitle','off')
 % Torque
 subplot(2,2,1)
 plot(rt_tout,trueMotorTorqueL,rt_tout,trueMotorTorqueR)
@@ -40,7 +46,8 @@ title('Accurate Feedback: Torque')
 xlabel('Time (s)')
 ylabel('Torque (Nm)')
 legend('Left','Right')
-ylim([-30 220])
+grid on
+%ylim([-30 220])
 
 % Voltage
 subplot(2,2,2)
@@ -49,7 +56,8 @@ title('Accurate Feedback: Voltage')
 xlabel('Time (s)')
 ylabel('Voltage (V)')
 legend('Left','Right')
-ylim([280 360])
+grid on
+%ylim([280 360])
 
 % Current
 subplot(2,2,3)
@@ -58,7 +66,8 @@ title('Accurate Feedback: Current')
 xlabel('Time (s)')
 ylabel('Current (A)')
 legend('Left','Right')
-ylim([0 150])
+grid on
+%ylim([-30 150])
 
 % Speed
 subplot(2,2,4)
@@ -67,4 +76,5 @@ title('Accurate Feedback: Speed')
 xlabel('Time (s)')
 ylabel('Speed (rpm)')
 legend('Left','Right')
-ylim([0 2200])
+grid on
+%ylim([-200 2200])

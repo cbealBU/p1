@@ -1,8 +1,13 @@
 % Wheel Force Transducer plots only
 
 %% Wheel Force Transducer (Left)
-
-figure('Name','Wheel Force Transducer (Left)','NumberTitle','off')
+% This addresses the left WFT figure, if it exists. If not, it
+% creates a new one.
+if ~exist('handleWFTLeftFig','var')
+    handleWFTLeftFig = figure('Name','Wheel Force Transducer (Left)','NumberTitle','off');
+else
+    figure(handleWFTLeftFig);
+end
 
 % Left Front Forces combined
 subplot(3,2,1)
@@ -54,7 +59,13 @@ legend('X-direction','Z-Direction')
 
 %% Wheel Force Transducer (Right)
 
-figure('Name','Wheel Force Transducer (Right)','NumberTitle','off')
+% This addresses the right WFT figure, if it exists. If not, it
+% creates a new one.
+if ~exist('handleWFTRightFig','var')
+    handleWFTRightFig = figure('Name','Wheel Force Transducer (Right)','NumberTitle','off');
+else
+    figure(handleWFTRightFig);
+end
 
 % Right Front Forces combined
 subplot(3,2,1)

@@ -1,29 +1,33 @@
 % Driver Input Plots only
 
-figure('Name','Driver Input','NumberTitle','off')
+% This addresses the motor feedback figure, if it exists. If not, it
+% creates a new one.
+if ~exist('handleDriverInputFig','var')
+    handleDriverInputFig = figure('Name','Driver Input','NumberTitle','off');
+else
+    figure(handleDriverInputFig);
+end
 
 % Brake Switches
 subplot(6,2,1)
-brakeSwitchA = bitUnpack(rt_DriverInput,1,1);
-brakeSwitchB = bitUnpack(rt_DriverInput,1,2);
-plot(rt_tout,[brakeSwitchA brakeSwitchB])
+brakeSwitchA = ~bitUnpack(rt_DriverInput,1,2);
+plot(rt_tout,brakeSwitchA)
 xlabel('Time (s)')
-title('Brake Switches')
-legend('Primary','Secondary')
+title('Brake Switch')
 yticks([0 1])
 yticklabels({'Off' 'On'})
-ylim([-0.1 1.1])
+ylim([-0.5 1.5])
 
 % Switch FNR (F)
 subplot(6,2,3)
-switchFNRF = bitUnpack(rt_DriverInput,1,3);
-switchFNRR = -1*bitUnpack(rt_DriverInput,1,4);
+switchFNRF = bitUnpack(rt_DriverInput,1,2);
+switchFNRR = -1*bitUnpack(rt_DriverInput,1,3);
 plot(rt_tout,switchFNRF+switchFNRR)
 xlabel('Time (s)')
 title('Switch FNR')
 yticks([-1 0 1])
 yticklabels({'REV' 'N' 'FWD'})
-ylim([-1.1 1.1])
+ylim([-1.5 1.5])
 
 % Accelerator Potentiometer
 subplot(3,2,2)

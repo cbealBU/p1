@@ -1,16 +1,11 @@
-% Steering plots only
-
 %% Steering (Left)
 
-% This addresses the right steering figure, if it exists. If not, it
+% This addresses the left steering figure, if it exists. If not, it
 % creates a new one.
 if ~exist('handleSteerLeftFig','var')
-    handleSteerLeftFig = figure('Name','Steering (Left)','NumberTitle','off')
+    handleSteerLeftFig = figure('Name','Steering (Left)','NumberTitle','off');
 else
-    %figure(handleSteerLeftFig)
-    % Graham: I get a bug whenever running this a second time whenever
-    % handleSteerLeftFig is already established. "Argument must be a Figure
-    % object or a positive integer.
+    figure(handleSteerLeftFig);
 end
 
 % Operational State (Flexcase)
@@ -30,7 +25,7 @@ ylabel('Coded')
 % Status Word
 % Might need to alter to use yticks
 subplot(4,2,2)
-statusWordLeft = uint8todouble(0,0,rt_SteeringLeft(:,2),rt_SteeringLeft(:,3));
+statusWordLeft = rt_SteeringLeft(:,2);
 plot(rt_tout,statusWordLeft)
 axListL(2) = gca;
 title('Status Word')
@@ -78,9 +73,9 @@ linkaxes(axListL,'x')
 % This addresses the right steering figure, if it exists. If not, it
 % creates a new one.
 if ~exist('handleSteerRightFig','var')
-    handleSteerRightFig = figure('Name','Steering (Right)','NumberTitle','off')
+    handleSteerRightFig = figure('Name','Steering (Right)','NumberTitle','off');
 else
-    figure(handleSteerRightFig)
+    figure(handleSteerRightFig);
 end
 
 % Operational State (Flexcase)
@@ -145,5 +140,5 @@ linkaxes(axListR,'x')
 
 % Clean up
 %clear statusWordLeft posTargetValLeft velFeedLeft currentFeedLeft posActualValLeft actualVelLeft torqueActualValLeft ...
- %   statusWordRight posTargetValRight velFeedLeft currentFeedLeft posActualValLeft actualVelLeft torqueActualValRight
+%   statusWordRight posTargetValRight velFeedLeft currentFeedLeft posActualValLeft actualVelLeft torqueActualValRight
 
