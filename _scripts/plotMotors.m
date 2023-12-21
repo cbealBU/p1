@@ -40,7 +40,7 @@ title('Accurate Feedback: Torque')
 xlabel('Time (s)')
 ylabel('Torque (Nm)')
 legend('Left','Right')
-ylim([-360 360])
+ylim([-30 220])
 
 % Voltage
 subplot(2,2,2)
@@ -49,7 +49,7 @@ title('Accurate Feedback: Voltage')
 xlabel('Time (s)')
 ylabel('Voltage (V)')
 legend('Left','Right')
-ylim([300 370])
+ylim([280 360])
 
 % Current
 subplot(2,2,3)
@@ -58,7 +58,7 @@ title('Accurate Feedback: Current')
 xlabel('Time (s)')
 ylabel('Current (A)')
 legend('Left','Right')
-ylim([0 500])
+ylim([0 150])
 
 % Speed
 subplot(2,2,4)
@@ -67,4 +67,4 @@ title('Accurate Feedback: Speed')
 xlabel('Time (s)')
 ylabel('Speed (rpm)')
 legend('Left','Right')
-ylim([0 5000])
+ylim([0 2200])

@@ -14,7 +14,7 @@ plot(rt_tout,accelX)
 title('Acceleration X (Longitudinal)')
 xlabel('Time (s)')
 ylabel('m/s')
-ylim([-20 20])
+%ylim([-20 20])
 grid on
 
 % Rotation Rate X (Roll)
@@ -24,7 +24,7 @@ plot(rt_tout,rotRateX)
 title('Rotation Rate X (Roll)')
 xlabel('Time (s)')
 ylabel('deg/s')
-ylim([-500 500])
+%ylim([-500 500])
 grid on
 
 % Acceleration Y (Lateral)
@@ -34,7 +34,7 @@ plot(rt_tout,accelY)
 title('Acceleration Y (Lateral)')
 xlabel('Time (s)')
 ylabel('m/s')
-ylim([-20 20])
+%ylim([-20 20])
 grid on
 
 % Rotation Rate Y (Pitch)
@@ -44,7 +44,7 @@ plot(rt_tout,rotRateY)
 title('Rotation Rate Y (Pitch)')
 xlabel('Time (s)')
 ylabel('deg/s')
-ylim([-500 500])
+%ylim([-500 500])
 grid on
 
 % Acceleration Z (Heave)
@@ -54,17 +54,17 @@ plot(rt_tout,accelZ)
 title('Acceleration Z (Heave)')
 xlabel('Time (s)')
 ylabel('m/s')
-ylim([-20 20])
+%ylim([-20 20])
 grid on
 
 % Rotation Rate Z (Yaw)
 subplot(3,2,6)
 rotRateZ = IMUraw2degpersec*uint8todouble(1,0,rt_IMU(:,5),rt_IMU(:,6));
-plot(rt_tout,accelZ)
+plot(rt_tout,rotRateZ)
 title('Rotation Rate Z (Yaw)')
 xlabel('Time (s)')
 ylabel('deg/s')
-ylim([-500 500])
+%ylim([-500 500])
 grid on
 
 % Clean up
