@@ -10,9 +10,15 @@ else
     figure(handleGPSDataFig);
 end
 
+% If
+if(~exist('noDiffInds'))
+    noDiffInds = [];
+    diffInds = 1:length(rt_tout);
+end
+
 subplot(5,3,1)
 ax = gca;
-hold off
+cla
 plot(rt_tout(noDiffInds),GPS.Mode(noDiffInds),'--','linewidth',2)
 hold on
 set(gca,'ColorOrderIndex',1)
@@ -25,7 +31,7 @@ title('Receiver Mode')
 
 subplot(5,3,2)
 ax = gca;
-hold off
+cla
 plot(rt_tout(noDiffInds),GPS.AttStat(noDiffInds,:),'--','linewidth',2)
 hold on
 set(gca,'ColorOrderIndex',1)
@@ -38,7 +44,7 @@ legend('Yaw','Pitch','Roll','location','best')
 
 subplot(5,3,3)
 ax = gca;
-hold off
+cla
 plot(rt_tout(noDiffInds),GPS.Sats(noDiffInds),'--','linewidth',2)
 hold on
 set(gca,'ColorOrderIndex',1)
@@ -48,7 +54,7 @@ title('Sats Used')
 
 subplot(5,1,2)
 ax = gca;
-hold off
+cla
 plot(rt_tout(noDiffInds),[GPS.HorSpd(noDiffInds) GPS.VrtSpd(noDiffInds)],'--','linewidth',2)
 hold on
 set(gca,'ColorOrderIndex',1)
@@ -59,7 +65,7 @@ grid on
 
 subplot(5,1,3)
 ax = gca;
-hold off
+cla
 plot(rt_tout(noDiffInds),[GPS.CoG(noDiffInds) GPS.Hdg(noDiffInds)],'--','linewidth',2)
 hold on
 set(gca,'ColorOrderIndex',1)
@@ -71,7 +77,7 @@ grid on
 
 subplot(5,1,4)
 ax = gca;
-hold off
+cla
 plot(rt_tout(noDiffInds),GPS.CoG(noDiffInds)-GPS.Hdg(noDiffInds),'--','linewidth',2)
 hold on
 set(gca,'ColorOrderIndex',1)
@@ -83,7 +89,7 @@ grid on
 
 subplot(5,1,5)
 ax = gca;
-hold off
+cla
 plot(rt_tout(noDiffInds),GPS.Roll(noDiffInds),'--','linewidth',2)
 hold on
 set(gca,'ColorOrderIndex',1)
@@ -99,7 +105,8 @@ if ~exist('handleGPSLatLongFig','var')
 else
     figure(handleGPSLatLongFig);
 end
-hold off
+clf
+cla
 geoplot(GPS.Lat(allGNSSInds),GPS.Long(allGNSSInds),'-','linewidth',6,'color',[0.8 0.8 0.8])
 hold on
 geoplot(GPS.Lat(noDiffInds),GPS.Long(noDiffInds),'--','linewidth',2,'color',[0.8 0.3 0.6])

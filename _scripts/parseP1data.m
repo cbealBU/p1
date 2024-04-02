@@ -98,13 +98,14 @@ Motor.Right.Feedback.trueMotorSpeedR = (0.5*uint8todouble(0,0,rt_DrivetrainRight
 
 Steering.Left.state = bitshift(bitand(hex2dec('f0'),rt_SteeringLeft(:,1)),-4);
 Steering.Left.substate = bitand(hex2dec('f'),rt_SteeringLeft(:,1));
-Steering.Left.statusWord = rt_SteeringLeft(:,2);
+Steering.Left.statusWord = uint8todouble(0,0,rt_SteeringLeft(:,2),rt_SteeringLeft(:,3));
 Steering.Left.posTargetVal = uint8todouble(1,0,rt_SteeringLeft(:,4),rt_SteeringLeft(:,5),rt_SteeringLeft(:,6),rt_SteeringLeft(:,7));
 Steering.Left.posActualVal = uint8todouble(1,0,rt_SteeringLeft(:,16),rt_SteeringLeft(:,17),rt_SteeringLeft(:,18),rt_SteeringLeft(:,19));
 Steering.Left.velFeedF = 10*uint8todouble(1,0,rt_SteeringLeft(:,8),rt_SteeringLeft(:,9),rt_SteeringLeft(:,10),rt_SteeringLeft(:,11));
 Steering.Left.actualVel = 10*uint8todouble(1,0,rt_SteeringLeft(:,20),rt_SteeringLeft(:,21),rt_SteeringLeft(:,22),rt_SteeringLeft(:,23));
 Steering.Left.currentFeedF = 0.001*uint8todouble(1,0,rt_SteeringLeft(:,12),rt_SteeringLeft(:,13),rt_SteeringLeft(:,14),rt_SteeringLeft(:,15));
-Steering.Left.torqueActualVal = 0.001*uint8todouble(1,0,rt_SteeringLeft(:,24),rt_SteeringLeft(:,25));
+Steering.Left.torqueActualVal = 0.925*0.001*uint8todouble(1,0,rt_SteeringLeft(:,24),rt_SteeringLeft(:,25));
+
 Steering.Right.state = bitshift(bitand(hex2dec('f0'),rt_SteeringRight(:,1)),-4);
 Steering.Right.substate = bitand(hex2dec('f'),rt_SteeringRight(:,1));
 Steering.Right.statusWord = uint8todouble(0,0,rt_SteeringRight(:,2),rt_SteeringRight(:,3));
@@ -113,7 +114,7 @@ Steering.Right.posActualVal = uint8todouble(1,0,rt_SteeringRight(:,16),rt_Steeri
 Steering.Right.velFeedF = 10*uint8todouble(1,0,rt_SteeringRight(:,8),rt_SteeringRight(:,9),rt_SteeringRight(:,10),rt_SteeringRight(:,11));
 Steering.Right.actualVel = 10*uint8todouble(1,0,rt_SteeringRight(:,20),rt_SteeringRight(:,21),rt_SteeringRight(:,22),rt_SteeringRight(:,23));
 Steering.Right.currentFeedF = 0.001*uint8todouble(1,0,rt_SteeringRight(:,12),rt_SteeringRight(:,13),rt_SteeringRight(:,14),rt_SteeringRight(:,15));
-Steering.Right.torqueActualVal = 0.001*uint8todouble(1,0,rt_SteeringRight(:,24),rt_SteeringRight(:,25));
+Steering.Right.torqueActualVal = 0.925*0.001*uint8todouble(1,0,rt_SteeringRight(:,24),rt_SteeringRight(:,25));
 
 WFT.left.Fx = 1.220703*uint8todouble(1,0,rt_WheelForceLeft(:,1),rt_WheelForceLeft(:,2));
 WFT.left.Fy = 0.6103515625*uint8todouble(1,0,rt_WheelForceLeft(:,3),rt_WheelForceLeft(:,4));
