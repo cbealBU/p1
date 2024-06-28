@@ -36,7 +36,7 @@
 % clear dirc filePath I query
 %% Asking for which plots to display
 plotsToDisp = input(['Enter the number corresponding to the plot you want to display.\nSeparate multiple plot inputs by a comma.\n' ...
-    '1: Control Panels\n2: Driver Input\n3: Steering\n4: Motor\n5: IMU\n6: Wheel Force Transducers\n7: GPS\n'],'s');
+    '[0]: All\n 1: Control Panels\n 2: Driver Input\n 3: Steering\n 4: Motor\n 5: IMU\n 6: Wheel Force Transducers\n 7: GPS\n'],'s');
 
 cleanedInput = erase(plotsToDisp," ");
 c = strsplit(cleanedInput,',');
@@ -44,7 +44,7 @@ c = strsplit(cleanedInput,',');
 
 %% Displaying plots
 
-if isempty(plotsToDisp)
+if isempty(plotsToDisp) || '0' == plotsToDisp
     plotControlPanel;
     plotDriverInput;
     plotSteering;
