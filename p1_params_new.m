@@ -57,7 +57,7 @@ p1params.input.VAccelFiltDen = [      1
 
 % Drivetrain control parameters
 p1params.drivetrain.left.CANTimeOut = 1.2; % CAN time out threshold (in s)
-p1params.drivetrain.left.zeroSpeedThresh = 4; % threshold for considering the vehicle to be moving slowly (m/s)
+p1params.drivetrain.left.zeroSpeedThresh = 6; % threshold for considering the vehicle to be moving slowly (m/s)
 p1params.drivetrain.left.velLimREV = -900; % maximum motor speed in reverse (RPM)
 p1params.drivetrain.left.velLimFWD = 5400; % maximum motor speed going forward (RPM)
 p1params.drivetrain.left.torqueLimLow = -350; % maximum motor torque in regen (Nm)
