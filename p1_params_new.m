@@ -8,7 +8,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Fundamental time step of the model
-Ts = 0.01;
+Ts = 0.001;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                                       %
@@ -66,6 +66,7 @@ p1params.drivetrain.left.minTorqueStartDrive = -120; % minimum torque in regen a
 p1params.drivetrain.left.maxTorqueStartDrive = 10; % minimum torque in motoring allowed to start limp home drive mode (Nm)
 p1params.drivetrain.left.minTorqueFullDrive = -120; % minimum torque in regen allowed to start full drive mode (Nm)
 p1params.drivetrain.left.maxTorqueFullDrive = 50; % minimum torque in motoring allowed to start full drive mode (Nm)
+p1params.drivetrain.left.npulleys = 5.6;
 
 p1params.drivetrain.right.CANTimeOut = 1.2; % CAN time out threshold (in s)
 p1params.drivetrain.right.zeroSpeedThresh = 2; % threshold for considering the vehicle to be moving slowly (m/s)
@@ -77,6 +78,7 @@ p1params.drivetrain.right.minTorqueStartDrive = -25; % minimum torque in regen a
 p1params.drivetrain.right.maxTorqueStartDrive = 10; % minimum torque in regen allowed to start an active drive mode (Nm)
 p1params.drivetrain.right.minTorqueFullDrive = -25; % minimum torque in regen allowed to start an active drive mode (Nm)
 p1params.drivetrain.right.maxTorqueFullDrive = 50; % minimum torque in regen allowed to start an active drive mode (Nm)
+p1params.drivetrain.right.npulleys = 5.6;
 
 % Steering control parameters
 p1params.steering.left.CANTimeOut = 0.2; % CAN time out threshold (in s)
@@ -129,7 +131,7 @@ p1params.wft.left.MzScale = 0.18310546875;
 p1params.wft.left.VelScale = 0.06103515625;
 p1params.wft.left.PosScale = 0.010986328125;
 p1params.wft.left.AxScale = 0.0030517578125;
-p1params.wft.left.AyScale = 0.0030517578125;
+p1params.wft.left.AzScale = 0.0030517578125;
 p1params.wft.right.FxScale = 1.220703125;
 p1params.wft.right.FyScale = 0.6103515625;
 p1params.wft.right.FzScale = 1.220703125;
@@ -139,7 +141,53 @@ p1params.wft.right.MzScale = 0.18310546875;
 p1params.wft.right.VelScale = 0.06103515625;
 p1params.wft.right.PosScale = 0.010986328125;
 p1params.wft.right.AxScale = 0.0030517578125;
-p1params.wft.right.AyScale = 0.0030517578125;
+p1params.wft.right.AzScale = 0.0030517578125;
+
+% Noise covariances for the IMU sensors. Estimated from two (relatively
+% short) stationary data sets.
+p1params.imu.AxVar = (100*0.0125)^2;
+p1params.imu.AyVar = (100*0.0148)^2;
+p1params.imu.AzVar = (1*0.0160)^2;
+p1params.imu.GxVar = 0.093^2; %0.111^2;
+p1params.imu.GyVar = 0.093^2; %0.105^2;
+p1params.imu.GzVar = 0.093^2;
+% Noise covariances for the GPS data.
+p1params.gps.YawStd = 0.25*pi/180;  % rad
+p1params.gps.RollStd = 0.5*pi/180;  % rad
+p1params.gps.VhVar = 0.004;       % m (approximate horizontal RMS)
+
+% These can be found by augmenting the Kalman filter temporarily with a
+% sensitivity term and determining the converged result. Note that this
+% requires substantial vehicle excitation. Default value is 1.0.
+p1params.imu.AxGain = 1.0;
+p1params.imu.AyGain = 1.0;
+p1params.imu.AzGain = 1.0;
+p1params.imu.GxGain = 1.0;
+p1params.imu.GyGain = 1.0;
+p1params.imu.GzGain = 1.0;
+% The cross-coupling terms between Ax and Ay is found by a least-squares
+% estimation process. This is detailed in Jihan Ryu's thesis.
+p1params.imu.Cxy = 0;
+% The vector location of the IMU relative to the GPS primary (driver side)
+% antenna
+p1params.imu.r_GPS = [-0.1; 0.5; 0.7];
+
+% Covariance matrix for the yaw Kalman Filter
+p1params.KF.Yaw.Rw = zeros(2,2);
+p1params.KF.Yaw.Rw(1,1) = p1params.imu.GzVar;
+p1params.KF.Yaw.Rv = p1params.gps.YawStd;
+% Covariance matrix for the roll Kalman Filter
+p1params.KF.Roll.Rw = zeros(2,2);
+p1params.KF.Roll.Rw(1,1) = p1params.imu.GxVar;
+p1params.KF.Roll.Rv = p1params.gps.RollStd;
+% Covariance matrix for the velocity Kalman Filter
+p1params.KF.Vel.Rw = zeros(4,4); 
+p1params.KF.Vel.Rw(1,1) = p1params.imu.AxVar; 
+p1params.KF.Vel.Rw(3,3) = p1params.imu.AyVar;
+p1params.KF.Vel.Rv = zeros(2,2);
+p1params.KF.Vel.Rv(1,1) = p1params.gps.VhVar;
+p1params.KF.Vel.Rv(2,2) = p1params.gps.VhVar;
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                                       %

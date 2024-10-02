@@ -34,6 +34,10 @@
 %     end
 % end
 % clear dirc filePath I query
+
+% Parse the data
+parseP1data
+
 %% Asking for which plots to display
 plotsToDisp = input(['Enter the number corresponding to the plot you want to display.\nSeparate multiple plot inputs by a comma.\n' ...
     '[0]: All\n 1: Control Panels\n 2: Driver Input\n 3: Steering\n 4: Motor\n 5: IMU\n 6: Wheel Force Transducers\n 7: GPS\n'],'s');
