@@ -6,7 +6,7 @@
 
 
 % Setup up object to communicate with raspberry pi
-%flexCase = raspberrypi('FlexCase01.local','pi','FazK75niXS');
+flexCase = raspberrypi('FlexCase01.local','pi','FazK75niXS');
 
 % Pull data to host computer
 clc

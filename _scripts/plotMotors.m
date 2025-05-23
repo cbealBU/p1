@@ -25,6 +25,7 @@ ylabel('Torque (Nm)')
 legend('Left Command','Left Actual','Right Command', 'Right Actual')
 grid on
 axis auto
+xlim([0 rt_tout(end)])
 ylim([-30 350])
 
 % Voltage
@@ -36,6 +37,7 @@ xlabel('Time (s)')
 ylabel('Voltage (V)')
 legend('Left','Right')
 grid on
+xlim([0 rt_tout(end)])
 ylim([270 350])
 
 % Current
@@ -47,6 +49,7 @@ xlabel('Time (s)')
 ylabel('Current (A)')
 legend('Left','Right')
 grid on
+xlim([0 rt_tout(end)])
 ylim([-30 150])
 
 % Speed
@@ -65,4 +68,5 @@ ylabel('Speed (rpm)')
 legend('Left Upper Lim','Left Lower Lim','Left Actual','Right Upper Lim', 'Right Lower Lim','Right Actual')
 grid on
 axis auto
+xlim([0 rt_tout(end)])
 ylim([-1000 5500])

@@ -11,12 +11,13 @@ p1data.imuBytes = 12;               % Inertial measurement data
 p1data.wftBytes = 20;               % Wheel force transducer data
 p1data.gpsBytes = 128;              % GPS packet bytes
 p1data.mpuBytes = 21;               % MPU I/O bytes
+p1data.footerBytes = 5;
 
 % Determine the number of bytes being transmitted in each direction
 mcu2mpuBytes = p1data.headerBytes+ p1data.flexCaseBytes + ...
     p1data.controlPanelBytes + p1data.driverInputBytes + ...
     2*p1data.steeringBytes + 2*p1data.drivetrainBytes + ...
-    p1data.imuBytes + 2*p1data.wftBytes;
+    p1data.imuBytes + 2*p1data.wftBytes + p1data.footerBytes;
 mpu2mcuBytes = p1data.gpsBytes + p1data.mpuBytes;
 
 % Determine the smallest multiple of 4 bytes that can be transmitted
