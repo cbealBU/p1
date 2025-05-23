@@ -9,6 +9,7 @@
 % CEB: Vectorize this new approach later?
 % Preallocate a vector of good data indices
 spiGoodInds = nan(size(rt_tout));
+
 % Set a counter for the number of indices of good data
 goodIndCount = 0;
 % Loop through each time step, determining whether there is good data based

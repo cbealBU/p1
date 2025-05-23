@@ -1,26 +1,26 @@
 % Parse all p1 data out into structures
 
-%excerptGoodSPI
+excerptGoodSPI
 
-Controls.switch.KeySwitch = bitUnpack(rt_ControlPanel,1,1);
-Controls.switch.HVEnable = bitUnpack(rt_ControlPanel,1,2);
-Controls.switch.DCDCOn = bitUnpack(rt_ControlPanel,1,3);
-Controls.switch.Utility1 = bitUnpack(rt_ControlPanel,1,4);
-Controls.switch.Utility2 = bitUnpack(rt_ControlPanel,1,5);
-Controls.switch.Utility3 = bitUnpack(rt_ControlPanel,1,6);
-Controls.switch.CruiseSet = bitUnpack(rt_ControlPanel,1,7);
-Controls.switch.CruiseEnable = bitUnpack(rt_ControlPanel,1,8);
+Controls.switch.KeySwitch = nan(size(rt_tout)); %bitUnpack(rt_ControlPanel,1,1);
+Controls.switch.HVEnable = nan(size(rt_tout)); %bitUnpack(rt_ControlPanel,1,2);
+Controls.switch.DCDCOn = nan(size(rt_tout)); %bitUnpack(rt_ControlPanel,1,3);
+Controls.switch.Utility1 = nan(size(rt_tout)); %bitUnpack(rt_ControlPanel,1,4);
+Controls.switch.Utility2 = nan(size(rt_tout)); %bitUnpack(rt_ControlPanel,1,5);
+Controls.switch.Utility3 = nan(size(rt_tout)); %bitUnpack(rt_ControlPanel,1,6);
+Controls.switch.CruiseSet = nan(size(rt_tout)); %bitUnpack(rt_ControlPanel,1,7);
+Controls.switch.CruiseEnable = nan(size(rt_tout)); %bitUnpack(rt_ControlPanel,1,8);
 Controls.lamp.FNRF = bitUnpack(rt_ControlPanel,2,1);
 Controls.lamp.FNRR = bitUnpack(rt_ControlPanel,2,2);
 Controls.lamp.GPSOK = bitUnpack(rt_ControlPanel,2,3);
 Controls.lamp.WFTOK = bitUnpack(rt_ControlPanel,2,4);
 Controls.lamp.DriveFault = bitUnpack(rt_ControlPanel,2,5);
 Controls.lamp.SteerFault = bitUnpack(rt_ControlPanel,2,6);
-Controls.lamp.DCDCOK = bitUnpack(rt_ControlPanel,2,7);
+Controls.lamp.DCDCOK = nan(size(rt_tout)); %bitUnpack(rt_ControlPanel,2,7);
 
 Driver.brakeSwitchA = bitUnpack(rt_DriverInput,1,1);
-Driver.switchFNRF = bitUnpack(rt_DriverInput,1,3);
-Driver.switchFNRR = -1*bitUnpack(rt_DriverInput,1,4);
+Driver.switchFNRF = bitUnpack(rt_DriverInput,1,2);
+Driver.switchFNRR = -1*bitUnpack(rt_DriverInput,1,3);
 Driver.accel_pedal = 12*3.3/4096*uint8todouble(0,0,rt_DriverInput(:,2),rt_DriverInput(:,3)); 
 Driver.steering_pot = uint8todouble(0,0,rt_DriverInput(:,4),rt_DriverInput(:,5));
 Driver.steering_angle_pot = (Driver.steering_pot-208)/246*pi/2*60/18;
