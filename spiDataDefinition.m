@@ -1,6 +1,7 @@
 % Script to define the data storage and transmission arrays
 
 % Declare the number of bytes in each array
+p1data.headerBytes = 10;            % SPI header ("start" plus 5 zeros)
 p1data.flexCaseBytes = 1;           % FlexCase info (ignition state, etc.)
 p1data.controlPanelBytes = 3;       % Switch and indicator states
 p1data.driverInputBytes = 21;       % Accelerator, brake, handwheel
@@ -12,19 +13,25 @@ p1data.gpsBytes = 128;              % GPS packet bytes
 p1data.mpuBytes = 21;               % MPU I/O bytes
 
 % Determine the number of bytes being transmitted in each direction
-mcu2mpuBytes = p1data.flexCaseBytes + p1data.controlPanelBytes + ...
-    p1data.driverInputBytes + 2*p1data.steeringBytes + ...
-    2*p1data.drivetrainBytes + p1data.imuBytes + 2*p1data.wftBytes;
+mcu2mpuBytes = p1data.headerBytes+ p1data.flexCaseBytes + ...
+    p1data.controlPanelBytes + p1data.driverInputBytes + ...
+    2*p1data.steeringBytes + 2*p1data.drivetrainBytes + ...
+    p1data.imuBytes + 2*p1data.wftBytes;
 mpu2mcuBytes = p1data.gpsBytes + p1data.mpuBytes;
+
+% Determine the smallest multiple of 4 bytes that can be transmitted
+p1data.spiBytes = 4*ceil(max(mpu2mcuBytes,mcu2mpuBytes)/4);
 
 % Determine the number of bytes transmitted over SPI each cycle, assuming
 % that the MCU->MPU message will have more data than the MPU->MCU message
 % (if this assumption breaks, the padding will have to be moved from the
 % MPU model to the MCU model)
-p1data.spiBytes = mcu2mpuBytes;
+%p1data.spiBytes = mcu2mpuBytes;
 % Determine the padding needed in the MPU->MCU message (same caveat as
 % above)
-p1data.paddingBytes = mcu2mpuBytes-mpu2mcuBytes;
+%p1data.paddingBytes = mcu2mpuBytes-mpu2mcuBytes;
+p1data.mcuPadding = p1data.spiBytes - mcu2mpuBytes;
+p1data.mpuPadding = p1data.spiBytes - mpu2mcuBytes;
 
 % Clean up the intermediate variables
 clear mcu2mpuBytes mpu2mcuBytes

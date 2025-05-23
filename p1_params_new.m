@@ -8,9 +8,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Fundamental time step of the model
-Ts = 0.001;
-% GPS recieve time interval
-p1params.gps.timestep = 0.01;
+Ts_MCU = 0.01;
+Ts_MPU = 0.001;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                                       %
