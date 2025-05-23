@@ -6,7 +6,7 @@
 
 
 % Setup up object to communicate with raspberry pi
-flexCase = raspberrypi('FlexCase01.local','pi','FazK75niXS');
+%flexCase = raspberrypi('FlexCase01.local','pi','FazK75niXS');
 
 % Pull data to host computer
 clc
@@ -60,23 +60,23 @@ for k = 1:length(fullFileNames)
 end
 clear k
 
-fprintf('Creating info structure for data file...\n');
-% Grab the date
-info.date=datestr(now,29);
-info.time=erase(datestr(now,13),":");
-% Building info structure from user input
-info.driver=deblank(input('Driver: ','s'));
-info.testloc=deblank(input('Test Location: ','s'));
-info.tyPress=deblank(input('Tire Pressures: ','s'));
-info.ambT=deblank(input('Ambient Temp: ','s'));
-% Enter a description for the data file/test
-description='';
-des=input('Description:  (End with a . on a line by itself.)\n','s');
-while(~strcmp(des,'.'))
-    description=[description '\n' des];
-    des=input('','s');
-end
-info.description=description;
+% fprintf('Creating info structure for data file...\n');
+% % Grab the date
+% info.date=datestr(now,29);
+% info.time=erase(datestr(now,13),":");
+% % Building info structure from user input
+% info.driver=deblank(input('Driver: ','s'));
+% info.testloc=deblank(input('Test Location: ','s'));
+% info.tyPress=deblank(input('Tire Pressures: ','s'));
+% info.ambT=deblank(input('Ambient Temp: ','s'));
+% % Enter a description for the data file/test
+% description='';
+% des=input('Description:  (End with a . on a line by itself.)\n','s');
+% while(~strcmp(des,'.'))
+%     description=[description '\n' des];
+%     des=input('','s');
+% end
+% info.description=description;
 
 if length(fds.Files) > 1
     % Give option to run matlab stitcher

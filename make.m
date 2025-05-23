@@ -6,7 +6,6 @@ function make(varargin)
 %
 % It checks the file modifications times so as to avoid compiling files
 % that have not changed since they were last compiled.
-%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Author: Christopher Gadda
