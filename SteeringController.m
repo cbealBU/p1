@@ -27,8 +27,8 @@ ack = 1;                % percentage Ackermann steering
                         %  1 = full Ackermann steering,
                         %  0 = parallel steering,
                         % -1 = reverse Ackermann steering.
-hal_filter_num = [1*(2*pi*Ts)];     % HAL heavy filter numerator
-hal_filter_den = [1 1*(2*pi*Ts)-1]; % HAL heavy filter denomenator
+%hal_filter_num = [1*(2*pi*Ts_MCU)];     % HAL heavy filter numerator
+%hal_filter_den = [1 1*(2*pi*Ts_MCU)-1]; % HAL heavy filter denomenator
 
 Ioff_l = -0.0791;       % Identified current offset. (Amps)
 Ioff_r =  0.0591;       % Identified current offset. (Amps)
@@ -43,5 +43,5 @@ steering_limit = 35;    % Maximum effective roadwheel angle. (deg)
 
 % Here's where we create the derivative/low-pass filter
 % This is just a single-pole low-pass filter in combination with a derivative.
-num=wc*2*pi*[1 -1];
-den=[1 wc*2*pi*Ts-1];
+%num=wc*2*pi*[1 -1];
+%den=[1 wc*2*pi*Ts-1];
