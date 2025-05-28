@@ -152,6 +152,9 @@ p1params.imu.AzVar = (1*0.0160)^2;
 p1params.imu.GxVar = 0.093^2; %0.111^2;
 p1params.imu.GyVar = 0.093^2; %0.105^2;
 p1params.imu.GzVar = 0.093^2;
+
+% GPS message reception time step
+p1params.gps.timeStep = 0.01;
 % Noise covariances for the GPS data.
 p1params.gps.YawStd = 0.25*pi/180;  % rad
 p1params.gps.RollStd = 0.5*pi/180;  % rad
