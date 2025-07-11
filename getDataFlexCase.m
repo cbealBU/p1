@@ -60,23 +60,23 @@ for k = 1:length(fullFileNames)
 end
 clear k
 
-% fprintf('Creating info structure for data file...\n');
-% % Grab the date
-% info.date=datestr(now,29);
-% info.time=erase(datestr(now,13),":");
-% % Building info structure from user input
-% info.driver=deblank(input('Driver: ','s'));
-% info.testloc=deblank(input('Test Location: ','s'));
-% info.tyPress=deblank(input('Tire Pressures: ','s'));
-% info.ambT=deblank(input('Ambient Temp: ','s'));
-% % Enter a description for the data file/test
-% description='';
-% des=input('Description:  (End with a . on a line by itself.)\n','s');
-% while(~strcmp(des,'.'))
-%     description=[description '\n' des];
-%     des=input('','s');
-% end
-% info.description=description;
+fprintf('Creating info structure for data file...\n');
+% Grab the date
+info.date=datestr(now,29);
+info.time=erase(datestr(now,13),":");
+% Building info structure from user input
+info.driver=deblank(input('Driver: ','s'));
+info.testloc=deblank(input('Test Location: ','s'));
+info.tyPress=deblank(input('Tire Pressures: ','s'));
+info.ambT=deblank(input('Ambient Temp: ','s'));
+% Enter a description for the data file/test
+description='';
+des=input('Description:  (End with a . on a line by itself.)\n','s');
+while(~strcmp(des,'.'))
+    description=[description '\n' des];
+    des=input('','s');
+end
+info.description=description;
 
 if length(fds.Files) > 1
     % Give option to run matlab stitcher
@@ -104,7 +104,7 @@ if strcmp(stitchFlag,'no') && length(fds.Files) > 1
 else
     newFileString = ['./data/' retrieveFileBase '_' datestr(now,'yyyy-mm-dd_HH-MM-SS') '.mat'];
     movefile(oldFileString,newFileString);
-    fprintf(1,'Files stitched (or was only a single file) and moved to the data subdirectory as %s.\n',...
+    fprintf(1,"Files stitched (or was only a single file) and moved to the data subdirectory.\nData can be reloaded with the command load('data/%s')\n",...
         [retrieveFileBase '_' datestr(now,'yyyy-mm-dd_HH-MM-SS') '.mat'])
 
     save(newFileString,"info",'-append')

@@ -9,7 +9,7 @@
 
 % Fundamental time step of the model
 Ts_MCU = 0.01;
-Ts_MPU = 0.001;
+Ts_MPU = 0.005;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                                       %
@@ -82,6 +82,10 @@ p1params.drivetrain.right.maxTorqueFullDrive = 50; % minimum torque in regen all
 p1params.drivetrain.right.npulleys = 5.6;
 
 % Steering control parameters
+p1params.steering.sleepTimeout = 20;
+p1params.steering.sleepRateThresh = 5*pi/180;
+p1params.steering.sleepSpeedThresh = 0.2;
+
 p1params.steering.left.CANTimeOut = 0.2; % CAN time out threshold (in s)
 p1params.steering.left.startupTimeOut = 30; % Time to wait for proper startup before faulting (s)
 p1params.steering.left.initNumPotReadings = 50; % Number of potentiometer readings to average for startup position (#)
@@ -192,6 +196,54 @@ p1params.KF.Vel.Rv = zeros(2,2);
 p1params.KF.Vel.Rv(1,1) = p1params.gps.VhVar;
 p1params.KF.Vel.Rv(2,2) = p1params.gps.VhVar;
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                       %
+%             SPI DATA TRANSMISSION SETUP               %
+%                                                       %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Declare the number of bytes in each array
+p1params.spi.headerBytes = 10;            % SPI header ("start" plus 3 zeros plus 2 byte counter)
+p1params.spi.flexCaseBytes = 1;           % FlexCase info (ignition state, etc.)
+p1params.spi.controlPanelBytes = 3;       % Switch and indicator states
+p1params.spi.driverInputBytes = 21;       % Accelerator, brake, handwheel
+p1params.spi.steeringBytes = 25;          % Roadwheel steering commands/states
+p1params.spi.drivetrainBytes = 44;        % Drivetrain commands/states
+p1params.spi.imuBytes = 12;               % Inertial measurement data
+p1params.spi.wftBytes = 20;               % Wheel force transducer data
+p1params.spi.gpsBytes = 128;              % GPS packet bytes
+p1params.spi.mpuBytes = 21;               % MPU I/O bytes
+p1params.spi.footerBytes = 5;
+
+% Determine the number of bytes being transmitted in each direction
+mcu2mpuBytes = p1params.spi.headerBytes+ p1params.spi.flexCaseBytes + ...
+    p1params.spi.controlPanelBytes + p1params.spi.driverInputBytes + ...
+    2*p1params.spi.steeringBytes + 2*p1params.spi.drivetrainBytes + ...
+    p1params.spi.imuBytes + 2*p1params.spi.wftBytes + p1params.spi.footerBytes;
+mpu2mcuBytes = p1params.spi.gpsBytes + p1params.spi.mpuBytes;
+
+% Determine the smallest multiple of 4 bytes that can be transmitted
+p1params.spi.spiBytes = 4*ceil(max(mpu2mcuBytes,mcu2mpuBytes)/4);
+
+% Check for an overrun of the MPU time step
+spiXmitTime = p1params.spi.spiBytes*8/2000000; % Update this data rate to match model
+if spiXmitTime > Ts_MPU
+    error('SPI message will overrun MPU time step. Adjust settings.')
+end
+
+% Determine the number of bytes transmitted over SPI each cycle, assuming
+% that the MCU->MPU message will have more data than the MPU->MCU message
+% (if this assumption breaks, the padding will have to be moved from the
+% MPU model to the MCU model)
+%p1data.spiBytes = mcu2mpuBytes;
+% Determine the padding needed in the MPU->MCU message (same caveat as
+% above)
+%p1data.paddingBytes = mcu2mpuBytes-mpu2mcuBytes;
+p1params.spi.mcuPadding = p1params.spi.spiBytes - mcu2mpuBytes;
+p1params.spi.mpuPadding = p1params.spi.spiBytes - mpu2mcuBytes;
+
+% Clean up the intermediate variables
+clear mcu2mpuBytes mpu2mcuBytes
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                                       %
@@ -200,49 +252,52 @@ p1params.KF.Vel.Rv(2,2) = p1params.gps.VhVar;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Gear ratios
-n_drive = 5.6;      % transmission drive ratio (unitless)
-n_handwheel = 50;   % handwheel drive ratio (unitless)
-n_steering = 160;   % steering drive ratio (unitless)
+%n_drive = 5.6;      % transmission drive ratio (unitless)
+p1params.steering.n_handwheel = 50;   % handwheel drive ratio (unitless)
+p1params.steering.n_steering = 160;   % steering drive ratio (unitless)
 
 % Encoder CPRs (counts per revolution)
-cpr_handwheel = 500*4;  % 1000 CPR quadrature
-cpr_steering = 1000*4;   % 500 CPR quadrature
+p1params.steering.cpr_handwheel = 500*4;  % 1000 CPR quadrature
+p1params.steering.cpr_steering = 1000*4;   % 500 CPR quadrature
 
 % Dimensions and mass properties
-param.m = 1724.0;                 % mass (kg)
-param.a = 1.35;                   % cg to front axle distance (m)
-param.b = 1.15;                   % cg to rear axle distance (m)
-param.d = 1.62;                   % track width (m)
-param.Iz = 1300;                  % Hand-fit estimate. (kg-m^2)
+p1params.model.m = 1724.0;                 % mass (kg)
+p1params.model.a = 1.35;                   % cg to front axle distance (m)
+p1params.model.b = 1.15;                   % cg to rear axle distance (m)
+p1params.model.d = 1.62;                   % track width (m)
+p1params.model.Iz = 1300;                  % Hand-fit estimate. (kg-m^2)
 
 % Roll properties
-param.Ix = 800;                   % roll inertia (kg-m^2)
-param.h_roll = 0.39;              % effective roll height, i.e. cg height minus roll center height (m)
-param.b_roll = 4800;              % roll damping (N-m-s/rad)
-param.k_roll = 160000;            % roll stiffness (N-m/rad)
+p1params.model.Ix = 800;                   % roll inertia (kg-m^2)
+p1params.model.h_roll = 0.39;              % effective roll height, i.e. cg height minus roll center height (m)
+p1params.model.b_roll = 4800;              % roll damping (N-m-s/rad)
+p1params.model.k_roll = 160000;            % roll stiffness (N-m/rad)
 
 % Cornering stiffness
-tire.fl.Ca = 75000/2;                % front left cornering stiffness (N/rad)
-tire.fr.Ca = 75000/2;                % front right cornering stiffness (N/rad)
-tire.rl.Ca = 135000/2;               % rear left cornering stiffness (N/rad)
-tire.rr.Ca = 135000/2;               % rear right cornering stiffness (N/rad)
+p1params.model.tire.fl.Ca = 75000/2;                % front left cornering stiffness (N/rad)
+p1params.model.tire.fr.Ca = 75000/2;                % front right cornering stiffness (N/rad)
+p1params.model.tire.rl.Ca = 135000/2;               % rear left cornering stiffness (N/rad)
+p1params.model.tire.rr.Ca = 135000/2;               % rear right cornering stiffness (N/rad)
 
 % Tire effective rolling radii
-tire.fl.re = 0.161*2;               % tire effective rolling radius (m)
-tire.fr.re = 0.161*2;               % tire effective rolling radius (m)
-tire.rl.re = 0.3085;                % tire effective rolling radius (m)
-tire.rr.re = 0.3085;                % tire effective rolling radius (m)
+p1params.model.tire.fl.re = 0.161*2;               % tire effective rolling radius (m)
+p1params.model.tire.fr.re = 0.161*2;               % tire effective rolling radius (m)
+p1params.model.tire.rl.re = 0.3085;                % tire effective rolling radius (m)
+p1params.model.tire.rr.re = 0.3085;                % tire effective rolling radius (m)
 
 % Tire relaxation length estimates
-tire.fl.rl = 0.3;                   % tire relaxation length (m)
-tire.fr.rl= 0.3;                    % tire relaxation length (m)
-tire.rl.rl = 0.55;                  % tire relaxation length (m)
-tire.rr.rl = 0.55;                  % tire relaxation length (m)
+p1params.model.tire.fl.rl = 0.3;                   % tire relaxation length (m)
+p1params.model.tire.fr.rl= 0.3;                    % tire relaxation length (m)
+p1params.model.tire.rl.rl = 0.55;                  % tire relaxation length (m)
+p1params.model.tire.rr.rl = 0.55;                  % tire relaxation length (m)
 
 % Tire pneumatic trail estimates
-tire.fl.tp = 0.023;                 % pneumatic trail (m)
-tire.fr.tp = 0.023;                 % pneumatic trail (m)
-tire.rl.tp = 0.023;                 % pneumatic trail (m)
-tire.rr.tp = 0.023;                 % pneumatic trail (m)
+p1params.model.tire.fl.tp = 0.023;                 % pneumatic trail (m)
+p1params.model.tire.fr.tp = 0.023;                 % pneumatic trail (m)
+p1params.model.tire.rl.tp = 0.023;                 % pneumatic trail (m)
+p1params.model.tire.rr.tp = 0.023;                 % pneumatic trail (m)
 
 
+% % Create Data Bus for Simulink Model
+% p1paramsInfo = Simulink.Bus.createObject(p1params);
+% p1paramsBus = evalin('base', p1paramsInfo.busName);
