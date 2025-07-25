@@ -15,41 +15,41 @@ MLyellow = [0.8500, 0.3250, 0.0980];
 subplot(2,2,1)
 cla
 hold on
-plot(rt_tout,Motor.Left.Command.reqMotorTorqueL,'-.','color',MLblue,'linewidth',2);
-plot(rt_tout,Motor.Left.Feedback.trueMotorTorqueL,'-','color',MLblue);
-plot(rt_tout,Motor.Right.Command.reqMotorTorqueR,'-.','color',MLred,'linewidth',2);
-plot(rt_tout,Motor.Right.Feedback.trueMotorTorqueR,'-','color',MLred);
+plot(rt_tout,Motor.Left.Command.reqMotorTorqueL,'-.','color',MLblue,'linewidth',0.75);
+plot(rt_tout,Motor.Left.Feedback.trueMotorTorqueL,'.-','color',MLblue);
+plot(rt_tout,Motor.Right.Command.reqMotorTorqueR,'-.','color',MLred,'linewidth',0.75);
+plot(rt_tout,Motor.Right.Feedback.trueMotorTorqueR,'.-','color',MLred);
 title('Accurate Feedback: Torque')
 xlabel('Time (s)')
 ylabel('Torque (Nm)')
 legend('Left Command','Left Actual','Right Command', 'Right Actual')
 grid on
 axis auto
-xlim([0 rt_tout(end)])
+xlim([0 max(rt_tout)])
 ylim([-30 350])
 
 % Voltage
 subplot(2,2,2)
-plot(rt_tout,Motor.Left.Feedback.trueMotorVoltageL,...
-    rt_tout,Motor.Right.Feedback.trueMotorVoltageR)
+plot(rt_tout,Motor.Left.Feedback.trueMotorVoltageL,'.-',...
+    rt_tout,Motor.Right.Feedback.trueMotorVoltageR,'.-')
 title('Accurate Feedback: Voltage')
 xlabel('Time (s)')
 ylabel('Voltage (V)')
 legend('Left','Right')
 grid on
-xlim([0 rt_tout(end)])
+xlim([0 max(rt_tout)])
 ylim([270 350])
 
 % Current
 subplot(2,2,3)
-plot(rt_tout,Motor.Left.Feedback.trueMotorCurrentL,...
-    rt_tout,Motor.Right.Feedback.trueMotorCurrentR)
+plot(rt_tout,Motor.Left.Feedback.trueMotorCurrentL,'.-',...
+    rt_tout,Motor.Right.Feedback.trueMotorCurrentR,'.-')
 title('Accurate Feedback: Current')
 xlabel('Time (s)')
 ylabel('Current (A)')
 legend('Left','Right')
 grid on
-xlim([0 rt_tout(end)])
+xlim([0 max(rt_tout)])
 ylim([-30 150])
 
 % Speed
@@ -58,15 +58,15 @@ cla
 hold on
 plot(rt_tout,Motor.Left.Command.limMotorSpeedFL,'-.','color',MLblue,'linewidth',2);
 plot(rt_tout,Motor.Left.Command.limMotorSpeedRL,'-.','color',MLblue,'linewidth',2);
-plot(rt_tout,Motor.Left.Feedback.trueMotorSpeedL,'-','color',MLblue);
+plot(rt_tout,Motor.Left.Feedback.trueMotorSpeedL,'-.','color',MLblue);
 plot(rt_tout,Motor.Right.Command.limMotorSpeedFR,':','color',MLred,'linewidth',2);
 plot(rt_tout,Motor.Right.Command.limMotorSpeedRR,':','color',MLred,'linewidth',2);
-plot(rt_tout,Motor.Right.Feedback.trueMotorSpeedR,'-','color',MLred);
+plot(rt_tout,Motor.Right.Feedback.trueMotorSpeedR,'-.','color',MLred);
 title('Accurate Feedback: Speed')
 xlabel('Time (s)')
 ylabel('Speed (rpm)')
 legend('Left Upper Lim','Left Lower Lim','Left Actual','Right Upper Lim', 'Right Lower Lim','Right Actual')
 grid on
 axis auto
-xlim([0 rt_tout(end)])
+xlim([0 max(rt_tout)])
 ylim([-1000 5500])

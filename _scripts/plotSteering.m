@@ -10,7 +10,7 @@ end
 
 % Operational State (Flexcase)
 subplot(4,2,1)
-plot(rt_tout,Steering.Left.state+0.1*Steering.Left.substate,'.')
+plot(rt_tout,Steering.Left.state+0.1*Steering.Left.substate,'.-')
 ylim([-1 4])
 set(gca,'ytick',[0 1 2 3]);
 set(gca,'yticklabel',{'Fault','Startup','Degraded','Operational'});
@@ -21,14 +21,14 @@ ylabel('Coded')
 % Status Word
 % Might need to alter to use yticks
 subplot(4,2,2)
-plot(rt_tout,Steering.Left.statusWord)
+plot(rt_tout,Steering.Left.statusWord,'.-')
 title('Status Word')
 xlabel('Time (s)')
 ylabel('Coded')
 
 % Position Target Value
 subplot(4,1,2)
-plot(rt_tout,[Steering.Left.posTargetVal Steering.Left.posActualVal],'.')
+plot(rt_tout,[Steering.Left.posTargetVal Steering.Left.posActualVal],'.-')
 ylim([-60000 60000])
 title('Position Values')
 legend('Target','Actual')
@@ -36,7 +36,7 @@ ylabel('Counts')
 
 % Velocity
 subplot(4,1,3)
-plot(rt_tout,[Steering.Left.velFeedF Steering.Left.actualVel],'.')
+plot(rt_tout,[Steering.Left.velFeedF Steering.Left.actualVel],'.-')
 ylim([-200000 200000])
 title('Velocity Values')
 legend('Target','Actual')
@@ -44,7 +44,7 @@ ylabel('Counts/sec')
 
 % Torque
 subplot(4,1,4)
-plot(rt_tout,[Steering.Left.currentFeedF Steering.Left.torqueActualVal],'.')
+plot(rt_tout,[Steering.Left.currentFeedF Steering.Left.torqueActualVal],'.-')
 ylim([-20 20])
 title('Torque Values')
 legend('Target','Actual')
@@ -63,7 +63,7 @@ end
 
 % Operational State (Flexcase)
 subplot(4,2,1)
-plot(rt_tout,Steering.Right.state+0.1*Steering.Right.substate,'.')
+plot(rt_tout,Steering.Right.state+0.1*Steering.Right.substate,'.-')
 ylim([-1 4])
 set(gca,'ytick',[0 1 2 3]);
 set(gca,'yticklabel',{'Fault','Startup','Degraded','Operational'});
@@ -74,14 +74,14 @@ ylabel('Coded')
 % Status Word
 % Might need to alter to use yticks
 subplot(4,2,2)
-plot(rt_tout,Steering.Right.statusWord)
+plot(rt_tout,Steering.Right.statusWord,'.-')
 title('Status Word')
 xlabel('Time (s)')
 ylabel('Coded')
 
 % Position Target Value
 subplot(4,1,2)
-plot(rt_tout,[Steering.Right.posTargetVal Steering.Right.posActualVal],'.')
+plot(rt_tout,[Steering.Right.posTargetVal Steering.Right.posActualVal],'.-')
 ylim([-60000 60000])
 title('Position Values')
 legend('Target','Actual')
@@ -89,7 +89,7 @@ ylabel('Counts')
 
 % Velocity Feedforward
 subplot(4,1,3)
-plot(rt_tout,[Steering.Right.velFeedF Steering.Right.actualVel],'.')
+plot(rt_tout,[Steering.Right.velFeedF Steering.Right.actualVel],'.-')
 ylim([-200000 200000])
 legend('Target','Actual')
 title('Velocity Values')
@@ -97,7 +97,7 @@ ylabel('Counts/sec')
 
 % Torque
 subplot(4,1,4)
-plot(rt_tout,[Steering.Right.currentFeedF Steering.Right.torqueActualVal],'.')
+plot(rt_tout,[Steering.Right.currentFeedF Steering.Right.torqueActualVal],'.-')
 ylim([-20 20])
 legend('Target','Actual')
 title('Torque Values')

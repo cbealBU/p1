@@ -9,7 +9,9 @@
 
 % Fundamental time step of the model
 Ts_MCU = 0.01;
-Ts_MPU = 0.005;
+Ts_MPU = 0.002;
+
+p1params.ToWorkspaceSize = 500;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                                       %
