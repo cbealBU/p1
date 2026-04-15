@@ -65,18 +65,18 @@ fprintf('Creating info structure for data file...\n');
 info.date=datestr(now,29);
 info.time=erase(datestr(now,13),":");
 % Building info structure from user input
-info.driver=deblank(input('Driver: ','s'));
-info.testloc=deblank(input('Test Location: ','s'));
-info.tyPress=deblank(input('Tire Pressures: ','s'));
-info.ambT=deblank(input('Ambient Temp: ','s'));
+%info.driver=deblank(input('Driver: ','s'));
+%info.testloc=deblank(input('Test Location: ','s'));
+%info.tyPress=deblank(input('Tire Pressures: ','s'));
+%info.ambT=deblank(input('Ambient Temp: ','s'));
 % Enter a description for the data file/test
-description='';
-des=input('Description:  (End with a . on a line by itself.)\n','s');
-while(~strcmp(des,'.'))
-    description=[description '\n' des];
-    des=input('','s');
-end
-info.description=description;
+%description='';
+%des=input('Description:  (End with a . on a line by itself.)\n','s');
+%while(~strcmp(des,'.'))
+%    description=[description '\n' des];
+%    des=input('','s');
+%end
+%info.description=description;
 
 if length(fds.Files) > 1
     % Give option to run matlab stitcher

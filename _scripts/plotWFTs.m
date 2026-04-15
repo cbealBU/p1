@@ -11,7 +11,7 @@ end
 
 % Left Front Forces combined
 subplot(2,2,1)
-plot(rt_tout,WFT.left.Fx,rt_tout,WFT.left.Fy,rt_tout,WFT.left.Fz)
+plot(rt_tout,WFT.left.Fx,'.-',rt_tout,WFT.left.Fy,'.-',rt_tout,WFT.left.Fz,'.-')
 title('LF Tire Forces')
 xlabel('Time (s)')
 ylabel('Force (N)')
@@ -19,7 +19,7 @@ legend('X-Direction','Y-Direction','Z-Direction')
 
 % Left Front Moments combined
 subplot(2,2,2)
-plot(rt_tout,WFT.left.Mx,rt_tout,WFT.left.My,rt_tout,WFT.left.Mz)
+plot(rt_tout,WFT.left.Mx,'.-',rt_tout,WFT.left.My,'.-',rt_tout,WFT.left.Mz,'.-')
 title('LF Tire Moments')
 xlabel('Time (s)')
 ylabel('Moment (Nm)')
@@ -27,7 +27,7 @@ legend('X-Direction','Y-Direction','Z-Direction')
 
 % Left Front Velocity
 subplot(2,2,3)
-plot(rt_tout,WFT.left.Vel)
+plot(rt_tout,WFT.left.Vel,'.-')
 title('LF Tire Velocity')
 xlabel('Time (s)')
 ylabel('Velocity (rpm)')
@@ -41,7 +41,7 @@ ylabel('Velocity (rpm)')
 
 % Left Front Acceleration
 subplot(2,2,4)
-plot(rt_tout,WFT.left.Ax,rt_tout,WFT.left.Az)
+plot(rt_tout,WFT.left.Ax,'.-',rt_tout,WFT.left.Az,'.-')
 title('LF Tire Acceleration')
 xlabel('Time (s)')
 ylabel('Acceleration (g)')
@@ -59,7 +59,7 @@ end
 
 % Right Front Forces combined
 subplot(2,2,1)
-plot(rt_tout,WFT.right.Fx,rt_tout,WFT.right.Fy,rt_tout,WFT.right.Fz)
+plot(rt_tout,WFT.right.Fx,'.-',rt_tout,WFT.right.Fy,'.-',rt_tout,WFT.right.Fz,'.-')
 title('RF Tire Forces')
 xlabel('Time (s)')
 ylabel('Force (N)')
@@ -67,7 +67,7 @@ legend('X-Direction','Y-Direction','Z-Direction')
 
 % Right Front Moments combined
 subplot(2,2,2)
-plot(rt_tout,WFT.right.Mx,rt_tout,WFT.right.My,rt_tout,WFT.right.Mz)
+plot(rt_tout,WFT.right.Mx,'.-',rt_tout,WFT.right.My,'.-',rt_tout,WFT.right.Mz,'.-')
 title('RF Tire Moments')
 xlabel('Time (s)')
 ylabel('Moment (Nm)')
@@ -75,7 +75,7 @@ legend('X-Direction','Y-Direction','Z-Direction')
 
 % Right Front Velocity
 subplot(2,2,3)
-plot(rt_tout,WFT.right.Vel)
+plot(rt_tout,WFT.right.Vel,'.-')
 title('RF Tire Velocity')
 xlabel('Time (s)')
 ylabel('Velocity (rpm)')
@@ -89,7 +89,7 @@ ylabel('Velocity (rpm)')
 
 % Right Front Acceleration
 subplot(2,2,4)
-plot(rt_tout,WFT.right.Ax,rt_tout,WFT.right.Az)
+plot(rt_tout,WFT.right.Ax,'.-',rt_tout,WFT.right.Az,'.-')
 title('RF Tire Acceleration')
 xlabel('Time (s)')
 ylabel('Acceleration (g)')
