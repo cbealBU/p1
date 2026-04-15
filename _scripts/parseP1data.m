@@ -1,6 +1,6 @@
 % Parse all p1 data out into structures
 
-excerptGoodSPI
+%excerptGoodSPI
 
 Controls.switch.KeySwitch = nan(size(rt_tout)); %bitUnpack(rt_ControlPanel,1,1);
 Controls.switch.HVEnable = nan(size(rt_tout)); %bitUnpack(rt_ControlPanel,1,2);

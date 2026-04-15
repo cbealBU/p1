@@ -111,6 +111,8 @@ geoplot(GPS.Lat(allGNSSInds),GPS.Long(allGNSSInds),'-','linewidth',6,'color',[0.
 hold on
 geoplot(GPS.Lat(noDiffInds),GPS.Long(noDiffInds),'--','linewidth',2,'color',[0.8 0.3 0.6])
 geoplot(GPS.Lat(diffInds),GPS.Long(diffInds),'-','linewidth',2,'color',[0.8 0.3 0.6])
+geoplot(GPS.Lat(allGNSSInds(1)),GPS.Long(allGNSSInds(1)),'o','markersize',12,'markerfacecolor','g')
+geoplot(GPS.Lat(allGNSSInds(end)),GPS.Long(allGNSSInds(end)),'s','markersize',12,'markerfacecolor','r')
 geobasemap satellite
 grid on
 title('Location')
