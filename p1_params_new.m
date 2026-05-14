@@ -69,7 +69,6 @@ p1params.drivetrain.left.minTorqueStartDrive = -120; % minimum torque in regen a
 p1params.drivetrain.left.maxTorqueStartDrive = 10; % minimum torque in motoring allowed to start limp home drive mode (Nm)
 p1params.drivetrain.left.minTorqueFullDrive = -120; % minimum torque in regen allowed to start full drive mode (Nm)
 p1params.drivetrain.left.maxTorqueFullDrive = 50; % minimum torque in motoring allowed to start full drive mode (Nm)
-p1params.drivetrain.left.npulleys = 5.6;
 
 p1params.drivetrain.right.CANTimeOut = 1.2; % CAN time out threshold (in s)
 p1params.drivetrain.right.zeroSpeedThresh = 2; % threshold for considering the vehicle to be moving slowly (m/s)
@@ -81,12 +80,15 @@ p1params.drivetrain.right.minTorqueStartDrive = -25; % minimum torque in regen a
 p1params.drivetrain.right.maxTorqueStartDrive = 10; % minimum torque in regen allowed to start an active drive mode (Nm)
 p1params.drivetrain.right.minTorqueFullDrive = -25; % minimum torque in regen allowed to start an active drive mode (Nm)
 p1params.drivetrain.right.maxTorqueFullDrive = 50; % minimum torque in regen allowed to start an active drive mode (Nm)
-p1params.drivetrain.right.npulleys = 5.6;
 
 % Steering control parameters
 p1params.steering.sleepTimeout = 20;
 p1params.steering.sleepRateThresh = 5*pi/180;
 p1params.steering.sleepSpeedThresh = 0.2;
+p1params.steering.ackermann = 1;
+p1params.steering.sr = 7.5;
+p1params.steering.wc = 10;
+p1params.steering.steering_limit = 35*pi/180;
 
 p1params.steering.left.CANTimeOut = 0.2; % CAN time out threshold (in s)
 p1params.steering.left.startupTimeOut = 30; % Time to wait for proper startup before faulting (s)
@@ -254,7 +256,7 @@ clear mcu2mpuBytes mpu2mcuBytes
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Gear ratios
-%n_drive = 5.6;      % transmission drive ratio (unitless)
+p1params.drivetrain.n_drive = 5.6;      % transmission drive ratio (unitless)
 p1params.steering.n_handwheel = 50;   % handwheel drive ratio (unitless)
 p1params.steering.n_steering = 160;   % steering drive ratio (unitless)
 
