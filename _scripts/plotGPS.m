@@ -10,11 +10,11 @@ else
     figure(handleGPSDataFig);
 end
 
-% If
-%if(~exist('noDiffInds'))
-    noDiffInds = find(GPS.Mode < 3);
-    diffInds = find(GPS.Mode >= 3);
-%end
+if(~exist('noDiffInds'))
+    parseP1data;
+%    noDiffInds = find(GPS.Mode < 3);
+%    diffInds = find(GPS.Mode >= 3);
+end
 
 subplot(5,3,1)
 ax = gca;
